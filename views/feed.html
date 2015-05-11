@@ -1,16 +1,30 @@
 <div class="container feed">
     <h1>Feed</h1>
+    <ul>
+        <li>
+            <a href="/compose">Make A Post</a>
+        </li>
+        <li>
+            <a href="/login">Log In</a>
+        </li>
+        <li>
+            <a href="/register">Register</a>
+        </li>
+    </ul>
     <div class="js-posts posts"></div>
 </div>
+
 <script id="init-data" type="application/json">
     {{{initData}}}
 </script>
+
 <script id="post-template" type="text/template">
     <div class="post">
         <p class="post-title"><%= title %></p>
         <img class="post-image" src="<%= url %>">
     </div>
 </script>
+
 <!-- Load page specific scripts -->
 {{#yield-scripts}}
     <script src="/js/feed.js"></script>

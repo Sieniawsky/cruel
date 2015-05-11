@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 /* Load Routes */
-app.get('/', function(req, res) {
+app.get('/xxxx', function(req, res) {
     res.render('index', {});
 });
 
@@ -37,7 +37,7 @@ app.get('/compose', function(req, res) {
     res.render('compose', {});
 });
 
-app.get('/feed', function(req, res) {
+app.get('/', function(req, res) {
     /* Load the feed data first */
     var db = monk(app.get('socket'));
     var posts = db.get('posts');
@@ -47,6 +47,10 @@ app.get('/feed', function(req, res) {
             initData: JSON.stringify({data: doc})
         });
     });
+});
+
+app.get('/register', function(req, res) {
+    res.render('register', {});
 });
 
 app.post('/post', function(req, res) {
@@ -59,7 +63,17 @@ app.post('/post', function(req, res) {
     data = _.extend(data, req.body);
     posts.insert(data).on('success', function(doc) {
         db.close();
-        res.redirect('/feed');
+        res.redirect('/');
+    });
+});
+
+app.post('/register', function(req, res) {
+    // Store the user data
+    var db = monk(app.get('socket'));
+    var users = db.get('users');
+    users.insert(req.body).on('success', function(doc) {
+        db.close();
+        res.redirect('/');
     });
 });
 

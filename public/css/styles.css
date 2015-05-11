@@ -10,13 +10,13 @@ body {
     margin-bottom: 60px;
 }
 
-/* index */
-.buffer {
+/* Compose */
+.compose {
     padding-top: 100px;
 }
 
-/* Compose */
-.compose {
+/* Register */
+.register {
     padding-top: 100px;
 }
 
