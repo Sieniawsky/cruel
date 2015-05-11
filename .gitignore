@@ -4,3 +4,6 @@
 # Dependencies
 node_modules
 bower_components
+
+# node.js
+npm-debug.log

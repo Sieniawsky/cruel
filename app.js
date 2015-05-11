@@ -10,6 +10,8 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var monk = require('monk');
 
+var _ = require('lodash');
+
 var app = express();
 
 /* Configure Application */
@@ -51,7 +53,11 @@ app.post('/post', function(req, res) {
     // Store the data in the db
     var db = monk(app.get('socket'));
     var posts = db.get('posts');
-    posts.insert(req.body).on('success', function(doc) {
+    var data = {
+        date: new Date()
+    };
+    data = _.extend(data, req.body);
+    posts.insert(data).on('success', function(doc) {
         db.close();
         res.redirect('/feed');
     });

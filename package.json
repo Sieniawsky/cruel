@@ -16,7 +16,8 @@
     "body-parser": "~1.0.0",
     "serve-favicon": "~2.0.1",
     "mongodb": "~1.4.7",
-    "monk": "~0.9.0"
+    "monk": "~0.9.0",
+    "lodash": "3.8.0"
   },
   "devDependencies": {
     "bower": "~1.3.12"
