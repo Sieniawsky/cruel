@@ -1,5 +1,4 @@
 /* This is where it all begins */
-
 var express    = require('express');
 var hogan      = require('hogan-express');
 var favicon    = require('serve-favicon');
@@ -29,10 +28,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 /* Load Routes */
-app.get('/xxxx', function(req, res) {
-    res.render('index', {});
-});
-
 app.get('/compose', function(req, res) {
     res.render('compose', {});
 });
