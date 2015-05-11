@@ -6,7 +6,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "init": "npm install && ./node_modules/bower/bin/bower install"
   },
   "dependencies": {
     "express": "~4.2.0",
