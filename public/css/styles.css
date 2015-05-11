@@ -1,1 +1,12 @@
 /* Styles */
+
+/* Global Styles */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    padding-top: 100px;
+}
