@@ -8,5 +8,36 @@ html {
 
 body {
     margin-bottom: 60px;
+}
+
+/* index */
+.buffer {
     padding-top: 100px;
+}
+
+/* Compose */
+.compose {
+    padding-top: 100px;
+}
+
+/* Posts */
+.posts {
+    width: 600px;
+}
+
+.post {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.post-title {
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+.post-image {
+    height: 400px;
+    width: auto;
 }

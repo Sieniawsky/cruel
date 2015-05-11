@@ -42,7 +42,7 @@ app.get('/feed', function(req, res) {
     posts.find({}).on('success', function(doc) {
         db.close();
         res.render('feed', {
-            initData: JSON.stringify({data: [doc]})
+            initData: JSON.stringify({data: doc})
         });
     });
 });
