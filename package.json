@@ -6,21 +6,27 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node app.js",
+    "start": "node server.js",
     "init": "npm install && ./node_modules/bower/bin/bower install",
-    "clear": "rm -r node_modules && rm -r bower_components"
+    "clean": "rm -r node_modules && rm -r bower_components"
   },
   "dependencies": {
     "express": "~4.2.0",
     "hogan-express": "~0.5.2",
-    "morgan": "~1.0.0",
-    "body-parser": "~1.0.0",
-    "serve-favicon": "~2.0.1",
     "mongodb": "~1.4.7",
     "monk": "~0.9.0",
+    "passport": "latest",
+    "passport-local": "latest",
+    "bcrypt-nodejs": "latest",
+
+    "morgan": "~1.0.0",
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.0",
+    "method-override": "~1.0.0",
+    "express-session": "~1.0.0",
+
     "lodash": "3.8.0",
-    "node-uuid": "latest",
-    "express-session": "~1.11.2"
+    "serve-favicon": "~2.0.1"
   },
   "devDependencies": {
     "bower": "~1.4.1"
