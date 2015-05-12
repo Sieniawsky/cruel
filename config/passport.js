@@ -10,9 +10,10 @@ module.exports = function(passport) {
     });
 
     passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, done) {
-            done(err, user);
-        });
+        //User.findById(id, function(err, done) {
+        //    done(err, user);
+        //});
+        done(err, user);
     });
 
     /* Signup */
@@ -36,6 +37,7 @@ module.exports = function(passport) {
 
                     user.email = email;
                     user.password = user.generateHash(password);
+                    user.username = req.body.username;
 
                     user.save(function(err) {
                         if (err) console.error(err);
