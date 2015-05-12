@@ -1,15 +1,5 @@
 /* Styles */
 
-/* Global Styles */
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-}
-
 /* Compose */
 .compose {
     padding-top: 100px;
@@ -40,4 +30,9 @@ body {
 .post-image {
     height: 400px;
     width: auto;
+}
+
+/* Joe's Fuccboi Styles */
+p .date2 {
+    font-size:10px;`
 }

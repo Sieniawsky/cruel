@@ -16,6 +16,7 @@
     "bootstrap": "~3.3.2",
     "lodash": "3.8.0",
     "backbone": "~1.1.2",
-    "holderjs": "latest"
+    "holderjs": "latest",
+    "foundation": "latest"
   }
 }
