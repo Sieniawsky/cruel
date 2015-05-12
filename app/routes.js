@@ -1,3 +1,6 @@
+var _      = require('lodash');
+var moment = require('moment');
+
 module.exports = function(app, passport, db) {
 
     /* Index feed page */
@@ -5,7 +8,7 @@ module.exports = function(app, passport, db) {
         var posts = db.get('posts');
         posts.find({}).on('success', function(doc) {
             res.render('feed', {
-                initData: JSON.stringify({data: doc})
+                initData: JSON.stringify({data: postRemap(doc)})
             });
         });
     });
@@ -55,4 +58,16 @@ var isLoggedIn = function(req, res, next) {
     }
 
     res.redirect('/');
+};
+
+var postRemap = function(data) {
+    var posts = [];
+    _.forEach(data, function(elem) {
+        var post = {};
+        post.title = elem.title;
+        post.url = elem.url;
+        post.date = moment(elem.date).fromNow();
+        posts.push(post);
+    });
+    return posts;
 };
