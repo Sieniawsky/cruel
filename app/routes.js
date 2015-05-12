@@ -45,15 +45,17 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.post('/signup', function(req, res) {
-        // Store the user data
-        var user = new User(req.body);
-        user.save(function(err, user) {
-            if (err) return console.error(err);
+    /* User signup */
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/',
+        failureRedirect : '/'
+    }));
 
-            res.redirect('/');
-        });
-    });
+    /* User login */
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect : '/',
+        failureRedirect : '/'
+    }));
 };
 
 /* Middleware helper */

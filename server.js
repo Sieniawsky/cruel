@@ -16,6 +16,9 @@ var configDB = require('./config/database.js');
 
 mongoose.connect(configDB.socket);
 
+/* Load Passport config */
+require('./config/passport')(passport);
+
 /* Configure Application */
 app.set('port', process.env.port || 3000);
 app.set('view engine', 'html');
