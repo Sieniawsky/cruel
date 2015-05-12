@@ -1,14 +1,17 @@
 var _      = require('lodash');
 var moment = require('moment');
+var Post   = require('./models/post');
+var User   = require('./models/user');
 
-module.exports = function(app, passport, db) {
+module.exports = function(app, passport) {
 
     /* Index feed page */
     app.get('/', function(req, res) {
-        var posts = db.get('posts');
-        posts.find({}).on('success', function(doc) {
+        Post.find(function(err, posts) {
+            if (err) return console.error(err);
+
             res.render('feed', {
-                initData: JSON.stringify({data: postRemap(doc)})
+                initData: JSON.stringify({data: postRemap(posts)})
             });
         });
     });
@@ -18,8 +21,12 @@ module.exports = function(app, passport, db) {
         res.render('compose', {});
     });
 
-    app.get('/register', function(req, res) {
-        res.render('register', {});
+    app.get('/login', function(req, res) {
+        res.render('login', {});
+    });
+
+    app.get('/signup', function(req, res) {
+        res.render('signup', {});
     });
 
     app.get('/logout', function(req, res) {
@@ -29,23 +36,21 @@ module.exports = function(app, passport, db) {
 
     /* Post handler */
     app.post('/post', function(req, res) {
-        var posts = db.get('posts');
-        var data = {
-            date: new Date()
-        };
-        data = _.extend(data, req.body);
-        posts.insert(data).on('success', function(doc) {
-            db.close();
+        var data = _.extend({date: new Date()}, req.body);
+        var post = new Post(data);
+        post.save(function(err, post) {
+            if (err) return console.error(err);
+
             res.redirect('/');
         });
     });
 
-    app.post('/register', function(req, res) {
+    app.post('/signup', function(req, res) {
         // Store the user data
-        var db = monk(app.get('socket'));
-        var users = db.get('users');
-        users.insert(req.body).on('success', function(doc) {
-            db.close();
+        var user = new User(req.body);
+        user.save(function(err, user) {
+            if (err) return console.error(err);
+
             res.redirect('/');
         });
     });

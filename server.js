@@ -1,6 +1,7 @@
 /* This is where it all begins */
 var express  = require('express');
 var app      = express();
+var mongoose = require('mongoose');
 var passport = require('passport');
 var hogan    = require('hogan-express');
 var favicon  = require('serve-favicon');
@@ -11,11 +12,9 @@ var bodyParser   = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 
-var mongo    = require('mongodb');
-var monk     = require('monk');
-var dbConfig = require('./config/database.js');
+var configDB = require('./config/database.js');
 
-var db = monk(dbConfig.socket);
+mongoose.connect(configDB.socket);
 
 /* Configure Application */
 app.set('port', process.env.port || 3000);
@@ -35,7 +34,7 @@ app.use(session({secret: 'Swaglord69'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./app/routes.js')(app, passport, db);
+require('./app/routes.js')(app, passport);
 
 /* Handle 404 */
 app.use(function(req, res, next) {

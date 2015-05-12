@@ -14,7 +14,7 @@
     "express": "~4.2.0",
     "hogan-express": "~0.5.2",
     "mongodb": "~1.4.7",
-    "monk": "~0.9.0",
+    "mongoose": "4.0.2",
     "passport": "latest",
     "passport-local": "latest",
     "bcrypt-nodejs": "latest",
