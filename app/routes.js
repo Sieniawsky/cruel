@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
             res.render('feed', {
                 initData: JSON.stringify({
                     data : postRemap(posts),
-                    user : req.session
+                    user : userRemap(req.user)
                 })
             });
         });
@@ -80,4 +80,10 @@ var postRemap = function(data) {
         posts.push(post);
     });
     return posts;
+};
+
+var userRemap = function(data) {
+    var user = data || {};
+    delete user.password;
+    return user;
 };
