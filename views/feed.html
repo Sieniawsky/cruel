@@ -8,8 +8,15 @@
 
 <div class="row">
     <div class="large-12 columns js-links">
-        <a href="/login">Login</a>
-        <a href="/signup">Signup</a>
+        {{#user._id}}
+            <a href="#">{{user.username}}</a>
+            <a href="/compose">Make A Post</a>
+            <a href="/logout">Logout</a>
+        {{/user._id}}
+        {{^user._id}}
+            <a href="/login">Login</a>
+            <a href="/signup">Signup</a>
+        {{/user._id}}
     </div>
 </div>
 

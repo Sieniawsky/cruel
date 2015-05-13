@@ -11,10 +11,11 @@ module.exports = function(app, passport) {
             if (err) return console.error(err);
 
             res.render('feed', {
-                initData: JSON.stringify({
+                initData : JSON.stringify({
                     data : postRemap(posts),
                     user : userRemap(req.user)
-                })
+                }),
+                user : req.user
             });
         });
     });
@@ -71,7 +72,7 @@ var isLoggedIn = function(req, res, next) {
 };
 
 var postRemap = function(data) {
-    
+
     var posts = _(data).sortBy(function(elem) {
         return new Date(elem.date);
     }).map(function(elem) {
