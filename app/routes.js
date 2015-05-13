@@ -83,7 +83,7 @@ var postRemap = function(data) {
         };
     });
 
-    return posts;
+    return posts.reverse();
 };
 
 var userRemap = function(data) {
