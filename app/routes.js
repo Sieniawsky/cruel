@@ -11,7 +11,10 @@ module.exports = function(app, passport) {
             if (err) return console.error(err);
 
             res.render('feed', {
-                initData: JSON.stringify({data: postRemap(posts)})
+                initData: JSON.stringify({
+                    data : postRemap(posts),
+                    user : req.session
+                })
             });
         });
     });
@@ -54,7 +57,7 @@ module.exports = function(app, passport) {
     /* User login */
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/',
-        failureRedirect : '/'
+        failureRedirect : '/failure'
     }));
 };
 
