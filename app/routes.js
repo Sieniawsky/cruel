@@ -1,3 +1,7 @@
+/* All routes for the application */
+/* When passing data to a render function include
+   all data needed in the client into the initData
+   object. Ensure to sanitize this data beforehand. */
 var _      = require('lodash');
 var moment = require('moment');
 var Post   = require('./models/post');
@@ -12,17 +16,20 @@ module.exports = function(app, passport) {
 
             res.render('feed', {
                 initData : JSON.stringify({
-                    data : postRemap(posts),
-                    user : userRemap(req.user)
+                    data : postRemap(posts)
                 }),
-                user : req.user
+                user : userRemap(req.user)
             });
         });
     });
 
     /* Post composition page */
-    app.get('/compose', function(req, res) {
-        res.render('compose', {});
+    app.get('/post', function(req, res) {
+        res.render('compose', {
+            initData : JSON.stringify({
+                user : userRemap(req.user)
+            })
+        });
     });
 
     app.get('/login', function(req, res) {
@@ -87,7 +94,8 @@ var postRemap = function(data) {
 };
 
 var userRemap = function(data) {
-    var user = data || {};
-    delete user.password;
-    return user;
+    if (typeof data !== "undefined" && data !== null) {
+        var user = _.pick(data, ['_id', 'username', 'email']);
+    }
+    return user || {};
 };

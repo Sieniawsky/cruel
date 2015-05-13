@@ -11,3 +11,14 @@
         <button type="submit" class="btn btn-default">Post</button>
     </form>
 </div>
+
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
+
+<!-- Load page specific scripts -->
+{{#yield-scripts}}
+    <script src="/js/dataLoader.js"></script>
+    <script src="/js/compose.js"></script>
+{{/yield-scripts}}
