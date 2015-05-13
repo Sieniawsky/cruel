@@ -71,14 +71,17 @@ var isLoggedIn = function(req, res, next) {
 };
 
 var postRemap = function(data) {
-    var posts = [];
-    _.forEach(data, function(elem) {
-        var post = {};
-        post.title = elem.title;
-        post.url = elem.url;
-        post.date = moment(new Date(elem.date)).fromNow();
-        posts.push(post);
+    
+    var posts = _(data).sortBy(function(elem) {
+        return new Date(elem.date);
+    }).map(function(elem) {
+        return {
+            title : elem.title,
+            url   : elem.url,
+            date  : moment(new Date(elem.date)).fromNow()
+        };
     });
+
     return posts;
 };
 
