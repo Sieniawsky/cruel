@@ -45,6 +45,24 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 
+    app.get('/u/:username', function(req, res) {
+        User.find({username: req.params.username}, function(err, user) {
+            if (err) return console.error(err);
+
+            var posts = Post.find({_user: req.user._id}, function(err, posts) {
+                if (err) return console.error(err);
+                
+                res.render('user', {
+                    initData : JSON.stringify({
+                        user : userRemap(req.user),
+                        posts : posts
+                    }),
+                    user  : userRemap(req.user)
+                });
+            });
+        });
+    });
+
     /* Post handler */
     app.post('/post', function(req, res) {
         var data = _.extend({date: new Date()}, req.body);
