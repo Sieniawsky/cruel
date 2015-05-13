@@ -13,7 +13,7 @@ userSchema.methods.generateHash = function(password) {
 };
 
 userSchema.methods.validPassword = function(password) {
-    bcrypt.compareSync(password, this.local.password);
+    bcrypt.compareSync(password, this.password);
 };
 
 module.exports = mongoose.model('User', userSchema);

@@ -73,7 +73,7 @@ var postRemap = function(data) {
         var post = {};
         post.title = elem.title;
         post.url = elem.url;
-        post.date = moment(elem.date).fromNow();
+        post.date = moment(new Date(elem.date)).fromNow();
         posts.push(post);
     });
     return posts;
