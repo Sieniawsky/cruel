@@ -1,4 +1,9 @@
 <div class="container login">
+    {{#message.length}}
+        <div class="container">
+            <div class="alert alert-danger">{{message}}</div>
+        </div>
+    {{/message.length}}
     <form action="/login" method="post">
         <div class="form-group">
             <label for="email">Email</label>

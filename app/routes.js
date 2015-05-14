@@ -33,11 +33,11 @@ module.exports = function(app, passport) {
     });
 
     app.get('/login', function(req, res) {
-        res.render('login', {});
+        res.render('login', {message : req.flash('loginMessage')});
     });
 
     app.get('/signup', function(req, res) {
-        res.render('signup', {});
+        res.render('signup', {message : req.flash('signupMessage')});
     });
 
     app.get('/logout', function(req, res) {
@@ -77,13 +77,15 @@ module.exports = function(app, passport) {
     /* User signup */
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/',
-        failureRedirect : '/'
+        failureRedirect : '/signup',
+        failureFlash    : true
     }));
 
     /* User login */
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/',
-        failureRedirect : '/failure'
+        failureRedirect : '/login',
+        failureFlash    : true
     }));
 };
 

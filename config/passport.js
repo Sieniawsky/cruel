@@ -29,7 +29,7 @@ module.exports = function(passport) {
                 if (err) return done(err);
 
                 if (user) {
-                    return done(null, false, 'Ting is fucked');
+                    return done(null, false, req.flash('signupMessage', 'This email is aleady in use!'));
                 } else {
 
                     var user = new User();
@@ -60,9 +60,10 @@ module.exports = function(passport) {
 
             if (err) return done(err);
 
-            if (!user) return done(null, false, 'Not found');
+            if (!user) return done(null, false, req.flash('loginMessage', 'No user found!'));
 
-            if (!user.validPassword(password)) return done(null, false, 'Wrong password');
+            if (!user.validPassword(password)) return done(null, false,
+                req.flash('loginMessage', 'Username or password incorrect!'));
 
             return done(null, user);
         });

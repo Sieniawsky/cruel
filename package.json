@@ -11,26 +11,27 @@
     "clean": "rm -r node_modules && rm -r bower_components"
   },
   "dependencies": {
-    "express": "~4.2.0",
-    "hogan-express": "~0.5.2",
-    "mongodb": "~1.4.7",
-    "mongoose": "4.0.2",
-    "passport": "latest",
-    "passport-local": "latest",
-    "bcrypt-nodejs": "latest",
+    "express"        : "~4.2.0",
+    "hogan-express"  : "~0.5.2",
+    "mongodb"        : "~1.4.7",
+    "mongoose"       : "4.0.2",
+    "passport"       : "latest",
+    "passport-local" : "latest",
+    "bcrypt-nodejs"  : "latest",
 
-    "morgan": "~1.0.0",
-    "body-parser": "~1.0.0",
-    "cookie-parser": "~1.0.0",
-    "method-override": "~1.0.0",
-    "express-session": "~1.0.0",
+    "morgan"          : "~1.0.0",
+    "body-parser"     : "~1.0.0",
+    "cookie-parser"   : "~1.0.0",
+    "method-override" : "~1.0.0",
+    "express-session" : "~1.0.0",
+    "connect-flash"   : "latest",
 
-    "lodash": "3.8.0",
-    "serve-favicon": "~2.0.1",
-    "moment": "latest"
+    "lodash"        : "3.8.0",
+    "serve-favicon" : "~2.0.1",
+    "moment"        : "latest"
   },
   "devDependencies": {
-    "bower": "~1.4.1"
+    "bower" : "~1.4.1"
   },
-  "engine": "node 0.10.31"
+  "engine" : "node 0.10.31"
 }
