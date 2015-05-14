@@ -24,6 +24,7 @@ module.exports = function(passport) {
     function(req, email, password, done) {
         process.nextTick(function() {
 
+            /* Check if provided email already exists */
             User.findOne({'email': email}, function(err, user) {
 
                 if (err) return done(err);
@@ -32,16 +33,25 @@ module.exports = function(passport) {
                     return done(null, false, req.flash('signupMessage', 'This email is aleady in use!'));
                 } else {
 
-                    var user = new User();
+                    /* Check if username already exists */
+                    User.findOne({'username': req.body.username}, function(err, user) {
+                        if (err) return done(err);
 
-                    user.email    = email;
-                    user.password = user.generateHash(password);
-                    user.username = req.body.username;
-                    user.date     = new Date();
+                        if (user) {
+                            return done(null, false, req.flash('signupMessage', 'This username is aleady in use!'));
+                        } else {
+                            var user = new User();
 
-                    user.save(function(err) {
-                        if (err) console.error(err);
-                        return done(null, user);
+                            user.email    = email;
+                            user.password = user.generateHash(password);
+                            user.username = req.body.username;
+                            user.date     = new Date();
+
+                            user.save(function(err) {
+                                if (err) console.error(err);
+                                return done(null, user);
+                            });
+                        }
                     });
                 }
             });
