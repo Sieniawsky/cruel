@@ -79,10 +79,12 @@
 <script id="post-template" type="text/template">
     <div class="row">
         <div class="large-3 columns small-3">
-            <img src="<%= url %>"/>
+            <a href="/post/<%= _id %>">
+                <img src="<%= url %>"/>
+            </a>
         </div>
         <div class="large-9 columns">
-            <p><strong><%= title %></strong></p>
+            <a href="/post/<%= _id %>"><strong><%= title %></strong></a>
             <p class"date2"><%= date %></p>
         </div>
     </div>

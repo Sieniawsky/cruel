@@ -16,7 +16,7 @@ module.exports = function(app, passport) {
 
             res.render('feed', {
                 initData : JSON.stringify({
-                    data : postRemap(posts)
+                    data : postsRemap(posts)
                 }),
                 user : userRemap(req.user)
             });
@@ -48,7 +48,7 @@ module.exports = function(app, passport) {
     app.get('/u/:username', function(req, res) {
         User.find({username: req.params.username}, function(err, user) {
             if (err) return console.log(err);
-            var posts = Post.find({_user: req.user._id}, function(err, posts) {
+            Post.find({_user: req.user._id}, function(err, posts) {
                 if (err) return console.error(err);
                 
                 res.render('user', {
@@ -57,6 +57,21 @@ module.exports = function(app, passport) {
                         posts : posts
                     }),
                     user  : userRemap(req.user)
+                });
+            });
+        });
+    });
+
+    app.get('/post/:id', function(req, res) {
+        Post.findOne({_id: req.params.id}, function(err, post) {
+            if (err) return console.error(err);
+            User.findById(post._user, function(err, user) {
+                if (err) return console.error(err);
+                res.render('post', {
+                    initData : JSON.stringify({
+                        post : postRemap(post, user)
+                    }),
+                    user : userRemap(req.user)
                 });
             });
         });
@@ -97,12 +112,13 @@ var isLoggedIn = function(req, res, next) {
     res.redirect('/');
 };
 
-var postRemap = function(data) {
+var postsRemap = function(data) {
 
     var posts = _(data).sortBy(function(elem) {
         return new Date(elem.date);
     }).map(function(elem) {
         return {
+            _id    : elem._id,
             title : elem.title,
             url   : elem.url,
             date  : moment(new Date(elem.date)).fromNow()
@@ -110,6 +126,17 @@ var postRemap = function(data) {
     });
 
     return posts.reverse();
+};
+
+var postRemap = function(post, user) {
+    return {
+        _id          : post._id,
+        title       : post.title,
+        description : post.description,
+        url         : post.url,
+        _user       : post._user,
+        user        : userRemap(user)
+    };
 };
 
 var userRemap = function(data) {

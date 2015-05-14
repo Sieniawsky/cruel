@@ -1,0 +1,20 @@
+<div class="container js-post"></div>
+
+<!-- Templates -->
+<script id="post-detail-template" type="text/template">
+    <img src="<%= url %>">
+    <p>Title: <%= title %></p>
+    <p>Description: <%= description %></p>
+    <p>Author: <%= user.username %></p>
+</script>
+
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
+
+<!-- Load page specific scripts -->
+{{#yield-scripts}}
+    <script src="/js/dataLoader.js"></script>
+    <script src="/js/post.js"></script>
+{{/yield-scripts}}
