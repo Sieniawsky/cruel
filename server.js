@@ -40,7 +40,7 @@ app.use(passport.session());
 app.use(flash());
 
 /* Load custom middleware */
-require('./app/restrict')(app);
+require('./app/middleware/restrict')(app);
 
 /* Load application routes */
 require('./app/routes')(app, passport);

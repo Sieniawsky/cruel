@@ -8,18 +8,12 @@ module.exports = function(app) {
 
 /* If the user is not logged in then redirect to the feed */
 var restrictIfNotLoggedIn = function(req, res, next) {
-    if (req.session.passport.user == null) {
-        res.redirect('/');
-    } else {
-        next();
-    }
+    if (req.isAuthenticated()) return next();
+    res.redirect('/');
 };
 
 /* If the user is logged in then redirect to the feed */
 var restrictIfLoggedIn = function(req, res, next) {
-    if (req.session.passport.user != null) {
-        res.redirect('/');
-    } else {
-        next();
-    }
+    if (req.isAuthenticated()) res.redirect('/');
+    next();
 };
