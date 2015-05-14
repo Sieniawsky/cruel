@@ -44,11 +44,10 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
-
+    
     app.get('/u/:username', function(req, res) {
         User.find({username: req.params.username}, function(err, user) {
-            if (err) return console.error(err);
-
+            if (err) return console.log(err);
             var posts = Post.find({_user: req.user._id}, function(err, posts) {
                 if (err) return console.error(err);
                 
