@@ -11,6 +11,7 @@ var path     = require('path');
 var bodyParser   = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
+var flash        = require('connect-flash');
 
 var configDB = require('./config/database.js');
 
@@ -36,8 +37,13 @@ app.use(bodyParser.urlencoded());
 app.use(session({secret: 'Swaglord69'}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
-require('./app/routes.js')(app, passport);
+/* Load custom middleware */
+require('./app/restrict')(app);
+
+/* Load application routes */
+require('./app/routes')(app, passport);
 
 /* Handle 404 */
 app.use(function(req, res, next) {

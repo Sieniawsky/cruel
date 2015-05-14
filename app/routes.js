@@ -1,3 +1,7 @@
+/* All routes for the application */
+/* When passing data to a render function include
+   all data needed in the client into the initData
+   object. Ensure to sanitize this data beforehand. */
 var _      = require('lodash');
 var moment = require('moment');
 var Post   = require('./models/post');
@@ -12,30 +16,50 @@ module.exports = function(app, passport) {
 
             res.render('feed', {
                 initData : JSON.stringify({
-                    data : postRemap(posts),
-                    user : userRemap(req.user)
+                    data : postRemap(posts)
                 }),
-                user : req.user
+                user : userRemap(req.user)
             });
         });
     });
 
     /* Post composition page */
-    app.get('/compose', function(req, res) {
-        res.render('compose', {});
+    app.get('/post', function(req, res) {
+        res.render('compose', {
+            initData : JSON.stringify({
+                user : userRemap(req.user)
+            })
+        });
     });
 
     app.get('/login', function(req, res) {
-        res.render('login', {});
+        res.render('login', {message : req.flash('loginMessage')});
     });
 
     app.get('/signup', function(req, res) {
-        res.render('signup', {});
+        res.render('signup', {message : req.flash('signupMessage')});
     });
 
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
+    });
+    
+    app.get('/u/:username', function(req, res) {
+        User.find({username: req.params.username}, function(err, user) {
+            if (err) return console.log(err);
+            var posts = Post.find({_user: req.user._id}, function(err, posts) {
+                if (err) return console.error(err);
+                
+                res.render('user', {
+                    initData : JSON.stringify({
+                        user : userRemap(req.user),
+                        posts : posts
+                    }),
+                    user  : userRemap(req.user)
+                });
+            });
+        });
     });
 
     /* Post handler */
@@ -52,13 +76,15 @@ module.exports = function(app, passport) {
     /* User signup */
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/',
-        failureRedirect : '/'
+        failureRedirect : '/signup',
+        failureFlash    : true
     }));
 
     /* User login */
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/',
-        failureRedirect : '/failure'
+        failureRedirect : '/login',
+        failureFlash    : true
     }));
 };
 
@@ -83,11 +109,12 @@ var postRemap = function(data) {
         };
     });
 
-    return posts;
+    return posts.reverse();
 };
 
 var userRemap = function(data) {
-    var user = data || {};
-    delete user.password;
-    return user;
+    if (typeof data !== "undefined" && data !== null) {
+        var user = _.pick(data, ['_id', 'username', 'email']);
+    }
+    return user || {};
 };
