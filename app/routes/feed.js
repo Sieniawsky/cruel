@@ -19,4 +19,13 @@ module.exports = function(app, passport) {
             });
         });
     });
+
+    /* Get posts depending on page number */
+    app.get('/:id(\\d+)', function(req, res) {
+        console.log('Page ' + req.params.id);
+        Post.find(function(err, posts) {
+            if (err) return console.error(err);
+            res.send(remap.postsRemap(posts));
+        });
+    });
 };

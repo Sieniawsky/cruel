@@ -32,6 +32,13 @@
     width: auto;
 }
 
+.loading {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Joe's Fuccboi Styles */
 p .date2 {
     font-size:10px;`
