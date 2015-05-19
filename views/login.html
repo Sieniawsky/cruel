@@ -16,3 +16,9 @@
         <button type="submit" class="btn btn-default">Login</button>
     </form>
 </div>
+
+<!-- Load page specific scripts -->
+{{#yield-scripts}}
+    <script src="/js/dataLoader.js"></script>
+    <script src="/js/vendor/validate.js"></script>
+{{/yield-scripts}}

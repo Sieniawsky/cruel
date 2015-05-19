@@ -24,8 +24,7 @@ $(function() {
         $('.js-loading').append(_.template($('#loading-template').html())());
         // AJAX TINGZ
         $.ajax({
-            url : '/' + page,
-            data : 'last_id=' + last,
+            url : '/' + page + '/' + last,
             type : 'GET',
             success : function(data) {
                 // Hide loading gif
