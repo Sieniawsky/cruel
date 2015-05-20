@@ -20,8 +20,6 @@ $(function() {
 
     /* Asynchronously loads the next page of posts */
     var loadPosts = function(page, last) {
-        // Show the loading .gif
-        $('.js-loading').append(_.template($('#loading-template').html())());
         // AJAX TINGZ
         $.ajax({
             url : '/' + page + '/' + last,
@@ -29,18 +27,22 @@ $(function() {
             success : function(data) {
 
                 if (data.length < 8) has_next = false;
-                
-                $('.js-loading').first().remove();
+
                 var post_template = _.template($('#post-template').html());
                 var posts = $('.js-posts');
                 _.each(data, function(elem) {
                     posts.append(post_template(elem));
                 });
+
+                if (data.length < 8) {
+                    has_next = false;
+                    var completed_template = _.template($('#completed-template').html());
+                    $('.js-posts').append(completed_template());
+                }
             },
             failure : function(data) {
-                $('.js-loading').first().remove();
-                var completed_template = _.template($('#completed-template').html());
-                $('.js-posts').append(completed_template());
+                var warning_template = _.template($('#warning-template').html());
+                $('.js-posts').append(warning_template());
             }
         });
     };

@@ -33,6 +33,9 @@ module.exports = function(app, passport) {
     /* Post handler */
     app.post('/post', function(req, res) {
         var data = _.extend({date: new Date()}, req.body);
+        data = _.omit(data, function(value) {
+            return value === '';
+        });
         var post = new Post(data);
         post.save(function(err, post) {
             if (err) return console.error(err);
