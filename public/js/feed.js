@@ -27,26 +27,20 @@ $(function() {
             url : '/' + page + '/' + last,
             type : 'GET',
             success : function(data) {
-                // Hide loading gif
+
+                if (data.length < 8) has_next = false;
+                
                 $('.js-loading').first().remove();
-
-                if (data.length < 8) {
-                    // Add warning
-                    has_next = false;
-                    return;
-                }
-
-                // Append posts
+                var post_template = _.template($('#post-template').html());
+                var posts = $('.js-posts');
                 _.each(data, function(elem) {
-                    var post_template = _.template($('#post-template').html());
-                    var posts = $('.js-posts');
                     posts.append(post_template(elem));
                 });
             },
             failure : function(data) {
-                // Hide loading gif
                 $('.js-loading').first().remove();
-                // Show error message
+                var completed_template = _.template($('#completed-template').html());
+                $('.js-posts').append(completed_template());
             }
         });
     };

@@ -18,6 +18,10 @@
     "backbone": "~1.1.2",
     "holderjs": "latest",
     "foundation": "latest",
-    "moment": "~2.10.2"
+    "moment": "~2.10.2",
+    "jquery.validate": "~1.13.0",
+    "validate": "~0.7.1",
+    "bootstrap-validator": "~0.8.1",
+    "H5F": "~1.1.1"
   }
 }

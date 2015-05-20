@@ -4,7 +4,7 @@
             <div class="alert alert-danger">{{message}}</div>
         </div>
     {{/message.length}}
-    <form action="/login" method="post">
+    <form id="login-form" action="/login" method="post">
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" class="form-control" name="email" id="email" placeholder="john@example.com">
@@ -19,6 +19,7 @@
 
 <!-- Load page specific scripts -->
 {{#yield-scripts}}
-    <script src="/js/dataLoader.js"></script>
-    <script src="/js/vendor/validate.js"></script>
+    <script src="/bower_components/H5F/h5f.min.js"></script>
+    <script src="/bower_components/bootstrap-validator/dist/validator.min.js"></script>
+    <script src="/js/login.js"></script>
 {{/yield-scripts}}
