@@ -4,15 +4,34 @@
             <div class="alert alert-danger">{{message}}</div>
         </div>
     {{/message.length}}
-    <form action="/login" method="post">
+    <form id="login-form" data-toggle="validator" role="form" action="/login" method="post">
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="john@example.com">
+            <label for="email" class="control-label">Email</label>
+            <input type="email" class="form-control" name="email"
+                id="email" placeholder="john@example.com"
+                data-error="Please enter a valid email address" required>
+            <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password">
+            <label for="password" class="control-label">Password</label>
+            <input type="password" class="form-control" name="password" id="password" required>
+            <div class="help-block with-errors"></div>
         </div>
-        <button type="submit" class="btn btn-default">Login</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Login</button>
+        </div>
     </form>
 </div>
+
+<!-- Load page specific styles -->
+{{#yield-styles}}
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+{{/yield-styles}}
+
+<!-- Load page specific scripts -->
+{{#yield-scripts}}
+    <script src="/bower_components/H5F/h5f.min.js"></script>
+    <script src="/bower_components/bootstrap-validator/dist/validator.min.js"></script>
+    <script src="/js/login.js"></script>
+{{/yield-scripts}}

@@ -110,6 +110,12 @@
     {{{initData}}}
 </script>
 
+<!-- Load page specific styles -->
+{{#yield-styles}}
+    <link rel="stylesheet" type="text/css" href="/bower_components/foundation/css/foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+{{/yield-styles}}
+
 <!-- Load page specific scripts -->
 {{#yield-scripts}}
     <script src="/js/dataLoader.js"></script>

@@ -1,14 +1,6 @@
 /* Styles */
 
-/* Compose */
-.compose {
-    padding-top: 100px;
-}
-
-/* Register */
-.register {
-    padding-top: 100px;
-}
+-webkit-transition: all 1s;
 
 /* Posts */
 .posts {

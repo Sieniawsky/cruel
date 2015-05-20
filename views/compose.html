@@ -1,21 +1,27 @@
 <div class="container compose">
-    <form class="js-compose" id="compose" action="/post" method="post">
+    <form class="js-compose" id="compose" data-toggle="validator"
+        role="form" action="/post" method="post">
         <div class="form-group">
-            <label for="postTitle">Post Title</label>
+            <label for="postTitle" class="control-label">Post Title</label>
             <input type="text" class="form-control" name="title"
-                id="postTitle" placeholder="Enter post title">
+                id="postTitle" placeholder="Enter post title" minlength="10"
+                data-error="Post title must be at least 10 characters long" required>
+            <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
-            <label for="imageURL">Image URL</label>
-            <input type="url" class="form-control" name="url"
-                id="imageURL" placeholder="http://www.example.com">
+            <label for="imageURL" class="control-label">Image URL</label>
+            <input type="url" class="form-control js-image" name="url" placeholder="http://www.example.com"
+                data-error="Please enter a valid URL">
+            <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
-            <label for="postDescription">Description</label>
+            <label for="postDescription" class="control-label">Description</label>
             <textarea rows="5" class="form-control" name="description" id="postDescription"
                 form="compose" placeholder="Enter a description"></textarea>
         </div>
-        <button type="submit" class="btn btn-default">Post</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Post</button>
+        </div>
     </form>
 </div>
 
@@ -24,8 +30,16 @@
     {{{initData}}}
 </script>
 
+<!-- Load page specific styles -->
+{{#yield-styles}}
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+{{/yield-styles}}
+
 <!-- Load page specific scripts -->
 {{#yield-scripts}}
+    <script src="/bower_components/H5F/h5f.min.js"></script>
+    <script src="/bower_components/bootstrap-validator/dist/validator.min.js"></script>
     <script src="/js/dataLoader.js"></script>
     <script src="/js/compose.js"></script>
 {{/yield-scripts}}
