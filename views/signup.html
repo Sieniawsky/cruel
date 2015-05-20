@@ -4,22 +4,36 @@
             <div class="alert alert-danger">{{message}}</div>
         </div>
     {{/message.length}}
-    <form id="signup-form" action="/signup" method="post">
+    <form id="signup-form" data-toggle="validator" role="form" action="/signup" method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+            <input type="text" class="form-control" name="username" id="username" placeholder="Username"
+                minlength="8" data-error="Username must be at least 8 characters long" required>
+            <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="john@example.com">
+            <input type="email" class="form-control" name="email" id="email" placeholder="john@example.com"
+                data-error="Please enter a valid email address" required>
+            <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password">
+            <input type="password" class="form-control" name="password" id="password"
+                minlength="10" data-error="Password must be at least 10 characters long" required>
+            <div class="help-block with-errors"></div>
         </div>
-        <button type="submit" class="btn btn-default">Signup</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Signup</button>
+        </div>
     </form>
 </div>
+
+<!-- Load page specific styles -->
+{{#yield-styles}}
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+{{/yield-styles}}
 
 <!-- Load page specific scripts -->
 {{#yield-scripts}}

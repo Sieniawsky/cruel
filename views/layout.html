@@ -12,15 +12,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="/bower_components/foundation/css/foundation.min.css">
-        <link rel="stylesheet" type="text/css" href="/css/app.css">
+        {{{ yield-styles }}}
     </head>
 
     <body>
         {{{ yield }}}
 
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="/bower_components/foundation/js/foundation.min.js"></script>
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/bower_components/lodash/lodash.min.js"></script>
 
         {{{ yield-scripts }}}
