@@ -8,7 +8,9 @@ var postSchema = mongoose.Schema({
     description : { type : String, default : '' },
     date        : String,
     _user       : mongoose.Schema.Types.ObjectId,
-    _username   : String
+    _username   : String,
+    voters      : { type : [mongoose.Schema.Types.ObjectId], default : []},
+    votes       : { type : Number, default : 0}
 });
 
 module.exports = mongoose.model('Post', postSchema);

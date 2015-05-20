@@ -7,10 +7,14 @@ module.exports = {
     postsRemap : function(data) {
         return _.map(data, function(elem) {
             return {
-                _id   : elem._id,
-                title : elem.title,
-                url   : elem.url,
-                date  : moment(new Date(elem.date)).fromNow()
+                _id         : elem._id,
+                title       : elem.title,
+                url         : elem.url,
+                date        : moment(new Date(elem.date)).fromNow(),
+                description : elem.description,
+                _user       : elem._user,
+                _username   : elem._username,
+                votes       : elem.votes
             };
         });
     },

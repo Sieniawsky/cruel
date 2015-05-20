@@ -7,6 +7,27 @@ $(function() {
         posts.append(post_template(post));
     });
 
+    $('.js-vote').click(function(e) {
+        // Ensure logged in
+        if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
+            // AJAX POST to server endpoint
+            $.ajax({
+                url : '/post/vote',
+                type : 'POST',
+                data : _.find(initData.data, {_id: e.target.name}),
+                success : function(data) {
+                    console.log('Success');
+                    // Async visual feedback
+                },
+                failure : function(data) {
+                    console.log('Failure');
+                }
+            });
+        } else {
+            // Prompt user to login
+        }
+    });
+
     /* Hook scroll for async feed load */
     var page = 1;
     var has_next = true;
