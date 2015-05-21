@@ -9,8 +9,8 @@ var postSchema = mongoose.Schema({
     date        : String,
     _user       : mongoose.Schema.Types.ObjectId,
     _username   : String,
-    voters      : { type : [mongoose.Schema.Types.ObjectId], default : []},
-    votes       : { type : Number, default : 0}
+    likers      : { type : [mongoose.Schema.Types.ObjectId], default : []},
+    score       : { type : Number, default : 0}
 });
 
 module.exports = mongoose.model('Post', postSchema);

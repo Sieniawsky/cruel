@@ -12,16 +12,14 @@ $(function() {
         if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
             // AJAX POST to server endpoint
             $.ajax({
-                url : '/post/vote',
+                url : '/post/like',
                 type : 'POST',
-                data : _.find(initData.data, {_id: e.target.name}),
-                success : function(data) {
-                    console.log('Success');
-                    // Async visual feedback
+                data : {
+                    post : _.find(initData.data, {_id: e.target.name}),
+                    user : initData.user
                 },
-                failure : function(data) {
-                    console.log('Failure');
-                }
+                success : function(data) {},
+                failure : function(data) {}
             });
         } else {
             // Prompt user to login

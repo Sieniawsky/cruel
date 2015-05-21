@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
             if (err) return console.error(err);
             res.render('feed', {
                 initData : JSON.stringify({
-                    data : remap.postsRemap(posts),
+                    data : remap.postsRemap(posts, req.user),
                     user : remap.userRemap(req.user)
                 }),
                 user : remap.userRemap(req.user)
@@ -26,7 +26,7 @@ module.exports = function(app, passport) {
         var query = Post.find({_id: {'$lt': req.params.id}}).limit(8).sort({'date': -1});
         query.exec(function(err, posts) {
             if (err) return console.error(err);
-            res.send(remap.postsRemap(posts));
+            res.send(remap.postsRemap(posts, req.user));
         });
     });
 };
