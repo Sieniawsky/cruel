@@ -7,6 +7,25 @@ $(function() {
         posts.append(post_template(post));
     });
 
+    $('.js-vote').click(function(e) {
+        // Ensure logged in
+        if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
+            // AJAX POST to server endpoint
+            $.ajax({
+                url : '/post/like',
+                type : 'POST',
+                data : {
+                    post : _.find(initData.data, {_id: e.target.name}),
+                    user : initData.user
+                },
+                success : function(data) {},
+                failure : function(data) {}
+            });
+        } else {
+            // Prompt user to login
+        }
+    });
+
     /* Hook scroll for async feed load */
     var page = 1;
     var has_next = true;
@@ -20,8 +39,6 @@ $(function() {
 
     /* Asynchronously loads the next page of posts */
     var loadPosts = function(page, last) {
-        // Show the loading .gif
-        $('.js-loading').append(_.template($('#loading-template').html())());
         // AJAX TINGZ
         $.ajax({
             url : '/' + page + '/' + last,
@@ -29,18 +46,22 @@ $(function() {
             success : function(data) {
 
                 if (data.length < 8) has_next = false;
-                
-                $('.js-loading').first().remove();
+
                 var post_template = _.template($('#post-template').html());
                 var posts = $('.js-posts');
                 _.each(data, function(elem) {
                     posts.append(post_template(elem));
                 });
+
+                if (data.length < 8) {
+                    has_next = false;
+                    var completed_template = _.template($('#completed-template').html());
+                    $('.js-posts').append(completed_template());
+                }
             },
             failure : function(data) {
-                $('.js-loading').first().remove();
-                var completed_template = _.template($('#completed-template').html());
-                $('.js-posts').append(completed_template());
+                var warning_template = _.template($('#warning-template').html());
+                $('.js-posts').append(warning_template());
             }
         });
     };

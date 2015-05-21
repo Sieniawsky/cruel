@@ -4,13 +4,23 @@ var _      = require('lodash');
 var moment = require('moment');
 
 module.exports = {
-    postsRemap : function(data) {
-        return _.map(data, function(elem) {
+    postsRemap : function(posts, user) {
+        return _.map(posts, function(post) {
+
+            var x = (_.isEmpty(user)) ? '' : String(user._id);
+            console.log(beenLiked(post.likers, x));
+
             return {
-                _id   : elem._id,
-                title : elem.title,
-                url   : elem.url,
-                date  : moment(new Date(elem.date)).fromNow()
+                _id         : post._id,
+                title       : post.title,
+                url         : post.url,
+                date        : moment(new Date(post.date)).fromNow(),
+                description : post.description,
+                _user       : post._user,
+                _username   : post._username,
+                score       : post.score,
+                liked       : beenLiked(post.likers, ((_.isEmpty(user)) ? '' : String(user._id))),
+                likers      : post.likers
             };
         });
     },
@@ -22,7 +32,10 @@ module.exports = {
             description : post.description,
             url         : post.url,
             _user       : post._user,
-            user        : userRemap(user)
+            _username   : post._username,
+            user        : userRemap(user),
+            score       : post.score,
+            liked       : _.includes(post.likers, ((_.isEmpty(user)) ? '' : String(user._id)))
         };
     },
 
@@ -31,5 +44,13 @@ module.exports = {
             var user = _.pick(data, ['_id', 'username', 'email']);
         }
         return user || {};
+    },
+
+    beenLiked : beenLiked = function(likers, id) {
+        var x = false;
+        _.each(likers, function(liker) {
+            if (liker == id) x = true;
+        });
+        return x;
     }
 };

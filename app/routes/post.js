@@ -15,6 +15,7 @@ module.exports = function(app, passport) {
         });
     });
 
+    /* Get a single specific post */
     app.get('/post/:id', function(req, res) {
         Post.findOne({_id: req.params.id}, function(err, post) {
             if (err) return console.error(err);
@@ -33,10 +34,32 @@ module.exports = function(app, passport) {
     /* Post handler */
     app.post('/post', function(req, res) {
         var data = _.extend({date: new Date()}, req.body);
+        data = _.omit(data, function(value) {
+            return value === '';
+        });
         var post = new Post(data);
         post.save(function(err, post) {
             if (err) return console.error(err);
             res.redirect('/');
+        });
+    });
+
+    /* Perform a like operation if it's valid */
+    app.post('/post/like', function(req, res) {
+        // Check if allowed
+        Post.findOne({_id: req.body.post._id, likers: req.body.user._id}, function(err, post) {
+            if (err) return console.error(err);
+            if (post == null) {
+                // User has not voted on this post yet
+                Post.update({_id: req.body.post._id},
+                    {'$push': {likers: req.body.user._id}, '$inc': {score: 1}}, function(err, post) {
+                    if (err) return console.error(err);
+                    User.update({_id: req.body.user._id}, {'$inc': {score: 1}}, function(err, user) {
+                        if (err) return console.error(err);
+                        res.send({outcome: true});
+                    });
+                });
+            }
         });
     });
 };

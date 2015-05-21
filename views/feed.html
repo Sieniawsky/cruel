@@ -86,8 +86,9 @@
             </a>
         </div>
         <div class="large-9 columns">
+            <button type="button" class="js-vote" name="<%= _id %>">Vote</button>
             <a href="/post/<%= _id %>"><strong><%= title %></strong></a>
-            <p class"date2"><%= date %></p>
+            <p class"date2">Score: <%= score %>, <%= date %>, By: <%= _username %></p>
         </div>
     </div>
     <hr/>
@@ -98,7 +99,9 @@
 </script>
 
 <script id="warning-template" type="text/template">
-    <div class="alert alert-warning"><%= message %></div>
+    <div class="alert alert-warning">
+        <p>Something went wrong while loading more posts</p>
+    </div>
 </script>
 
 <script id="completed-template" type="text/template">
