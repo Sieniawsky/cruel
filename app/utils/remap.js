@@ -7,9 +7,6 @@ module.exports = {
     postsRemap : function(posts, user) {
         return _.map(posts, function(post) {
 
-            var x = (_.isEmpty(user)) ? '' : String(user._id);
-            console.log(beenLiked(post.likers, x));
-
             return {
                 _id         : post._id,
                 title       : post.title,

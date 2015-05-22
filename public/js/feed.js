@@ -1,68 +1,127 @@
-/* Initialize the feed */
+/* Experiment with Backbone */
 $(function() {
-    /* Generate feed */
-    var post_template = _.template($('#post-template').html());
-    var posts = $('.js-posts');
-    _.each(initData.data, function(post) {
-        posts.append(post_template(post));
+
+    /* Post Model */
+    var Post = Backbone.Model.extend({
+        default: {
+            done: false
+        },
+
+        initialize: function() {}
     });
 
-    $('.js-vote').click(function(e) {
-        // Ensure logged in
-        if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
-            // AJAX POST to server endpoint
-            $.ajax({
-                url : '/post/like',
-                type : 'POST',
-                data : {
-                    post : _.find(initData.data, {_id: e.target.name}),
-                    user : initData.user
-                },
-                success : function(data) {},
-                failure : function(data) {}
-            });
-        } else {
-            // Prompt user to login
-        }
+    /* Post Collection */
+    var PostList = Backbone.Collection.extend({
+        model: Post
     });
 
-    /* Hook scroll for async feed load */
-    var page = 1;
-    var has_next = true;
-    $(window).scroll(function() {
-        if (($(window).scrollTop() == $(document).height() - $(window).height()) && has_next) {
-            var last_id = initData.data[initData.data.length - 1]._id;
-            loadPosts(page, last_id);
-            page++;
-        }
-    });
+    /* Post View */
+    var PostView = Backbone.View.extend({
 
-    /* Asynchronously loads the next page of posts */
-    var loadPosts = function(page, last) {
-        // AJAX TINGZ
-        $.ajax({
-            url : '/' + page + '/' + last,
-            type : 'GET',
-            success : function(data) {
+        tagName: 'div',
 
-                if (data.length < 8) has_next = false;
+        template: _.template($('#post-template').html()),
 
-                var post_template = _.template($('#post-template').html());
-                var posts = $('.js-posts');
-                _.each(data, function(elem) {
-                    posts.append(post_template(elem));
+        events: {
+            'click .js-like': 'like'
+        },
+
+        initialize: function() {},
+
+        like: function() {
+            console.log('Like has been clicked');
+            if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
+                $.ajax({
+                    url : '/post/like',
+                    type : 'POST',
+                    data : {
+                        post : this.model.attributes,
+                        user : initData.user
+                    },
+                    success : function(data) {},
+                    failure : function(data) {}
                 });
-
-                if (data.length < 8) {
-                    has_next = false;
-                    var completed_template = _.template($('#completed-template').html());
-                    $('.js-posts').append(completed_template());
-                }
-            },
-            failure : function(data) {
-                var warning_template = _.template($('#warning-template').html());
-                $('.js-posts').append(warning_template());
+            } else {
+                // Prompt user to login
             }
-        });
-    };
+        },
+
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+            return this;
+        }
+    });
+
+    /* Application View */
+    var FeedView = Backbone.View.extend({
+
+        el: '.js-app',
+
+        initialize: function() {
+            this.$feed = $('.js-feed');
+            this.triggerPoint = 100;
+            this.page = 0;
+            this.isLoading = false;
+            this.hasMore = true;
+
+            this.completed_template = _.template($('#completed-template').html());
+
+            _.bindAll(this, 'checkScroll');
+            $(window).scroll(this.checkScroll);
+
+            this.posts = new PostList();
+            var that = this;
+            _.each(initData.data, function(post) {
+                that.posts.add(new Post(post));
+            });
+
+            this.addAll();
+        },
+
+        addOne: function(post) {
+            var view = new PostView({model: post});
+            this.$feed.append(view.render().el);
+        },
+
+        addAll: function() {
+            this.posts.each(this.addOne, this);
+        },
+
+        checkScroll: function() {
+            if (!this.isLoading && this.hasMore &&
+                ($(window).scrollTop() + this.triggerPoint
+                    > $(document).height() - $(window).height())) {
+                this.page += 1;
+                this.loadPosts();
+            }
+        },
+
+        loadPosts: function() {
+            this.isLoading = true;
+            var last = this.posts.at(this.posts.length - 1).get('_id');
+            var that = this;
+            $.ajax({
+                url: '/' + this.page + '/' + last,
+                type: 'GET',
+                success: function(data) {
+                    if (data.length < 8) that.hasMore = false;
+                    _.each(data, function(post) {
+                        that.posts.add(new Post(post));
+                    })
+
+                    if (data.length < 8) {
+                        that.hasMore = false;
+                        that.$feed.append(that.completed_template());
+                    }
+
+                    that.isLoading = false;
+                },
+                failure: function(data) {
+                    that.isLoading = false;
+                }
+            });
+        }
+    });
+
+    var feed = new FeedView();
 });
