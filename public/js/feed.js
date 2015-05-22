@@ -1,30 +1,5 @@
 /* Initialize the feed */
 $(function() {
-    /* Generate feed */
-    var post_template = _.template($('#post-template').html());
-    var posts = $('.js-posts');
-    //_.each(initData.data, function(post) {
-    //    posts.append(post_template(post));
-    //});
-
-    $('.js-vote').click(function(e) {
-        // Ensure logged in
-        if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
-            // AJAX POST to server endpoint
-            $.ajax({
-                url : '/post/like',
-                type : 'POST',
-                data : {
-                    post : _.find(initData.data, {_id: e.target.name}),
-                    user : initData.user
-                },
-                success : function(data) {},
-                failure : function(data) {}
-            });
-        } else {
-            // Prompt user to login
-        }
-    });
 
     /* Hook scroll for async feed load */
     var page = 1;

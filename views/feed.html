@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row js-app">
     <div class="large-3 columns ">
         <div class="panel">
             <a href="#"><img src="http://placehold.it/300x240&text=[img]"/></a>
@@ -47,7 +47,8 @@
             </div>
         </div>
     </div>
-    <div class="large-6 columns js-posts"></div>
+    <div class="large-6 columns js-feed">
+    </div>
     <aside class="large-3 columns hide-for-small">
         <p><img src="http://placehold.it/300x440&amp;text=[ad]"/></p>
         <p><img src="http://placehold.it/300x440&amp;text=[ad]"/></p>
@@ -79,14 +80,14 @@
 
 <!-- Templates -->
 <script id="post-template" type="text/template">
-    <div class="row">
+    <div class="row js-post">
         <div class="large-3 columns small-3">
             <a href="/post/<%= _id %>">
                 <img src="<%= url %>"/>
             </a>
         </div>
         <div class="large-9 columns">
-            <button type="button" class="js-vote" name="<%= _id %>">Vote</button>
+            <button type="button" class="js-like" name="<%= _id %>">Vote</button>
             <a href="/post/<%= _id %>"><strong><%= title %></strong></a>
             <p class"date2">Score: <%= score %>, <%= date %>, By: <%= _username %></p>
         </div>
