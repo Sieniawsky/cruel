@@ -53,7 +53,7 @@ $(function() {
     });
 
     /* Application View */
-    var AppView = Backbone.View.extend({
+    var FeedView = Backbone.View.extend({
 
         el: '.js-app',
 
@@ -98,7 +98,6 @@ $(function() {
 
         loadPosts: function() {
             this.isLoading = true;
-
             var last = this.posts.at(this.posts.length - 1).get('_id');
             var that = this;
             $.ajax({
@@ -124,5 +123,5 @@ $(function() {
         }
     });
 
-    var app = new AppView;
+    var feed = new FeedView();
 });
