@@ -17,19 +17,25 @@ var PostView = Backbone.View.extend({
         'click .js-like': 'like'
     },
 
-    initialize: function() {},
+    initialize: function() {
+        _.bindAll(this, 'render');
+        this.model.bind('change', this.render);
+    },
 
     like: function() {
         console.log('Like has been clicked');
         if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
+            var that = this;
             $.ajax({
-                url : '/post/like',
+                url : '/api/like/' + this.model.get('_id'),
                 type : 'POST',
                 data : {
                     post : this.model.attributes,
                     user : initData.user
                 },
-                success : function(data) {},
+                success : function(data) {
+                    that.model.fetch();
+                },
                 failure : function(data) {}
             });
         } else {
@@ -91,7 +97,7 @@ var FeedView = Backbone.View.extend({
         var last = this.posts.at(this.posts.length - 1).get('_id');
         var that = this;
         $.ajax({
-            url: '/' + this.page + '/' + last,
+            url: '/api/feed/' + last,
             type: 'GET',
             success: function(data) {
                 if (data.length < 8) that.hasMore = false;
