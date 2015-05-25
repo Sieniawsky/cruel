@@ -6,5 +6,7 @@ module.exports = Backbone.Model.extend({
         done: false
     },
 
-    initialize: function() {}
+    initialize: function() {
+        this.set('rawDate', new Date(this.get('rawDate')));
+    }
 });

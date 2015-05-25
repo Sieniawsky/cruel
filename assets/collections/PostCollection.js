@@ -3,5 +3,11 @@ var Backbone = require('backbone');
 
 /* Post Collection */
 module.exports = Backbone.Collection.extend({
-    model: Post
+    model: Post,
+
+    initialize: function() {
+        this.comparator = function(post) {
+            return -post.get('rawDate').getTime();
+        };
+    }
 });
