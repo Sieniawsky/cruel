@@ -7,7 +7,7 @@ var remap  = require('../utils/remap');
 module.exports = function(app, passport) {
     /* Index feed page */
     app.get('/', function(req, res) {
-        var query = Post.find({}, {voters: 0}).limit(8).sort({'date': -1});
+        var query = Post.find().limit(8);
         query.exec(function(err, posts) {
             if (err) return console.error(err);
             res.render('feed', {

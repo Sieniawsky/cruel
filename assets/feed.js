@@ -23,7 +23,7 @@ var PostView = Backbone.View.extend({
         console.log('Like has been clicked');
         if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
             $.ajax({
-                url : '/post/like',
+                url : '/api/like/' + this.model.get('_id'),
                 type : 'POST',
                 data : {
                     post : this.model.attributes,
@@ -91,7 +91,7 @@ var FeedView = Backbone.View.extend({
         var last = this.posts.at(this.posts.length - 1).get('_id');
         var that = this;
         $.ajax({
-            url: '/' + this.page + '/' + last,
+            url: '/api/feed/' + last,
             type: 'GET',
             success: function(data) {
                 if (data.length < 8) that.hasMore = false;
