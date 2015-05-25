@@ -7,3 +7,4 @@ bower_components
 
 # node.js
 npm-debug.log
+public/js/bundles/*.js

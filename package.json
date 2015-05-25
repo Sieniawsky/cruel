@@ -1,37 +1,42 @@
 {
   "name": "cruel",
   "description": "Cruel web app",
-  "author" : "Martin Sieniawski <m.sieniawski@live.ca>",
-  "contributors" : ["Joe Cornfield <joe@cruel.co>"],
+  "author": "Martin Sieniawski <m.sieniawski@live.ca>",
+  "contributors": [
+    "Joe Cornfield <joe@cruel.co>"
+  ],
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server.js",
+    "start": "npm run build && node server.js",
     "init": "npm install && ./node_modules/bower/bin/bower install",
-    "clean": "rm -r node_modules && rm -r bower_components"
+    "clean": "rm -r node_modules && rm -r bower_components",
+    "build": "browserify ./assets/feed.js > ./public/js/bundles/feed.js"
   },
   "dependencies": {
-    "express"        : "~4.2.0",
-    "hogan-express"  : "~0.5.2",
-    "mongodb"        : "~1.4.7",
-    "mongoose"       : "4.0.2",
-    "passport"       : "latest",
-    "passport-local" : "latest",
-    "bcrypt-nodejs"  : "latest",
-
-    "morgan"          : "~1.0.0",
-    "body-parser"     : "~1.0.0",
-    "cookie-parser"   : "~1.0.0",
-    "method-override" : "~1.0.0",
-    "express-session" : "~1.0.0",
-    "connect-flash"   : "latest",
-
-    "lodash"        : "3.8.0",
-    "serve-favicon" : "~2.0.1",
-    "moment"        : "latest"
+    "backbone": "^1.2.0",
+    "bcrypt-nodejs": "latest",
+    "body-parser": "~1.0.0",
+    "browserify": "~10.2.1",
+    "connect-flash": "latest",
+    "cookie-parser": "~1.0.0",
+    "debowerify": "^1.2.1",
+    "express": "~4.2.0",
+    "express-session": "~1.0.0",
+    "hogan-express": "~0.5.2",
+    "jquery": "^2.1.4",
+    "lodash": "3.8.0",
+    "method-override": "~1.0.0",
+    "moment": "latest",
+    "mongodb": "~1.4.7",
+    "mongoose": "4.0.2",
+    "morgan": "~1.0.0",
+    "passport": "latest",
+    "passport-local": "latest",
+    "serve-favicon": "~2.0.1"
   },
   "devDependencies": {
-    "bower" : "~1.4.1"
+    "bower": "~1.4.1"
   },
-  "engine" : "node 0.10.31"
+  "engine": "node 0.10.31"
 }
