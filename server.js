@@ -43,7 +43,7 @@ app.use(flash());
 require('./app/middleware/restrict')(app);
 
 /* Load application routes */
-require('./app/routes')(app, passport);
+require('./app')(app, passport);
 
 /* Handle 404 */
 app.use(function(req, res, next) {
