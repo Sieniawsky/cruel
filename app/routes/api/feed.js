@@ -1,3 +1,9 @@
+/* Routes for posts */
+var _      = require('lodash');
+var Post   = require('../../models/post');
+var User   = require('../../models/user');
+var remap  = require('../../utils/remap');
+
 /* API routes for the feed */
 module.exports = function(app, passport) {
     /* Get posts depending on page number */
