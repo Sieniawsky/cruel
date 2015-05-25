@@ -17,11 +17,15 @@ var PostView = Backbone.View.extend({
         'click .js-like': 'like'
     },
 
-    initialize: function() {},
+    initialize: function() {
+        _.bindAll(this, 'render');
+        this.model.bind('change', this.render);
+    },
 
     like: function() {
         console.log('Like has been clicked');
         if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
+            var that = this;
             $.ajax({
                 url : '/api/like/' + this.model.get('_id'),
                 type : 'POST',
@@ -29,7 +33,9 @@ var PostView = Backbone.View.extend({
                     post : this.model.attributes,
                     user : initData.user
                 },
-                success : function(data) {},
+                success : function(data) {
+                    that.model.fetch();
+                },
                 failure : function(data) {}
             });
         } else {
