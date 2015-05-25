@@ -12,6 +12,7 @@ module.exports = {
                 title       : post.title,
                 url         : post.url,
                 date        : moment(new Date(post.date)).fromNow(),
+                rawDate     : post.date,
                 description : post.description,
                 _user       : post._user,
                 _username   : post._username,
@@ -26,13 +27,15 @@ module.exports = {
         return {
             _id         : post._id,
             title       : post.title,
-            description : post.description,
             url         : post.url,
+            date        : moment(new Date(post.date)).fromNow(),
+            rawDate     : post.date,
+            description : post.description,
             _user       : post._user,
             _username   : post._username,
-            user        : userRemap(user),
             score       : post.score,
-            liked       : _.includes(post.likers, ((_.isEmpty(user)) ? '' : String(user._id)))
+            liked       : beenLiked(post.likers, ((_.isEmpty(user)) ? '' : String(user._id))),
+            likers      : post.likers
         };
     },
 
