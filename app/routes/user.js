@@ -1,6 +1,5 @@
 /* Routes for users */
 var _      = require('lodash');
-var moment = require('moment');
 var Post   = require('../models/post');
 var User   = require('../models/user');
 var remap  = require('../utils/remap');
