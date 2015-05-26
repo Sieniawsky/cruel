@@ -6,8 +6,21 @@ module.exports = Backbone.Collection.extend({
     model: Post,
 
     initialize: function() {
-        this.comparator = function(post) {
-            return -post.get('rawDate').getTime();
-        };
+        this.comparator = this.newSort;
+    },
+
+    sync: function(method, collection, options) {
+        options = options || {};
+        this.comparator = this[options.sort + 'Sort'];
+        options.url = '/api/feed/' + options.sort;
+        Backbone.sync(method, collection, options);
+    },
+
+    newSort: function(post) {
+        return -post.get('rawDate').getTime();
+    },
+
+    topSort: function(post) {
+        return -post.get('score');
     }
 });

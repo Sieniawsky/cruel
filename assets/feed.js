@@ -54,9 +54,9 @@ var FeedView = Backbone.View.extend({
     el: '.js-app',
 
     events: {
-        'click .js-new': 'loadNew',
-        'click .js-top': 'loadTop',
-        'click .js-hot': 'loadHot'
+        'click .js-new': function(){this.load('new')},
+        'click .js-top': function(){this.load('top')},
+        'click .js-hot': function(){this.load('hot')}
     },
 
     initialize: function() {
@@ -65,16 +65,19 @@ var FeedView = Backbone.View.extend({
         this.page = 0;
         this.isLoading = false;
         this.hasMore = true;
+        this.completed_template = _.template($('#completed-template').html());
 
         // Sorting options
         this.sort = 'new';
 
-        this.completed_template = _.template($('#completed-template').html());
-
+        // View events
         _.bindAll(this, 'checkScroll');
         $(window).scroll(this.checkScroll);
 
+        // Collection events
         this.posts = new PostCollection();
+        this.posts.bind('reset', this.addAll, this);
+
         var that = this;
         _.each(initData.data, function(post) {
             that.posts.add(new Post(post));
@@ -89,19 +92,16 @@ var FeedView = Backbone.View.extend({
     },
 
     addAll: function() {
+        console.log('addAll');
+        this.$feed.empty();
+        this.posts.sort();
+        console.log(this.posts.comparator);
         this.posts.each(this.addOne, this);
     },
 
-    loadNew: function() {
-        this.sort = 'new';
-    },
-
-    loadTop: function() {
-        this.sort = 'top';
-    },
-
-    loadHot: function() {
-        this.sort = 'hot';
+    load: function(sort) {
+        this.sort = sort;
+        this.posts.fetch({reset: true, sort: this.sort});
     },
 
     checkScroll: function() {
