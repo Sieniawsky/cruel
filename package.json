@@ -11,7 +11,7 @@
     "start": "npm run build && node server.js",
     "init": "npm install && ./node_modules/bower/bin/bower install",
     "clean": "rm -r node_modules && rm -r bower_components",
-    "build": "browserify ./assets/feed.js > ./public/js/bundles/feed.js"
+    "build": "./bin/build"
   },
   "dependencies": {
     "backbone": "^1.2.0",
@@ -20,7 +20,6 @@
     "browserify": "~10.2.1",
     "connect-flash": "latest",
     "cookie-parser": "~1.0.0",
-    "debowerify": "^1.2.1",
     "express": "~4.2.0",
     "express-session": "~1.0.0",
     "hogan-express": "~0.5.2",

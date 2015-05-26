@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+/* Client-side build process for scripts */
+
+var fs         = require('fs');
+var UglifyJS   = require('uglify-js');
+var browserify = require('browserify');
+
+var feedSource = 'assets/feed.js';
+var tempPath   = 'public/js/bundles/temp.js'
+var feedPath   = 'public/js/bundles/feed.js'
+
+var o = fs.createWriteStream(tempPath);
+
+var b = browserify()
+    .add(feedSource)
+    .bundle()
+    .pipe(o);
+
+o.on('finish', function() {
+    var u = UglifyJS.minify(tempPath);
+    fs.writeFile(feedPath, u.code, function(err) {
+        if (err) return console.error(err);
+        fs.unlink(tempPath, function(err) {
+            if (err) return console.error(err);
+        });
+    });
+});
