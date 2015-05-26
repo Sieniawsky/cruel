@@ -6,9 +6,43 @@ var remap  = require('../../utils/remap');
 
 /* API routes for the feed */
 module.exports = function(app, passport) {
-    /* Get posts depending on page number */
-    app.get('/api/feed/:id', function(req, res) {
-        var query = Post.find({_id: {'$lt': req.params.id}}).limit(8);
+    
+    /* Get new posts */
+    app.get('/api/feed/new/:id?', function(req, res) {
+        var query;
+        if (typeof req.params.id == 'undefined') {
+            query = Post.find().sort({date: 1}).limit(8);
+        } else {
+            query = Post.find({_id: {'$lt': req.params.id}}).sort({date: 1}).limit(8);
+        }
+        query.exec(function(err, posts) {
+            if (err) return console.error(err);
+            res.send(remap.postsRemap(posts, req.user));
+        });
+    });
+
+    /* Get top rated posts */
+    app.get('/api/feed/top/:id?', function(req, res) {
+        var query;
+        if (typeof req.params.id == 'undefined') {
+            query = Post.find().sort({score: -1}).limit(8);
+        } else {
+            query = Post.find({_id: {'$lt': req.params.id}}).sort({score: -1}).limit(8);
+        }
+        query.exec(function(err, posts) {
+            if (err) return console.error(err);
+            res.send(remap.postsRemap(posts, req.user));
+        });
+    });
+
+    /* Get hot posts */
+    app.get('/api/feed/hot/:id?', function(req, res) {
+        var query;
+        if (typeof req.params.id == 'undefined') {
+            query = Post.find();
+        } else {
+            query = Post.find();
+        }
         query.exec(function(err, posts) {
             if (err) return console.error(err);
             res.send(remap.postsRemap(posts, req.user));

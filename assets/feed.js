@@ -53,12 +53,21 @@ var FeedView = Backbone.View.extend({
 
     el: '.js-app',
 
+    events: {
+        'click .js-new': 'loadNew',
+        'click .js-top': 'loadTop',
+        'click .js-hot': 'loadHot'
+    },
+
     initialize: function() {
         this.$feed = $('.js-feed');
         this.triggerPoint = 100;
         this.page = 0;
         this.isLoading = false;
         this.hasMore = true;
+
+        // Sorting options
+        this.sort = 'new';
 
         this.completed_template = _.template($('#completed-template').html());
 
@@ -83,6 +92,18 @@ var FeedView = Backbone.View.extend({
         this.posts.each(this.addOne, this);
     },
 
+    loadNew: function() {
+        this.sort = 'new';
+    },
+
+    loadTop: function() {
+        this.sort = 'top';
+    },
+
+    loadHot: function() {
+        this.sort = 'hot';
+    },
+
     checkScroll: function() {
         if (!this.isLoading && this.hasMore &&
             ($(window).scrollTop() + this.triggerPoint
@@ -97,7 +118,7 @@ var FeedView = Backbone.View.extend({
         var last = this.posts.at(this.posts.length - 1).get('_id');
         var that = this;
         $.ajax({
-            url: '/api/feed/' + last,
+            url: '/api/feed/' + this.sort + '/' + last,
             type: 'GET',
             success: function(data) {
                 if (data.length < 8) that.hasMore = false;
