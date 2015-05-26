@@ -15,12 +15,8 @@
     "jquery": "~2.1.4",
     "bootstrap": "~3.3.2",
     "lodash": "3.8.0",
-    "backbone": "~1.2.0",
-    "holderjs": "latest",
     "foundation": "latest",
     "moment": "~2.10.2",
-    "jquery.validate": "~1.13.0",
-    "validate": "~0.7.1",
     "bootstrap-validator": "~0.8.1",
     "H5F": "~1.1.1"
   }
