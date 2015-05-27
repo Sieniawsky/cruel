@@ -37,15 +37,12 @@ module.exports = function(app, passport) {
 
     /* Get hot posts */
     app.get('/api/feed/hot/:id?', function(req, res) {
-        var query;
-        if (typeof req.params.id == 'undefined') {
-            query = Post.find();
-        } else {
-            query = Post.find();
-        }
+        var range = new Date();
+        range.setDate(range.getDate() - 2);
+        var query = Post.find({date: {'$gte': range}});
         query.exec(function(err, posts) {
             if (err) return console.error(err);
-            res.send(remap.postsRemap(posts, req.user));
+            res.send(remap.postsHotRemap(posts, req.user));
         });
     });
 };

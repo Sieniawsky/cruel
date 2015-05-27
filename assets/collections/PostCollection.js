@@ -22,5 +22,9 @@ module.exports = Backbone.Collection.extend({
 
     topSort: function(post) {
         return -post.get('score');
+    },
+
+    hotSort: function(post) {
+        return -post.get('hotScore');
     }
 });

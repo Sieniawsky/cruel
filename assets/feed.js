@@ -92,10 +92,7 @@ var FeedView = Backbone.View.extend({
     },
 
     addAll: function() {
-        console.log('addAll');
         this.$feed.empty();
-        this.posts.sort();
-        console.log(this.posts.comparator);
         this.posts.each(this.addOne, this);
     },
 
