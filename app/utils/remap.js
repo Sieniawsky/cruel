@@ -18,7 +18,8 @@ module.exports = {
                 _username   : post._username,
                 score       : post.score,
                 liked       : beenLiked(post.likers, ((_.isEmpty(user)) ? '' : String(user._id))),
-                likers      : post.likers
+                likers      : post.likers,
+                hotScore    : 0
             };
         });
     },
@@ -35,8 +36,33 @@ module.exports = {
             _username   : post._username,
             score       : post.score,
             liked       : beenLiked(post.likers, ((_.isEmpty(user)) ? '' : String(user._id))),
-            likers      : post.likers
+            likers      : post.likers,
+            hotScore    : 0
         };
+    },
+
+    postsHotRemap : function(posts, user) {
+        return _(posts)
+            .map(function(post) {
+                var hours = Math.abs(new Date(post.date) - new Date()) / 36e5;
+                return {
+                    _id         : post._id,
+                    title       : post.title,
+                    url         : post.url,
+                    date        : moment(new Date(post.date)).fromNow(),
+                    rawDate     : post.date,
+                    description : post.description,
+                    _user       : post._user,
+                    _username   : post._username,
+                    score       : post.score,
+                    liked       : beenLiked(post.likers, ((_.isEmpty(user)) ? '' : String(user._id))),
+                    likers      : post.likers,
+                    hotScore    : Math.ceil(((post.score + 9)/Math.pow(hours + 2, 1.2)))
+                };    
+            })
+            .sortBy(function(post) {
+                return -post.hotScore;
+            });
     },
 
     userRemap : userRemap = function(data) {

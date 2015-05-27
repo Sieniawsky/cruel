@@ -8,10 +8,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm run build && node server.js",
+    "start": "node server.js",
+    "build": "./bin/build && node server.js",
     "init": "npm install && ./node_modules/bower/bin/bower install",
-    "clean": "rm -r node_modules && rm -r bower_components",
-    "build": "./bin/build"
+    "clean": "rm -r node_modules && rm -r bower_components"
   },
   "dependencies": {
     "backbone": "^1.2.0",
