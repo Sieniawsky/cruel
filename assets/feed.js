@@ -54,15 +54,12 @@ var FeedView = Backbone.View.extend({
     el: '.js-app',
 
     events: {
-        'click .js-new'  : function(){this.load('new')},
-        'click .js-top'  : function(){this.load('top')},
-        'click .js-hot'  : function(){this.load('hot')},
-        'click .js-week' : function(){this.load('week')},
-        'click .js-month': function(){this.load('month')}
+        'change .js-sort': 'load'
     },
 
     initialize: function() {
         this.$feed = $('.js-feed');
+        this.$sort = $('.js-sort');
         this.triggerPoint = 100;
         this.page = 1;
         this.isLoading = false;
@@ -98,8 +95,9 @@ var FeedView = Backbone.View.extend({
         this.posts.each(this.addOne, this);
     },
 
-    load: function(sort) {
-        this.sort = sort;
+    load: function() {
+        this.sort = this.$sort.val();
+        console.log(this.sort);
         this.page = 1;
         this.hasMore = true;
         this.posts.fetch({reset: true, sort: this.sort});
