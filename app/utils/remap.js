@@ -67,7 +67,7 @@ module.exports = {
 
     userRemap : userRemap = function(data) {
         if (typeof data !== "undefined" && data !== null) {
-            var user = _.pick(data, ['_id', 'username', 'email']);
+            var user = _.pick(data, ['_id', 'username', 'email', 'date']);
         }
         return user || {};
     },

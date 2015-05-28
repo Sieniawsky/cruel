@@ -31,6 +31,40 @@ module.exports = function(app, passport) {
         });
     });
 
+    /* Get top posts for the current week */
+    app.get('/api/feed/week/:page', function(req, res) {
+        var date = new Date;
+        var firstDay = date.getDate() - date.getDay();
+        var first = new Date(date.getFullYear(), date.getMonth(), firstDay);
+        var last = new Date(date.getFullYear(), date.getMonth(), firstDay + 6);
+        var query = Post
+            .find({'$and': [{date: {'$gte': first}}, {date: {'$lte': last}}]})
+            .sort({score: -1})
+            .skip(computeSkip(req.params.page))
+            .limit(8);
+        query.exec(function(err, posts) {
+            console.log('we made it');
+            if (err) return console.error(err);
+            res.send(remap.postsRemap(posts, req.user));
+        });
+    });
+
+    /* Get top posts for the current month */
+    app.get('/api/feed/month/:page', function(req, res) {
+        var date = new Date();
+        var first = new Date(date.getFullYear(), date.getMonth(), 1);
+        var last = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        var query = Post
+            .find({'$and': [{date: {'$gte': first}}, {date: {'$lte': last}}]})
+            .sort({score: -1})
+            .skip(computeSkip(req.params.page))
+            .limit(8);
+        query.exec(function(err, posts) {
+            if (err) return console.error(err);
+            res.send(remap.postsRemap(posts, req.user));
+        });
+    });
+
     /* Get hot posts */
     app.get('/api/feed/hot/:page', function(req, res) {
         var range = new Date();

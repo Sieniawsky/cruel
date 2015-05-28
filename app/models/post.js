@@ -6,7 +6,7 @@ var postSchema = mongoose.Schema({
     title       : String,
     url         : { type : String, default : defaults.default_url },
     description : { type : String, default : '' },
-    date        : String,
+    date        : Date,
     _user       : mongoose.Schema.Types.ObjectId,
     _username   : String,
     likers      : { type : [mongoose.Schema.Types.ObjectId], default : []},
