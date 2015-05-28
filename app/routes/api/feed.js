@@ -35,19 +35,8 @@ module.exports = function(app, passport) {
     app.get('/api/feed/week/:page', function(req, res) {
         var date = new Date;
         var firstDay = date.getDate() - date.getDay();
-        console.log(firstDay);
-        //var first = new Date(date.setDate(firstDay));
-        //var last = new Date(date.setDate(firstDay + 6));
-        console.log('Before first');
         var first = new Date(date.getFullYear(), date.getMonth(), firstDay);
-        console.log('After first, before last');
         var last = new Date(date.getFullYear(), date.getMonth(), firstDay + 6);
-        console.log('After last');
-
-        console.log('Week');
-        console.log(first);
-        console.log(last);
-
         var query = Post
             .find({'$and': [{date: {'$gte': first}}, {date: {'$lte': last}}]})
             .sort({score: -1})
@@ -65,11 +54,6 @@ module.exports = function(app, passport) {
         var date = new Date();
         var first = new Date(date.getFullYear(), date.getMonth(), 1);
         var last = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
-        console.log('Month');
-        console.log(first);
-        console.log(last);
-
         var query = Post
             .find({'$and': [{date: {'$gte': first}}, {date: {'$lte': last}}]})
             .sort({score: -1})
