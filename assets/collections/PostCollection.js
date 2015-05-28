@@ -11,7 +11,7 @@ module.exports = Backbone.Collection.extend({
 
     sync: function(method, collection, options) {
         options = options || {};
-        this.comparator = this[options.sort + 'Sort'];
+        this.comparator = this[options.sort + 'Sort'] || this[this.topAliases[options.sort]];
         options.url = '/api/feed/' + options.sort + '/1';
         Backbone.sync(method, collection, options);
     },
@@ -22,6 +22,11 @@ module.exports = Backbone.Collection.extend({
 
     topSort: function(post) {
         return -post.get('score');
+    },
+
+    topAliases: {
+        'week' : 'topSort',
+        'month': 'topSort' 
     },
 
     hotSort: function(post) {

@@ -54,9 +54,11 @@ var FeedView = Backbone.View.extend({
     el: '.js-app',
 
     events: {
-        'click .js-new': function(){this.load('new')},
-        'click .js-top': function(){this.load('top')},
-        'click .js-hot': function(){this.load('hot')}
+        'click .js-new'  : function(){this.load('new')},
+        'click .js-top'  : function(){this.load('top')},
+        'click .js-hot'  : function(){this.load('hot')},
+        'click .js-week' : function(){this.load('week')},
+        'click .js-month': function(){this.load('month')}
     },
 
     initialize: function() {
@@ -101,6 +103,7 @@ var FeedView = Backbone.View.extend({
         this.page = 1;
         this.hasMore = true;
         this.posts.fetch({reset: true, sort: this.sort});
+        console.log(this.posts.comparator);
     },
 
     checkScroll: function() {

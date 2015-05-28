@@ -6,7 +6,7 @@ var userSchema = mongoose.Schema({
     username : String,
     email    : String,
     password : String,
-    date     : String,
+    date     : Date,
     score    : { type : Number, default : 0}
 });
 
