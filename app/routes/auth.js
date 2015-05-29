@@ -1,8 +1,9 @@
 /* Routes for authentication */
-var _      = require('lodash');
-var Post   = require('../models/post');
-var User   = require('../models/user');
-var remap  = require('../utils/remap');
+var _        = require('lodash');
+var Post     = require('../models/post');
+var User     = require('../models/user');
+var Location = require('../models/location'); 
+var remap    = require('../utils/remap');
 
 module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
@@ -10,7 +11,13 @@ module.exports = function(app, passport) {
     });
 
     app.get('/signup', function(req, res) {
-        res.render('signup', {message : req.flash('signupMessage')});
+        Location.find({}, function(err, locations) {
+            if (err) return console.error(err);
+            res.render('signup', {
+                message   : req.flash('signupMessage'),
+                locations : remap.locationRemap(locations)
+            });
+        });
     });
 
     app.get('/logout', function(req, res) {

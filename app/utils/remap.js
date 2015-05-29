@@ -68,8 +68,27 @@ module.exports = {
     userRemap : userRemap = function(data) {
         if (typeof data !== "undefined" && data !== null) {
             var user = _.pick(data, ['_id', 'username', 'email', 'date']);
+            var user = {
+                _id           : data._id,
+                username      : data.username,
+                email         : data.email,
+                date          : data.date,
+                _location     : data._location,
+                _locationName : data._locationName
+            };
         }
         return user || {};
+    },
+
+    locationRemap : function(locations) {
+        return _.map(locations, function(location) {
+            return {
+                _id     : location._id,
+                name    : location.name,
+                city    : location.city,
+                country : location.country
+            };
+        });
     },
 
     beenLiked : beenLiked = function(likers, id) {

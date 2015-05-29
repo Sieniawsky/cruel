@@ -32,7 +32,11 @@ module.exports = function(app, passport) {
 
     /* Post handler */
     app.post('/post', function(req, res) {
-        var data = _.extend({date: new Date()}, req.body);
+        var data = _.extend({
+            date          : new Date(),
+            _location     : req.user._location,
+            _locationName : req.user._locationName
+        }, req.body);
         data = _.omit(data, function(value) {
             return value === '';
         });

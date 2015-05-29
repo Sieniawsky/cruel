@@ -18,6 +18,15 @@
             <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
+            <label for="location"></label>
+            <select id="location" name="location">
+                {{#locations}}
+                    <option value="{{_id}},{{name}}">{{name}}</option>
+                {{/locations}}
+            </select>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" name="password" id="password"
                 minlength="10" data-error="Password must be at least 10 characters long" required>
