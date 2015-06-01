@@ -20,7 +20,6 @@ module.exports = Backbone.View.extend({
     },
 
     like: function() {
-        console.log('Like has been clicked');
         if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
             var that = this;
             $.ajax({

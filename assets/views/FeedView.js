@@ -3,6 +3,10 @@ var _ = require('lodash');
 var Backbone = require('backbone');
 Backbone.$ = $;
 
+var Post           = require('../models/Post');
+var PostCollection = require('../collections/PostCollection');
+var PostView       = require('../views/PostView');
+
 /* Basic feed view module that can be extended and customized */
 module.exports = Backbone.View.extend({
 
