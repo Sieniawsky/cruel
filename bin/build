@@ -6,7 +6,7 @@ var fs         = require('fs');
 var UglifyJS   = require('uglify-js');
 var browserify = require('browserify');
 
-var feedSource = 'assets/feed.js';
+var feedSource = 'assets/MainFeed.js';
 var tempPath   = 'public/js/bundles/temp.js'
 var feedPath   = 'public/js/bundles/feed.js'
 

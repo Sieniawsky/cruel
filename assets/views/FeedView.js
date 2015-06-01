@@ -3,74 +3,20 @@ var _ = require('lodash');
 var Backbone = require('backbone');
 Backbone.$ = $;
 
-var Post           = require('./models/Post.js');
-var PostCollection = require('./collections/PostCollection.js');
+var Post           = require('../models/Post');
+var PostCollection = require('../collections/PostCollection');
+var PostView       = require('../views/PostView');
 
-/* Post View */
-var PostView = Backbone.View.extend({
-
-    tagName: 'div',
-
-    template: _.template($('#post-template').html()),
-
-    events: {
-        'click .js-like': 'like'
-    },
-
-    initialize: function() {
-        _.bindAll(this, 'render');
-        this.model.bind('change', this.render);
-    },
-
-    like: function() {
-        console.log('Like has been clicked');
-        if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
-            var that = this;
-            $.ajax({
-                url : '/api/like/' + this.model.get('_id'),
-                type : 'POST',
-                data : {
-                    post : this.model.attributes,
-                    user : initData.user
-                },
-                success : function(data) {
-                    that.model.fetch();
-                },
-                failure : function(data) {}
-            });
-        } else {
-            // Prompt user to login
-        }
-    },
-
-    render: function() {
-        this.$el.html(this.template(this.model.toJSON()));
-        return this;
-    }
-});
-
-var FeedView = Backbone.View.extend({
-
-    el: '.js-app',
-
-    events: {
-        'change .js-sort'    : 'load',
-        'change .js-location': 'load'
-    },
+/* Basic feed view module that can be extended and customized */
+module.exports = Backbone.View.extend({
 
     initialize: function() {
         this.$feed     = $('.js-feed');
-        this.$sort     = $('.js-sort');
-        this.$location = $('.js-location');
         this.triggerPoint = 100;
         this.page = 1;
         this.isLoading = false;
         this.hasMore = true;
         this.completed_template = _.template($('#completed-template').html());
-
-        // Sorting options
-        this.sort     = 'new';
-        this.location = this.$location.val();
 
         // View events
         _.bindAll(this, 'checkScroll');
@@ -96,18 +42,6 @@ var FeedView = Backbone.View.extend({
     addAll: function() {
         this.$feed.empty();
         this.posts.each(this.addOne, this);
-    },
-
-    load: function() {
-        this.sort = this.$sort.val();
-        this.location = this.$location.val();
-        this.page = 1;
-        this.hasMore = true;
-        this.posts.fetch({
-            reset: true,
-            sort: this.sort,
-            location: this.location
-        });
     },
 
     checkScroll: function() {
@@ -147,9 +81,4 @@ var FeedView = Backbone.View.extend({
             }
         });
     }
-});
-
-/* Start it up */
-$(function() {
-    var feed = new FeedView();
 });
