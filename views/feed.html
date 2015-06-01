@@ -26,6 +26,12 @@
                 <option value="week">Week</option>
                 <option value="month">Month</option>
             </select>
+
+            <select class="js-location">
+                {{#locations}}
+                    <option value="{{_id}}">{{name}}, {{city}}</option>
+                {{/locations}}
+            </select>
         </div>
     </div>
 

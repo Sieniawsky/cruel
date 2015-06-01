@@ -54,12 +54,14 @@ var FeedView = Backbone.View.extend({
     el: '.js-app',
 
     events: {
-        'change .js-sort': 'load'
+        'change .js-sort'    : 'load',
+        'change .js-location': 'load'
     },
 
     initialize: function() {
-        this.$feed = $('.js-feed');
-        this.$sort = $('.js-sort');
+        this.$feed     = $('.js-feed');
+        this.$sort     = $('.js-sort');
+        this.$location = $('.js-location');
         this.triggerPoint = 100;
         this.page = 1;
         this.isLoading = false;
@@ -67,7 +69,8 @@ var FeedView = Backbone.View.extend({
         this.completed_template = _.template($('#completed-template').html());
 
         // Sorting options
-        this.sort = 'new';
+        this.sort     = 'new';
+        this.location = this.$location.val();
 
         // View events
         _.bindAll(this, 'checkScroll');
@@ -97,11 +100,14 @@ var FeedView = Backbone.View.extend({
 
     load: function() {
         this.sort = this.$sort.val();
-        console.log(this.sort);
+        this.location = this.$location.val();
         this.page = 1;
         this.hasMore = true;
-        this.posts.fetch({reset: true, sort: this.sort});
-        console.log(this.posts.comparator);
+        this.posts.fetch({
+            reset: true,
+            sort: this.sort,
+            location: this.location
+        });
     },
 
     checkScroll: function() {
@@ -117,7 +123,11 @@ var FeedView = Backbone.View.extend({
         this.isLoading = true;
         var that = this;
         $.ajax({
-            url: '/api/feed/' + this.sort + '/' + this.page,
+            url: '/api/feed/'
+                + this.sort
+                + '/'
+                + this.location
+                + '/' + this.page ,
             type: 'GET',
             success: function(data) {
                 if (data.length < 8) that.hasMore = false;
