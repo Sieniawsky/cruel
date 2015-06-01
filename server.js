@@ -13,6 +13,7 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var flash        = require('connect-flash');
 
+var Location = require('./app/models/location');
 var configDB = require('./config/database.js');
 
 mongoose.connect(configDB.socket);
@@ -45,6 +46,12 @@ require('./app/middleware/restrict')(app);
 /* Load application routes */
 require('./app')(app, passport);
 
+/* Load and store location data */
+Location.find({}, function(err, locations) {
+    if (err) return console.error(err);
+    app.set('locations', locations);
+});
+
 /* Handle 404 */
 app.use(function(req, res, next) {
     var err = new Error('Not Found!');
@@ -64,3 +71,6 @@ app.use(function(err, req, res, next) {
 app.listen(3000, function() {
     console.log('Starting on port 3000');
 });
+
+/* Export the app */
+module.exports = app;

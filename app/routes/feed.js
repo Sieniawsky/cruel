@@ -1,8 +1,9 @@
 /* Routes for the index feed of the application */
-var _      = require('lodash');
-var Post   = require('../models/post');
-var User   = require('../models/user');
-var remap  = require('../utils/remap');
+var _        = require('lodash');
+var Post     = require('../models/post');
+var User     = require('../models/user');
+var remap    = require('../utils/remap');
+var app      = require('../../server');
 
 module.exports = function(app, passport) {
     /* Index feed page */
@@ -15,7 +16,8 @@ module.exports = function(app, passport) {
                     data : remap.postsRemap(posts, req.user),
                     user : remap.userRemap(req.user)
                 }),
-                user : remap.userRemap(req.user)
+                user      : remap.userRemap(req.user),
+                locations : app.get('locations')
             });
         });
     });
