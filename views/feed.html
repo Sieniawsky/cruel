@@ -1,124 +1,55 @@
-<div class="container js-app">
-    <div class="row">
-        <div class="large-12 columns">
-            <div class="panel">
-                <h1>Feed Template</h1>
-            </div>
-        </div>
-    </div>
+<div class="js-app">
 
-    <div class="row">
-        <div class="large-12 columns js-links">
-            {{#user._id}}
-                <a href="/u/{{user.username}}">{{user.username}}</a>
-                <a href="/post">Make A Post</a>
-                <a href="/logout">Logout</a>
-            {{/user._id}}
-            {{^user._id}}
-                <a href="/login">Login</a>
-                <a href="/signup">Signup</a>
-            {{/user._id}}
+    <!-- User and session controls -->
+    {{#user._id}}
+        <a href="/u/{{user.username}}">{{user.username}}</a>
+        <a href="/post">Make A Post</a>
+        <a href="/logout">Logout</a>
+    {{/user._id}}
+    {{^user._id}}
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+    {{/user._id}}
 
-            <select class="js-sort">
-                <option value="new">New</option>
-                <option value="top">Top</option>
-                <option value="hot">Hot</option>
-                <option value="week">Week</option>
-                <option value="month">Month</option>
-            </select>
+    <!-- Feed sort options -->
+    <select class="js-sort">
+        <option value="new">New</option>
+        <option value="top">Top</option>
+        <option value="hot">Hot</option>
+        <option value="week">Week</option>
+        <option value="month">Month</option>
+    </select>
 
-            <select class="js-location">
-                {{#locations}}
-                    <option value="{{_id}}">{{name}}, {{city}}</option>
-                {{/locations}}
-            </select>
-        </div>
-    </div>
+    <!-- Feed location options -->
+    <select class="js-location">
+        {{#locations}}
+            <option value="{{_id}}">{{name}}, {{city}}</option>
+        {{/locations}}
+    </select>
 
-    <div class="row">
-        <div class="large-3 columns ">
-            <div class="panel">
-                <a href="#"><img src="http://placehold.it/300x240&amp;text=[img]"/></a>
-                <h5><a href="#">Your Name</a></h5>
-                <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
-                    <section class="section">
-                        <h5 class="title"><a href="#">Section 1</a></h5>
-                    </section>
-                    <section class="section">
-                        <h5 class="title"><a href="#">Section 2</a></h5>
-                    </section>
-                    <section class="section">
-                        <h5 class="title"><a href="#">Section 3</a></h5>
-                    </section>
-                    <section class="section">
-                        <h5 class="title"><a href="#">Section 4</a></h5>
-                    </section>
-                    <section class="section">
-                        <h5 class="title"><a href="#">Section 5</a></h5>
-                    </section>
-                    <section class="section">
-                        <h5 class="title"><a href="#">Section 6</a></h5>
-                    </section>
-                </div>
-            </div>
-        </div>
-        <div class="large-6 columns js-feed">
-        </div>
-        <aside class="large-3 columns hide-for-small">
-            <p><img src="http://placehold.it/300x440&amp;text=[ad]"/></p>
-            <p><img src="http://placehold.it/300x440&amp;text=[ad]"/></p>
-        </aside>
-    </div>
-
+    <!-- Feed load point -->
+    <div class="js-feed"></div>
     <div class="js-loading"></div>
-
-    <footer class="row">
-        <div class="large-12 columns">
-            <hr/>
-            <div class="row">
-                <div class="large-5 columns">
-                    <p>© Copyright no one at all. Go to town.</p>
-                </div>
-                <div class="large-7 columns">
-                    <ul class="inline-list right">
-                        <li><a href="#">Section 1</a></li>
-                        <li><a href="#">Section 2</a></li>
-                        <li><a href="#">Section 3</a></li>
-                        <li><a href="#">Section 4</a></li>
-                        <li><a href="#">Section 5</a></li>
-                        <li><a href="#">Section 6</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
 
 <!-- Templates -->
 <script id="post-template" type="text/template">
-    <div class="row js-post">
-        <div class="large-3 columns small-3">
-            <a href="/post/<%= _id %>">
-                <img src="<%= url %>"/>
-            </a>
-        </div>
-        <div class="large-9 columns">
-            <button type="button" class="js-like" name="<%= _id %>">Vote</button>
-            <a href="/post/<%= _id %>"><strong><%= title %></strong></a>
-            <p class"date2">Score: <%= score %>, <%= date %>, By: <%= _username %></p>
-        </div>
+    <div class="js-post">
+        <a href="/post/<%= _id %>">
+            <img src="<%= url %>"/>
+        </a>
+        <button type="button" class="js-like" name="<%= _id %>">Vote</button>
+        <a href="/post/<%= _id %>"><strong><%= title %></strong></a>
+        <p class"date2">Score: <%= score %>, <%= date %>, By: <%= _username %></p>
     </div>
-    <hr/>
 </script>
 
 <script id="loading-template" type="text/template">
-    <img class="loading" src="/images/dashinfinity.gif">
+    <img src="/images/dashinfinity.gif">
 </script>
 
 <script id="warning-template" type="text/template">
-    <div class="alert alert-warning">
-        <p>Something went wrong while loading more posts</p>
-    </div>
+    <p>Something went wrong while loading more posts</p>
 </script>
 
 <script id="completed-template" type="text/template">
@@ -129,12 +60,6 @@
 <script id="init-data" type="application/json">
     {{{initData}}}
 </script>
-
-<!-- Load page specific styles -->
-{{#yield-styles}}
-    <link rel="stylesheet" type="text/css" href="/bower_components/foundation/css/foundation.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/app.css">
-{{/yield-styles}}
 
 <!-- Load page specific scripts -->
 {{#yield-scripts}}

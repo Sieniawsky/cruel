@@ -1,26 +1,25 @@
-<div class="container compose">
+<div>
     <form class="js-compose" id="compose" data-toggle="validator"
         role="form" action="/post" method="post">
         <div class="form-group">
-            <label for="postTitle" class="control-label">Post Title</label>
-            <input type="text" class="form-control" name="title"
-                id="postTitle" placeholder="Enter post title" minlength="10"
+            <label for="postTitle">Post Title</label>
+            <input type="text" name="title" id="postTitle" placeholder="Enter post title" minlength="10"
                 data-error="Post title must be at least 10 characters long" required>
             <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
-            <label for="imageURL" class="control-label">Image URL</label>
-            <input type="url" class="form-control js-image" name="url" placeholder="http://www.example.com"
+            <label for="imageURL">Image URL</label>
+            <input type="url" class="js-image" name="url" placeholder="http://www.example.com"
                 data-error="Please enter a valid URL">
             <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
-            <label for="postDescription" class="control-label">Description</label>
-            <textarea rows="5" class="form-control" name="description" id="postDescription"
+            <label for="postDescription">Description</label>
+            <textarea rows="5" name="description" id="postDescription"
                 form="compose" placeholder="Enter a description"></textarea>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-default">Post</button>
+            <button type="submit">Post</button>
         </div>
     </form>
 </div>
@@ -29,12 +28,6 @@
 <script id="init-data" type="application/json">
     {{{initData}}}
 </script>
-
-<!-- Load page specific styles -->
-{{#yield-styles}}
-    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/app.css">
-{{/yield-styles}}
 
 <!-- Load page specific scripts -->
 {{#yield-scripts}}
