@@ -3,10 +3,11 @@
 /* Database generation script */
 var _        = require('lodash');
 var mongoose = require('mongoose');
-var configDB = require('./config/database.js');
-var Location = require('./app/models/location');
+var configDB = require('../config/database.js');
+var Location = require('../app/models/location');
 
-var data = [
+/* location data */
+var data  = [
     {
         name    : 'Toronto',
         city    : 'Toronto',
@@ -29,10 +30,19 @@ var data = [
     }
 ];
 
+/* Establish database connection */
 mongoose.connect(configDB.socket);
 
-var post = new Post(data);
-post.save(function(err, post) {
-    if (err) return console.error(err);
-    res.redirect('/');
+/* Insert location data */
+_.forEach(data, function(location) {
+    var l = new Location(location);
+    l.save(function(err, loc) {
+        if (err) return console.error(err);
+    });
+});
+
+/* Close database connection and exit process */
+mongoose.connection.close(function () {
+    console.log('Database generated, ' + data.length + ' elements added.');
+    process.exit(0);
 });
