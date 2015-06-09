@@ -11,6 +11,8 @@ var FeedView       = require('./views/FeedView');
 /* Feed for a user's profile page */
 var UserFeed = FeedView.extend({
 
+    el: '.js-user',
+
     events: {
         'change .js-sort'     : 'load',
         'change .js-location' : 'load'
@@ -20,25 +22,26 @@ var UserFeed = FeedView.extend({
         /* Call super initialize */
         FeedView.prototype.initialize.apply(this);
 
-        this.$sort     = $('.js-sort');
-        this.$location = $('.js-location');
-
-        // Sorting options
-        this.sort     = 'new';
-        this.location = this.$location.val();
+        this.$sort = $('.js-sort');
+        this.sort  = 'new';
+        this.user  = initData.user._id;
+        this.url   = this.setURL(this.page);
     },
 
     load: function() {
         this.sort = this.$sort.val();
-        this.location = this.$location.val();
         this.page = 1;
         this.hasMore = true;
         this.posts.fetch({
-            reset: true,
-            sort: this.sort,
-            location: this.location
+            reset : true,
+            url   : this.setURL(1)
         });
-    } 
+    },
+
+    setURL: function(page) {
+        this.url = '/api/feed/' + this.user + '/' + this.sort + '/' + page;
+        return this.url;
+    }
 });
 
 /* Start it up */

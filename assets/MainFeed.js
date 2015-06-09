@@ -28,6 +28,9 @@ var MainFeed = FeedView.extend({
         // Sorting options
         this.sort     = 'new';
         this.location = this.$location.val();
+
+        // Set update url
+        this.url = this.setURL(this.page);
     },
 
     load: function() {
@@ -36,11 +39,15 @@ var MainFeed = FeedView.extend({
         this.page = 1;
         this.hasMore = true;
         this.posts.fetch({
-            reset: true,
-            sort: this.sort,
-            location: this.location
+            reset : true,
+            url   : this.setURL(1)
         });
     },
+
+    setURL: function(page) {
+        this.url = '/api/feed/' + this.sort + '/' + this.location + '/' + page;
+        return this.url;
+    }
 });
 
 /* Start it up */

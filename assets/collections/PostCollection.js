@@ -12,11 +12,6 @@ module.exports = Backbone.Collection.extend({
     sync: function(method, collection, options) {
         options = options || {};
         this.comparator = this[options.sort + 'Sort'] || this[this.topAliases[options.sort]];
-        options.url = '/api/feed/'
-            + options.sort
-            + '/'
-            + options.location
-            + '/1';
         Backbone.sync(method, collection, options);
     },
 

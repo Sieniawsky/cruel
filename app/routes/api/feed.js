@@ -92,6 +92,32 @@ module.exports = function(app, passport) {
         });
     });
 
+    /* Get new posts for a given user */
+    app.get('/api/feed/:user/new/:page', function(req, res) {
+        var query = Post
+            .find({_user: req.params.user})
+            .sort({date: 1})
+            .skip(computeSkip(req.params.page))
+            .limit(8);
+        query.exec(function(err, posts) {
+            if (err) return console.error(err);
+            res.send(remap.postsRemap(posts, req.user));
+        });
+    });
+
+    /* Get top posts for a given user */
+    app.get('/api/feed/:user/top/:page', function(req, res) {
+        var query = Post
+            .find({_user: req.params.user})
+            .sort({score: -1})
+            .skip(computeSkip(req.params.page))
+            .limit(8);
+        query.exec(function(err, posts) {
+            if (err) return console.error(err);
+            res.send(remap.postsRemap(posts, req.user));
+        });
+    });
+
     var computeSkip = function(page) {
         page = parseInt(page);
         if (page < 0) page = 0;
