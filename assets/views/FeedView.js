@@ -27,7 +27,7 @@ module.exports = Backbone.View.extend({
         this.posts.bind('reset', this.addAll, this);
 
         var that = this;
-        _.each(initData.data, function(post) {
+        _.each(initData.posts, function(post) {
             that.posts.add(new Post(post));
         });
 
@@ -57,12 +57,8 @@ module.exports = Backbone.View.extend({
         this.isLoading = true;
         var that = this;
         $.ajax({
-            url: '/api/feed/'
-                + this.sort
-                + '/'
-                + this.location
-                + '/' + this.page ,
-            type: 'GET',
+            url  : this.url,
+            type : 'GET',
             success: function(data) {
                 if (data.length < 8) that.hasMore = false;
                 _.each(data, function(post) {

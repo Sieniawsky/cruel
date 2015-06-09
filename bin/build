@@ -1,28 +1,38 @@
 #!/usr/bin/env node
 
 /* Client-side build process for scripts */
-
+var _          = require('lodash');
 var fs         = require('fs');
 var UglifyJS   = require('uglify-js');
 var browserify = require('browserify');
 
-var feedSource = 'assets/MainFeed.js';
-var tempPath   = 'public/js/bundles/temp.js'
-var feedPath   = 'public/js/bundles/feed.js'
+var sources = [{
+    sourcePath : 'assets/MainFeed.js',
+    tempPath   : 'public/js/temp1.js',
+    exportPath : 'public/js/bundles/feed.js'
+}, {
+    sourcePath : 'assets/UserFeed.js',
+    tempPath   : 'public/js/temp2.js',
+    exportPath : 'public/js/bundles/user.js'
+}];
 
-var o = fs.createWriteStream(tempPath);
+_.forEach(sources, function(source) {
+    var o = fs.createWriteStream(source.tempPath);
+    var b = browserify()
+        .add(source.sourcePath)
+        .bundle()
+        .pipe(o);
 
-var b = browserify()
-    .add(feedSource)
-    .bundle()
-    .pipe(o);
-
-o.on('finish', function() {
-    var u = UglifyJS.minify(tempPath);
-    fs.writeFile(feedPath, u.code, function(err) {
-        if (err) return console.error(err);
-        fs.unlink(tempPath, function(err) {
+    o.on('finish', function() {
+        console.log(source.sourcePath + ' has been bundled');
+        var u = UglifyJS.minify(source.tempPath);
+        fs.writeFile(source.exportPath, u.code, function(err) {
             if (err) return console.error(err);
+            console.log(source.sourcePath + ' has been uglified');
+            fs.unlink(source.tempPath, function(err) {
+                if (err) return console.error(err);
+                console.log(source.sourcePath + ' has been built and unlinked');
+            });
         });
     });
 });

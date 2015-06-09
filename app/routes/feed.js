@@ -13,8 +13,8 @@ module.exports = function(app, passport) {
             if (err) return console.error(err);
             res.render('feed', {
                 initData : JSON.stringify({
-                    data : remap.postsRemap(posts, req.user),
-                    user : remap.userRemap(req.user)
+                    posts : remap.postsRemap(posts, req.user),
+                    user  : remap.userRemap(req.user)
                 }),
                 user      : remap.userRemap(req.user),
                 locations : app.get('locations')
