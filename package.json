@@ -21,6 +21,7 @@
     "body-parser": "~1.0.0",
     "browserify": "~10.2.1",
     "connect-flash": "latest",
+    "connect-mongo": "^0.8.1",
     "cookie-parser": "~1.0.0",
     "express": "~4.2.0",
     "express-session": "~1.0.0",
