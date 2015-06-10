@@ -11,6 +11,7 @@ var path     = require('path');
 var bodyParser   = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
+var MongoStore   = require('connect-mongo')(session);
 var flash        = require('connect-flash');
 
 var Location = require('./app/models/location');
@@ -35,7 +36,19 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
-app.use(session({secret: 'Swaglord69'}));
+app.use(session({
+    saveUninitialized : false,
+    rolling : true,
+    resave  : true,
+    secret  : 'Swaglord69',
+    cookie  : {
+        expires : false,
+        maxAge  : new Date(Date.now() + 3600000)
+    },
+    store   : new MongoStore({mongooseConnection: mongoose.connection}, function(err) {
+        console.log(err || 'connect-mongodb setup ok')
+    })
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
