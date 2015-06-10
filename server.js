@@ -43,7 +43,7 @@ app.use(session({
     secret  : 'Swaglord69',
     cookie  : {
         expires : false,
-        maxAge  : new Date(Date.now() + 3600000)
+        maxAge  : new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
     },
     store   : new MongoStore({mongooseConnection: mongoose.connection}, function(err) {
         console.log(err || 'connect-mongodb setup ok')
