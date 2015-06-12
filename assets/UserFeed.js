@@ -21,9 +21,8 @@ var UserFeed = FeedView.extend({
     initialize: function() {
         /* Call super initialize */
         FeedView.prototype.initialize.apply(this);
-
-        this.$sort = $('.js-sort');
-        this.sort  = 'new';
+        this.sort = 'new';
+        this.$sort.val('new');
         this.user  = initData.user._id;
         this.url   = this.setURL(this.page);
         this.load();
