@@ -17,6 +17,7 @@ module.exports = Backbone.View.extend({
         this.isLoading = false;
         this.hasMore = true;
         this.completed_template = _.template($('#completed-template').html());
+        this.$sort = $('.js-sort');
 
         // View events
         _.bindAll(this, 'checkScroll');

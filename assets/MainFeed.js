@@ -21,12 +21,9 @@ var MainFeed = FeedView.extend({
     initialize: function() {
         /* Call super initialize */
         FeedView.prototype.initialize.apply(this);
-
-        this.$sort     = $('.js-sort');
+        this.sort = 'hot';
+        this.$sort.val('hot');
         this.$location = $('.js-location');
-
-        // Sorting options
-        this.sort = 'new';
 
         // Set the location to the user's location setting
         if (typeof initData.user._location != "undefined") {
