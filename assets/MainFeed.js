@@ -26,11 +26,19 @@ var MainFeed = FeedView.extend({
         this.$location = $('.js-location');
 
         // Sorting options
-        this.sort     = 'new';
-        this.location = this.$location.val();
+        this.sort = 'new';
+
+        // Set the location to the user's location setting
+        if (typeof initData.user._location != "undefined") {
+            this.location = initData.user._location;
+            this.$location.val(initData.user._location);
+        } else {
+            this.location = this.$location.val();
+        }
 
         // Set update url
         this.url = this.setURL(this.page);
+        this.load();
     },
 
     load: function() {
