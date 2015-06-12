@@ -25,13 +25,6 @@ module.exports = Backbone.View.extend({
         // Collection events
         this.posts = new PostCollection();
         this.posts.bind('reset', this.addAll, this);
-
-        var that = this;
-        _.each(initData.posts, function(post) {
-            that.posts.add(new Post(post));
-        });
-
-        this.addAll();
     },
 
     addOne: function(post) {

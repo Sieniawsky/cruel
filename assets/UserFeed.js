@@ -26,6 +26,7 @@ var UserFeed = FeedView.extend({
         this.sort  = 'new';
         this.user  = initData.user._id;
         this.url   = this.setURL(this.page);
+        this.load();
     },
 
     load: function() {

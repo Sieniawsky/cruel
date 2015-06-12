@@ -13,7 +13,6 @@ module.exports = function(app, passport) {
             if (err) return console.error(err);
             res.render('feed', {
                 initData : JSON.stringify({
-                    posts : remap.postsRemap(posts, req.user),
                     user  : remap.userRemap(req.user)
                 }),
                 user      : remap.userRemap(req.user),
