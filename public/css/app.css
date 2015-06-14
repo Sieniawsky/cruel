@@ -1008,7 +1008,7 @@ input[type="button"].btn-block {
     font-family: 'Bebas';
     font-style: normal;
     font-weight: normal;
-    src: local('Bebas'), url('/public/fonts/BebasNeue.woff') format('woff');
+    src: local('Bebas'), url('/fonts/BebasNeue.woff') format('woff');
 }
 
 p .date2 {
