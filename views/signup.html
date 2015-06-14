@@ -1,40 +1,72 @@
-<div>
-    {{#message.length}}
-        <div>{{message}}</div>
-    {{/message.length}}
-    <form id="signup-form" data-toggle="validator" role="form" action="/signup" method="post">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" placeholder="Username" minlength="8"
-                data-error="Username must be at least 8 characters long" required>
-            <div class="help-block with-errors"></div>
+
+
+<!-- User and session controls -->
+<div class="cruelheader">
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="headerlogo">
+                <a href="/">
+                    <img src="/images/headerlogo.png">
+                </a>
+            </div>
+            <div class="icons">
+                {{#user._id}}
+                    <a href="/u/{{user.username}}">{{user.username}}</a>
+                    <a href="/post">Make A Post</a>
+                    <a href="/logout">Logout</a>
+                {{/user._id}}
+                {{^user._id}}
+                    <a href="/login">Login</a>
+                    <a href="/signup">Signup</a>
+                {{/user._id}}
+            </div>
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="john@example.com"
-                data-error="Please enter a valid email address" required>
-            <div class="help-block with-errors"></div>
-        </div>
-        <div class="form-group">
-            <label for="location"></label>
-            <select id="location" name="location">
-                {{#locations}}
-                    <option value="{{_id}},{{name}}">{{name}}</option>
-                {{/locations}}
-            </select>
-            <div class="help-block with-errors"></div>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" minlength="10"
-                data-error="Password must be at least 10 characters long" required>
-            <div class="help-block with-errors"></div>
-        </div>
-        <div class="form-group">
-            <button type="submit">Signup</button>
-        </div>
-    </form>
+    </div>
 </div>
+
+<div class="row">
+    <div class="large-12 columns feed">
+        <div class="postheader composeheader">
+            <h1>Create an Account</h1>
+        </div>
+
+        <div class="forms">
+            {{#message.length}}
+                <div>{{message}}</div>
+            {{/message.length}}
+            <form id="signup-form" data-toggle="validator" role="form" action="/signup" method="post">
+                <div class="form-group">
+                    <h1>Username</h1>
+                    <input type="text" name="username" id="username" placeholder="Username" minlength="8"
+                        data-error="Username must be at least 8 characters long" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <h1>Email</h1>
+                    <input type="email" name="email" id="email" placeholder="john@example.com"
+                        data-error="Please enter a valid email address" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <h1>Campus</h1>
+                    <select id="location" name="location">
+                        {{#locations}}
+                            <option value="{{_id}},{{name}}">{{name}}</option>
+                        {{/locations}}
+                    </select>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <h1>Password</h1>
+                    <input type="password" name="password" id="password" minlength="10"
+                        data-error="Password must be at least 10 characters long" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Signup</button>
+                </div>
+            </form>
+        </div>
 
 <!-- Load page specific scripts -->
 {{#yield-scripts}}
