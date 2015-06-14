@@ -1,46 +1,97 @@
 <div class="js-app">
+    <div class="bgimage">
+        <img src="/images/bg1.jpg">
+    </div>
 
     <!-- User and session controls -->
-    {{#user._id}}
-        <a href="/u/{{user.username}}">{{user.username}}</a>
-        <a href="/post">Make A Post</a>
-        <a href="/logout">Logout</a>
-    {{/user._id}}
-    {{^user._id}}
-        <a href="/login">Login</a>
-        <a href="/signup">Signup</a>
-    {{/user._id}}
+    <div class="cruelheader">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="headerlogo">
+                    <a href="#">
+                        <img src="/images/headerlogo.png">
+                    </a>
+                </div>
+                <div class="icons">
+                    {{#user._id}}
+                        <a href="/u/{{user.username}}">{{user.username}}</a>
+                        <a href="/post">Make A Post</a>
+                        <a href="/logout">Logout</a>
+                    {{/user._id}}
+                    {{^user._id}}
+                        <a href="/login">Login</a>
+                        <a href="/signup">Signup</a>
+                    {{/user._id}}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Feed sort options -->
-    <select class="js-sort">
-        <option value="hot">Hot</option>
-        <option value="new">New</option>
-        <option value="top">Top</option>
-        <option value="week">Week</option>
-        <option value="month">Month</option>
-    </select>
+    
+    <div class="row">
+        <div class="large-12 columns feed">
+            <div class="feedheader">
+                <!-- City Header -->
+                <h2>City Name</h2>
+                <!-- Feed sort options -->
+                <div class="sorting">
+                    <span class="sortlabel">Browse by:</span>
+                    <select class="js-sort">
+                        <option value="new">New</option>
+                        <option value="top">Top</option>
+                        <option value="hot">Hot</option>
+                        <option value="week">Week</option>
+                        <option value="month">Month</option>
+                    </select>
 
-    <!-- Feed location options -->
-    <select class="js-location">
-        {{#locations}}
-            <option value="{{_id}}">{{name}}, {{city}}</option>
-        {{/locations}}
-    </select>
+                    <!-- Feed location options -->
+                    <select class="js-location">
+                        {{#locations}}
+                            <option value="{{_id}}">{{name}}, {{city}}</option>
+                        {{/locations}}
+                    </select>
+                </div>
+            </div>
 
-    <!-- Feed load point -->
-    <div class="js-feed"></div>
-    <div class="js-loading"></div>
+
+            <!-- Feed load point -->
+            <div class="js-feed"></div>
+            <div class="js-loading"></div>
+        </div>
+    </div>
 </div>
 
 <!-- Templates -->
 <script id="post-template" type="text/template">
+    
+    
     <div class="js-post">
-        <a href="/post/<%= _id %>">
-            <img src="<%= url %>"/>
-        </a>
-        <button type="button" class="js-like" name="<%= _id %>">Vote</button>
-        <a href="/post/<%= _id %>"><strong><%= title %></strong></a>
-        <p class"date2">Score: <%= score %>, <%= date %>, By: <%= _username %></p>
+        
+        <div class="row">
+        
+            <div class="feeditem">
+                
+                
+                <div class="large-2 columns thumbnail">
+                    <a href="/post/<%= _id %>">
+                        <img src="<%= url %>"/>
+                    </a>
+                    <button type="button" class="js-like" name="<%= _id %>"></button>
+                        
+                    
+                </div>
+               
+            
+             <div class="large-10 columns feedcontent">
+                <a href="/post/<%= _id %>"><h1><%= title %></h1></a>
+                <div class="authortime">
+                    <span class="count"> <%= score %></span>
+                    <span class="author"> <%= _username %></span>
+                    <span class="time"> <%= date %></span> 
+                    
+                </div>
+            </div>
+        </div>
     </div>
 </script>
 
