@@ -31,22 +31,26 @@
     <div class="row">
         <div class="large-12 columns feed">
             <div class="feedheader">
-    
+                <!-- City Header -->
+                <h2>City Name</h2>
                 <!-- Feed sort options -->
-                <select class="js-sort">
-                    <option value="new">New</option>
-                    <option value="top">Top</option>
-                    <option value="hot">Hot</option>
-                    <option value="week">Week</option>
-                    <option value="month">Month</option>
-                </select>
+                <div class="sorting">
+                    <span class="sortlabel">Browse by:</span>
+                    <select class="js-sort">
+                        <option value="new">New</option>
+                        <option value="top">Top</option>
+                        <option value="hot">Hot</option>
+                        <option value="week">Week</option>
+                        <option value="month">Month</option>
+                    </select>
 
-                <!-- Feed location options -->
-                <select class="js-location">
-                    {{#locations}}
-                        <option value="{{_id}}">{{name}}, {{city}}</option>
-                    {{/locations}}
-                </select>
+                    <!-- Feed location options -->
+                    <select class="js-location">
+                        {{#locations}}
+                            <option value="{{_id}}">{{name}}, {{city}}</option>
+                        {{/locations}}
+                    </select>
+                </div>
             </div>
 
 
@@ -62,14 +66,19 @@
     
     
     <div class="js-post">
+        
         <div class="row">
+        
             <div class="feeditem">
                 
-                <div class="large-2 columns">
+                
+                <div class="large-2 columns thumbnail">
                     <a href="/post/<%= _id %>">
                         <img src="<%= url %>"/>
                     </a>
-                    <button type="button" class="js-like boltbutton" name="<%= _id %>"></button>
+                    <button type="button" class="js-like" name="<%= _id %>"></button>
+                        
+                    
                 </div>
                
             
@@ -77,8 +86,9 @@
                 <a href="/post/<%= _id %>"><h1><%= title %></h1></a>
                 <div class="authortime">
                     <span class="count"> <%= score %></span>
-                    <span class="time"> <%= date %></span> 
                     <span class="author"> <%= _username %></span>
+                    <span class="time"> <%= date %></span> 
+                    
                 </div>
             </div>
         </div>
