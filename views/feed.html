@@ -61,8 +61,6 @@
 
 <!-- Templates -->
 <script id="post-template" type="text/template">
-    
-    
     <div class="js-post">
         <div class="row">
             <div class="feeditem">
@@ -70,7 +68,9 @@
                     <a href="/post/<%= _id %>">
                         <img src="<%= url %>"/>
                     </a>
-                    <button type="button" class="js-like" name="<%= _id %>"></button>
+                    <button type="button"
+                        class="<% if(liked) { %>js-like bolt-liked<% } else { %>js-like bolt<% }%>"
+                        name="<%= _id %>"></button>
                 </div>
                <div class="large-10 columns feedcontent">
                 <a href="/post/<%= _id %>"><h1><%= title %></h1></a>
@@ -78,7 +78,6 @@
                     <span class="count"> <%= score %></span>
                     <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
                     <span class="time"> <%= date %></span> 
-                    
                 </div>
             </div>
         </div>

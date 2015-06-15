@@ -1175,8 +1175,7 @@ p .date2 {
 }
 
 
-.feeditem .thumbnail button {
-    
+.bolt {
     margin-left:-40px;
     position:absolute;
     margin-top:-50%;
@@ -1191,16 +1190,28 @@ p .date2 {
 
 }
 
-.feeditem .thumbnail button:focus {
+.bolt-liked {
+    margin-left:-40px;
+    position:absolute;
+    margin-top:-50%;
+    background-image: URL("/images/boltbuttonhover.png");
+    width:32px;
+    height:32px;
+    padding:0;
+    border:none;
+    
+    cursor: pointer;
+    background-color:#fff;
+
+}
+
+.bolt:focus {
   outline:none;
 }
 
-.feeditem .thumbnail button:hover {
+.bolt:hover {
   background-image: URL("/images/boltbuttonhover.png");
 }
-
-
-
 
 .authortime a {
     text-decoration: none;

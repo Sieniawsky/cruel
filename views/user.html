@@ -50,7 +50,9 @@
                     <a href="/post/<%= _id %>">
                         <img src="<%= url %>"/>
                     </a>
-                     <button type="button" class="js-like" name="<%= _id %>"></button>
+                     <button type="button"
+                        class="<% if(liked) { %>js-like bolt-liked<% } else { %>js-like bolt<% }%>"
+                        name="<%= _id %>"></button>
                 </div>
                    <div class="large-10 columns feedcontent">
                 <a href="/post/<%= _id %>"><h1><%= title %></h1></a>
