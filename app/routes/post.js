@@ -10,7 +10,8 @@ module.exports = function(app, passport) {
         res.render('compose', {
             initData : JSON.stringify({
                 user : remap.userRemap(req.user)
-            })
+            }),
+            user : remap.userRemap(req.user)
         });
     });
 
