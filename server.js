@@ -16,14 +16,22 @@ var flash        = require('connect-flash');
 
 var Location = require('./app/models/location');
 var configDB = require('./config/database.js');
+var socket;
 
-mongoose.connect(configDB.socket);
+/* Set database socket */
+if (process.argv.length == 3 && process.argv[2] === 'prod') {
+    socket = configDB.prodSocket;
+} else {
+    socket = configDB.devSocket;
+}
+
+mongoose.connect(socket);
 
 /* Load Passport config */
 require('./config/passport')(passport);
 
 /* Configure Application */
-app.set('port', process.env.port || 3000);
+app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'html');
 app.set('layout', 'layout');
 app.engine('html', hogan);
@@ -81,8 +89,8 @@ app.use(function(err, req, res, next) {
     });
 });
 
-app.listen(3000, function() {
-    console.log('Starting on port 3000');
+app.listen(app.get('port'), function() {
+    console.log('Starting on port ' + app.get('port'));
 });
 
 /* Export the app */

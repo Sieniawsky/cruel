@@ -14,7 +14,7 @@
     "gendb": "./bin/gendb",
     "init": "npm install && ./node_modules/bower/bin/bower install",
     "clean": "rm -r node_modules && rm -r bower_components",
-    "pointinstall": "./node_modules/bower/bin/bower install && ./bin/build"
+    "postinstall": "./node_modules/bower/bin/bower install && ./bin/build"
   },
   "dependencies": {
     "backbone": "^1.2.0",
@@ -37,9 +37,7 @@
     "passport": "latest",
     "passport-local": "latest",
     "serve-favicon": "~2.0.1",
-    "uglify-js": "^2.4.23"
-  },
-  "devDependencies": {
+    "uglify-js": "^2.4.23",
     "bower": "~1.4.1"
   },
   "engine": "node 0.10.31"
