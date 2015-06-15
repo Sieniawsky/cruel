@@ -1,28 +1,64 @@
-<div>
-    <form class="js-compose" id="compose" data-toggle="validator"
-        role="form" action="/post" method="post">
-        <div class="form-group">
-            <label for="postTitle">Post Title</label>
-            <input type="text" name="title" id="postTitle" placeholder="Enter post title" minlength="10"
-                data-error="Post title must be at least 10 characters long" required>
-            <div class="help-block with-errors"></div>
+
+
+<!-- User and session controls -->
+<div class="cruelheader">
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="headerlogo">
+                <a href="/">
+                    <img src="/images/headerlogo.png">
+                </a>
+            </div>
+            <div class="icons">
+                {{#user._id}}
+                    <a href="/u/{{user.username}}">{{user.username}}</a>
+                    <a href="/post">Make A Post</a>
+                    <a href="/logout">Logout</a>
+                {{/user._id}}
+                {{^user._id}}
+                    <a href="/login">Login</a>
+                    <a href="/signup">Signup</a>
+                {{/user._id}}
+            </div>
         </div>
-        <div class="form-group">
-            <label for="imageURL">Image URL</label>
-            <input type="url" class="js-image" name="url" placeholder="http://www.example.com"
-                data-error="Please enter a valid URL">
-            <div class="help-block with-errors"></div>
-        </div>
-        <div class="form-group">
-            <label for="postDescription">Description</label>
-            <textarea rows="5" name="description" id="postDescription"
-                form="compose" placeholder="Enter a description"></textarea>
-        </div>
-        <div class="form-group">
-            <button type="submit">Post</button>
-        </div>
-    </form>
+    </div>
 </div>
+
+<div class="row">
+    <div class="large-12 columns feed">
+        <div class="postheader composeheader">
+            <h1>Make a post</h1>
+        </div>
+            
+        <div class="forms">
+            <form class="js-compose" id="compose" data-toggle="validator"
+                role="form" action="/post" method="post">
+                <div class="form-group">
+                    <h1>POST TITLE</h1>
+                    <input type="text" name="title" id="postTitle" placeholder="Enter post title" minlength="10"
+                        data-error="Post title must be at least 10 characters long" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <h1>IMAGE URL</h1>
+                    <input type="url" class="js-image" name="url" placeholder="http://www.example.com"
+                        data-error="Please enter a valid URL">
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <h1>POST TEXT</h1>
+                    <textarea rows="5" name="description" id="postDescription"
+                        form="compose" placeholder="Enter a description"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Data Load Point -->
 <script id="init-data" type="application/json">
@@ -36,3 +72,5 @@
     <script src="/js/dataLoader.js"></script>
     <script src="/js/compose.js"></script>
 {{/yield-scripts}}
+
+

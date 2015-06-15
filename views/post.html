@@ -1,11 +1,53 @@
+
+<div class="cruelheader">
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="headerlogo">
+                <a href="/">
+                    <img src="/images/headerlogo.png">
+                </a>
+            </div>
+            <div class="icons">
+                {{#user._id}}
+                    <a href="/u/{{user.username}}">{{user.username}}</a>
+                    <a href="/post">Make A Post</a>
+                    <a href="/logout">Logout</a>
+                {{/user._id}}
+                {{^user._id}}
+                    <a href="/login">Login</a>
+                    <a href="/signup">Signup</a>
+                {{/user._id}}
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="js-post"></div>
 
 <!-- Templates -->
 <script id="post-detail-template" type="text/template">
-    <img src="<%= url %>">
-    <p>Title: <%= title %></p>
-    <p>Description: <%= description %></p>
-    <p>Author: <%= _username %></p>
+<div class="row">
+    <div class="large-12 columns feed">
+        <div class="postheader">
+            <div class="backtofeed">
+                <a href="/"><h1>Back to feed</h1></a>
+            </div>
+        </div>    
+    <div class="post">
+        <div class="row">
+            <div class="large-5 columns">
+                <img src="<%= url %>">
+            </div>  
+            <div class="large-7 columns postcontent">
+                <h1><%= title %></h1>
+                <div class="authortime"><span class="count"><%= score %></span><a href="/u/<%= _username %>"><span class="author"><%= _username %></span></a>&nbsp;<span class="time"><%= date %></span>
+                </div>
+                <p><%= description %></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 </script>
 
 <!-- Data Load Point -->
@@ -18,3 +60,4 @@
     <script src="/js/dataLoader.js"></script>
     <script src="/js/post.js"></script>
 {{/yield-scripts}}
+

@@ -1,16 +1,48 @@
-<div>
+
+
+<!-- User and session controls -->
+<div class="cruelheader">
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="headerlogo">
+                <a href="/">
+                    <img src="/images/headerlogo.png">
+                </a>
+            </div>
+            <div class="icons">
+                {{#user._id}}
+                    <a href="/u/{{user.username}}">{{user.username}}</a>
+                    <a href="/post">Make A Post</a>
+                    <a href="/logout">Logout</a>
+                {{/user._id}}
+                {{^user._id}}
+                    <a href="/login">Login</a>
+                    <a href="/signup">Signup</a>
+                {{/user._id}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="large-12 columns feed">
+        <div class="postheader composeheader">
+            <h1>Login</h1>
+        </div>
+
+        <div class="forms">
     {{#message.length}}
         <div>{{message}}</div>
     {{/message.length}}
     <form id="login-form" data-toggle="validator" role="form" action="/login" method="post">
         <div class="form-group">
-            <label for="email">Email</label>
+            <h1>Email</h1>
             <input type="email" name="email" id="email" placeholder="john@example.com"
                 data-error="Please enter a valid email address" required>
             <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
+            <h1>Password</h1>
             <input type="password" name="password" id="password" required>
             <div class="help-block with-errors"></div>
         </div>
