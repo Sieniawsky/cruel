@@ -10,7 +10,7 @@ module.exports = function(app, passport) {
     app.get('/api/post/:id', function(req, res) {
         Post.findOne({_id: req.params.id}, function(err, post) {
             if (err) return console.error(err);
-            res.send(remap.postRemap(post));
+            res.send(remap.postRemap(post, req.user));
         });
     });
 

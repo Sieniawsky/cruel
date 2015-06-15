@@ -19,8 +19,11 @@ module.exports = Backbone.View.extend({
         this.model.bind('change', this.render);
     },
 
-    like: function() {
-        if (typeof initData.user._id !== "undefined" && initData.user._id !== null) {
+    like: function(e) {
+        if (typeof initData.user._id !== "undefined"
+            && initData.user._id !== null
+            && !this.model.get('liked')) {
+
             var that = this;
             $.ajax({
                 url : '/api/like/' + this.model.get('_id'),
