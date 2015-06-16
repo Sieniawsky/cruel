@@ -3,10 +3,11 @@ var Backbone = require('backbone');
 
 /* Post Collection */
 module.exports = Backbone.Collection.extend({
+
     model: Post,
 
     initialize: function() {
-        this.comparator = this.newSort;
+        this.comparator = this.hotSort;
     },
 
     sync: function(method, collection, options) {
