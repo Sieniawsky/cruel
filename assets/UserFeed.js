@@ -25,7 +25,7 @@ var UserFeed = FeedView.extend({
         this.$sort.val('new');
         this.$username = $('.js-username');
         this.user  = initData.user._id;
-        this.url   = this.setURL(this.page);
+        this.url   = this.genURL(this.page);
         this.load();
     },
 
@@ -35,14 +35,13 @@ var UserFeed = FeedView.extend({
         this.hasMore = true;
         this.posts.fetch({
             reset : true,
-            url   : this.setURL(1),
+            url   : this.genURL(1),
             sort  : this.sort
         });
     },
 
-    setURL: function(page) {
-        this.url = '/api/feed/' + this.user + '/' + this.sort + '/' + page;
-        return this.url;
+    genURL: function(page) {
+        return '/api/feed/' + this.user + '/' + this.sort + '/' + page;
     },
 
     render: function() {

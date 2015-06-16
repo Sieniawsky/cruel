@@ -11,13 +11,13 @@ var PostView       = require('../views/PostView');
 module.exports = Backbone.View.extend({
 
     initialize: function() {
-        this.$feed     = $('.js-feed');
+        this.$feed = $('.js-feed');
+        this.$sort = $('.js-sort');
+        this.completed_template = _.template($('#completed-template').html());
         this.triggerPoint = 100;
         this.page = 1;
         this.isLoading = false;
         this.hasMore = true;
-        this.completed_template = _.template($('#completed-template').html());
-        this.$sort = $('.js-sort');
 
         // View events
         _.bindAll(this, 'checkScroll');
@@ -51,13 +51,13 @@ module.exports = Backbone.View.extend({
         this.isLoading = true;
         var that = this;
         $.ajax({
-            url  : this.url,
+            url  : this.genURL(this.page),
             type : 'GET',
             success: function(data) {
-                if (data.length < 8) that.hasMore = false;
                 _.each(data, function(post) {
                     that.posts.add(new Post(post));
                 })
+                that.addAll();
 
                 if (data.length < 8) {
                     that.hasMore = false;

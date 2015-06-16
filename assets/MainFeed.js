@@ -35,26 +35,26 @@ var MainFeed = FeedView.extend({
         }
 
         // Set update url
-        this.url = this.setURL(this.page);
+        this.url = this.genURL(this.page);
         this.load();
     },
 
     load: function() {
+        var that = this;
         this.sort = this.$sort.val();
         this.location = this.$location.val();
         this.page = 1;
         this.hasMore = true;
         this.posts.fetch({
             reset : true,
-            url   : this.setURL(1),
+            url   : this.genURL(1),
             sort  : this.sort
         });
         this.render();
     },
 
-    setURL: function(page) {
-        this.url = '/api/feed/' + this.sort + '/' + this.location + '/' + page;
-        return this.url;
+    genURL: function(page) {
+        return '/api/feed/' + this.sort + '/' + this.location + '/' + page;
     },
 
     render: function() {

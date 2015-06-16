@@ -11,8 +11,8 @@ module.exports = function(app, passport) {
     app.get('/api/feed/new/:location/:page', function(req, res) {
         var query = Post
             .find({_location: req.params.location})
-            .sort({date: 1})
             .skip(computeSkip(req.params.page))
+            .sort({date: -1})
             .limit(8);
         query.exec(function(err, posts) {
             if (err) return console.error(err);
@@ -88,7 +88,8 @@ module.exports = function(app, passport) {
         });
         query.exec(function(err, posts) {
             if (err) return console.error(err);
-            res.send(remap.postsHotRemap(paginateHot(posts, req.params.page), req.user));
+            var temp = remap.postsHotRemap(posts, req.user);
+            res.send(paginateHot(temp, req.params.page));
         });
     });
 
@@ -127,7 +128,7 @@ module.exports = function(app, passport) {
     var paginateHot = function(posts, page) {
         var skip = computeSkip(page);
         var end = skip + 8;
-        if (end < posts.length) end = posts.length;
+        if (end > posts.length) end = posts.length;
         return _.slice(posts, skip, end);
     };
 };
