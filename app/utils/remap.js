@@ -61,7 +61,7 @@ module.exports = {
                     score         : post.score,
                     liked         : beenLiked(post.likers, ((_.isEmpty(user)) ? '' : String(user._id))),
                     likers        : post.likers,
-                    hotScore      : Math.ceil(((post.score + 9)/Math.pow(hours + 2, 1.2))),
+                    hotScore      : Math.round(((post.score + 9)/Math.pow(hours + 2, 1.2)) * 100)/100,
                     _location     : post._location,
                     _locationName : post._locationName
                 };    
