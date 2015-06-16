@@ -24,6 +24,7 @@ var MainFeed = FeedView.extend({
         this.sort = 'hot';
         this.$sort.val('hot');
         this.$location = $('.js-location');
+        this.$locationName = $('.js-location-name');
 
         // Set the location to the user's location setting
         if (typeof initData.user._location != "undefined") {
@@ -48,15 +49,21 @@ var MainFeed = FeedView.extend({
             url   : this.setURL(1),
             sort  : this.sort
         });
+        this.render();
     },
 
     setURL: function(page) {
         this.url = '/api/feed/' + this.sort + '/' + this.location + '/' + page;
         return this.url;
+    },
+
+    render: function() {
+        this.$locationName.html($('.js-location option:selected').text());
     }
 });
 
 /* Start it up */
 $(function() {
     var feed = new MainFeed();
+    feed.render();
 });

@@ -1172,6 +1172,7 @@ p .date2 {
 .feeditem .thumbnail a img {
   min-height:100px;
   max-height:150px;
+  width: 100%;
 }
 
 
