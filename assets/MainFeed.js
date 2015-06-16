@@ -45,7 +45,8 @@ var MainFeed = FeedView.extend({
         this.hasMore = true;
         this.posts.fetch({
             reset : true,
-            url   : this.setURL(1)
+            url   : this.setURL(1),
+            sort  : this.sort
         });
     },
 
