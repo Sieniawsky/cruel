@@ -23,6 +23,7 @@ var UserFeed = FeedView.extend({
         FeedView.prototype.initialize.apply(this);
         this.sort = 'new';
         this.$sort.val('new');
+        this.$username = $('.js-username');
         this.user  = initData.user._id;
         this.url   = this.setURL(this.page);
         this.load();
@@ -42,10 +43,15 @@ var UserFeed = FeedView.extend({
     setURL: function(page) {
         this.url = '/api/feed/' + this.user + '/' + this.sort + '/' + page;
         return this.url;
+    },
+
+    render: function() {
+        this.$username.html(initData.user.username);
     }
 });
 
 /* Start it up */
 $(function() {
     var feed = new UserFeed();
+    feed.render();
 });

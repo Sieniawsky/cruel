@@ -13,10 +13,10 @@ module.exports = function(app, passport) {
                 
                 res.render('user', {
                     initData  : JSON.stringify({
-                        user  : remap.userRemap(req.user),
+                        user  : remap.userRemap(user),
                         posts : remap.postsRemap(posts, user)
                     }),
-                    user : remap.userRemap(user)
+                    user : remap.userRemap(req.user)
                 });
             });
         });
