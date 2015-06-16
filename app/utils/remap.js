@@ -68,7 +68,8 @@ module.exports = {
             })
             .sortBy(function(post) {
                 return -post.hotScore;
-            });
+            })
+            .value();
     },
 
     userRemap : userRemap = function(data) {
