@@ -31,7 +31,7 @@ mongoose.connect(socket);
 require('./config/passport')(passport);
 
 /* Configure Application */
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'html');
 app.set('layout', 'layout');
 app.engine('html', hogan);
