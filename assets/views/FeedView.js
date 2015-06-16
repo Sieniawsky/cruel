@@ -29,6 +29,7 @@ module.exports = Backbone.View.extend({
     },
 
     addOne: function(post) {
+        console.log(post.attributes.hotScore + ', ' + post.attributes.title);
         var view = new PostView({model: post});
         this.$feed.append(view.render().el);
     },
