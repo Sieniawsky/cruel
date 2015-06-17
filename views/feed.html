@@ -70,22 +70,13 @@
                         class="<% if(liked) { %>js-like bolt-liked<% } else { %>js-like bolt<% }%>"
                         name="<%= _id %>"></button>
                 </div>
-<<<<<<< HEAD
-                <div class="large-10 columns feedcontent">
+                <div class="large-10 columns feed-post-content">
                     <a href="/post/<%= _id %>"><h3><%= title %></h3></a>
                     <p><%= snippet %></p>
                     <span class="score"> <%= score %></span>
                     <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
-                    <span class="date"> <%= date %></span> 
+                    <span class="date"> <%= date %></span>
                 </div>
-=======
-               <div class="large-10 columns feed-post-content">
-                <a href="/post/<%= _id %>"><h3><%= title %></h3></a>
-                <span class="score"> <%= score %></span>
-                <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
-                <span class="date"> <%= date %></span> 
-               
->>>>>>> #87 - CSS rewrite edits
             </div>
         </div>
     </div>
