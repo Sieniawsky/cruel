@@ -174,9 +174,11 @@ h3 {
 }
 
 .feed-post-header {
+  position:relative;
   margin-left: -15px;
   padding-right:0;
   margin-bottom:9px;
+
   
   
 }
@@ -189,24 +191,24 @@ h3 {
 
 
 .bolt {
-    margin-left:-40px;
+    
     position:absolute;
-    margin-top:-50%;
+    top:35%;
+    left:-24px;
     background-image: URL("/images/boltbutton.png");
     width:32px;
     height:32px;
     padding:0;
     border:none;
-    
     cursor: pointer;
     background-color:#fff;
 
 }
 
 .bolt-liked {
-    margin-left:-40px;
     position:absolute;
-    margin-top:-50%;
+    top:35%;
+    left:-24px;
     background-image: URL("/images/boltbuttonhover.png");
     width:32px;
     height:32px;
