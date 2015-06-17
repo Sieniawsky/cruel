@@ -5,9 +5,8 @@ var moment = require('moment');
 
 module.exports = {
     postsRemap : function(posts, user) {
-        var snippet = post.description.length == 0 ? '' : post.description.substring(0, 60).concat('...')
         return _.map(posts, function(post) {
-
+            var snippet = post.description.length == 0 ? '' : post.description.substring(0, 60).concat('...');
             return {
                 _id           : post._id,
                 title         : post.title,
@@ -29,7 +28,7 @@ module.exports = {
     },
 
     postRemap : function(post, user) {
-        var snippet = post.description.length == 0 ? '' : post.description.substring(0, 60).concat('...')
+        var snippet = post.description.length == 0 ? '' : post.description.substring(0, 60).concat('...');
         return {
             _id           : post._id,
             title         : post.title,
@@ -53,7 +52,7 @@ module.exports = {
         return _(posts)
             .map(function(post) {
                 var hours = Math.abs(new Date(post.date) - new Date()) / 36e5;
-                var snippet = post.description.length == 0 ? '' : post.description.substring(0, 60).concat('...')
+                var snippet = post.description.length == 0 ? '' : post.description.substring(0, 60).concat('...');
                 return {
                     _id           : post._id,
                     title         : post.title,
