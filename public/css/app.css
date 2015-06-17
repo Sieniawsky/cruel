@@ -101,7 +101,7 @@ h2 {
    
 }
 
-.backtofeed:before {
+.navigation:before {
     content: url(/images/backarrow.png);
     padding-right:6px;
     margin-bottom:2px;
@@ -161,7 +161,7 @@ h3 {
      }
 
 
-.feedpost{
+.feed-post{
     padding-top:15px;
     border-top: 1px solid #dbdcdf;
     margin-left:45px;
@@ -173,7 +173,7 @@ h3 {
     height:auto;
 }
 
-.thumbnail-container {
+.feed-post-header {
   margin-left: -15px;
   padding-right:0;
   margin-bottom:9px;
@@ -256,12 +256,12 @@ h3 {
 
 }
 
-.feedcontent {
+.feed-post-content {
     margin-left:-25px;
     padding-left:5px;
 }
 
-.feedcontent a {
+.feed-post-content a {
     text-decoration: none;
 }
 
@@ -282,12 +282,12 @@ h3 {
     padding-bottom:15px;
 }
 
-.postcontent {
+.post-content {
     padding-left:5px;
     padding-top:15px;
 }
 
-.postcontent a {
+.post-content a {
   text-decoration:none;
 }
 

@@ -45,8 +45,8 @@
 <script id="post-template" type="text/template">
     <div class="js-post">
         <div class="row">
-            <div class="feedpost">
-                <div class="large-2 columns thumbnail-container">
+            <div class="feed-post">
+                <div class="large-2 columns feed-post-header">
                     <a href="/post/<%= _id %>">
                         <img class="thumbnail" src="<%= url %>"/>
                     </a>
@@ -54,21 +54,12 @@
                         class="<% if(liked) { %>js-like bolt-liked<% } else { %>js-like bolt<% }%>"
                         name="<%= _id %>"></button>
                 </div>
-<<<<<<< HEAD
-                   <div class="large-10 columns feedcontent">
-                <a href="/post/<%= _id %>"><h1><%= title %></h1></a>
-                <p><%= snippet %></p>
-                <div class="authortime">
-                    <span class="count"> <%= score %></span>
+                <div class="large-10 columns feed-post-content">
+                    <a href="/post/<%= _id %>"><h3><%= title %></h3></a>
+                    <p><%= snippet %></p>
+                    <span class="score"> <%= score %></span>
                     <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
-                    <span class="time"> <%= date %></span> 
-=======
-                <div class="large-10 columns feedcontent">
-                <a href="/post/<%= _id %>"><h3><%= title %></h3></a>
-                <span class="score"> <%= score %></span>
-                <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
-                <span class="date"> <%= date %></span> 
->>>>>>> #87 - Css rewrite
+                    <span class="date"> <%= date %></span> 
                 </div>
             </div> 
         </div>   
