@@ -267,6 +267,21 @@ h3 {
     text-decoration: none;
 }
 
+.snippet {
+  margin-top:5px;
+  margin-bottom:0px;
+  font-size: 14px;
+  color: #4f4f4f;
+}
+
+.snippet a {
+  font-weight:400;
+  color:#a6a6a6;
+  padding-left:2px;
+}
+
+
+
 
 /**Post Styles**/
 
