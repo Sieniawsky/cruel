@@ -2,12 +2,11 @@
 <div class="cruelheader">
     <div class="row">
         <div class="large-12 columns">
-            <div class="headerlogo">
-                <a href="/">
-                    <img src="/images/headerlogo.png">
-                </a>
-            </div>
-            <div class="icons">
+            <a href="/">
+                <img src="/images/headerlogo.png" class="logo">
+            </a>
+            
+            <div class="nav">
                 {{#user._id}}
                     <a href="/u/{{user.username}}">{{user.username}}</a>
                     <a href="/post">Make A Post</a>
@@ -27,21 +26,22 @@
 <!-- Templates -->
 <script id="post-detail-template" type="text/template">
 <div class="row">
-    <div class="large-12 columns feed">
-        <div class="postheader">
-            <div class="backtofeed">
-                <a href="/"><h1>Back to feed</h1></a>
-            </div>
+    <div class="large-12 columns container">
+        <div class="container-header">
+            
+                <a href="/"><h2 class="navigation">Back to feed</h2></a>
+            
         </div>    
     <div class="post">
         <div class="row">
             <div class="large-5 columns">
                 <img src="<%= url %>">
             </div>  
-            <div class="large-7 columns postcontent">
-                <h1><%= title %></h1>
-                <div class="authortime"><span class="count"><%= score %></span><a href="/u/<%= _username %>"><span class="author"><%= _username %></span></a>&nbsp;<span class="time"><%= date %></span>
-                </div>
+            <div class="large-7 columns post-content">
+                <h3><%= title %></h3>
+                <span class="score"> <%= score %></span>
+                <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
+                <span class="date"> <%= date %></span> 
                 <p><%= description %></p>
             </div>
         </div>

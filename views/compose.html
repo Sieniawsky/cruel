@@ -1,52 +1,51 @@
 
 
-<!-- User and session controls -->
-<div class="cruelheader">
-    <div class="row">
-        <div class="large-12 columns">
-            <div class="headerlogo">
+ <!-- User and session controls -->
+    <div class="cruelheader">
+        <div class="row">
+            <div class="large-12 columns">
                 <a href="/">
-                    <img src="/images/headerlogo.png">
+                    <img src="/images/headerlogo.png" class="logo">
                 </a>
-            </div>
-            <div class="icons">
-                {{#user._id}}
-                    <a href="/u/{{user.username}}">{{user.username}}</a>
-                    <a href="/post">Make A Post</a>
-                    <a href="/logout">Logout</a>
-                {{/user._id}}
-                {{^user._id}}
-                    <a href="/login">Login</a>
-                    <a href="/signup">Signup</a>
-                {{/user._id}}
+                
+                <div class="nav">
+                    {{#user._id}}
+                        <a href="/u/{{user.username}}">{{user.username}}</a>
+                        <a href="/post">Make A Post</a>
+                        <a href="/logout">Logout</a>
+                    {{/user._id}}
+                    {{^user._id}}
+                        <a href="/login">Login</a>
+                        <a href="/signup">Signup</a>
+                    {{/user._id}}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <div class="row">
-    <div class="large-12 columns feed">
-        <div class="postheader composeheader">
-            <h1>Make a post</h1>
+    <div class="large-12 columns container">
+        <div class="container-header">
+            <h2>Make a post</h2>
         </div>
             
         <div class="forms">
             <form class="js-compose" id="compose" data-toggle="validator"
                 role="form" action="/post" method="post">
                 <div class="form-group">
-                    <h1>POST TITLE</h1>
+                    <h4>POST TITLE</h4>
                     <input type="text" name="title" id="postTitle" placeholder="Enter post title" minlength="10"
                         data-error="Post title must be at least 10 characters long" required>
                     <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
-                    <h1>IMAGE URL</h1>
+                    <h4>IMAGE URL</h4>
                     <input type="url" class="js-image" name="url" placeholder="http://www.example.com"
                         data-error="Please enter a valid URL">
                     <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
-                    <h1>POST TEXT</h1>
+                    <h4>POST TEXT</h4>
                     <textarea rows="5" name="description" id="postDescription"
                         form="compose" placeholder="Enter a description"></textarea>
                 </div>
