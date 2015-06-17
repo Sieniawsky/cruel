@@ -5,12 +5,11 @@
     <div class="cruelheader">
         <div class="row">
             <div class="large-12 columns">
-                <div class="headerlogo">
-                    <a href="/">
-                        <img src="/images/headerlogo.png">
-                    </a>
-                </div>
-                <div class="icons">
+                <a href="/">
+                    <img src="/images/headerlogo.png" class="logo">
+                </a>
+                
+                <div class="nav">
                     {{#user._id}}
                         <a href="/u/{{user.username}}">{{user.username}}</a>
                         <a href="/post">Make A Post</a>
@@ -26,8 +25,8 @@
     </div>
     
     <div class="row">
-        <div class="large-12 columns feed">
-            <div class="feedheader">
+        <div class="large-12 columns container">
+            <div class="container-header">
                 <!-- City Header -->
                 <h2 class="js-location-name"></h2>
                 <!-- Feed sort options -->
@@ -62,22 +61,21 @@
 <script id="post-template" type="text/template">
     <div class="js-post">
         <div class="row">
-            <div class="feeditem">
-                <div class="large-2 columns thumbnail">
+            <div class="feedpost">
+                <div class="large-2 columns thumbnail-container">
                     <a href="/post/<%= _id %>">
-                        <img src="<%= url %>"/>
+                        <img class="thumbnail" src="<%= url %>"/>
                     </a>
                     <button type="button"
                         class="<% if(liked) { %>js-like bolt-liked<% } else { %>js-like bolt<% }%>"
                         name="<%= _id %>"></button>
                 </div>
-               <div class="large-10 columns feedcontent">
-                <a href="/post/<%= _id %>"><h1><%= title %></h1></a>
-                <p><%= snippet %></p>
-                <div class="authortime">
-                    <span class="count"> <%= score %></span>
+                <div class="large-10 columns feedcontent">
+                    <a href="/post/<%= _id %>"><h3><%= title %></h3></a>
+                    <p><%= snippet %></p>
+                    <span class="score"> <%= score %></span>
                     <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
-                    <span class="time"> <%= date %></span> 
+                    <span class="date"> <%= date %></span> 
                 </div>
             </div>
         </div>

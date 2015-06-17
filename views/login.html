@@ -1,15 +1,14 @@
 
 
-<!-- User and session controls -->
+ <!-- User and session controls -->
 <div class="cruelheader">
     <div class="row">
         <div class="large-12 columns">
-            <div class="headerlogo">
-                <a href="/">
-                    <img src="/images/headerlogo.png">
-                </a>
-            </div>
-            <div class="icons">
+            <a href="/">
+                <img src="/images/headerlogo.png" class="logo">
+            </a>
+            
+            <div class="nav">
                 {{#user._id}}
                     <a href="/u/{{user.username}}">{{user.username}}</a>
                     <a href="/post">Make A Post</a>
@@ -24,10 +23,11 @@
     </div>
 </div>
 
+
 <div class="row">
-    <div class="large-12 columns feed">
-        <div class="postheader composeheader">
-            <h1>Login</h1>
+    <div class="large-12 columns container">
+        <div class="container-header">
+            <h2>Login</h2>
         </div>
 
         <div class="forms">
@@ -36,13 +36,13 @@
     {{/message.length}}
     <form id="login-form" data-toggle="validator" role="form" action="/login" method="post">
         <div class="form-group">
-            <h1>Email</h1>
+            <h4>Email</h4>
             <input type="email" name="email" id="email" placeholder="john@example.com"
                 data-error="Please enter a valid email address" required>
             <div class="help-block with-errors"></div>
         </div>
         <div class="form-group">
-            <h1>Password</h1>
+            <h4>Password</h4>
             <input type="password" name="password" id="password" required>
             <div class="help-block with-errors"></div>
         </div>
