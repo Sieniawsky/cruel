@@ -5,6 +5,7 @@ var moment = require('moment');
 
 module.exports = {
     postsRemap : function(posts, user) {
+        var snippet = post.description.length == 0 ? '' : post.description.substring(0, 60).concat('...')
         return _.map(posts, function(post) {
 
             return {
@@ -14,6 +15,7 @@ module.exports = {
                 date          : moment(new Date(post.date)).fromNow(),
                 rawDate       : post.date,
                 description   : post.description,
+                snippet       : snippet,
                 _user         : post._user,
                 _username     : post._username,
                 score         : post.score,
@@ -27,6 +29,7 @@ module.exports = {
     },
 
     postRemap : function(post, user) {
+        var snippet = post.description.length == 0 ? '' : post.description.substring(0, 60).concat('...')
         return {
             _id           : post._id,
             title         : post.title,
@@ -34,6 +37,7 @@ module.exports = {
             date          : moment(new Date(post.date)).fromNow(),
             rawDate       : post.date,
             description   : post.description,
+            snippet       : snippet,
             _user         : post._user,
             _username     : post._username,
             score         : post.score,
@@ -49,6 +53,7 @@ module.exports = {
         return _(posts)
             .map(function(post) {
                 var hours = Math.abs(new Date(post.date) - new Date()) / 36e5;
+                var snippet = post.description.length == 0 ? '' : post.description.substring(0, 60).concat('...')
                 return {
                     _id           : post._id,
                     title         : post.title,
@@ -56,6 +61,7 @@ module.exports = {
                     date          : moment(new Date(post.date)).fromNow(),
                     rawDate       : post.date,
                     description   : post.description,
+                    snippet       : snippet,
                     _user         : post._user,
                     _username     : post._username,
                     score         : post.score,
