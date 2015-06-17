@@ -275,9 +275,13 @@ h3 {
 }
 
 .snippet a {
-  font-weight:400;
   color:#a6a6a6;
-  padding-left:2px;
+  padding-left:6px;
+  letter-spacing:1px;
+}
+
+.snippet a:hover{
+  color:#333333;
 }
 
 
