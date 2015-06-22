@@ -3,6 +3,7 @@ var _      = require('lodash');
 var Post   = require('../models/post');
 var User   = require('../models/user');
 var remap  = require('../utils/remap');
+var bg     = require('../utils/background.js');
 
 module.exports = function(app, passport) {
     /* Post composition page */
@@ -11,7 +12,8 @@ module.exports = function(app, passport) {
             initData : JSON.stringify({
                 user : remap.userRemap(req.user)
             }),
-            user : remap.userRemap(req.user)
+            user       : remap.userRemap(req.user),
+            background : bg()
         });
     });
 
@@ -25,7 +27,8 @@ module.exports = function(app, passport) {
                     initData : JSON.stringify({
                         post : remap.postRemap(post, user)
                     }),
-                    user : remap.userRemap(req.user)
+                    user       : remap.userRemap(req.user),
+                    background : bg()
                 });
             });
         });

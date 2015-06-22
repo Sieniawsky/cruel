@@ -3,6 +3,7 @@ var _      = require('lodash');
 var Post   = require('../models/post');
 var User   = require('../models/user');
 var remap  = require('../utils/remap');
+var bg     = require('../utils/background.js');
 
 module.exports = function(app, passport) {
     app.get('/u/:username', function(req, res) {
@@ -16,7 +17,8 @@ module.exports = function(app, passport) {
                         user  : remap.userRemap(user),
                         posts : remap.postsRemap(posts, user)
                     }),
-                    user : remap.userRemap(req.user)
+                    user       : remap.userRemap(req.user),
+                    background : bg()
                 });
             });
         });
