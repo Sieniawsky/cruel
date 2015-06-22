@@ -10,5 +10,5 @@ module.exports = function() {
     var filtered = _.filter(files, function(file) {
         return file.charAt(0) !== '.';
     });
-    return filtered[Math.floor(Math.random() * (filtered.length + 1))];
+    return filtered[Math.floor(Math.random() * filtered.length)];
 };

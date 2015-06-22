@@ -81,12 +81,13 @@ module.exports = {
         if (typeof data !== "undefined" && data !== null) {
             var user = _.pick(data, ['_id', 'username', 'email', 'date']);
             var user = {
-                _id           : data._id,
-                username      : data.username,
-                email         : data.email,
-                date          : data.date,
-                _location     : data._location,
-                _locationName : data._locationName
+                _id                : data._id,
+                username           : data.username,
+                email              : data.email,
+                date               : data.date,
+                _location          : data._location,
+                _locationName      : data._locationName,
+                scoreNotifications : data.scoreNotifications
             };
         }
         return user || {};
