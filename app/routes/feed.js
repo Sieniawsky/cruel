@@ -4,6 +4,7 @@ var Post     = require('../models/post');
 var User     = require('../models/user');
 var remap    = require('../utils/remap');
 var app      = require('../../server');
+var bg       = require('../utils/background.js');
 
 module.exports = function(app, passport) {
     /* Index feed page */
@@ -13,10 +14,11 @@ module.exports = function(app, passport) {
             if (err) return console.error(err);
             res.render('feed', {
                 initData : JSON.stringify({
-                    user  : remap.userRemap(req.user)
+                    user : remap.userRemap(req.user)
                 }),
-                user      : remap.userRemap(req.user),
-                locations : app.get('locations')
+                user       : remap.userRemap(req.user),
+                locations  : app.get('locations'),
+                background : bg()
             });
         });
     });
