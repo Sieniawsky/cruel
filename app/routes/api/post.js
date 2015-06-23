@@ -17,14 +17,16 @@ module.exports = function(app, passport) {
     /* Perform a like operation if it's valid */
     app.post('/api/like/:id', function(req, res) {
         // Check if allowed
-        Post.findOne({_id: req.params.id, likers: req.body.user._id}, function(err, post) {
+        Post.findOne({_id: req.params.id}, function(err, post) {
             if (err) return console.error(err);
-            if (post == null) {
+            if (!_.contains(post.likers, req.user._id)) {
                 // User has not voted on this post yet
                 Post.update({_id: req.params.id},
-                    {'$push': {likers: req.body.user._id}, '$inc': {score: 1}}, function(err, post) {
+                    {'$push': {likers: req.user._id}, '$inc': {score: 1}}, function(err, update) {
                     if (err) return console.error(err);
-                    User.update({_id: req.body.user._id}, {'$inc': {score: 1}}, function(err, user) {
+                    User.update({_id: post._user},
+                        {'$inc': {score: 1}, '$push': {scoreNotifications: {_post: post._id, title: post.title}}},
+                        function(err, user) {
                         if (err) return console.error(err);
                         res.send({outcome: true});
                     });
