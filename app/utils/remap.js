@@ -79,6 +79,9 @@ module.exports = {
 
     userRemap : userRemap = function(data) {
         if (typeof data !== "undefined" && data !== null) {
+
+            /* Take the scoreNotifications array from the
+               database and map it a usable format. */
             var newScore = 0;
             var mapped = [];
             _(data.scoreNotifications)
