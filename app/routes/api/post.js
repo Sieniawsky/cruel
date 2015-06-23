@@ -19,12 +19,12 @@ module.exports = function(app, passport) {
         // Check if allowed
         Post.findOne({_id: req.params.id}, function(err, post) {
             if (err) return console.error(err);
-            if (!_.contains(post.likers, req.body.user._id)) {
+            if (!_.contains(post.likers, req.user._id)) {
                 // User has not voted on this post yet
                 Post.update({_id: req.params.id},
-                    {'$push': {likers: req.body.user._id}, '$inc': {score: 1}}, function(err, update) {
+                    {'$push': {likers: req.user._id}, '$inc': {score: 1}}, function(err, update) {
                     if (err) return console.error(err);
-                    User.update({_id: req.body.user._id},
+                    User.update({_id: post._user},
                         {'$inc': {score: 1}, '$push': {scoreNotifications: {_post: post._id, title: post.title}}},
                         function(err, user) {
                         if (err) return console.error(err);
