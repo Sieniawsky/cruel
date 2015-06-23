@@ -79,15 +79,33 @@ module.exports = {
 
     userRemap : userRemap = function(data) {
         if (typeof data !== "undefined" && data !== null) {
-            var user = _.pick(data, ['_id', 'username', 'email', 'date']);
+            var newScore = 0;
+            var mapped = [];
+            _(data.scoreNotifications)
+                .groupBy(function(n) {
+                    return n._post;
+                })
+                .forEach(function(m) {
+                    newScore += m.length;
+                    mapped.push({
+                        _post    : m[0]._post,
+                        title    : m[0].title,
+                        newScore : m.length
+                    });
+                }).value()
+
             var user = {
-                _id                : data._id,
-                username           : data.username,
-                email              : data.email,
-                date               : data.date,
-                _location          : data._location,
-                _locationName      : data._locationName,
-                scoreNotifications : data.scoreNotifications
+                _id           : data._id,
+                username      : data.username,
+                email         : data.email,
+                date          : data.date,
+                score         : data.score,
+                _location     : data._location,
+                _locationName : data._locationName,
+                notifications : {
+                    newScore  : newScore,
+                    posts     : mapped
+                }
             };
         }
         return user || {};
