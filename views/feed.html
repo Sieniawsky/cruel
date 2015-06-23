@@ -11,7 +11,7 @@
                 
                 <div class="nav">
                     {{#user._id}}
-                        <a href="#" class="nav-score">1234</a>
+                        <a href="#" class="nav-score">{{user.score}}</a>
                         <a href="/u/{{user.username}}">{{user.username}}</a>
                         <a href="/post">Make A Post</a>
                         <a href="/logout">Logout</a>
@@ -59,14 +59,14 @@
     <div class="mobile-nav-bottom">
         <div class="mobile-icons">
             {{#user._id}}
-                <a href="#" class="mobile-score"><span class="mobile-score-count">1234</span>Score</a>
+                <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
                 <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
                 <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
                 <a href="/u/{{user.username}}" class="mobile-profile"><img src="images/mobile-profile-icon.png" class="profile-icon">Profile</a>
                 <a href="#" class="mobile-menu"><img src="/images/mobile-menu-icon.png" class="menu-icon">More</a>
             {{/user._id}}
             {{^user._id}}
-                <a href="#" class="mobile-score"><span class="mobile-score-count">1234</span>Score</a>
+                <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
                 <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
                 <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
                 <a href="/u/{{user.username}}" class="mobile-profile"><img src="images/mobile-profile-icon.png" class="profile-icon">Profile</a>
