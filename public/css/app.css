@@ -14,17 +14,17 @@
 
 .cruelheader {
     width:100%;
-    height:50px;
+    height:42px;
     position:fixed;
     top:0px;
     z-index:1;
-    background: -webkit-linear-gradient(rgba(40,40,40,1), rgba(51,51,51,1), rgba(40,40,40,1)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(rgba(40,40,40,1), rgba(51,51,51,1), rgba(40,40,40,1)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(rgba(40,40,40,1), rgba(51,51,51,1), rgba(40,40,40,1)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(rgba(40,40,40,1), rgba(51,51,51,1), rgba(40,40,40,1)); /* Standard syntax */
-    -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.49);
-    -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.49);
-    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.49);
+    background: -webkit-linear-gradient(rgba(40,40,40,1), rgba(45,45,45,1), rgba(40,40,40,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(40,40,40,1), rgba(45,45,45,1), rgba(40,40,40,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(40,40,40,1), rgba(45,45,45,1), rgba(40,40,40,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(40,40,40,1), rgba(45,45,45,1), rgba(40,40,40,1)); /* Standard syntax */
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.49);
+    -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.49);
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.49);
     border-bottom: 1px solid #212121;
 
 }
@@ -32,14 +32,14 @@
 .logo {
     float:left;
     margin-left:-15px;
-    margin-top:10px;
-    width:110px;
+    margin-top:8px;
+    width:100px;
     height:auto;
 }
 
 .nav {
     float:right;
-    margin-top:14px;
+    margin-top:10px;
     margin-right:-14px;
 }
 
@@ -47,7 +47,7 @@
 .nav a {
   text-decoration: none;
   font-family: 'Bebas';
-  color: #a6a6a6;
+  color: #6e6e6e;
   padding-left:15px;
   font-size: 14px;
   letter-spacing:1px;
@@ -58,18 +58,156 @@
   color:#fff;
 }
 
+.nav-score:before {
+  content: url('/images/boltcountmobile2.png');
+}
+
+
+/**Menubar Media Queries**/
+
+@media only screen and (max-device-width:768px) {
+  .cruelheader {
+    height:30px;
+  }
+  .logo {
+    margin-top:6px;
+    width:70px;
+    margin-left:-7px;
+  }
+  .nav {
+    display:none;
+  }
+}
+
+/**Mobile Menubar**/
+
+.mobile-nav-bottom {
+  display:none;
+}
+
+.mobile-icons {
+  display:none;
+}
+
+@media only screen and (max-device-width:768px) {
+  
+
+  .mobile-nav-bottom {
+    display:block;
+    height:45px;
+    width:100%;
+    position:fixed;
+    bottom:0px;
+    z-index:1;
+    background-color:#f2f2f2;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .mobile-icons {
+    display:block;
+    position:absolute;
+    width:320px;
+    left:50%;
+    margin-left:-160px;
+  }
+  
+  .mobile-icons a {
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size:11px;
+    bottom:-23px;
+    letter-spacing:0;
+    color:#bababa;
+    text-decoration: none;
+    position:relative;
+  }
+
+  .mobile-score {
+    width:auto;
+    left:20px;
+    }
+  
+  .mobile-score-count {
+    position:absolute;
+    top:-26px;
+    left:5px;
+    font-family:'Bebas';
+    font-size:18px;
+  }
+
+  .mobile-score-count:before {
+    content: url('/images/mobile-bolt-icon2.png');
+    margin-left:-18px;
+  }
+
+
+  .mobile-messages {
+    width:auto;
+    left:39px;
+  }
+
+  .message-icon {
+    width:24px;
+    height:auto;
+    position:absolute;
+    top:-25px;
+    left:3px;
+    margin-left:12px;
+  }
+
+  .mobile-post {
+    width:auto;
+    left:59px;
+  }
+
+  .post-icon {
+    width:25px;
+    height:auto;
+    position:absolute;
+    top:-23px;
+    left:1px;
+  }
+
+  .mobile-profile {
+    width:auto;
+    left:92px;
+   }
+
+  .profile-icon {
+    width:25px;
+    height:auto;
+    position:absolute;
+    top:-25px;
+    left:3px;
+  }
+
+  .mobile-menu {
+    width:auto;
+    left:128px;
+  }
+  
+  .menu-icon {
+    width:24px;
+    height:auto;
+    position:absolute;
+    top:-25px;
+    left:1px;
+  }
+
+}
+
+
 /**Container Styles**/
 
 
 .container {
 
     border-radius: 7px;
-    border: 1px solid #dbdcdf; 
+    border: 1px solid #e8e8e8; 
     height:auto;
     background-color: #fff;
     margin-bottom:50px;
     margin-top:70px;
-    }
+}
 
 .container-header {
     
@@ -86,8 +224,6 @@ h2 {
     padding-top:10px;
     letter-spacing: 1px;
     margin:0;
-
-   
 }
 
 .navigation:before {
@@ -112,7 +248,64 @@ h2 {
   font-size:13px;
 }
 
+/**Container Media Queries**/
 
+@media only screen and (max-device-width:768px) {
+  .container {
+
+    border-radius: 0px;
+    border: none; 
+    height:auto;
+    background-color: #fff;
+    margin-bottom:50px;
+    margin-top:30px;
+  }
+    
+  .container-header {
+    margin-left:-5px;
+    margin-right:8px;
+    height:45px;
+  }
+    
+  h2 {
+    float:left;
+    font-family: 'Bebas';
+    font-size: 18px;
+    color: #a6a6a6;
+    padding-top:8px;
+    letter-spacing: 1px;
+    margin:0;
+  }
+
+  .navigation:before {
+    content: url(/images/backarrow.png);
+    padding-right:6px;
+    margin-bottom:2px;
+  }
+
+  .sorting {
+    float:right;
+    margin-top:10px;
+    width:auto;
+    margin-right: -5px;
+  }
+
+  .sorting select:focus {
+    outline: none;
+  }
+
+  .sorting select {
+      font-size:12px;
+  }
+
+
+  .sortlabel {
+    font-size:11px;
+  }
+
+
+
+}
 
 /**Feed Styles**/
 
@@ -123,7 +316,7 @@ h3 {
     letter-spacing:1px;
     color: #333333;
     line-height: 24px;
-    margin-top:-3px;
+    margin-top:-2px;
     margin-bottom: 0px;
 }
 
@@ -138,7 +331,7 @@ h3 {
 }
 
 .date {
-    font-family: 'Helvetica';
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size: 13px;
     color:#a6a6a6;
     }
@@ -152,7 +345,7 @@ h3 {
 
 .feed-post{
     padding-top:15px;
-    border-top: 1px solid #dbdcdf;
+    border-top: 1px solid #e8e8e8;
     margin-left:45px;
     margin-right:45px;
     padding-bottom:15px;
@@ -167,9 +360,6 @@ h3 {
   margin-left: -15px;
   padding-right:0;
   margin-bottom:9px;
-
-  
-  
 }
 
 .thumbnail {
@@ -180,7 +370,6 @@ h3 {
 
 
 .bolt {
-    
     position:absolute;
     top:35%;
     left:-24px;
@@ -191,7 +380,6 @@ h3 {
     border:none;
     cursor: pointer;
     background-color:#fff;
-
 }
 
 .bolt-liked {
@@ -205,8 +393,7 @@ h3 {
     border:none;
     cursor: pointer;
     background-color:#fff;
-
-}
+  }
 
 .bolt-liked:focus {
   outline:none;
@@ -222,11 +409,9 @@ h3 {
 
 
 .score {
-
     font-family: 'Bebas';
     font-size: 24px;
     color: #a6a6a6;
-
 }
 
 .score:before {
@@ -234,7 +419,6 @@ h3 {
     margin-left:-7px;
     padding-top:5px;
     margin-right:-2px;
-    
 }
 
 
@@ -244,7 +428,6 @@ h3 {
     font-size: 18px;
     color: #a6a6a6;
     letter-spacing:0.02em;
-
 }
 
 .feed-post-content {
@@ -273,14 +456,143 @@ h3 {
   color:#333333;
 }
 
+/**Feed Media Queries**/
 
+@media only screen and (max-device-width:768px) {
+  
+  h3 {
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 20px;
+    margin-top:-3px;
+    margin-bottom: 0px;
+    letter-spacing:0;
+    color:#656565;
+  }
+
+  .date {
+    font-size: 12px;
+  }
+
+  .date:before {
+    font-size:12px;
+  }
+
+
+  .feed-post{
+      padding-top:12px;
+      border-top: 1px solid #e8e8e8;
+      margin-left:10px;
+      margin-right:10px;
+      padding-bottom:12px;
+      padding-left:0px;
+      padding-right:0px;
+      position:relative;
+      height:auto;
+  }
+
+  .feed-post-header {
+    position:relative;
+    margin-left: 10px;
+    padding-right:9px;
+    margin-bottom:5px;
+  }
+
+  .thumbnail {
+    width:100%;
+    height: auto;
+    min-height:65px;
+    max-height:150px;
+  }
+
+  .author {
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing:0.02em;
+    color: #a6a6a6;
+    padding-left:4px;
+    padding-right:3px;
+  }
+
+  .author:before {
+    content:'\00B7';
+    padding-right:2px;
+    font-size:12px;
+     }
+  
+  .bolt {
+    position:absolute;
+    top:27%;
+    left:-19px;
+    background-image: URL("/images/boltbuttonmobile.png");
+    width:30px;
+    height:30px;
+    padding:0;
+  }
+
+  .bolt-liked {
+    position:absolute;
+    top:27%;
+    left:-19px;
+    background-image: URL("/images/boltbuttonmobilehover.png");
+    width:30px;
+    height:30px;
+  }
+
+
+
+  .bolt:hover {
+    background-image: URL("/images/boltbuttonmobilehover.png");
+  }
+
+
+  .score {
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 12px;
+    color: #a6a6a6;
+    margin-right:0;
+    }
+
+  .score:before {
+    content: none;
+    margin-top:10px;
+  }
+
+
+  .feed .comments {
+    padding-left:7px;
+    font-family: 'Bebas';
+    font-size: 18px;
+    color: #a6a6a6;
+    letter-spacing:0.02em;
+  }
+
+  .feed-post-content {
+    margin-left:-25px;
+    padding-left:12px;
+  }
+
+  .feed-post-content a {
+    text-decoration: none;
+  }
+
+  .snippet {
+   display:none;
+  }
+
+
+
+
+
+}
 
 
 /**Post Styles**/
 
 .post {
 
-    border-top: 1px solid #dbdcdf;
+    border-top: 1px solid #e8e8e8;
     margin-left:30px;
     margin-right:30px;
     margin-bottom:30px;
@@ -340,7 +652,7 @@ h4 {
 }
 
 .forms {
-    border-top: 1px solid #dbdcdf;
+    border-top: 1px solid #e8e8e8;
     margin-left:30px;
     margin-right:30px;
     margin-bottom:30px;
@@ -353,6 +665,7 @@ h4 {
 .form-group input {
   width:50%;
 }
+
 
 .form-group h1 {
   padding-bottom:5px;

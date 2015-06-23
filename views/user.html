@@ -9,6 +9,7 @@
                 
                 <div class="nav">
                     {{#user._id}}
+                        <a href="#" class="nav-score">1234</a>
                         <a href="/u/{{user.username}}">{{user.username}}</a>
                         <a href="/post">Make A Post</a>
                         <a href="/logout">Logout</a>
@@ -56,10 +57,12 @@
                 </div>
                 <div class="large-10 columns feed-post-content">
                     <a href="/post/<%= _id %>"><h3><%= title %></h3></a>
-                    <p class="snippet"><%= snippet %><a href="/post/<%= _id %>">[...]</a></p>
                     <span class="score"> <%= score %></span>
                     <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
                     <span class="date"> <%= date %></span> 
+                    <p class="snippet"><%= snippet %>
+                        <% if(snippet.length != 0) { %><a href="/post/<%= _id %>">[...]</a><% } %>
+                    </p>
                 </div>
             </div> 
         </div>   

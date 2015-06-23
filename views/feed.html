@@ -11,6 +11,7 @@
                 
                 <div class="nav">
                     {{#user._id}}
+                        <a href="#" class="nav-score">1234</a>
                         <a href="/u/{{user.username}}">{{user.username}}</a>
                         <a href="/post">Make A Post</a>
                         <a href="/logout">Logout</a>
@@ -55,6 +56,25 @@
             <div class="js-loading"></div>
         </div>
     </div>
+    <div class="mobile-nav-bottom">
+        <div class="mobile-icons">
+            {{#user._id}}
+                <a href="#" class="mobile-score"><span class="mobile-score-count">1234</span>Score</a>
+                <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
+                <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
+                <a href="/u/{{user.username}}" class="mobile-profile"><img src="images/mobile-profile-icon.png" class="profile-icon">Profile</a>
+                <a href="#" class="mobile-menu"><img src="/images/mobile-menu-icon.png" class="menu-icon">More</a>
+            {{/user._id}}
+            {{^user._id}}
+                <a href="#" class="mobile-score"><span class="mobile-score-count">1234</span>Score</a>
+                <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
+                <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
+                <a href="/u/{{user.username}}" class="mobile-profile"><img src="images/mobile-profile-icon.png" class="profile-icon">Profile</a>
+                <a href="#" class="mobile-menu"><img src="/images/mobile-menu-icon.png" class="menu-icon">More</a>
+            {{/user._id}}
+        </div>   
+    </div>
+
 </div>
 
 <!-- Templates -->
@@ -72,12 +92,12 @@
                 </div>
                 <div class="large-10 columns feed-post-content">
                     <a href="/post/<%= _id %>"><h3><%= title %></h3></a>
-                    <p class="snippet"><%= snippet %>
-                        <% if(snippet.length != 0) { %><a href="/post/<%= _id %>">[...]</a><% } %>
-                    </p>
                     <span class="score"> <%= score %></span>
                     <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
                     <span class="date"> <%= date %></span>
+                    <p class="snippet"><%= snippet %>
+                        <% if(snippet.length != 0) { %><a href="/post/<%= _id %>">[...]</a><% } %>
+                    </p>
                 </div>
             </div>
         </div>

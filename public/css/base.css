@@ -1,7 +1,18 @@
 /* Foundation Styling */
 
-html, body {
-  height: 100%; }
+html {
+  height:100%;
+  width:100%;
+
+} 
+
+
+
+
+body {
+  height: 100%;
+  width:100%;
+  }
 
 html {
   box-sizing: border-box; }
@@ -28,6 +39,8 @@ body {
   margin: 0;
   padding: 0;
   position: relative; }
+
+ 
 
 a:hover {
   cursor: pointer; }
@@ -150,6 +163,19 @@ img {
 
   .large-12 {
     width: 100%; }
+
+/**Grid Media Queries**/
+
+@media only screen and (max-device-width:768px) {
+  
+  .large-2 {
+    width: 30%; 
+    }
+
+  .large-10 {
+    width:70%;
+  }
+  }
 
 /**Bootstrap Form Styles**/
 
