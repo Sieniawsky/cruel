@@ -93,6 +93,7 @@ module.exports = {
                     mapped.push({
                         _post    : m[0]._post,
                         title    : m[0].title,
+                        snippet  : m[0].title.substring(0, 40).concat(' ...'),
                         newScore : m.length
                     });
                 }).value()
