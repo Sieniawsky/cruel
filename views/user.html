@@ -1,28 +1,5 @@
 <div class="js-user">
-    <!-- User and session controls -->
-    <div class="cruelheader">
-        <div class="row">
-            <div class="large-12 columns">
-                <a href="/">
-                    <img src="/images/headerlogo.png" class="logo">
-                </a>
-                
-                <div class="nav">
-                    {{#user._id}}
-                        <a href="#" class="nav-score">1234</a>
-                        <a href="/u/{{user.username}}">{{user.username}}</a>
-                        <a href="/post">Make A Post</a>
-                        <a href="/logout">Logout</a>
-                    {{/user._id}}
-                    {{^user._id}}
-                        <a href="/login">Login</a>
-                        <a href="/signup">Signup</a>
-                    {{/user._id}}
-                </div>
-            </div>
-        </div>
-    </div>
-
+   
     <div class="row">
         <div class="large-12 columns container">
             <div class="container-header">
@@ -42,44 +19,7 @@
     </div> 
 </div>
 
-<!-- Templates -->
-<script id="post-template" type="text/template">
-    <div class="js-post">
-        <div class="row">
-            <div class="feed-post">
-                <div class="large-2 columns feed-post-header">
-                    <a href="/post/<%= _id %>">
-                        <img class="thumbnail" src="<%= url %>"/>
-                    </a>
-                     <button type="button"
-                        class="<% if(liked) { %>js-like bolt-liked<% } else { %>js-like bolt<% }%>"
-                        name="<%= _id %>"></button>
-                </div>
-                <div class="large-10 columns feed-post-content">
-                    <a href="/post/<%= _id %>"><h3><%= title %></h3></a>
-                    <span class="score"> <%= score %></span>
-                    <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
-                    <span class="date"> <%= date %></span> 
-                    <p class="snippet"><%= snippet %>
-                        <% if(snippet.length != 0) { %><a href="/post/<%= _id %>">[...]</a><% } %>
-                    </p>
-                </div>
-            </div> 
-        </div>   
-    </div>
-</script>
 
-<script id="loading-template" type="text/template">
-    <img src="/images/dashinfinity.gif">
-</script>
-
-<script id="warning-template" type="text/template">
-    <p>Something went wrong while loading more posts</p>
-</script>
-
-<script id="completed-template" type="text/template">
-    <p>There are no more posts to load.</p>
-</script>
 
 <!-- Data Load Point -->
 <script id="init-data" type="application/json">
