@@ -4,18 +4,23 @@ var Post     = require('../models/post');
 var User     = require('../models/user');
 var Location = require('../models/location'); 
 var remap    = require('../utils/remap');
+var bg       = require('../utils/background');
 
 module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
-        res.render('login', {message : req.flash('loginMessage')});
+        res.render('login', {
+            message    : req.flash('loginMessage'),
+            background : bg()
+        });
     });
 
     app.get('/signup', function(req, res) {
         Location.find({}, function(err, locations) {
             if (err) return console.error(err);
             res.render('signup', {
-                message   : req.flash('signupMessage'),
-                locations : remap.locationRemap(locations)
+                message    : req.flash('signupMessage'),
+                locations  : remap.locationRemap(locations),
+                background : bg()
             });
         });
     });

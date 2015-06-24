@@ -11,7 +11,7 @@ module.exports = Backbone.View.extend({
     template: _.template($('#post-template').html()),
 
     events: {
-        'click .js-like': 'like'
+        'click .js-like': 'handleLike'
     },
 
     initialize: function() {
@@ -19,7 +19,15 @@ module.exports = Backbone.View.extend({
         this.model.bind('change', this.render);
     },
 
-    like: function(e) {
+    handleLike: function() {
+        if (!this.model.get('liked')) {
+            this.like();
+        } else {
+            this.unlike();
+        }
+    },
+
+    like: function() {
         if (typeof initData.user._id !== "undefined"
             && initData.user._id !== null
             && !this.model.get('liked')) {
@@ -37,8 +45,27 @@ module.exports = Backbone.View.extend({
                 },
                 failure : function(data) {}
             });
-        } else {
-            // Prompt user to login
+        }
+    },
+
+    unlike: function() {
+        if (typeof initData.user._id !== "undefined"
+            && initData.user._id !== null
+            && this.model.get('liked')) {
+
+            var that = this;
+            $.ajax({
+                url : '/api/unlike/' + this.model.get('_id'),
+                type : 'POST',
+                data : {
+                    post : this.model.attributes,
+                    user : initData.user
+                },
+                success : function(data) {
+                    that.model.fetch();
+                },
+                failure : function(data) {}
+            });
         }
     },
 
