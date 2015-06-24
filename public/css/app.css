@@ -41,16 +41,20 @@
     float:right;
     margin-top:10px;
     margin-right:-14px;
+    padding-right:30px;
 }
 
 
 .nav a {
   text-decoration: none;
-  font-family: 'Bebas';
+  font-family: 'Oswald', sans-serif;
+  text-transform:uppercase;
   color: #6e6e6e;
-  padding-left:15px;
+  padding-left:20px;
   font-size: 14px;
-  letter-spacing:1px;
+  letter-spacing:0px;
+
+
 
 }
 
@@ -62,6 +66,127 @@
   content: url('/images/boltcountmobile2.png');
 }
 
+/**Nav Dropdown**/
+
+.menu-icon {
+  position:absolute;
+  width:25px;
+  height:26px;
+  right:0;
+  top:8px;
+}
+
+.nav-dropdown {
+  display:none;
+  position:absolute;
+  right:0;
+  top:42px;
+  background-color: #f2f2f2
+}
+
+.nav-dropdown a {
+  text-decoration:none;
+  color: #bababa;
+}
+.nav-dropdown ul {
+  list-style:none;
+  padding-left:12px;
+  padding-right:12px;
+  margin-top:4px;
+  width:100%;
+  text-align:center;
+  margin-bottom:4px;
+  
+}
+.nav-dropdown ul li {
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size:13px;
+  letter-spacing:0;
+  width:100%;
+  display:inline-block;
+  *display:inline; /*IE7*/
+  *zoom:1; /*IE7*/
+  padding-bottom:8px;
+  padding-top:6px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.nav-dropdown ul li a {
+  padding-left:0;
+}
+
+.nav-dropdown ul li a:hover {
+  color:#2d2d2d;
+}
+
+.nav-dropdown li:first-child {
+  border-top:none;
+}
+
+/**Notification Dropdown**/
+
+ .notification-box {
+    display:none;
+    position:absolute;
+    width:350px;
+    height:auto;
+    top:42px;
+    right:0px;
+    background-color:#f2f2f2;
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+ 
+  .notifications-list {
+    list-style:none;
+    padding:0;
+    margin-bottom:0;
+    margin-top:0;
+  }
+
+  .notification-score-count {
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    font-size:17px;
+    margin-left:20px;
+    color:#bababa;;
+    top:5px;
+
+  }
+    
+  .notification-score-count:before {
+    content: url('/images/mobile-bolt-icon2.png');
+    margin-left:-18px;
+  }
+
+  .notification-title {
+    text-decoration:none;
+    color:#bababa;
+    padding-left:7px;
+
+  }
+
+  .notification a {
+    font-size:14px;
+
+  }
+ 
+
+  .notification-box ul li{
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .notification-box ul li:first-child {
+    border-top:none;
+  }
+
+  .notification {
+    height:auto;
+    padding-top:5px;
+    padding-bottom:8px;
+
+  }
 
 /**Menubar Media Queries**/
 
@@ -129,8 +254,9 @@
   .mobile-score-count {
     position:absolute;
     top:-26px;
-    left:5px;
-    font-family:'Bebas';
+    left:11px;
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
     font-size:18px;
   }
 
@@ -149,7 +275,7 @@
     width:24px;
     height:auto;
     position:absolute;
-    top:-25px;
+    top:-26px;
     left:3px;
     margin-left:12px;
   }
@@ -163,7 +289,7 @@
     width:25px;
     height:auto;
     position:absolute;
-    top:-23px;
+    top:-24px;
     left:1px;
   }
 
@@ -176,21 +302,130 @@
     width:25px;
     height:auto;
     position:absolute;
-    top:-25px;
+    top:-26px;
     left:3px;
   }
 
   .mobile-menu {
     width:auto;
-    left:128px;
+    position:absolute;
+    right:18px;
+    bottom:-20px;
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size:11px;
+    letter-spacing:0;
+    color:#bababa;
+    text-decoration: none;
   }
   
   .menu-icon {
     width:24px;
     height:auto;
     position:absolute;
-    top:-25px;
+    top:-24px;
     left:1px;
+  }
+  .dropdown-mobile {
+    display:none;
+    position:absolute;
+    width:190px;
+    height:auto;
+    bottom:45px;
+    right:0px;
+    background-color:#f2f2f2;
+  }
+  .dropdown-mobile a {
+    text-decoration:none;
+    color: #bababa;
+  }
+  .dropdown-mobile ul {
+    list-style:none;
+    padding-left:12px;
+    padding-right:12px;
+    margin-top:4px;
+    width:100%;
+    text-align:center;
+    margin-bottom:0;
+    
+  }
+  .dropdown-mobile ul li {
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size:13px;
+    letter-spacing:0;
+    width:100%;
+    display:inline-block;
+    *display:inline; /*IE7*/
+    *zoom:1; /*IE7*/
+    padding-bottom:8px;
+    padding-top:6px;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .dropdown-mobile li:first-child {
+    border-top:none;
+  }
+
+  .notification-box-mobile {
+    display:none;
+    position:absolute;
+    width:100%;
+    height:auto;
+    bottom:45px;
+    left:0px;
+    background-color:#f2f2f2;
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+ 
+  .notifications-list {
+    list-style:none;
+    padding:0;
+    margin-bottom:0;
+    margin-top:0;
+  }
+
+  .notification-score-count {
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    font-size:17px;
+    margin-left:20px;
+    color:#bababa;;
+    top:5px;
+
+  }
+    
+  .notification-score-count:before {
+    content: url('/images/mobile-bolt-icon2.png');
+    margin-left:-18px;
+  }
+
+  .notification-title {
+    text-decoration:none;
+    color:#bababa;
+    padding-left:7px;
+
+  }
+
+  .notification-mobile a {
+    font-size:14px;
+
+  }
+ 
+
+  .notification-box-mobile ul li{
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .notification-box-mobile ul li:first-child {
+    border-top:none;
+  }
+
+  .notification-mobile {
+    height:auto;
+    padding-top:5px;
+    padding-bottom:8px;
+
   }
 
 }
@@ -218,7 +453,8 @@
 
 h2 {
     float:left;
-    font-family: 'Bebas';
+    font-family: 'Oswald', sans-serif;
+    text-transform:uppercase;
     font-size: 24px;
     color: #a6a6a6;
     padding-top:10px;
@@ -269,7 +505,8 @@ h2 {
     
   h2 {
     float:left;
-    font-family: 'Bebas';
+    font-family: 'Oswald', sans-serif;
+    text-transform:uppercase;
     font-size: 18px;
     color: #a6a6a6;
     padding-top:8px;
@@ -311,7 +548,8 @@ h2 {
 
 
 h3 {
-    font-family: 'Bebas';
+    font-family: 'Oswald', sans-serif;
+    text-transform:uppercase;
     font-size: 20px;
     letter-spacing:1px;
     color: #333333;
@@ -321,7 +559,8 @@ h3 {
 }
 
 .author {
-    font-family: 'Bebas';
+    font-family: 'Oswald', sans-serif;
+    text-transform:uppercase;
     font-size: 16px;
     letter-spacing:0.02em;
     color: #a6a6a6;
@@ -409,7 +648,8 @@ h3 {
 
 
 .score {
-    font-family: 'Bebas';
+    font-family: 'Oswald', sans-serif;
+    text-transform:uppercase;
     font-size: 24px;
     color: #a6a6a6;
 }
@@ -424,7 +664,8 @@ h3 {
 
 .feed .comments {
     padding-left:7px;
-    font-family: 'Bebas';
+    font-family: 'Oswald', sans-serif;
+    text-transform:uppercase;
     font-size: 18px;
     color: #a6a6a6;
     letter-spacing:0.02em;
@@ -464,6 +705,7 @@ h3 {
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size: 16px;
     font-weight: normal;
+    text-transform:none;
     line-height: 20px;
     margin-top:-3px;
     margin-bottom: 0px;
@@ -509,6 +751,7 @@ h3 {
   .author {
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size: 12px;
+    text-transform:none;
     letter-spacing:0.02em;
     color: #a6a6a6;
     padding-left:4px;
@@ -562,7 +805,8 @@ h3 {
 
   .feed .comments {
     padding-left:7px;
-    font-family: 'Bebas';
+    font-family: 'Oswald', sans-serif;
+    text-transform:uppercase;
     font-size: 18px;
     color: #a6a6a6;
     letter-spacing:0.02em;
@@ -626,7 +870,8 @@ h3 {
 /**Form Styles**/
 
 h4 {
-    font-family: 'Bebas';
+    font-family: 'Oswald', sans-serif;
+    text-transform:uppercase;
     font-size: 16px;
     letter-spacing:0.02em;
     color:#4f4f4f;
@@ -644,7 +889,8 @@ h4 {
 }
 
 .postform h1 {
-    font-family:'Bebas';
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
     color:#4f4f4f;
     margin-left:1px;
 
