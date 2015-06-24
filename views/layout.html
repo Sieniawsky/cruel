@@ -10,6 +10,9 @@
         <meta name="author" content="">
         <meta name="keywords" content="">
         <meta name="description" content="">
+
+        <!-- Fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed:400,700" rel="stylesheet" type="text/css">
        
 
         <!-- Mobile -->
@@ -23,6 +26,11 @@
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="/css/base.css">
         <link rel="stylesheet" type="text/css" href="/css/app.css">
+
+        <!-- Dropdown Scripts -->
+       
+    
+
     </head>
 
     <body>
@@ -31,7 +39,37 @@
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/bower_components/lodash/lodash.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $('#mobile-drawer').click(function() {
+                $('.dropdown-mobile').slideToggle("fast");
+            });
+        });
+        </script>
+         <script>
+        $(document).ready(function() {
+            $('.mobile-score').click(function() {
+                $('.notification-box-mobile').slideToggle("fast");
+            });
+        });
+        </script>
+        <script>
+        $(document).ready(function() {
+            $('.nav-menu').click(function() {
+                $('.nav-dropdown').slideToggle("fast");
+            });
+        });
+        </script>
+         <script>
+        $(document).ready(function() {
+            $('.nav-score').click(function() {
+                $('.notification-box').slideToggle("fast");
+            });
+        });
+        </script>
 
         {{{ yield-scripts }}}
     </body>
+
+       
 </html>
