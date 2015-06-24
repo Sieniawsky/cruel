@@ -1,28 +1,3 @@
-
-
-<!-- User and session controls -->
-<div class="cruelheader">
-    <div class="row">
-        <div class="large-12 columns">
-            <a href="/">
-                <img src="/images/headerlogo.png" class="logo">
-            </a>
-            
-            <div class="nav">
-                {{#user._id}}
-                    <a href="/u/{{user.username}}">{{user.username}}</a>
-                    <a href="/post">Make A Post</a>
-                    <a href="/logout">Logout</a>
-                {{/user._id}}
-                {{^user._id}}
-                    <a href="/login">Login</a>
-                    <a href="/signup">Signup</a>
-                {{/user._id}}
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row">
     <div class="large-12 columns container">
         <div class="container-header">
