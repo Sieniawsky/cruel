@@ -18,7 +18,11 @@ module.exports = function(app, passport) {
                 }),
                 user       : remap.userRemap(req.user),
                 locations  : app.get('locations'),
-                background : bg()
+                background : bg(),
+                partials   : {
+                    feedPostTemplate : 'partials/feed-post-template',
+                    feedScripts      : 'partials/feed-scripts'
+                }
             });
         });
     });

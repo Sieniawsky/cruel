@@ -21,7 +21,11 @@ module.exports = function(app, passport) {
                         posts : remap.postsRemap(posts, user)
                     }),
                     user       : remap.userRemap(req.user),
-                    background : back
+                    background : bg(),
+                    partials   : {
+                        feedPostTemplate : 'partials/feed-post-template',
+                        feedScripts      : 'partials/feed-scripts'
+                    }
                 });
             });
         });
