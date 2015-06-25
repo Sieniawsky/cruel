@@ -6,9 +6,6 @@ html {
 
 } 
 
-
-
-
 body {
   height: 100%;
   width:100%;
@@ -67,7 +64,7 @@ img {
 
 .row {
   margin: 0 auto;
-  max-width: 62.5em;
+  max-width: 800px;
   width: 100%; }
   .row:before, .row:after {
     content: " ";
@@ -175,7 +172,15 @@ img {
   .large-10 {
     width:70%;
   }
+
+  .large-5 {
+    width:100%;
   }
+
+  .large-7 {
+    width:100%;
+  }
+}
 
 /**Bootstrap Form Styles**/
 
@@ -507,6 +512,8 @@ select[multiple].form-group-lg .form-control {
 .has-error.radio-inline label,
 .has-error.checkbox-inline label {
   color: #a94442;
+  font-size:13px;
+  font-weight:normal;
 }
 .has-error .form-control {
   border-color: #a94442;
