@@ -11,9 +11,6 @@ module.exports = function(app, passport) {
             if (err) return console.log(err);
             Post.find({_user: user._id}, function(err, posts) {
                 if (err) return console.error(err);
-
-                var back = bg();
-                console.log('background: ' + back);
                 
                 res.render('user', {
                     initData  : JSON.stringify({

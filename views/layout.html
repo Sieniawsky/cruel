@@ -26,101 +26,102 @@
 
     <body>
         <!-- Navbar -->
-        <div class="cruelheader js-nav">
-            <div class="row">
-                <div class="large-12 columns">
-                    <a href="/">
-                        <img src="/images/headerlogo.png" class="logo">
-                    </a>
-                    <div class="nav">
-                        {{#user._id}}
-                            <a href="#" class="nav-score">{{user.score}}</a>
-                            <div class="notification-box">
-                                <ul class="notifications-list">
-                                    {{#user.notifications.posts}}
-                                        <li class="notification">
-                                            <span class="notification-score-count">+{{newScore}}</span>
-                                            <a href="/post/{{_post}}" class="notification-title">
-                                                {{snippet}}
-                                            </a>
-                                        </li>
-                                    {{/user.notifications.posts}}
-                                </ul>
-                            </div>
-                            <a href="/u/{{user.username}}">{{user.username}}</a>
-                            <a href="/post">Make A Post</a>
-                            <a href="/logout">Logout</a>
-                            <a href="#" class="menu-button"><img src="/images/menu-icon.png"></a>
-                            <div class="dropdown">
-                                <ul>
-                                    <li><a href="/">Home</a></li></br>
-                                    <li><a href="#">Logout</a></li></br>
-                                    <li><a href="#">Contact</a></li></br>
-                                    <li><a href="#">Terms &amp; Conditions</a></li></br>
-                                    <li><a href="#">User License Agreement</a></li></br>
-                                </ul>
-                            </div>
-                        {{/user._id}}
-                        {{^user._id}}
-                            <a href="/login">Login</a>
-                            <a href="/signup">Signup</a>
-                            <a href="#" class="menu-button"><img src="/images/menu-icon.png"></a>
-                             <div class="dropdown">
-                                <ul>
-                                    <li><a href="/">Home</a></li></br>
-                                    <li><a href="#">Logout</a></li></br>
-                                    <li><a href="#">Contact</a></li></br>
-                                    <li><a href="#">Terms &amp; Conditions</a></li></br>
-                                    <li><a href="#">User License Agreement</a></li></br>
-                                </ul>
-                            </div>
-                        {{/user._id}}
+        <div class="js-nav">
+            <div class="cruelheader">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <a href="/">
+                            <img src="/images/headerlogo.png" class="logo">
+                        </a>
+                        <div class="nav">
+                            {{#user._id}}
+                                <a href="#" class="nav-score">{{user.score}}</a>
+                                <div class="notification-box">
+                                    <ul class="notifications-list">
+                                        {{#user.notifications.posts}}
+                                            <li class="notification">
+                                                <span class="notification-score-count">+{{newScore}}</span>
+                                                <a href="/post/{{_post}}" class="notification-title">
+                                                    {{snippet}}
+                                                </a>
+                                            </li>
+                                        {{/user.notifications.posts}}
+                                    </ul>
+                                </div>
+                                <a href="/u/{{user.username}}">{{user.username}}</a>
+                                <a href="/post">Make A Post</a>
+                                <a href="/logout">Logout</a>
+                                <a href="#" class="nav-menu"><img src="/images/menu-icon.png" class="menu-icon"></a>
+                                <div class="nav-dropdown">
+                                    <ul>
+                                        <li><a href="/">Home</a></li></br>
+                                        <li><a href="#">Logout</a></li></br>
+                                        <li><a href="#">Contact</a></li></br>
+                                        <li><a href="#">Terms &amp; Conditions</a></li></br>
+                                        <li><a href="#">User License Agreement</a></li></br>
+                                    </ul>
+                                </div>
+                            {{/user._id}}
+                            {{^user._id}}
+                                <a href="/login">Login</a>
+                                <a href="/signup">Signup</a>
+                                <a href="#" class="nav-menu"><img src="/images/menu-icon.png"></a>
+                                <div class="nav-dropdown">
+                                    <ul>
+                                        <li><a href="/">Home</a></li></br>
+                                        <li><a href="#">Logout</a></li></br>
+                                        <li><a href="#">Contact</a></li></br>
+                                        <li><a href="#">Terms &amp; Conditions</a></li></br>
+                                        <li><a href="#">User License Agreement</a></li></br>
+                                    </ul>
+                                </div>
+                            {{/user._id}}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Mobile Nav -->
-        <div class="mobile-nav-bottom">
-            <div class="dropdown-mobile">
-                <ul>
-                    <li><a href="/">Home</a></li></br>
-                    <li><a href="#">Logout</a></li></br>
-                    <li><a href="#">Contact</a></li></br>
-                    <li><a href="#">Terms &amp; Conditions</a></li></br>
-                    <li><a href="#">User License Agreement</a></li></br>
-                </ul>
-            </div>
-            <div class="notification-box-mobile">
-                <ul class="notifications-list">
-                    {{#user.notifications.posts}}
-                        <li class="notification">
-                            <span class="notification-score-count">+{{newScore}}</span>
-                            <a href="/post/{{_post}}" class="notification-title">
-                                {{snippet}}
-                            </a>
-                        </li>
-                    {{/user.notifications.posts}}
-                </ul>
-            </div>
-            <div class="mobile-icons">
-                {{#user._id}}
-                    <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
-                    <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
-                    <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
-                    <a href="/u/{{user.username}}" class="mobile-profile"><img src="/images/mobile-profile-icon.png" class="profile-icon">Profile</a>
-                    <div class="menu-button-mobile">
-                        <img src="/images/mobile-menu-icon.png" class="menu-icon">More
-                    </div>
-                {{/user._id}}
-                {{^user._id}}
-                    <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
-                    <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
-                    <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
-                    <a href="/u/{{user.username}}" class="mobile-profile"><img src="/images/mobile-profile-icon.png" class="profile-icon">Profile</a>
-                    <div class="menu-button-mobile">
-                        <img src="/images/mobile-menu-icon.png" class="menu-icon">More
-                    </div>
-                {{/user._id}}
+
+            <!-- Mobile Nav -->
+            <div class="mobile-nav-bottom">
+                <div class="dropdown-mobile">
+                    <ul>
+                        <li><a href="/">Home</a></li></br>
+                        <li><a href="#">Logout</a></li></br>
+                        <li><a href="#">Contact</a></li></br>
+                        <li><a href="#">Terms &amp; Conditions</a></li></br>
+                        <li><a href="#">User License Agreement</a></li></br>
+                    </ul>
+                </div>
+                <div class="notification-box-mobile">
+                    <ul class="notifications-list">
+                        {{#user.notifications.posts}}
+                            <li class="notification">
+                                <span class="notification-score-count">+{{newScore}}</span>
+                                <a href="/post/{{_post}}" class="notification-title">
+                                    {{snippet}}
+                                </a>
+                            </li>
+                        {{/user.notifications.posts}}
+                    </ul>
+                </div>
+                <div class="mobile-icons">
+                    {{#user._id}}
+                        <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
+                        <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
+                        <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
+                        <a href="/u/{{user.username}}" class="mobile-profile"><img src="/images/mobile-profile-icon.png" class="profile-icon">Profile</a>
+                        <div class="mobile-menu">
+                            <img src="/images/mobile-menu-icon.png" class="menu-icon">More
+                        </div>
+                    {{/user._id}}
+                    {{^user._id}}
+                        <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
+                        <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
+                        <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
+                        <a href="/u/{{user.username}}" class="mobile-profile"><img src="/images/mobile-profile-icon.png" class="profile-icon">Profile</a>
+                        <a href="#" class="mobile-menu"><img src="/images/mobile-menu-icon.png" class="menu-icon">More</a>
+                    {{/user._id}}
+                </div>   
             </div>
         </div>
 
@@ -135,5 +136,6 @@
 
         <!-- Script load point -->
         {{{ yield-scripts }}}
+
     </body>
 </html>

@@ -7,39 +7,55 @@ var NavBar = Backbone.View.extend({
     el: '.js-nav',
 
     events: {
-        'click #mobile-drawer' : 'toggleDrawerMobile',
+        'click .mobile-menu'   : 'toggleDrawerMobile',
         'click .mobile-score'  : 'toggleScoreMobile',
         'click .nav-menu'      : 'toggleMenu',
         'click .nav-score'     : 'toggleScore',
-        'blur #mobile-drawer'  : 'closeDrawerMobile',
-        'blur .mobile-score'   : 'closeScoreMobile',
-        'blur .nav-menu'       : 'closeMenu',
-        'blur .nav-score'      : 'closeScore'
+        'blur .mobile-score'   : 'toggleScoreMobile',
+        'blur .nav-menu'       : 'toggleMenu',
+        'blur .nav-score'      : 'toggleScore',
+        'blur .mobile-menu'    : 'toggleDrawerMobile'
     },
 
     initialize: function() {
+        this.isRead = false;
+
         this.$notificationBox       = $('.notification-box');
         this.$notificationBoxMobile = $('.notification-box-mobile');
         this.$navDropdown           = $('.nav-dropdown');
         this.$dropdownMobile        = $('.dropdown-mobile');
     },
 
+    markAsRead: function() {
+        if (!this.isRead && initData.user.notifications.posts.length != 0) {
+            var that = this;
+            $.ajax({
+                url : '/api/user/mark',
+                type : 'PUT',
+                success : function(data) {
+                    that.isRead = true;
+                    console.log('Success');
+                },
+                failure : function(data) {}
+            });
+        }
+    },
+
     /* Handlers */
-    toggleDrawerMobile : function() {
-        console.log('mobile drawer');
+    toggleDrawerMobile: function() {
         this.$dropdownMobile.slideToggle('fast');
     },
-    toggleScoreMobile  : function() {
-        console.log('mobile score');
+    toggleScoreMobile: function() {
         this.$notificationBoxMobile.slideToggle('fast');
+        this.markAsRead();
     },
-    toggleMenu         : function() {this.$navDropdown.slideToggle('fast');},
-    toggleScore        : function() {this.$notificationBox.slideToggle('fast');},
-
-    closeDrawerMobile  : function() {this.$dropdownMobile.slideDown('fast');},
-    closeScoreMobile   : function() {this.$notificationBoxMobile.slideDown('fast');},
-    closeMenu          : function() {this.$navDropdown.slideUp('fast');},
-    closeScore         : function() {this.$notificationBox.slideUp('fast');}
+    toggleMenu: function() {
+        this.$navDropdown.slideToggle('fast');
+    },
+    toggleScore: function() {
+        this.$notificationBox.slideToggle('fast');
+        this.markAsRead();
+    },
 });
 
 $(function() {
