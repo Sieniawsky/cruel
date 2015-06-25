@@ -25,8 +25,14 @@ var NavBar = Backbone.View.extend({
     },
 
     /* Handlers */
-    toggleDrawerMobile : function() {this.$dropdownMobile.slideToggle('fast');},
-    toggleScoreMobile  : function() {this.$notificationBoxMobile.slideToggle('fast');},
+    toggleDrawerMobile : function() {
+        console.log('mobile drawer');
+        this.$dropdownMobile.slideToggle('fast');
+    },
+    toggleScoreMobile  : function() {
+        console.log('mobile score');
+        this.$notificationBoxMobile.slideToggle('fast');
+    },
     toggleMenu         : function() {this.$navDropdown.slideToggle('fast');},
     toggleScore        : function() {this.$notificationBox.slideToggle('fast');},
 
