@@ -168,7 +168,7 @@
   }
     
   .notification-score-count:before {
-    content: url('/images/mobile-bolt-icon2.png');
+    content: url('/images/boltcountmobile2.png');
     margin-left:-18px;
   }
 

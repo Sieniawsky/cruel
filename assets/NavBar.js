@@ -7,14 +7,14 @@ var NavBar = Backbone.View.extend({
     el: '.js-nav',
 
     events: {
-        'click .mobile-menu'   : 'toggleDrawerMobile',
+        'click .menu-button-mobile'   : 'toggleDrawerMobile',
         'click .mobile-score'  : 'toggleScoreMobile',
-        'click .nav-menu'      : 'toggleMenu',
-        'click .nav-score'     : 'toggleScore',
+        'click .menu-button'      : 'toggleMenu',
+        'click .notification-score-count'     : 'toggleScore',
         'blur .mobile-score'   : 'toggleScoreMobile',
-        'blur .nav-menu'       : 'toggleMenu',
-        'blur .nav-score'      : 'toggleScore',
-        'blur .mobile-menu'    : 'toggleDrawerMobile'
+        'blur .menu-button'       : 'toggleMenu',
+        'blur .notification-score-count'      : 'toggleScore',
+        'blur .menu-button-mobile'    : 'toggleDrawerMobile'
     },
 
     initialize: function() {
@@ -22,7 +22,7 @@ var NavBar = Backbone.View.extend({
 
         this.$notificationBox       = $('.notification-box');
         this.$notificationBoxMobile = $('.notification-box-mobile');
-        this.$navDropdown           = $('.nav-dropdown');
+        this.$navDropdown           = $('.dropdown');
         this.$dropdownMobile        = $('.dropdown-mobile');
     },
 
