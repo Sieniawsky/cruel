@@ -2,7 +2,7 @@
 
 /**Remove Background images from mobile**/
 
-@media only screen and (max-device-width:768px) {
+@media only screen and (max-width:768px) {
 
   html {
     background:none !important;
@@ -202,7 +202,7 @@
 
 /**Menubar Media Queries**/
 
-@media only screen and (max-device-width:768px) {
+@media only screen and (max-width:768px) {
   .cruelheader {
     height:30px;
   }
@@ -226,7 +226,7 @@
   display:none;
 }
 
-@media only screen and (max-device-width:768px) {
+@media only screen and (max-width:768px) {
   
 
   .mobile-nav-bottom {
@@ -499,7 +499,7 @@ h2 {
 
 /**Container Media Queries**/
 
-@media only screen and (max-device-width:768px) {
+@media only screen and (max-width:768px) {
   .container {
     border-radius: 0px;
     border: none; 
@@ -712,7 +712,7 @@ h3 {
 
 /**Feed Media Queries**/
 
-@media only screen and (max-device-width:768px) {
+@media only screen and (max-width:768px) {
   
   h3 {
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -881,7 +881,7 @@ h3 {
 
 /**Post Media Queries**/
 
-@media only screen and (max-device-width:768px) {
+@media only screen and (max-width:768px) {
   .post {
     margin-left:0;
     margin-right:0;
@@ -1032,7 +1032,7 @@ h4 {
 
 /**Forms Media Queries**/
 
-@media only screen and (max-device-width:768px) {
+@media only screen and (max-width:768px) {
   
   .forms {
     border-top: 1px solid #e8e8e8;
