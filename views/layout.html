@@ -25,8 +25,8 @@
     </head>
 
     <body>
-
-        <div class="cruelheader">
+        <!-- Navbar -->
+        <div class="cruelheader js-nav">
             <div class="row">
                 <div class="large-12 columns">
                     <a href="/">
@@ -79,49 +79,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- Content load point -->
-        {{{ yield }}}
-
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="/bower_components/lodash/lodash.min.js"></script>
-
-        <script>
-        $(document).ready(function() {
-            $('.menu-button-mobile').click(function() {
-                $('.dropdown-mobile').slideToggle("fast");
-            });
-        });
-        </script>
-         <script>
-        $(document).ready(function() {
-            $('.mobile-score').click(function() {
-                $('.notification-box-mobile').slideToggle("fast");
-            });
-        });
-        </script>
-        <script>
-        $(document).ready(function() {
-            $('.menu-button').click(function() {
-                $('.dropdown').slideToggle("fast");
-            });
-        });
-        </script>
-         <script>
-        $(document).ready(function() {
-            $('.nav-score').click(function() {
-                $('.notification-box').slideToggle("fast");
-            });
-        });
-        </script>
-
-        {{{ yield-scripts }}}
-
-   
-
-
-
+        <!-- Mobile Nav -->
         <div class="mobile-nav-bottom">
             <div class="dropdown-mobile">
                 <ul>
@@ -165,5 +123,16 @@
                 {{/user._id}}
             </div>
         </div>
+
+        <!-- Content load point -->
+        {{{ yield }}}
+
+        <!-- Scripts -->
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/bower_components/lodash/lodash.min.js"></script>
+
+        <!-- Script load point -->
+        {{{ yield-scripts }}}
     </body>
 </html>
