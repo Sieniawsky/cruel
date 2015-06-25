@@ -2,29 +2,26 @@
 
 <!-- Templates -->
 <script id="post-detail-template" type="text/template">
-<div class="row">
-    <div class="large-12 columns container">
-        <div class="container-header">
-            
+    <div class="row">
+        <div class="large-12 columns container">
+            <div class="container-header">
                 <a href="/"><h2 class="navigation">Back to feed</h2></a>
-            
-        </div>    
-    <div class="post">
-        <div class="row">
-            <div class="large-5 columns">
-                <img src="<%= url %>">
-            </div>  
-            <div class="large-7 columns post-content">
-                <h3><%= title %></h3>
-                <span class="score"> <%= score %></span>
-                <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
-                <span class="date"> <%= date %></span> 
-                <p><%= description %></p>
+            </div>    
+        <div class="post">
+            <div class="row">
+                <div class="large-5 columns">
+                    <img src="<%= url %>">
+                </div>  
+                <div class="large-7 columns post-content">
+                    <h3><%= title %></h3>
+                    <span class="score"> <%= score %></span>
+                    <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
+                    <span class="date"> <%= date %></span> 
+                    <p><%= description %></p>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
 </script>
 
 <!-- Data Load Point -->

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" style="background: url(/images/backgrounds/{{background}}) no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
-
+<html lang="en" style="background: url(/images/backgrounds/{{background}}) no-repeat center center fixed;-webkit-background-    size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
     <head>
-        
-
         <!-- Basics -->
         <title>Cruel</title>
         <meta charset="UTF-8">
@@ -12,12 +9,11 @@
         <meta name="description" content="">
 
         <!-- Fonts -->
-        <link href="http://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed:400,700" rel="stylesheet" type="text/css">
-       
+        <link href="http://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed:400,700"
+            rel="stylesheet" type="text/css">
 
         <!-- Mobile -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-       
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
@@ -26,144 +22,122 @@
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="/css/base.css">
         <link rel="stylesheet" type="text/css" href="/css/app.css">
-
-        <!-- Dropdown Scripts -->
-       
-  
-
     </head>
 
     <body>
-
-        <div class="cruelheader">
-            <div class="row">
-                <div class="large-12 columns">
-                    <a href="/">
-                        <img src="/images/headerlogo.png" class="logo">
-                    </a>
-                    
-                    <div class="nav">
-                        {{#user._id}}
-                            <a href="#" class="nav-score">{{user.score}}</a>
-                            <div class="notification-box">
-                                <ul class="notifications-list">
-                                    <li class="notification"><span class="notification-score-count">+12</span><a href="#" class="notification-title">This is a sample title text this is a sample</a></li>
-                                    <li class="notification"><span class="notification-score-count">+12</span><a href="#" class="notification-title">This is a sample title text this is a sample</a></li>
-                                </ul>
-                            </div>
-                            <a href="/u/{{user.username}}">{{user.username}}</a>
-                            <a href="/post">Make A Post</a>
-                            <a href="/logout">Logout</a>
-                            <a href="#" class="menu-button"><img src="/images/menu-icon.png"></a>
-                            <div class="dropdown">
-                                <ul>
-                                    <li><a href="/">Home</a></li></br>
-                                    <li><a href="#">Logout</a></li></br>
-                                    <li><a href="#">Contact</a></li></br>
-                                    <li><a href="#">Terms & Conditions</a></li></br>
-                                    <li><a href="#">User License Agreement</a></li></br>
-                                </ul>
-                            </div>
-                        {{/user._id}}
-                        {{^user._id}}
-                            <a href="/login">Login</a>
-                            <a href="/signup">Signup</a>
-                            <a href="#" class="menu-button"><img src="/images/menu-icon.png"></a>
-                             <div class="dropdown">
-                                <ul>
-                                    <li><a href="/">Home</a></li></br>
-                                    <li><a href="#">Logout</a></li></br>
-                                    <li><a href="#">Contact</a></li></br>
-                                    <li><a href="#">Terms & Conditions</a></li></br>
-                                    <li><a href="#">User License Agreement</a></li></br>
-                                </ul>
-                            </div>
-                        {{/user._id}}
+        <!-- Navbar -->
+        <div class="js-nav">
+            <div class="cruelheader">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <a href="/">
+                            <img src="/images/headerlogo.png" class="logo">
+                        </a>
+                        <div class="nav">
+                            {{#user._id}}
+                                <a href="#" class="notification-score-count">{{user.score}}</a>
+                                <div class="notification-box">
+                                    <ul class="notifications-list">
+                                        {{#user.notifications.posts}}
+                                            <li class="notification">
+                                                <span class="notification-score-count">+{{newScore}}</span>
+                                                <a href="/post/{{_post}}" class="notification-title">
+                                                    {{snippet}}
+                                                </a>
+                                            </li>
+                                        {{/user.notifications.posts}}
+                                    </ul>
+                                </div>
+                                <a href="/u/{{user.username}}">{{user.username}}</a>
+                                <a href="/post">Make A Post</a>
+                                <a href="/logout">Logout</a>
+                                <a href="#" class="menu-button"><img src="/images/menu-icon.png"></a>
+                                <div class="dropdown">
+                                    <ul>
+                                        <li><a href="/">Home</a></li></br>
+                                        <li><a href="#">Logout</a></li></br>
+                                        <li><a href="#">Contact</a></li></br>
+                                        <li><a href="#">Terms &amp; Conditions</a></li></br>
+                                        <li><a href="#">User License Agreement</a></li></br>
+                                    </ul>
+                                </div>
+                            {{/user._id}}
+                            {{^user._id}}
+                                <a href="/login">Login</a>
+                                <a href="/signup">Signup</a>
+                                <a href="#" class="nmenu-button"><img src="/images/menu-icon.png"></a>
+                                <div class="dropdown">
+                                    <ul>
+                                        <li><a href="/">Home</a></li></br>
+                                        <li><a href="#">Logout</a></li></br>
+                                        <li><a href="#">Contact</a></li></br>
+                                        <li><a href="#">Terms &amp; Conditions</a></li></br>
+                                        <li><a href="#">User License Agreement</a></li></br>
+                                    </ul>
+                                </div>
+                            {{/user._id}}
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Mobile Nav -->
+            <div class="mobile-nav-bottom">
+                <div class="dropdown-mobile">
+                    <ul>
+                        <li><a href="/">Home</a></li></br>
+                        <li><a href="#">Logout</a></li></br>
+                        <li><a href="#">Contact</a></li></br>
+                        <li><a href="#">Terms &amp; Conditions</a></li></br>
+                        <li><a href="#">User License Agreement</a></li></br>
+                    </ul>
+                </div>
+                <div class="notification-box-mobile">
+                    <ul class="notifications-list">
+                        {{#user.notifications.posts}}
+                            <li class="notification">
+                                <span class="notification-score-count">+{{newScore}}</span>
+                                <a href="/post/{{_post}}" class="notification-title">
+                                    {{snippet}}
+                                </a>
+                            </li>
+                        {{/user.notifications.posts}}
+                    </ul>
+                </div>
+                <div class="mobile-icons">
+                    {{#user._id}}
+                        <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
+                        <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
+                        <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
+                        <a href="/u/{{user.username}}" class="mobile-profile"><img src="/images/mobile-profile-icon.png" class="profile-icon">Profile</a>
+                        <div class="menu-button-mobile">
+                            <img src="/images/mobile-menu-icon.png" class="menu-icon">More
+                        </div>
+                    {{/user._id}}
+                    {{^user._id}}
+                        <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
+                        <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
+                        <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
+                        <a href="/u/{{user.username}}" class="mobile-profile"><img src="/images/mobile-profile-icon.png" class="profile-icon">Profile</a>
+                        <div class="menu-button-mobile">
+                            <img src="/images/mobile-menu-icon.png" class="menu-icon">More
+                        </div>
+                    {{/user._id}}
+                </div>   
+            </div>
         </div>
+
+        <!-- Content load point -->
         {{{ yield }}}
 
+        <!-- Scripts -->
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/bower_components/lodash/lodash.min.js"></script>
-        <script>
-        $(document).ready(function() {
-            $('.menu-button-mobile').click(function() {
-                $('.dropdown-mobile').slideToggle("fast");
-            });
-        });
-        </script>
-         <script>
-        $(document).ready(function() {
-            $('.mobile-score').click(function() {
-                $('.notification-box-mobile').slideToggle("fast");
-            });
-        });
-        </script>
-        <script>
-        $(document).ready(function() {
-            $('.menu-button').click(function() {
-                $('.dropdown').slideToggle("fast");
-            });
-        });
-        </script>
-         <script>
-        $(document).ready(function() {
-            $('.nav-score').click(function() {
-                $('.notification-box').slideToggle("fast");
-            });
-        });
-        </script>
+        <script src="/js/bundles/nav.js"></script>
 
+        <!-- Script load point -->
         {{{ yield-scripts }}}
 
-   
-
-
-
-        <div class="mobile-nav-bottom">
-            <div class="dropdown-mobile">
-                <ul>
-                    <li><a href="/">Home</a></li></br>
-                    <li><a href="#">Logout</a></li></br>
-                    <li><a href="#">Contact</a></li></br>
-                    <li><a href="#">Terms & Conditions</a></li></br>
-                    <li><a href="#">User License Agreement</a></li></br>
-                </ul>
-            </div>
-            <div class="notification-box-mobile">
-                <ul class="notifications-list">
-                    <li class="notification-mobile"><span class="notification-score-count">+12</span><a href="#" class="notification-title">This is a sample title text this is a sample</a></li>
-                    <li class="notification-mobile"><span class="notification-score-count">+12</span><a href="#" class="notification-title">This is a sample title text this is a sample</a></li>
-                </ul>
-            </div>
-
-            <div class="mobile-icons">
-                {{#user._id}}
-                    <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
-                    <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
-                    <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
-                    <a href="/u/{{user.username}}" class="mobile-profile"><img src="/images/mobile-profile-icon.png" class="profile-icon">Profile</a>
-                    <div class="menu-button-mobile">
-                        <img src="/images/mobile-menu-icon.png" class="menu-icon">More
-                    </div>
-                {{/user._id}}
-                {{^user._id}}
-                    <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
-                    <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
-                    <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
-                    <a href="/u/{{user.username}}" class="mobile-profile"><img src="/images/mobile-profile-icon.png" class="profile-icon">Profile</a>
-                    <div class="menu-button-mobile">
-                        <img src="/images/mobile-menu-icon.png" class="menu-icon">More
-                    </div>
-                {{/user._id}}
-            </div>   
-        </div>
-        
-        
     </body>
-
-       
 </html>
