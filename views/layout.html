@@ -39,7 +39,7 @@
                                         {{#user.notifications.hasNew}}
                                             {{#user.notifications.posts}}
                                                 <li class="notification">
-                                                    <span class="notification-score-count">+{{newScore}}</span>
+                                                    <span class="notification-box-score-count">+{{newScore}}</span>
                                                     <a href="/post/{{_post}}" class="notification-title">
                                                         {{snippet}}
                                                     </a>
@@ -48,7 +48,7 @@
                                         {{/user.notifications.hasNew}}
                                         {{^user.notifications.hasNew}}
                                             <li class="notification">
-                                                <span class="notification-score-count">+0</span>
+                                                <span class="notification-box-empty">+0</span>
                                                 <span class="notification-title">
                                                     No new notifications.
                                                 </span>
