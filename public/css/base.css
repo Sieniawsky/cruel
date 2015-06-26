@@ -64,8 +64,7 @@ img {
 
 .row {
   margin: 0 auto;
-  max-width: 800px;
-  width: 100%; }
+  width: 60%; }
   .row:before, .row:after {
     content: " ";
     display: table; }
@@ -163,8 +162,20 @@ img {
 
 /**Grid Media Queries**/
 
+@media only screen and (min-width:768px) {
+  .row {
+    min-width:800px;
+  }
+
+}
+
+
 @media only screen and (max-width:768px) {
   
+  .row {
+    width:100%;
+  }
+
   .large-2 {
     width: 30%; 
     }
