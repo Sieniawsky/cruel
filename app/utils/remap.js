@@ -107,6 +107,7 @@ module.exports = {
                 _location     : data._location,
                 _locationName : data._locationName,
                 notifications : {
+                    hasNew    : (mapped.length > 0),
                     newScore  : newScore,
                     posts     : mapped
                 }

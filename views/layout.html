@@ -36,14 +36,21 @@
                                 <a href="#" class="notification-score-count">{{user.score}}</a>
                                 <div class="notification-box">
                                     <ul class="notifications-list">
-                                        {{#user.notifications.posts}}
+                                        {{#user.notifications.hasNew}}
+                                            {{#user.notifications.posts}}
+                                                <li class="notification">
+                                                    <span class="notification-score-count">+{{newScore}}</span>
+                                                    <a href="/post/{{_post}}" class="notification-title">
+                                                        {{snippet}}
+                                                    </a>
+                                                </li>
+                                            {{/user.notifications.posts}}
+                                        {{/user.notifications.hasNew}}
+                                        {{^user.notifications.hasNew}}
                                             <li class="notification">
-                                                <span class="notification-score-count">+{{newScore}}</span>
-                                                <a href="/post/{{_post}}" class="notification-title">
-                                                    {{snippet}}
-                                                </a>
+                                                <p>No new notifications</p>
                                             </li>
-                                        {{/user.notifications.posts}}
+                                        {{/user.notifications.hasNew}}
                                     </ul>
                                 </div>
                                 <a href="/u/{{user.username}}">{{user.username}}</a>
@@ -102,14 +109,21 @@
                 </div>
                 <div class="notification-box-mobile">
                     <ul class="notifications-list">
-                        {{#user.notifications.posts}}
+                        {{#user.notifications.hasNew}}
+                            {{#user.notifications.posts}}
+                                <li class="notification">
+                                    <span class="notification-score-count">+{{newScore}}</span>
+                                    <a href="/post/{{_post}}" class="notification-title">
+                                        {{snippet}}
+                                    </a>
+                                </li>
+                            {{/user.notifications.posts}}
+                        {{/user.notifications.hasNew}}
+                        {{^user.notifications.hasNew}}
                             <li class="notification">
-                                <span class="notification-score-count">+{{newScore}}</span>
-                                <a href="/post/{{_post}}" class="notification-title">
-                                    {{snippet}}
-                                </a>
+                                <p>No new notifications</p>
                             </li>
-                        {{/user.notifications.posts}}
+                        {{/user.notifications.hasNew}}
                     </ul>
                 </div>
                 <div class="mobile-icons">
@@ -118,18 +132,18 @@
                         <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
                         <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
                         <a href="/u/{{user.username}}" class="mobile-profile"><img src="/images/mobile-profile-icon.png" class="profile-icon">Profile</a>
-                        <div class="menu-button-mobile">
+                        <a href="#" class="menu-button-mobile">
                             <img src="/images/mobile-menu-icon.png" class="menu-icon">More
-                        </div>
+                        </a>
                     {{/user._id}}
                     {{^user._id}}
                         <a href="#" class="mobile-score"><span class="mobile-score-count">{{user.score}}</span>Score</a>
                         <a href="#" class="mobile-messages"><img src="/images/mobile-message-icon.png" class="message-icon">Messages</a>
                         <a href="/post" class="mobile-post"><img src="/images/mobile-post-icon.png" class="post-icon">Post</a>
                         <a href="/u/{{user.username}}" class="mobile-profile"><img src="/images/mobile-profile-icon.png" class="profile-icon">Profile</a>
-                        <div class="menu-button-mobile">
+                        <a href="#" class="menu-button-mobile">
                             <img src="/images/mobile-menu-icon.png" class="menu-icon">More
-                        </div>
+                        </a>
                     {{/user._id}}
                 </div>   
             </div>
