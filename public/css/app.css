@@ -1220,7 +1220,7 @@ h4 {
 /**Modal Popup Styles**/
 
 .overlay {
-  
+  visibility:hidden;
   position: absolute;
   left:0px;
   top:0px;
