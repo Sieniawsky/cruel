@@ -11,6 +11,13 @@
             <div class="row">
                 <div class="large-5 columns">
                     <img src="<%= url %>">
+                    <button type="button"
+                        class="<% if(liked) { %>js-like post-liked<% } else { %>js-like post-like<% }%>"
+                        name="<%= _id %>"></button>
+                    <button type="button"
+                        class="<% if(liked) { %>js-like post-liked-mobile<% } else { %>js-like post-like-mobile<% }%>"
+                        name="<%= _id %>"></button>
+                    
                 </div>  
                 <div class="large-7 columns post-content">
                     <h3><%= title %></h3>

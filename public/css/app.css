@@ -890,6 +890,96 @@ h3 {
     margin-top:10px;
 }
 
+/**Post like button**/
+
+.post-like {
+  position:absolute;
+  top:24px;
+  left:24px;
+  width:89px;
+  height:26px;
+  border:0;
+  background:url(/images/post-like2.png) no-repeat top left;
+  background-size: 89px 26px;
+}
+
+.post-like:focus {
+  outline:none;
+
+}
+
+.post-liked {
+  position:absolute;
+  top:24px;
+  left:24px;
+  width:64px;
+  height:26px;
+  border:0;
+  background:url(/images/post-liked2.png) no-repeat top left;
+  background-size: 63px 26px;
+}
+
+.post-liked:focus {
+  outline:none;
+}
+
+.post-like-mobile {
+  display:none;
+}
+
+.post-liked-mobile {
+  display:none;
+}
+
+/**Post Like Button Media Queries**/
+
+@media only screen and (max-width:768px) {
+  .post-like {
+    display:none;
+  }
+
+   .post-liked {
+    display:none;
+  }
+
+  .post-like-mobile {
+    display:block;
+    position:absolute;
+    bottom:31px;
+    left:24px;
+    width:89px;
+    height:26px;
+    border:0;
+    background:url(/images/post-like2.png) no-repeat top left;
+    background-size: 89px 26px;
+  }
+
+  .post-like-mobile:focus {
+    outline:none;
+
+  }
+
+  .post-liked-mobile {
+    display:block;
+    position:absolute;
+    bottom:31px;
+    left:24px;
+    width:64px;
+    height:26px;
+    border:0;
+    background:url(/images/post-liked2.png) no-repeat top left;
+    background-size: 63px 26px;
+  }
+
+  .post-liked-mobile:focus {
+    outline:none;
+  }
+
+
+}
+
+
+
 /**Post Media Queries**/
 
 @media only screen and (max-width:768px) {
