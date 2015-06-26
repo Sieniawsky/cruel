@@ -260,14 +260,26 @@
   }
 
   .mobile-score {
-    width:auto;
-    left:20px;
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size:11px;
+    bottom:-21px;
+    left:10px;
+    letter-spacing:0;
+    color:#bababa;
+    text-decoration: none;
+    position:absolute;
     }
+
+  .mobile-score:focus {
+    outline:none;
+  }
+
+
   
   .mobile-score-count {
     position:absolute;
-    top:-26px;
-    left:11px;
+    top:-25px;
+    left:12px;
     font-family:'Oswald', sans-serif;
     text-transform:uppercase;
     font-size:18px;
@@ -281,7 +293,7 @@
 
   .mobile-messages {
     width:auto;
-    left:39px;
+    left:65px;
   }
 
   .message-icon {
@@ -295,7 +307,7 @@
 
   .mobile-post {
     width:auto;
-    left:59px;
+    left:94px;
   }
 
   .post-icon {
@@ -308,7 +320,7 @@
 
   .mobile-profile {
     width:auto;
-    left:92px;
+    left:135px;
    }
 
   .profile-icon {
@@ -322,13 +334,17 @@
   .menu-button-mobile {
     width:auto;
     position:absolute;
-    right:-125px;
+    right:15px;
     bottom:-20px;
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size:11px;
     letter-spacing:0;
     color:#bababa;
     text-decoration: none;
+  }
+
+  .menu-button-mobile:focus{
+    outline:none;
   }
   
   .menu-icon {
