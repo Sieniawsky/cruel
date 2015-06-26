@@ -83,11 +83,21 @@
             <div class="mobile-nav-bottom">
                 <div class="dropdown-mobile">
                     <ul>
-                        <li><a href="/">Home</a></li></br>
-                        <li><a href="#">Logout</a></li></br>
-                        <li><a href="#">Contact</a></li></br>
-                        <li><a href="#">Terms &amp; Conditions</a></li></br>
-                        <li><a href="#">User License Agreement</a></li></br>
+                        {{#user._id}}
+                            <li><a href="/">Home</a></li></br>
+                            <li><a href="/logout">Logout</a></li></br>
+                            <li><a href="#">Contact</a></li></br>
+                            <li><a href="#">Terms &amp; Conditions</a></li></br>
+                            <li><a href="#">User License Agreement</a></li></br>
+                        {{/user._id}}
+                        {{^user._id}}
+                            <li><a href="/">Home</a></li></br>
+                            <li><a href="/login">Log in</a></li></br>
+                            <li><a href="/signup">Sign up</a></li></br>
+                            <li><a href="#">Contact</a></li></br>
+                            <li><a href="#">Terms &amp; Conditions</a></li></br>
+                            <li><a href="#">User License Agreement</a></li></br>
+                        {{/user._id}}
                     </ul>
                 </div>
                 <div class="notification-box-mobile">
