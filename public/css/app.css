@@ -471,7 +471,7 @@ h2 {
     font-size: 24px;
     color: #a6a6a6;
     padding-top:10px;
-    letter-spacing: 1px;
+    letter-spacing: 0px;
     margin:0;
 }
 
@@ -523,7 +523,7 @@ h2 {
     color: #a6a6a6;
     padding-top:10px;
     padding-left:3px;
-    letter-spacing: 1px;
+    letter-spacing: 0px;
     margin:0;
   }
 
@@ -537,7 +537,7 @@ h2 {
     float:right;
     margin-top:10px;
     width:auto;
-    margin-right: -5px;
+    margin-right: -14px;
   }
 
   .sorting select:focus {
@@ -546,11 +546,12 @@ h2 {
 
   .sorting select {
       font-size:12px;
+      margin-left:-3px;
   }
 
 
   .sortlabel {
-    font-size:11px;
+    font-size:10px;
   }
 
 
@@ -564,7 +565,7 @@ h3 {
     font-family: 'Oswald', sans-serif;
     text-transform:uppercase;
     font-size: 20px;
-    letter-spacing:1px;
+    letter-spacing:0px;
     color: #333333;
     line-height: 24px;
     margin-top:-2px;
@@ -575,12 +576,20 @@ h3 {
     font-family: 'Oswald', sans-serif;
     text-transform:uppercase;
     font-size: 16px;
-    letter-spacing:0.02em;
+    letter-spacing:0px;
     color: #a6a6a6;
     padding-left:4px;
     padding-right:3px;
     
 }
+
+.author:before {
+    content:'\00B7';
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    padding-right:3px;
+    font-size:12px;
+    
+  }
 
 .date {
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -681,7 +690,7 @@ h3 {
     text-transform:uppercase;
     font-size: 18px;
     color: #a6a6a6;
-    letter-spacing:0.02em;
+    letter-spacing:0px;
 }
 
 .feed-post-content {
@@ -703,7 +712,7 @@ h3 {
 .snippet a {
   color:#a6a6a6;
   padding-left:6px;
-  letter-spacing:1px;
+  letter-spacing:0px;
 }
 
 .snippet a:hover{
@@ -728,6 +737,7 @@ h3 {
 
   .date {
     font-size: 12px;
+    padding-left:0px;
   }
 
   .date:before {
@@ -765,15 +775,16 @@ h3 {
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size: 12px;
     text-transform:none;
-    letter-spacing:0.02em;
+    letter-spacing:0px;
     color: #a6a6a6;
-    padding-left:4px;
-    padding-right:3px;
+    padding-left:0px;
+    padding-right:0px;
+    margin-right:-2px;
   }
 
   .author:before {
     content:'\00B7';
-    padding-right:2px;
+    padding-right:0px;
     font-size:12px;
      }
   
@@ -807,7 +818,7 @@ h3 {
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size: 12px;
     color: #a6a6a6;
-    margin-right:0;
+    margin-right:-2px;
     }
 
   .score:before {
@@ -822,7 +833,7 @@ h3 {
     text-transform:uppercase;
     font-size: 18px;
     color: #a6a6a6;
-    letter-spacing:0.02em;
+    letter-spacing:0px;
   }
 
   .feed-post-content {
@@ -913,7 +924,7 @@ h3 {
     font-family: 'Oswald', sans-serif;
     text-transform:uppercase;
     font-size: 18px;
-    letter-spacing:1px;
+    letter-spacing:0px;
     color: #333333;
     line-height: 24px;
     margin-top:-8px;
@@ -924,7 +935,7 @@ h3 {
       font-family: 'Oswald', sans-serif;
       text-transform:uppercase;
       font-size: 16px;
-      letter-spacing:0.02em;
+      letter-spacing:0px;
       color: #a6a6a6;
       padding-left:4px;
       padding-right:3px;
@@ -953,7 +964,7 @@ h4 {
     font-family: 'Oswald', sans-serif;
     text-transform:uppercase;
     font-size: 16px;
-    letter-spacing:0.02em;
+    letter-spacing:0px;
     color:#4f4f4f;
     margin-left:1px;
     padding-right:3px;
