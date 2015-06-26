@@ -48,7 +48,10 @@
                                         {{/user.notifications.hasNew}}
                                         {{^user.notifications.hasNew}}
                                             <li class="notification">
-                                                <p>No new notifications</p>
+                                                <span class="notification-score-count">+0</span>
+                                                <a href="#" class="notification-title">
+                                                    No new notifications.
+                                                </a>
                                             </li>
                                         {{/user.notifications.hasNew}}
                                     </ul>
