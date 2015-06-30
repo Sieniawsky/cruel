@@ -16,13 +16,14 @@ var FullPost = Backbone.View.extend({
     },
 
     initialize: function() {
+        this.nav = nav || {};
+
         _.bindAll(this, 'render');
         this.model.bind('change', this.render);
         this.render();
     },
 
     handleLike: function() {
-        console.log('called');
         if (!this.model.get('liked')) {
             this.like();
         } else {
@@ -48,6 +49,8 @@ var FullPost = Backbone.View.extend({
                 },
                 failure : function(data) {}
             });
+        } else {
+            this.nav.showModal();
         }
     },
 
@@ -69,6 +72,8 @@ var FullPost = Backbone.View.extend({
                 },
                 failure : function(data) {}
             });
+        } else {
+            this.nav.showModal();
         }
     },
 
