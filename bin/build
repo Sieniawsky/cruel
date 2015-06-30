@@ -18,6 +18,10 @@ var sources = [{
     sourcePath : 'assets/NavBar.js',
     tempPath   : 'public/js/temp3.js',
     exportPath : 'public/js/bundles/nav.js'
+}, {
+    sourcePath : 'assets/FullPost.js',
+    tempPath   : 'public/js/temp4.js',
+    exportPath : 'public/js/bundles/post.js'
 }];
 
 _.forEach(sources, function(source) {
