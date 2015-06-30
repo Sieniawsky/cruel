@@ -90,6 +90,10 @@
   cursor:pointer;
 }
 
+.menu-button:focus {
+  outline:none;
+}
+
 
 .dropdown {
   display:none;
@@ -140,107 +144,112 @@
 
 /**Notification Dropdown**/
 
- .notification-box {
-    display:none;
-    position:absolute;
-    width:350px;
-    height:auto;
-    top:42px;
-    right:0px;
-    background-color:#f2f2f2;
-    padding-left:10px;
-    padding-right:10px;
-  }
-
- 
-  .notifications-list {
-    list-style:none;
-    padding:0;
-    margin-bottom:0;
-    margin-top:0;
-  }
-
-  .notification-score-count {
-    font-family:'Oswald', sans-serif;
-    text-transform:uppercase;
-    font-size:17px;
-    color:#bababa;;
-    position:relative;
-    float:left;
-    margin-top:-3px;
-    margin-right:20px;
-    cursor:pointer;
+.notification-box {
+  display:none;
+  position:absolute;
+  width:350px;
+  height:auto;
+  top:42px;
+  right:0px;
+  background-color:#f2f2f2;
+  padding-left:10px;
+  padding-right:10px;
 }
 
-  .notification-score-count:before {
-    content: url('/images/boltcountmobile2.png');
-    
-  }
 
-   .notification-box-score-count {
-    font-family:'Oswald', sans-serif;
-    text-transform:uppercase;
-    font-size:17px;
-    margin-left:20px;
-    color:#bababa;;
-    top:5px;
+.notifications-list {
+  list-style:none;
+  padding:0;
+  margin-bottom:0;
+  margin-top:0;
+}
 
-  }
-    
-  .notification-box-score-count:before {
-    content: url('/images/boltcountmobile2.png');
-    margin-left:-18px;
-  }
+.notification-score-count {
+  font-family:'Oswald', sans-serif;
+  text-transform:uppercase;
+  font-size:17px;
+  color:#bababa;;
+  position:relative;
+  float:left;
+  margin-top:-3px;
+  margin-right:20px;
+  cursor:pointer;
+}
 
-  .notification-box-empty {
-    font-family:'Oswald', sans-serif;
-    text-transform:uppercase;
-    font-size:17px;
-    margin-left:20px;
-    color:#bababa;;
-    top:5px;
+.notification-score-count:focus {
+  outline:none;
+}
 
-  }
 
-  .notification-box-empty:before {
-    content: url('/images/mobile-bolt-icon2.png');
-    margin-left:-18px;
-  }
+.notification-score-count:before {
+  content: url('/images/boltcountmobile2.png');
+  
+}
 
-  .notification-title {
-    text-decoration:none;
-    color:#bababa;
-    padding-left:7px;
-    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-    font-size:14px;
+ .notification-box-score-count {
+  font-family:'Oswald', sans-serif;
+  text-transform:uppercase;
+  font-size:17px;
+  margin-left:20px;
+  color:#bababa;;
+  top:5px;
 
-  }
+}
+  
+.notification-box-score-count:before {
+  content: url('/images/boltcountmobile2.png');
+  margin-left:-18px;
+}
 
-  .notification a {
-    font-size:13px;
-    text-decoration:none;
-    color:#bababa;
-    padding-left:7px;
-    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-    font-size:14px;
+.notification-box-empty {
+  font-family:'Oswald', sans-serif;
+  text-transform:uppercase;
+  font-size:17px;
+  margin-left:20px;
+  color:#bababa;;
+  top:5px;
 
-  }
- 
+}
 
-  .notification-box ul li{
-    border-top: 1px solid #e8e8e8;
-  }
+.notification-box-empty:before {
+  content: url('/images/mobile-bolt-icon2.png');
+  margin-left:-18px;
+}
 
-  .notification-box ul li:first-child {
-    border-top:none;
-  }
+.notification-title {
+  text-decoration:none;
+  color:#bababa;
+  padding-left:7px;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size:14px;
 
-  .notification {
-    height:auto;
-    padding-top:5px;
-    padding-bottom:8px;
+}
 
-  }
+.notification a {
+  font-size:13px;
+  text-decoration:none;
+  color:#bababa;
+  padding-left:7px;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size:14px;
+
+}
+
+
+.notification-box ul li{
+  border-top: 1px solid #e8e8e8;
+}
+
+.notification-box ul li:first-child {
+  border-top:none;
+}
+
+.notification {
+  height:auto;
+  padding-top:5px;
+  padding-bottom:8px;
+
+}
 
 /**Menubar Media Queries**/
 
@@ -1037,6 +1046,7 @@ h3 {
     border:0;
     background:url(/images/post-like3.png) no-repeat top left;
     background-size: 89px 26px;
+    cursor:pointer;
   }
 
   .post-like-mobile:hover {
