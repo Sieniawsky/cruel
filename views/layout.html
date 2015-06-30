@@ -35,7 +35,9 @@
                             {{#user._id}}
                                 <div class="notification-score-count">{{user.score}}
                                     {{#user.notifications.hasNew}}
-                                        <span class="notification-counter">{{user.notifications.newScore}}</span>
+                                        <span class="js-new-score notification-counter">
+                                            {{user.notifications.newScore}}
+                                        </span>
                                     {{/user.notifications.hasNew}}
                                 </div>
                                 <div class="notification-box">
