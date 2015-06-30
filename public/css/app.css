@@ -319,7 +319,8 @@
     color:#bababa;
     text-decoration: none;
     position:absolute;
-    }
+    cursor:pointer;
+  }
 
   .mobile-score:focus {
     outline:none;
@@ -334,6 +335,7 @@
     font-family:'Oswald', sans-serif;
     text-transform:uppercase;
     font-size:18px;
+    cursor:pointer;
   }
 
   .mobile-score-count:before {
@@ -392,6 +394,7 @@
     letter-spacing:0;
     color:#bababa;
     text-decoration: none;
+    cursor:pointer;
   }
 
   .menu-button-mobile:focus{
@@ -404,6 +407,7 @@
     position:absolute;
     top:-24px;
     left:1px;
+    cursor:pointer;
   }
   .dropdown-mobile {
     display:none;
@@ -906,6 +910,7 @@ h3 {
     font-size: 12px;
     color: #a6a6a6;
     margin-right:-2px;
+    margin-left:0px;
     }
 
   .score:before {
