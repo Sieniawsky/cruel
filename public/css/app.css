@@ -62,7 +62,8 @@
   font-family: 'Oswald', sans-serif;
   text-transform:uppercase;
   color: #6e6e6e;
-  padding-left:20px;
+  padding-right:10px;
+  margin-right:-5px;
   font-size: 14px;
   letter-spacing:0px;
 
@@ -80,13 +81,15 @@
 
 /**Nav Dropdown**/
 
-.menu-button img {
+.menu-button {
   position:absolute;
   width:25px;
   height:26px;
   right:0;
   top:8px;
+  cursor:pointer;
 }
+
 
 .dropdown {
   display:none;
@@ -161,15 +164,17 @@
     font-family:'Oswald', sans-serif;
     text-transform:uppercase;
     font-size:17px;
-    margin-left:20px;
     color:#bababa;;
-    top:5px;
-
-  }
+    position:relative;
+    float:left;
+    margin-top:-3px;
+    margin-right:20px;
+    cursor:pointer;
+}
 
   .notification-score-count:before {
     content: url('/images/boltcountmobile2.png');
-    margin-left:-18px;
+    
   }
 
    .notification-box-score-count {
@@ -337,7 +342,7 @@
     width:24px;
     height:auto;
     position:absolute;
-    top:-26px;
+    top:-25px;
     left:3px;
     margin-left:12px;
   }
@@ -351,8 +356,8 @@
     width:25px;
     height:auto;
     position:absolute;
-    top:-24px;
-    left:1px;
+    top:-26px;
+    left:0px;
   }
 
   .mobile-profile {
@@ -952,7 +957,7 @@ h3 {
   width:89px;
   height:26px;
   border:0;
-  background:url(/images/post-like2.png) no-repeat top left;
+  background:url(/images/post-like3.png) no-repeat top left;
   background-size: 89px 26px;
   cursor:pointer;
 }
@@ -1287,4 +1292,32 @@ h4 {
   .modal{
     margin-top:50%;
   }
+}
+
+/**Notification Counters**/
+
+.notification-counter{
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif; 
+  font-size:11px;
+  color:#fff;
+  padding:0 3px 0 3px;
+  background-color:#ff0000;
+  position:absolute;
+  top:0px;
+  right:-11px;
+  border-radius:5px;
+  line-height:14px;
+}
+
+.notification-counter-mobile {
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif; 
+  font-size:11px;
+  color:#fff;
+  padding:0 3px 0 3px;
+  background-color:#ff0000;
+  position:absolute;
+  top:0px;
+  left:8px;
+  border-radius:5px;
+  line-height:14px;
 }

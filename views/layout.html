@@ -33,7 +33,11 @@
                         </a>
                         <div class="nav">
                             {{#user._id}}
-                                <a href="#" class="notification-score-count">{{user.score}}</a>
+                                <div class="notification-score-count">{{user.score}}
+                                    {{#user.notifications.hasNew}}
+                                        <span class="notification-counter">{{user.notifications.newScore}}</span>
+                                    {{/user.notifications.hasNew}}
+                                </div>
                                 <div class="notification-box">
                                     <ul class="notifications-list">
                                         {{#user.notifications.hasNew}}
@@ -59,7 +63,7 @@
                                 <a href="/u/{{user.username}}">{{user.username}}</a>
                                 <a href="/post">Make A Post</a>
                                 <a href="/logout">Logout</a>
-                                <a href="#" class="menu-button"><img src="/images/menu-icon.png"></a>
+                                <img class="menu-button" src="/images/menu-icon.png">
                                 <div class="dropdown">
                                     <ul>
                                         <li><a href="/">Home</a></li></br>
@@ -135,7 +139,12 @@
                 <div class="mobile-icons">
                     {{#user._id}}
                         <div class="mobile-score" tabindex="0">
-                            <span class="mobile-score-count">{{user.score}}</span>Score
+                            <div class="mobile-score-count">{{user.score}}
+                                {{#user.notifications.hasNew}}
+                                    <span class="notification-counter-mobile">{{user.notifications.newScore}}</span>
+                                {{/user.notifications.hasNew}}
+                            </div>
+                            Score
                         </div>
                         <a href="#" class="mobile-messages">
                             <img src="/images/mobile-message-icon.png" class="message-icon">Messages
