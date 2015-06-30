@@ -14,7 +14,12 @@ var NavBar = Backbone.View.extend({
         'blur .menu-button-mobile'        : 'closeDrawerMobile',
         'blur .mobile-score'              : 'closeScoreMobile',
         'blur .menu-button'               : 'closeMenu',
-        'blur .notification-score-count'  : 'closeScore'
+        'blur .notification-score-count'  : 'closeScore',
+
+        'click .js-close'         : 'hideModal',
+        'click .js-link-messages' : 'handleLink',
+        'click .js-link-post'     : 'handleLink',
+        'click .js-link-user'     : 'handleLink'
     },
 
     initialize: function() {
@@ -24,6 +29,33 @@ var NavBar = Backbone.View.extend({
         this.$notificationBoxMobile = $('.notification-box-mobile');
         this.$navDropdown           = $('.dropdown');
         this.$dropdownMobile        = $('.dropdown-mobile');
+        this.$modal = $('.overlay');
+    },
+
+    showModal: function() {
+        this.$modal.show();
+    },
+
+    hideModal: function() {
+        this.$modal.hide();
+    },
+
+    handleLink: function(e) {
+        e.preventDefault();
+        if (this.isLoggedIn()) {
+            window.location = e.currentTarget.href;
+        }
+    },
+
+    isLoggedIn: function() {
+        if (typeof initData !== 'undefined'
+            && typeof initData.user !== 'undefined'
+            && typeof initData.user._id !== 'undefined') {
+            return true;
+        } else {
+            this.showModal();
+            return false;
+        }
     },
 
     markAsRead: function() {
@@ -47,8 +79,10 @@ var NavBar = Backbone.View.extend({
     },
 
     toggleScoreMobile: function() {
-        this.$notificationBoxMobile.slideToggle('fast');
-        this.markAsRead();
+        if (this.isLoggedIn()) {
+            this.$notificationBoxMobile.slideToggle('fast');
+            this.markAsRead();
+        }
     },
 
     toggleMenu: function() {
@@ -56,8 +90,10 @@ var NavBar = Backbone.View.extend({
     },
 
     toggleScore: function() {
-        this.$notificationBox.slideToggle('fast');
-        this.markAsRead();
+        if (this.isLoggedIn()) {
+            this.$notificationBox.slideToggle('fast');
+            this.markAsRead();
+        }
     },
 
     closeDrawerMobile: function() {
@@ -78,5 +114,5 @@ var NavBar = Backbone.View.extend({
 });
 
 $(function() {
-    var nav = new NavBar();
+    nav = new NavBar();
 });

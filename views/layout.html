@@ -146,13 +146,13 @@
                             </div>
                             Score
                         </div>
-                        <a href="#" class="mobile-messages">
+                        <a href="#" class="js-link-message mobile-messages">
                             <img src="/images/mobile-message-icon.png" class="message-icon">Messages
                         </a>
-                        <a href="/post" class="mobile-post">
+                        <a href="/post" class="js-link-post mobile-post">
                             <img src="/images/mobile-post-icon.png" class="post-icon">Post
                         </a>
-                        <a href="/u/{{user.username}}" class="mobile-profile">
+                        <a href="/u/{{user.username}}" class="js-link-user mobile-profile">
                             <img src="/images/mobile-profile-icon.png" class="profile-icon">Profile
                         </a>
                         <div class="menu-button-mobile" tabindex="0">
@@ -163,13 +163,13 @@
                         <div class="mobile-score" tabindex="0">
                             <span class="mobile-score-count">0</span>Score
                         </div>
-                        <a href="#" class="mobile-messages">
+                        <a href="#" class="js-link-messages mobile-messages">
                             <img src="/images/mobile-message-icon.png" class="message-icon">Messages
                         </a>
-                        <a href="/post" class="mobile-post">
+                        <a href="/post" class="js-link-post mobile-post">
                             <img src="/images/mobile-post-icon.png" class="post-icon">Post
                         </a>
-                        <a href="/u/{{user.username}}" class="mobile-profile">
+                        <a href="/u/{{user.username}}" class="js-link-user mobile-profile">
                             <img src="/images/mobile-profile-icon.png" class="profile-icon">Profile
                         </a>
                         <div class="menu-button-mobile" tabindex="0">
@@ -178,13 +178,14 @@
                     {{/user._id}}
                 </div>   
             </div>
-        </div>
 
-        <div class="overlay">
-            <div class="modal">
-                <img class="modal-close" src="/images/modal-close.png">
-                <h1>You have to be logged in to do that!</h1>
-                <p><a href="/login">Log in</a>&nbsp;or&nbsp;<a href="/signup">Sign up</a></p>
+            <!-- Modal -->
+            <div class="overlay">
+                <div class="modal">
+                    <img class="js-close modal-close" src="/images/modal-close.png">
+                    <h1>You have to be logged in to do that!</h1>
+                    <p><a href="/login">Log in</a>&nbsp;or&nbsp;<a href="/signup">Sign up</a></p>
+                </div>
             </div>
         </div>
 

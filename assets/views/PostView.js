@@ -15,6 +15,8 @@ module.exports = Backbone.View.extend({
     },
 
     initialize: function() {
+        this.nav = nav || {};
+
         _.bindAll(this, 'render');
         this.model.bind('change', this.render);
     },
@@ -45,6 +47,8 @@ module.exports = Backbone.View.extend({
                 },
                 failure : function(data) {}
             });
+        } else {
+            this.nav.showModal();
         }
     },
 
@@ -66,6 +70,8 @@ module.exports = Backbone.View.extend({
                 },
                 failure : function(data) {}
             });
+        } else {
+            this.nav.showModal();
         }
     },
 
