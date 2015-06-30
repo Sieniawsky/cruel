@@ -95,25 +95,29 @@
 
             <!-- Mobile Nav -->
             <div class="mobile-nav-bottom">
-                <div class="dropdown-mobile">
-                    <ul>
-                        {{#user._id}}
+                {{#user._id}}
+                    <div class="dropdown-mobile">
+                        <ul>
                             <li><a href="/">Home</a></li></br>
                             <li><a href="/logout">Logout</a></li></br>
                             <li><a href="#">Contact</a></li></br>
                             <li><a href="#">Terms &amp; Conditions</a></li></br>
                             <li><a href="#">User License Agreement</a></li></br>
-                        {{/user._id}}
-                        {{^user._id}}
+                        </ul>
+                    </div>
+                {{/user._id}}
+                {{^user._id}}
+                    <div class="dropdown-mobile">
+                        <ul>
                             <li><a href="/">Home</a></li></br>
                             <li><a href="/login">Log in</a></li></br>
                             <li><a href="/signup">Sign up</a></li></br>
                             <li><a href="#">Contact</a></li></br>
                             <li><a href="#">Terms &amp; Conditions</a></li></br>
                             <li><a href="#">User License Agreement</a></li></br>
-                        {{/user._id}}
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
+                {{/user._id}}
                 <div class="notification-box-mobile">
                     <ul class="notifications-list">
                         {{#user.notifications.hasNew}}
