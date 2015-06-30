@@ -417,7 +417,6 @@
     width:100%;
     text-align:center;
     margin-bottom:0;
-    
   }
   .dropdown-mobile ul li {
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -732,13 +731,15 @@ h3 {
     text-transform:uppercase;
     font-size: 24px;
     color: #a6a6a6;
+    margin-right:-2px;
+    margin-left:-5px;
 }
 
 .score:before {
     content: url(/images/boltcount.png);
-    margin-left:-7px;
+    margin-right:-5px;
     padding-top:5px;
-    margin-right:-2px;
+    
 }
 
 
@@ -775,6 +776,25 @@ h3 {
 
 .snippet a:hover{
   color:#333333;
+}
+
+.feed-end {
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    color:#4f4f4f;
+    font-size: 14px;
+    text-align: center;
+    position:relative;
+    width:200px;
+    margin-left:auto;
+    margin-right:auto;
+    height:40px;
+}
+.post-malone {
+  width:43px;
+  height:auto;
+  position:absolute;
+  right:-27px;
+  top:-17px;
 }
 
 /**Feed Media Queries**/
@@ -962,6 +982,11 @@ h3 {
   cursor:pointer;
 }
 
+.post-like:hover {
+  background:url(/images/post-like2.png) no-repeat top left;
+  background-size: 89px 26px;
+}
+
 .post-like:focus {
   outline:none;
 
@@ -1010,6 +1035,11 @@ h3 {
     width:89px;
     height:26px;
     border:0;
+    background:url(/images/post-like3.png) no-repeat top left;
+    background-size: 89px 26px;
+  }
+
+  .post-like-mobile:hover {
     background:url(/images/post-like2.png) no-repeat top left;
     background-size: 89px 26px;
   }
