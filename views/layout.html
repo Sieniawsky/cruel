@@ -151,7 +151,9 @@
                         <div class="mobile-score" tabindex="0">
                             <div class="mobile-score-count">{{user.score}}
                                 {{#user.notifications.hasNew}}
-                                    <span class="notification-counter-mobile">{{user.notifications.newScore}}</span>
+                                    <span class="js-new-score notification-counter-mobile">
+                                        {{user.notifications.newScore}}
+                                    </span>
                                 {{/user.notifications.hasNew}}
                             </div>
                             Score
