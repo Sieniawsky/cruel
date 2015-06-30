@@ -33,7 +33,7 @@
                         </a>
                         <div class="nav">
                             {{#user._id}}
-                                <div class="notification-score-count">{{user.score}}
+                                <div class="notification-score-count" tabindex="0">{{user.score}}
                                     {{#user.notifications.hasNew}}
                                         <span class="notification-counter">{{user.notifications.newScore}}</span>
                                     {{/user.notifications.hasNew}}
@@ -63,7 +63,9 @@
                                 <a href="/u/{{user.username}}">{{user.username}}</a>
                                 <a href="/post">Make A Post</a>
                                 <a href="/logout">Logout</a>
-                                <img class="menu-button" src="/images/menu-icon.png">
+                                <div class="menu-button" tabindex="0">
+                                    <img src="/images/menu-icon.png">
+                                </div>
                                 <div class="dropdown">
                                     <ul>
                                         <li><a href="/">Home</a></li></br>
@@ -77,7 +79,9 @@
                             {{^user._id}}
                                 <a href="/login">Login</a>
                                 <a href="/signup">Signup</a>
-                               <img class="menu-button" src="/images/menu-icon.png">
+                                <div class="menu-button" tabindex="0">
+                                    <img src="/images/menu-icon.png">
+                                </div>
                                 <div class="dropdown">
                                     <ul>
                                         <li><a href="/">Home</a></li></br>
