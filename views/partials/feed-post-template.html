@@ -13,8 +13,9 @@
                 <div class="large-10 columns feed-post-content">
                     <a href="/post/<%= _id %>"><h3><%= title %></h3></a>
                     <span class="score"> <%= score %></span>
-                    <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
-                    <span class="date"> <%= date %></span>
+                    <a href="/u/<%= _username %>"><span class="author"><%= _username %></span></a>
+                    <a href="/post/<%= _id %>"><span class="comment-count">16 comments</span></a>
+                    <span class="date"><%= date %></span>
                     <p class="snippet"><%= snippet %>
                         <% if(snippet.length != 0) { %><a href="/post/<%= _id %>">[...]</a><% } %>
                     </p>
