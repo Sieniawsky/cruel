@@ -7,6 +7,16 @@ module.exports = {
     postsRemap : function(posts, user) {
         return _.map(posts, function(post) {
             var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
+            var comments = _.map(post.comments, function(comment) {
+                return {
+                    _id       : comment._id,
+                    _user     : comment._user,
+                    _username : comment._username,
+                    comment   : comment.comment,
+                    score     : comment.score,
+                    date      : moment(new Date(comment.date)).fromNow()
+                };
+            });
             return {
                 _id           : post._id,
                 title         : post.title,
@@ -23,13 +33,24 @@ module.exports = {
                 hotScore      : 0,
                 _location     : post._location,
                 _locationName : post._locationName,
-                comments      : post.comments
+                comments      : comments,
+                commentNumber : comments.length
             };
         });
     },
 
     postRemap : function(post, user) {
         var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
+        var comments = _.map(post.comments, function(comment) {
+            return {
+                _id       : comment._id,
+                _user     : comment._user,
+                _username : comment._username,
+                comment   : comment.comment,
+                score     : comment.score,
+                date      : moment(new Date(comment.date)).fromNow()
+            };
+        });
         return {
             _id           : post._id,
             title         : post.title,
@@ -46,7 +67,8 @@ module.exports = {
             hotScore      : 0,
             _location     : post._location,
             _locationName : post._locationName,
-            comments      : post.comments
+            comments      : comments,
+            commentNumber : comments.length
         };
     },
 
@@ -55,6 +77,16 @@ module.exports = {
             .map(function(post) {
                 var hours = Math.abs(new Date(post.date) - new Date()) / 36e5;
                 var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
+                var comments = _.map(post.comments, function(comment) {
+                    return {
+                        _id       : comment._id,
+                        _user     : comment._user,
+                        _username : comment._username,
+                        comment   : comment.comment,
+                        score     : comment.score,
+                        date      : moment(new Date(comment.date)).fromNow()
+                    };
+                });
                 return {
                     _id           : post._id,
                     title         : post.title,
@@ -71,7 +103,8 @@ module.exports = {
                     hotScore      : Math.round(((post.score + 9)/Math.pow(hours + 2, 1.2)) * 100)/100,
                     _location     : post._location,
                     _locationName : post._locationName,
-                    comments      : post.comments
+                    comments      : comments,
+                    commentNumber : comments.length
                 };    
             })
             .sortBy(function(post) {

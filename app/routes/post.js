@@ -21,12 +21,15 @@ module.exports = function(app, passport) {
     app.get('/post/:id', function(req, res) {
         Post.findOne({_id: req.params.id}, function(err, post) {
             if (err) return console.error(err);
+            var post = remap.postRemap(post, req.user);
+            var user = remap.userRemap(req.user);
             res.render('post', {
                 initData : JSON.stringify({
-                    post : remap.postRemap(post, req.user),
-                    user : remap.userRemap(req.user)
+                    post : post,
+                    user : user
                 }),
-                user       : remap.userRemap(req.user),
+                post       : post,
+                user       : user,
                 background : bg()
             });
         });
