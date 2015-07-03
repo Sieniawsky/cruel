@@ -76,4 +76,23 @@ module.exports = function(app, passport) {
             }
         });
     });
+
+    app.post('/api/comment', function(req, res) {
+        if (typeof req.user._id != 'undefined' && req.user._id != null) {
+            var comment = {
+                comment   : '',
+                score     : 0,
+                _user     : '',
+                _username : '',
+                _post     : '',
+                date      : new Date()
+            };
+            Post.update({}, {'$push': {comments: comment}}, function(err, update) {
+                if (err) return console.error(err);
+                res.send({outcome: true});
+            });
+        } else {
+            res.send({outcome: false});
+        }
+    });
 };

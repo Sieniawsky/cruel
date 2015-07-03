@@ -22,7 +22,8 @@ module.exports = {
                 likers        : post.likers,
                 hotScore      : 0,
                 _location     : post._location,
-                _locationName : post._locationName
+                _locationName : post._locationName,
+                comments      : post.comments
             };
         });
     },
@@ -44,7 +45,8 @@ module.exports = {
             likers        : post.likers,
             hotScore      : 0,
             _location     : post._location,
-            _locationName : post._locationName
+            _locationName : post._locationName,
+            comments      : post.comments
         };
     },
 
@@ -68,7 +70,8 @@ module.exports = {
                     likers        : post.likers,
                     hotScore      : Math.round(((post.score + 9)/Math.pow(hours + 2, 1.2)) * 100)/100,
                     _location     : post._location,
-                    _locationName : post._locationName
+                    _locationName : post._locationName,
+                    comments      : post.comments
                 };    
             })
             .sortBy(function(post) {

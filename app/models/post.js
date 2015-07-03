@@ -12,7 +12,8 @@ var postSchema = mongoose.Schema({
     likers        : { type : [mongoose.Schema.Types.ObjectId], default : []},
     score         : { type : Number, default : 0},
     _location     : mongoose.Schema.Types.ObjectId,
-    _locationName : String
+    _locationName : String,
+    comments      : []
 });
 
 module.exports = mongoose.model('Post', postSchema);
