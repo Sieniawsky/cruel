@@ -1,5 +1,12 @@
 <div class="js-post"></div>
 
+<!-- Comment Form -->
+
+
+<!-- Comment Feed -->
+
+
+
 <!-- Templates -->
 <script id="post-detail-template" type="text/template">
     <div class="row">
@@ -25,6 +32,46 @@
                     <a href="/u/<%= _username %>"><span class="author"> <%= _username %></span></a>
                     <span class="date"> <%= date %></span> 
                     <p><%= description %></p>
+                </div>
+            </div>
+        </div>
+   
+        <div class="large-12 columns comments">
+            <form>
+                <div class="form-group comment-form">
+                    <h4>COMMENTS</h4>
+                    <textarea rows="3" name="description" id="postDescription" placeholder="Write a comment"></textarea>
+                </div>
+                <div class="form-group comment-form">
+                    <button type="submit" class="comment-button">Post</button>
+                </div>
+            </form>
+            <span class="sortlabel">Browse by:</span>
+            <select class="js-sort">
+                <option value="new">New</option>
+                <option value="top">Top</option>
+            </select>
+            <div class="comments-feed">
+                <div class="comment">
+                    <button type="button" class="bolt"></button>
+                    <span class="comment-score">28</span>
+                    <a href="#"><span class="author"> Swaglord69</span></a>
+                    <span class="date"> <%= date %></span>
+                    <p>This is a test comment this is a test comment this is a test.</p>
+                </div>
+                <div class="comment">
+                    <button type="button" class="bolt"></button>
+                    <span class="comment-score">14</span>
+                    <a href="#"><span class="author"> Swaglord69</span></a>
+                    <span class="date"> <%= date %></span>
+                    <p>This is a test comment this is a test comment this is a test. This is a test comment this is a test comment this is a test. This is a test comment this is a test comment this is a test. This is a test comment this is a test comment this is a test. This is a test comment this is a test comment this is a test.</p>
+                </div>
+                <div class="comment">
+                    <button type="button" class="bolt"></button>
+                    <span class="comment-score">5</span>
+                    <a href="#"><span class="author"> Swaglord69</span></a>
+                    <span class="date"> <%= date %></span>
+                    <p>This is a test comment this is a test comment this is a test.</p>
                 </div>
             </div>
         </div>
