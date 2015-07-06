@@ -18,8 +18,8 @@
                 </form>
                 <span class="sortlabel">Browse by:</span>
                 <select class="js-sort">
-                    <option value="new">New</option>
-                    <option value="top">Top</option>
+                    <option value="New">New</option>
+                    <option value="Top">Top</option>
                 </select>
                 <div class="js-comments comments-feed">
                 </div>
@@ -55,9 +55,10 @@
 
 <script id="post-comment-template" type="text/template">
     <div class="comment">
-        <button type="button" class="bolt"></button>
+        <button type="button" name="<%= _id %>"
+            class="<% if(liked) { %>js-comment-like bolt-liked<% } else { %>js-comment-like bolt<% }%>"></button>
         <span class="comment-score"><%= score %></span>
-        <a href="#"><span class="author"><%= _username %></span></a>
+        <a href="/u/<%= _username %>"><span class="author"><%= _username %></span></a>
         <span class="date"> <%= date %></span>
         <p><%= comment %></p>
     </div>

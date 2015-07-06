@@ -12,8 +12,10 @@ var FullPost = Backbone.View.extend({
     template: _.template($('#post-detail-template').html()),
 
     events: {
-        'click .js-like'  : 'handleLike',
-        'submit #js-form' : 'handleComment'
+        'click .js-like'         : 'handleLike',
+        'submit #js-form'        : 'handleComment',
+        'change .js-sort'        : 'sort',
+        'click .js-comment-like' : 'handleCommentLike'
     },
 
     initialize: function() {
@@ -26,10 +28,40 @@ var FullPost = Backbone.View.extend({
         this.$comments = $('.js-comments');
         this.$comment  = $('.js-comment-text');
         this.$form     = $('#js-form');
+        this.$sort     = $('.js-sort');
 
+        this.sortNew();
         _.bindAll(this, 'render');
         this.model.bind('change', this.render);
+
         this.render();
+    },
+
+    handleCommentLike: function(e) {
+        var comment = _.find(this.model.get('comments'), function(comment) {
+            return comment._id == e.currentTarget.name;
+        });
+        if (comment.liked) {
+            this.commentUnlike(comment);
+        } else {
+            this.commentLike(comment);
+        }
+    },
+
+    sort: function() {
+        var sort = this.$sort.val();
+        this['sort' + sort];
+        this.render();
+    },
+
+    sortNew: function() {
+        this.model.set('comments', _.sortBy(this.model.get('comments'), function(comment) {
+            return -comment.date;
+        }));
+    },
+
+    sortTop: function() {
+        this.model.set('comments', _.sortBy(this.model.get('comments'), 'score'));
     },
 
     handleLike: function() {
@@ -95,6 +127,54 @@ var FullPost = Backbone.View.extend({
                 data : {
                     post : this.model.attributes,
                     user : initData.user
+                },
+                success : function(data) {
+                    that.model.fetch();
+                },
+                failure : function(data) {}
+            });
+        } else {
+            this.nav.showModal();
+        }
+    },
+
+    commentLike: function(comment) {
+        if (typeof initData.user !== 'undefined'
+            && typeof initData.user._id !== 'undefined'
+            && initData.user._id !== null) {
+
+            var that = this;
+            $.ajax({
+                url  : '/api/comment/like/' + comment._id,
+                type : 'POST',
+                data : {
+                    comment : comment,
+                    post    : this.model.attributes,
+                    user    : initData.user
+                },
+                success : function(data) {
+                    that.model.fetch();
+                },
+                failure : function(data) {}
+            });
+        } else {
+            this.nav.showModal();
+        }
+    },
+
+    commentUnlike: function(comment) {
+        if (typeof initData.user !== 'undefined'
+            && typeof initData.user._id !== 'undefined'
+            && initData.user._id !== null) {
+
+            var that = this;
+            $.ajax({
+                url : '/api/comment/unlike/' + comment._id,
+                type : 'POST',
+                data : {
+                    comment : comment,
+                    post    : this.model.attributes,
+                    user    : initData.user
                 },
                 success : function(data) {
                     that.model.fetch();
