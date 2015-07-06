@@ -87,7 +87,7 @@ module.exports = function(app, passport) {
                 _post     : req.params.id,
                 date      : new Date()
             };
-            Post.update({}, {'$push': {comments: comment}}, function(err, update) {
+            Post.update({_id: req.params.id}, {'$push': {comments: comment}}, function(err, update) {
                 if (err) return console.error(err);
                 res.send({outcome: true});
             });
