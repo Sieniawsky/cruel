@@ -716,7 +716,8 @@ h3 {
 
 .bolt {
   position:absolute;
-  top:35%;
+  top:50%;
+  margin-top:-16px;
   left:-24px;
   background-image: URL("/images/boltbutton.png");
   width:32px;
@@ -729,7 +730,8 @@ h3 {
 
 .bolt-liked {
   position:absolute;
-  top:35%;
+  top:50%;
+  margin-top:-16px;
   left:-24px;
   background-image: URL("/images/boltbuttonhover.png");
   width:32px;
@@ -788,7 +790,7 @@ h3 {
 
 .snippet {
   margin-top:5px;
-  margin-bottom:0px;
+  margin-bottom:10px;
   font-size: 14px;
   color: #4f4f4f;
 }
@@ -911,7 +913,8 @@ h3 {
   
   .bolt {
     position:absolute;
-    top:27%;
+    top:50%;
+    margin-top:-15px;
     left:-19px;
     background-image: URL("/images/boltbuttonmobile.png");
     width:30px;
@@ -921,7 +924,8 @@ h3 {
 
   .bolt-liked {
     position:absolute;
-    top:27%;
+    top:50%;
+    margin-top:-15px;
     left:-19px;
     background-image: URL("/images/boltbuttonmobilehover.png");
     width:30px;
