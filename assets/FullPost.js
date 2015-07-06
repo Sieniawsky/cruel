@@ -12,8 +12,8 @@ var FullPost = Backbone.View.extend({
     template: _.template($('#post-detail-template').html()),
 
     events: {
-        'click .js-like'        : 'handleLike',
-        'click .js-form-submit' : 'handleComment'
+        'click .js-like'  : 'handleLike',
+        'submit #js-form' : 'handleComment'
     },
 
     initialize: function() {
@@ -21,10 +21,11 @@ var FullPost = Backbone.View.extend({
         this.postTemplate    = _.template($('#post-detail-template').html());
         this.commentTemplate = _.template($('#post-comment-template').html());
 
-        this.nav          = nav || {};
-        this.$post        = $('.js-post-body');
-        this.$comments    = $('.js-comments');
-        this.$comment     = $('.js-comment-text');
+        this.nav       = nav || {};
+        this.$post     = $('.js-post-body');
+        this.$comments = $('.js-comments');
+        this.$comment  = $('.js-comment-text');
+        this.$form     = $('#js-form');
 
         _.bindAll(this, 'render');
         this.model.bind('change', this.render);
@@ -39,7 +40,7 @@ var FullPost = Backbone.View.extend({
         }
     },
 
-    handleComment: function() {
+    handleComment: function(e) {
         var that = this;
         $.ajax({
             url  : '/api/comment/' + this.model.get('_id'),
@@ -55,6 +56,8 @@ var FullPost = Backbone.View.extend({
                 console.log(data);
             }
         });
+        e.preventDefault();
+        this.$form.trigger('reset');
     },
 
     like: function() {
