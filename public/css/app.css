@@ -62,14 +62,14 @@
   font-family: 'Oswald', sans-serif;
   text-transform:uppercase;
   color: #6e6e6e;
-  padding-right:10px;
+  padding-right:18px;
   margin-right:-5px;
   font-size: 14px;
   letter-spacing:0px;
-
-
-
+  float:left;
 }
+
+
 
 .nav a:hover {
   color:#fff;
@@ -100,12 +100,15 @@
   position:absolute;
   right:0;
   top:42px;
-  background-color: #f2f2f2
+  background-color: #f2f2f2;
+  width:175px
 }
 
 .dropdown a {
   text-decoration:none;
   color: #bababa;
+  float:none;
+  padding: 0 5px 0 0;
 }
 .dropdown ul {
   list-style:none;
@@ -125,8 +128,8 @@
   display:inline-block;
   *display:inline; /*IE7*/
   *zoom:1; /*IE7*/
-  padding-bottom:8px;
-  padding-top:6px;
+  padding-bottom:6px;
+  padding-top:7px;
   border-top: 1px solid #e8e8e8;
 }
 
@@ -147,13 +150,15 @@
 .notification-box {
   display:none;
   position:absolute;
-  width:350px;
+  width:360px;
   height:auto;
   top:42px;
   right:0px;
   background-color:#f2f2f2;
   padding-left:10px;
   padding-right:10px;
+  max-height:250px;
+  overflow:auto;
 }
 
 
@@ -193,11 +198,12 @@
   margin-left:20px;
   color:#bababa;;
   top:5px;
+  float:left;
 
 }
   
 .notification-box-score-count:before {
-  content: url('/images/boltcountmobile2.png');
+  content: url('/images/boltcountmobile.png');
   margin-left:-18px;
 }
 
@@ -208,6 +214,8 @@
   margin-left:20px;
   color:#bababa;;
   top:5px;
+  float:left;
+  
 
 }
 
@@ -221,7 +229,10 @@
   color:#bababa;
   padding-left:7px;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size:14px;
+  font-size:13px;
+  padding-top:5px;
+  float:left;
+
 
 }
 
@@ -231,7 +242,9 @@
   color:#bababa;
   padding-left:7px;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size:14px;
+  padding-right:0;
+  margin-right:0;
+  text-transform:none;
 
 }
 
@@ -245,7 +258,7 @@
 }
 
 .notification {
-  height:auto;
+  height:40px;
   padding-top:5px;
   padding-bottom:8px;
 
@@ -313,7 +326,7 @@
   .mobile-score {
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size:11px;
-    bottom:-21px;
+    bottom:-20px;
     left:12px;
     letter-spacing:0;
     color:#bababa;
@@ -330,7 +343,7 @@
   
   .mobile-score-count {
     position:absolute;
-    top:-25px;
+    top:-23px;
     left:12px;
     font-family:'Oswald', sans-serif;
     text-transform:uppercase;
@@ -458,6 +471,8 @@
     background-color:#f2f2f2;
     padding-left:10px;
     padding-right:10px;
+    max-height:250px;
+    overflow:auto;
   }
 
  
@@ -487,6 +502,7 @@
     text-decoration:none;
     color:#bababa;
     padding-left:7px;
+    margin-left:-20px;
 
   }
 
@@ -744,7 +760,8 @@ h3 {
   color: #a6a6a6;
   margin-right:-2px;
   margin-left:-5px;
-  line-height:30px;
+  line-height:35px;
+
 }
 
 .score:before {
@@ -1360,7 +1377,7 @@ h4 {
   background-color:#ff0000;
   position:absolute;
   top:0px;
-  left:8px;
+  left:5px;
   border-radius:5px;
   line-height:14px;
 }
@@ -1427,6 +1444,11 @@ h4 {
 
 .comments select:focus {
   outline:none;
+}
+
+.comment-button {
+  margin-top:5px;
+  margin-bottom:30px;
 }
 
 /**Comment media queries **/
