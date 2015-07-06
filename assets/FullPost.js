@@ -12,11 +12,19 @@ var FullPost = Backbone.View.extend({
     template: _.template($('#post-detail-template').html()),
 
     events: {
-        'click .js-like': 'handleLike'
+        'click .js-like'        : 'handleLike',
+        'click .js-form-submit' : 'handleComment'
     },
 
     initialize: function() {
-        this.nav = nav || {};
+
+        this.postTemplate    = _.template($('#post-detail-template').html());
+        this.commentTemplate = _.template($('#post-comment-template').html());
+
+        this.nav          = nav || {};
+        this.$post        = $('.js-post-body');
+        this.$comments    = $('.js-comments');
+        this.$comment     = $('.js-comment-text');
 
         _.bindAll(this, 'render');
         this.model.bind('change', this.render);
@@ -31,6 +39,24 @@ var FullPost = Backbone.View.extend({
         }
     },
 
+    handleComment: function() {
+        var that = this;
+        $.ajax({
+            url  : '/api/comment/' + this.model.get('_id'),
+            type : 'POST',
+            data : {
+                comment : this.$comment.val()
+            },
+            success : function(data) {
+                console.log(data);
+                that.model.fetch();
+            },
+            failure : function(data) {
+                console.log(data);
+            }
+        });
+    },
+
     like: function() {
         if (typeof initData.user !== 'undefined'
             && typeof initData.user._id !== 'undefined'
@@ -38,7 +64,7 @@ var FullPost = Backbone.View.extend({
 
             var that = this;
             $.ajax({
-                url : '/api/like/' + this.model.get('_id'),
+                url  : '/api/like/' + this.model.get('_id'),
                 type : 'POST',
                 data : {
                     post : this.model.attributes,
@@ -78,7 +104,13 @@ var FullPost = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.html(this.template(this.model.toJSON()));
+        var that = this;
+        this.$post.empty();
+        this.$post.html(this.postTemplate(this.model.toJSON()));
+        this.$comments.empty();
+        _.forEach(this.model.get('comments'), function(comment) {
+            that.$comments.append(that.commentTemplate(comment));
+        });
     }
 
 });
