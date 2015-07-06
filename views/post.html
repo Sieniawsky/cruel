@@ -6,7 +6,7 @@
         <div class="js-post-body"></div>
         {{#user._id}}
             <div class="large-12 columns comments">
-                <div class="js-form">
+                <form id="js-form">
                     <div class="form-group comment-form">
                         <h4>COMMENTS</h4>
                         <textarea class="js-comment-text" rows="3" name="description"
@@ -15,7 +15,7 @@
                     <div class="form-group comment-form">
                         <button type="submit" class="js-form-submit comment-button">Post</button>
                     </div>
-                </div>
+                </form>
                 <span class="sortlabel">Browse by:</span>
                 <select class="js-sort">
                     <option value="new">New</option>
