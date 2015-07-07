@@ -1421,6 +1421,12 @@ h4 {
   margin-top:-15px;
 }
 
+.comment .bolt-liked {
+  left:-38px;
+  top:50%;
+  margin-top:-15px;
+}
+
 .comment-score {
   font-family: 'Oswald', sans-serif;
   text-transform:uppercase;
@@ -1451,7 +1457,7 @@ h4 {
 
 .comment-button {
   margin-top:5px;
-  margin-bottom:30px;
+  margin-bottom:10px;
 }
 
 /**Comment media queries **/
@@ -1483,6 +1489,10 @@ h4 {
 
   .comment .author:before {
     padding-right:2px;
+  }
+
+  .comment .bolt-liked {
+    left:-8px;
   }
 
 }
@@ -1573,7 +1583,7 @@ h4 {
     
 }
 
-/**Comment media queries **/
+/**User page media queries **/
 
 @media only screen and (max-width:768px) {
   
@@ -1606,6 +1616,8 @@ h4 {
     padding-right:0;
     padding-left:0;
   }
+
+
 }
 
   
