@@ -165,6 +165,7 @@ module.exports = {
                 _username : comment._username,
                 comment   : comment.comment,
                 score     : comment.score,
+                rawDate   : new Date(comment.date),
                 date      : moment(new Date(comment.date)).fromNow(),
                 liked     : beenLiked(comment.likers, ((_.isEmpty(user)) ? '' : String(user._id)))
             };
