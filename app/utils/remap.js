@@ -7,16 +7,7 @@ module.exports = {
     postsRemap : function(posts, user) {
         return _.map(posts, function(post) {
             var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
-            var comments = _.map(post.comments, function(comment) {
-                return {
-                    _id       : comment._id,
-                    _user     : comment._user,
-                    _username : comment._username,
-                    comment   : comment.comment,
-                    score     : comment.score,
-                    date      : moment(new Date(comment.date)).fromNow()
-                };
-            });
+            var comments = commentsRemap(post.comments, user);
             return {
                 _id           : post._id,
                 title         : post.title,
@@ -41,16 +32,7 @@ module.exports = {
 
     postRemap : function(post, user) {
         var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
-        var comments = _.map(post.comments, function(comment) {
-            return {
-                _id       : comment._id,
-                _user     : comment._user,
-                _username : comment._username,
-                comment   : comment.comment,
-                score     : comment.score,
-                date      : moment(new Date(comment.date)).fromNow()
-            };
-        });
+        var comments = commentsRemap(post.comments, user);
         return {
             _id           : post._id,
             title         : post.title,
@@ -77,16 +59,7 @@ module.exports = {
             .map(function(post) {
                 var hours = Math.abs(new Date(post.date) - new Date()) / 36e5;
                 var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
-                var comments = _.map(post.comments, function(comment) {
-                    return {
-                        _id       : comment._id,
-                        _user     : comment._user,
-                        _username : comment._username,
-                        comment   : comment.comment,
-                        score     : comment.score,
-                        date      : moment(new Date(comment.date)).fromNow()
-                    };
-                });
+                var comments = commentsRemap(post.comments, user);
                 return {
                     _id           : post._id,
                     title         : post.title,
@@ -116,17 +89,20 @@ module.exports = {
     userRemap : userRemap = function(data) {
         if (typeof data !== "undefined" && data !== null) {
 
-            /* Take the scoreNotifications array from the
-               database and map it a usable format. */
-            var newScore = 0;
-            var mapped = [];
+            /* Take the scoreNotifications and commentNotifications
+               arrays from the database and map them into usable objects. */
+            var newScore       = 0;
+            var mappedPosts    = [];
+            var mappedComments = [];
+
+            /* Map the post notifications into a usable form */
             _(data.scoreNotifications)
                 .groupBy(function(n) {
                     return n._post;
                 })
                 .forEach(function(m) {
                     newScore += m.length;
-                    mapped.push({
+                    mappedPosts.push({
                         _post    : m[0]._post,
                         title    : m[0].title,
                         snippet  : m[0].title.substring(0, 40).concat(' ...'),
@@ -134,6 +110,23 @@ module.exports = {
                     });
                 }).value()
 
+            /* Map the post notification into a usable form */
+            _(data.commentNotifications)
+                .groupBy(function(n) {
+                    return n._post;
+                })
+                .forEach(function(m) {
+                    newScore += m.length;
+                    mappedPosts.push({
+                        _post    : m[0]._post,
+                        _comment : m[0]._comment,
+                        comment  : m[0].comment,
+                        snippet  : m[0].comment.substring(0, 40).concat(' ...'),
+                        newScore : m.length
+                    });
+                }).value()
+
+            /* Generate the final user object */
             var user = {
                 _id           : data._id,
                 username      : data.username,
@@ -143,9 +136,10 @@ module.exports = {
                 _location     : data._location,
                 _locationName : data._locationName,
                 notifications : {
-                    hasNew    : (mapped.length > 0),
+                    hasNew    : (mappedPosts.length > 0 || mappedComments.length > 0),
                     newScore  : newScore,
-                    posts     : mapped
+                    posts     : mappedPosts,
+                    comments  : mappedComments
                 }
             };
         }
@@ -159,6 +153,20 @@ module.exports = {
                 name    : location.name,
                 city    : location.city,
                 country : location.country
+            };
+        });
+    },
+
+    commentsRemap : commentsRemap = function(comments, user) {
+        return _.map(comments, function(comment) {
+            return {
+                _id       : comment._id,
+                _user     : comment._user,
+                _username : comment._username,
+                comment   : comment.comment,
+                score     : comment.score,
+                date      : moment(new Date(comment.date)).fromNow(),
+                liked     : beenLiked(comment.likers, ((_.isEmpty(user)) ? '' : String(user._id)))
             };
         });
     },

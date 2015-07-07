@@ -1,8 +1,9 @@
 /* Routes for posts */
-var _      = require('lodash');
-var Post   = require('../../models/post');
-var User   = require('../../models/user');
-var remap  = require('../../utils/remap');
+var _        = require('lodash');
+var Post     = require('../../models/post');
+var User     = require('../../models/user');
+var remap    = require('../../utils/remap');
+var mongoose = require('mongoose');
 
 var has = function(collection, target) {
     return _.some(collection, function(elem) {
@@ -77,15 +78,19 @@ module.exports = function(app, passport) {
         });
     });
 
+    /* Comment logic */
+
     app.post('/api/comment/:id', function(req, res) {
         if (typeof req.user._id != 'undefined' && req.user._id != null) {
             var comment = {
+                _id       : mongoose.Types.ObjectId(),
                 comment   : req.body.comment,
                 score     : 0,
                 _user     : req.user._id,
                 _username : req.user.username,
                 _post     : req.params.id,
-                date      : new Date()
+                date      : new Date(),
+                likers    : []
             };
             Post.update({_id: req.params.id}, {'$push': {comments: comment}}, function(err, update) {
                 if (err) return console.error(err);
@@ -94,5 +99,78 @@ module.exports = function(app, passport) {
         } else {
             res.send({outcome: false});
         }
+    });
+
+    /* Perform a comment like operation if it's valid */
+    app.post('/api/comment/like/:id', function(req, res) {
+        // Check if allowed
+        Post.findOne({_id: req.body.post._id}, function(err, post) {
+            if (err) return console.error(err);
+            var comment = _.find(post.comments, function(c) {
+                return c._id == req.params.id;
+            });
+            if (!has(comment.likers, req.user._id)) {
+                // User has not voted on this post comment yet
+                Post.update({'comments._id': comment._id},
+                    {
+                        '$push' : {'comments.$.likers': req.user._id},
+                        '$inc'  : {'comments.$.score': 1}
+                    },
+                    function(err, update) {
+                    if (err) return console.error(err);
+                    User.update({_id: post._user},
+                        {
+                            '$inc': {score: 1},
+                            '$push': {commentNotifications: {
+                                _post    : post._id,
+                                _comment : comment._id,
+                                comment  : comment.comment}
+                            }
+                        },
+                        function(err, user) {
+                        if (err) return console.error(err);
+                        res.send({outcome: true});
+                    });
+                });
+            } else {
+                res.send({outcome: false});
+            }
+        });
+    });
+
+    /* Perform a comment unlike operation if it's valid */
+    app.post('/api/comment/unlike/:id', function(req, res) {
+
+        Post.findOne({_id: req.body.post._id}, function(err, post) {
+            if (err) return console.error(err);
+            var comment = _.find(post.comments, function(c) {
+                return c._id == req.params.id;
+            });
+            /* Check if user is allowed to unlike */
+            if (has(comment.likers, req.user._id)) {
+                /* User is allowed, decrement post score and remove id from comment likers */
+                Post.update({'comments._id': comment._id},
+                    {'$pull': {'comments.$.likers': req.user._id}, '$inc': {'comments.$.score': -1}}, function(err, update) {
+                    if (err) return console.error(err);
+                    /* Decrement user score, remove notification */
+
+                    User.findOne({_id: post._user}, function(err, user) {
+                        if (err) return console.error(err);
+                        var notifications = user.commentNotifications;
+                        var index = _.indexOf(notifications, {_post: post._id, _comment: comment._id, title: post.title});
+                        notifications.splice(index, 1);
+
+                        /* Update */
+                        User.update({_id: post._user},
+                            {'$inc': {score: -1}, '$set': {commentNotifications: notifications}}, function(err, u) {
+                                if (err) return console.error(err);
+                                res.send({outcome: true});
+                        });
+                    });
+                });
+            } else {
+                res.send({outcome: false});
+            }
+        });
     });
 };
