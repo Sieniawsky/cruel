@@ -4,8 +4,8 @@
             <a href="/"><h2 class="navigation">Back to feed</h2></a>
         </div>
         <div class="js-post-body"></div>
-        {{#user._id}}
-            <div class="large-12 columns comments">
+        <div class="large-12 columns comments">
+            {{#user._id}}
                 <form id="js-form">
                     <div class="form-group comment-form">
                         <h4>COMMENTS</h4>
@@ -16,15 +16,15 @@
                         <button type="submit" class="js-form-submit comment-button">Post</button>
                     </div>
                 </form>
-                <span class="sortlabel">Browse by:</span>
-                <select class="js-sort">
-                    <option value="new">New</option>
-                    <option value="top">Top</option>
-                </select>
-                <div class="js-comments comments-feed">
-                </div>
+            {{/user._id}}
+            <span class="sortlabel">Browse by:</span>
+            <select class="js-sort">
+                <option value="new">New</option>
+                <option value="top">Top</option>
+            </select>
+            <div class="js-comments comments-feed">
             </div>
-        {{/user._id}}
+        </div>
     </div>
 </div>
 
