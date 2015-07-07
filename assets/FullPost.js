@@ -19,7 +19,6 @@ var FullPost = Backbone.View.extend({
     },
 
     initialize: function() {
-
         this.postTemplate    = _.template($('#post-detail-template').html());
         this.commentTemplate = _.template($('#post-comment-template').html());
 
@@ -30,12 +29,56 @@ var FullPost = Backbone.View.extend({
         this.$form     = $('#js-form');
         this.$sort     = $('.js-sort');
 
-        this.sortNew();
+        this.sortOption = 'top';
+        this.$sort.val('top');
+
         _.bindAll(this, 'render');
         this.model.bind('change', this.render);
-
         this.render();
     },
+
+    initDates: function() {
+        var comments = _.map(this.model.get('comments'), function(comment) {
+            comment.rawDate = new Date(comment.rawDate);
+            return comment;
+        });
+        this.model.set('comments', comments);
+    },
+
+    /* ========== */
+    /* Sort Logic */
+    /* ========== */
+
+    sort: function() {
+        this.sortOption = this.$sort.val();
+        this.render();
+    },
+
+    newSort: function() {
+        var sorted = _.sortBy(this.model.get('comments'), function(comment) {
+            return -comment.rawDate.getTime();
+        });
+        this.model.set({comments: sorted}, {silent: true});
+    },
+
+    topSort: function() {
+        var sorted = _.sortBy(this.model.get('comments'), function(comment) {
+            return -comment.score;
+        });
+        this.model.set({comments: sorted}, {silent: true});
+    },
+
+    handleLike: function() {
+        if (!this.model.get('liked')) {
+            this.like();
+        } else {
+            this.unlike();
+        }
+    },
+
+    /* ================= */
+    /* Like Unlike Logic */
+    /* ================= */
 
     handleCommentLike: function(e) {
         var comment = _.find(this.model.get('comments'), function(comment) {
@@ -48,30 +91,6 @@ var FullPost = Backbone.View.extend({
         }
     },
 
-    sort: function() {
-        var sort = this.$sort.val();
-        this['sort' + sort];
-        this.render();
-    },
-
-    sortNew: function() {
-        this.model.set('comments', _.sortBy(this.model.get('comments'), function(comment) {
-            return -comment.date;
-        }));
-    },
-
-    sortTop: function() {
-        this.model.set('comments', _.sortBy(this.model.get('comments'), 'score'));
-    },
-
-    handleLike: function() {
-        if (!this.model.get('liked')) {
-            this.like();
-        } else {
-            this.unlike();
-        }
-    },
-
     handleComment: function(e) {
         var that = this;
         $.ajax({
@@ -81,7 +100,6 @@ var FullPost = Backbone.View.extend({
                 comment : this.$comment.val()
             },
             success : function(data) {
-                console.log(data);
                 that.model.fetch();
             },
             failure : function(data) {
@@ -187,6 +205,8 @@ var FullPost = Backbone.View.extend({
     },
 
     render: function() {
+        this.initDates();
+        this[this.sortOption + 'Sort']();
         var that = this;
         this.$post.empty();
         this.$post.html(this.postTemplate(this.model.toJSON()));
