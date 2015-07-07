@@ -104,15 +104,29 @@ module.exports = function(app, passport) {
     /* Perform a comment like operation if it's valid */
     app.post('/api/comment/like/:id', function(req, res) {
         // Check if allowed
-        Post.findOne({_id: req.params.id}, function(err, post) {
+        Post.findOne({_id: req.body.post._id}, function(err, post) {
             if (err) return console.error(err);
-            if (!has(post.likers, req.user._id)) {
-                // User has not voted on this post yet
-                Post.update({_id: req.params.id},
-                    {'$push': {likers: req.user._id}, '$inc': {score: 1}}, function(err, update) {
+            var comment = _.find(post.comments, function(c) {
+                return c._id == req.params.id;
+            });
+            if (!has(comment.likers, req.user._id)) {
+                // User has not voted on this post comment yet
+                Post.update({'comments._id': comment._id},
+                    {
+                        '$push' : {'comments.$.likers': req.user._id},
+                        '$inc'  : {'comments.$.score': 1}
+                    },
+                    function(err, update) {
                     if (err) return console.error(err);
                     User.update({_id: post._user},
-                        {'$inc': {score: 1}, '$push': {scoreNotifications: {_post: post._id, title: post.title}}},
+                        {
+                            '$inc': {score: 1},
+                            '$push': {commentNotifications: {
+                                _post    : post._id,
+                                _comment : comment._id,
+                                comment  : comment.comment}
+                            }
+                        },
                         function(err, user) {
                         if (err) return console.error(err);
                         res.send({outcome: true});
@@ -127,26 +141,28 @@ module.exports = function(app, passport) {
     /* Perform a comment unlike operation if it's valid */
     app.post('/api/comment/unlike/:id', function(req, res) {
 
-        Post.findOne({_id: req.params.id}, function(err, post) {
+        Post.findOne({_id: req.body.post._id}, function(err, post) {
             if (err) return console.error(err);
-
+            var comment = _.find(post.comments, function(c) {
+                return c._id == req.params.id;
+            });
             /* Check if user is allowed to unlike */
-            if (has(post.likers, req.user._id)) {
-                /* User is allowed, decrement post score and remove id from likers */
-                Post.update({_id: req.params.id},
-                    {'$pull': {likers: req.user._id}, '$inc': {score: -1}}, function(err, update) {
+            if (has(comment.likers, req.user._id)) {
+                /* User is allowed, decrement post score and remove id from comment likers */
+                Post.update({'comments._id': comment._id},
+                    {'$pull': {'comments.$.likers': req.user._id}, '$inc': {'comments.$.score': -1}}, function(err, update) {
                     if (err) return console.error(err);
                     /* Decrement user score, remove notification */
 
                     User.findOne({_id: post._user}, function(err, user) {
                         if (err) return console.error(err);
-                        var notifications = user.scoreNotifications;
-                        var index = _.indexOf(notifications, {_post: post._id, title: post.title});
+                        var notifications = user.commentNotifications;
+                        var index = _.indexOf(notifications, {_post: post._id, _comment: comment._id, title: post.title});
                         notifications.splice(index, 1);
 
                         /* Update */
                         User.update({_id: post._user},
-                            {'$inc': {score: -1}, '$set': {scoreNotifications: notifications}}, function(err, u) {
+                            {'$inc': {score: -1}, '$set': {commentNotifications: notifications}}, function(err, u) {
                                 if (err) return console.error(err);
                                 res.send({outcome: true});
                         });
