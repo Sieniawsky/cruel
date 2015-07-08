@@ -21,6 +21,7 @@ var FullPost = Backbone.View.extend({
     initialize: function() {
         this.postTemplate    = _.template($('#post-detail-template').html());
         this.commentTemplate = _.template($('#post-comment-template').html());
+        this.commentTimeoutTemplate = _.template($('#comment-timeout-template').html());
 
         this.nav       = nav || {};
         this.$post     = $('.js-post-body');
@@ -28,6 +29,7 @@ var FullPost = Backbone.View.extend({
         this.$comment  = $('.js-comment-text');
         this.$form     = $('#js-form');
         this.$sort     = $('.js-sort');
+        this.$messages = $('.js-messages');
 
         this.sortOption = 'top';
         this.$sort.val('top');
@@ -92,22 +94,38 @@ var FullPost = Backbone.View.extend({
     },
 
     handleComment: function(e) {
-        var that = this;
-        $.ajax({
-            url  : '/api/comment/' + this.model.get('_id'),
-            type : 'POST',
-            data : {
-                comment : this.$comment.val()
-            },
-            success : function(data) {
-                that.model.fetch();
-            },
-            failure : function(data) {
-                console.log(data);
-            }
+
+        /* Check if no comments were made by the user within 5 min */
+        var checkTime = 1000 * 60 * 5;
+        var recentComments = _.filter(this.model.get('comments'), function(comment) {
+            var timeDiff = new Date().getTime() - comment.rawDate.getTime();
+            var olderThanCheckTime = (new Date().getTime() - comment.rawDate.getTime() < checkTime) ? false : true;
+            return (comment._user == initData.user._id && !olderThanCheckTime);
         });
-        e.preventDefault();
-        this.$form.trigger('reset');
+
+        /* Only POST comment if no comments were made by the user with 5 min */
+        if (recentComments.length == 0) {
+            var that = this;
+            $.ajax({
+                url  : '/api/comment/' + this.model.get('_id'),
+                type : 'POST',
+                data : {
+                    comment : this.$comment.val()
+                },
+                success : function(data) {
+                    that.model.fetch();
+                },
+                failure : function(data) {
+                    console.log(data);
+                }
+            });
+            e.preventDefault();
+            this.$form.trigger('reset');
+        } else {
+            /* Display an error message to the user */
+            e.preventDefault();
+            this.$messages.append(this.commentTimeoutTemplate());
+        }
     },
 
     like: function() {
