@@ -3,7 +3,8 @@ var _      = require('lodash');
 var Post   = require('../models/post');
 var User   = require('../models/user');
 var remap  = require('../utils/remap');
-var bg     = require('../utils/background.js');
+var bg     = require('../utils/background');
+var exists = require('../utils/exists');
 
 module.exports = function(app, passport) {
     /* Post composition page */
@@ -21,17 +22,21 @@ module.exports = function(app, passport) {
     app.get('/post/:id', function(req, res) {
         Post.findOne({_id: req.params.id}, function(err, post) {
             if (err) return console.error(err);
-            var post = remap.postRemap(post, req.user);
-            var user = remap.userRemap(req.user);
-            res.render('post', {
-                initData : JSON.stringify({
-                    post : post,
-                    user : user
-                }),
-                post       : post,
-                user       : user,
-                background : bg()
-            });
+            if (exists(post)) {
+                var post = remap.postRemap(post, req.user);
+                var user = remap.userRemap(req.user);
+                res.render('post', {
+                    initData : JSON.stringify({
+                        post : post,
+                        user : user
+                    }),
+                    post       : post,
+                    user       : user,
+                    background : bg()
+                });               
+            } else {
+                res.redirect('/404');
+            }
         });
     });
 
