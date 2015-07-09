@@ -7,7 +7,7 @@
             {{#message.length}}
                 <div>{{message}}</div>
             {{/message.length}}
-            <form id="signup-form" data-toggle="validator" role="form" action="/signup" method="post">
+            <form id="form" data-toggle="validator" role="form" action="/signup" method="post">
                 <div class="form-group">
                     <h4>Username</h4>
                     <input type="text" name="username" id="username" placeholder="Username" minlength="8"
@@ -45,5 +45,5 @@
 {{#yield-scripts}}
     <script src="/bower_components/H5F/h5f.min.js"></script>
     <script src="/bower_components/bootstrap-validator/dist/validator.min.js"></script>
-    <script src="/js/signup.js"></script>
+    <script src="/js/polyfill.js"></script>
 {{/yield-scripts}}
