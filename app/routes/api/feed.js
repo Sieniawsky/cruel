@@ -10,7 +10,7 @@ module.exports = function(app, passport) {
     /* Get new posts */
     app.get('/api/feed/new/:location/:page', function(req, res) {
         var query = Post
-            .find({_location: req.params.location})
+            .find(computeLocationQuery(req.params.location))
             .skip(computeSkip(req.params.page))
             .sort({date: -1})
             .limit(8);
@@ -23,7 +23,7 @@ module.exports = function(app, passport) {
     /* Get top rated posts */
     app.get('/api/feed/top/:location/:page', function(req, res) {
         var query = Post
-            .find({_location: req.params.location})
+            .find(computeLocationQuery(req.params.location))
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
             .limit(8);
@@ -40,13 +40,13 @@ module.exports = function(app, passport) {
         var first = new Date(date.getFullYear(), date.getMonth(), firstDay);
         var last = new Date(date.getFullYear(), date.getMonth(), firstDay + 6);
         var query = Post
-            .find({
-                _location: req.params.location,
-                '$and': [
-                    {date: {'$gte': first}},
-                    {date: {'$lte': last}}
-                ]
-            })
+            .find(
+                computeLocationQuery(req.params.location, {
+                    '$and': [
+                        {date: {'$gte': first}},
+                        {date: {'$lte': last}}
+                    ]
+                }))
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
             .limit(8);
@@ -62,13 +62,13 @@ module.exports = function(app, passport) {
         var first = new Date(date.getFullYear(), date.getMonth(), 1);
         var last = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         var query = Post
-            .find({
-                _location: req.params.location,
-                '$and': [
-                    {date: {'$gte': first}},
-                    {date: {'$lte': last}}
-                ]
-            })
+            .find(
+                computeLocationQuery(req.params.location, {
+                    '$and': [
+                        {date: {'$gte': first}},
+                        {date: {'$lte': last}}
+                    ]
+                }))
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
             .limit(8);
@@ -82,10 +82,10 @@ module.exports = function(app, passport) {
     app.get('/api/feed/hot/:location/:page', function(req, res) {
         var range = new Date();
         range.setDate(range.getDate() - 2);
-        var query = Post.find({
-            _location: req.params.location,
-            date: {'$gte': range}
-        });
+        var query = Post.find(
+            computeLocationQuery(req.params.location, {
+                date: {'$gte': range}
+            }));
         query.exec(function(err, posts) {
             if (err) return console.error(err);
             var temp = remap.postsHotRemap(posts, req.user);
@@ -118,6 +118,15 @@ module.exports = function(app, passport) {
             res.send(remap.postsRemap(posts, req.user));
         });
     });
+
+    var computeLocationQuery = function(location, other) {
+        var other = other || {};
+        var query = _.extend(other, {});
+        if (location !== 'all') {
+            query = _.extend(query, {_location: location});
+        }
+        return query;
+    };
 
     var computeSkip = function(page) {
         page = parseInt(page);
