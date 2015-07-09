@@ -19,12 +19,14 @@
     "backbone": "^1.2.0",
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.0.0",
+    "bower": "~1.4.1",
     "browserify": "~10.2.1",
     "connect-flash": "latest",
     "connect-mongo": "^0.8.1",
     "cookie-parser": "~1.0.0",
     "express": "~4.2.0",
     "express-session": "~1.0.0",
+    "factor-bundle": "^2.4.1",
     "hogan-express": "~0.5.2",
     "jquery": "^2.1.4",
     "lodash": "3.8.0",
@@ -36,8 +38,7 @@
     "passport": "latest",
     "passport-local": "latest",
     "serve-favicon": "~2.0.1",
-    "uglify-js": "^2.4.23",
-    "bower": "~1.4.1"
+    "uglifyify": "^3.0.1"
   },
   "engine": "node 0.10.31"
 }
