@@ -18,6 +18,7 @@
     "foundation": "latest",
     "moment": "~2.10.2",
     "bootstrap-validator": "~0.8.1",
-    "H5F": "~1.1.1"
+    "H5F": "~1.1.1",
+    "zoom.js": "~0.0.1"
   }
 }
