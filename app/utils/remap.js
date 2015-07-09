@@ -25,7 +25,8 @@ module.exports = {
                 _location     : post._location,
                 _locationName : post._locationName,
                 comments      : comments,
-                commentNumber : comments.length
+                commentNumber : comments.length,
+                commentText   : (comments.length == 1) ? 'comment' : 'comments'
             };
         });
     },
@@ -50,7 +51,8 @@ module.exports = {
             _location     : post._location,
             _locationName : post._locationName,
             comments      : comments,
-            commentNumber : comments.length
+            commentNumber : comments.length,
+            commentText   : (comments.length == 1) ? 'comment' : 'comments'
         };
     },
 
@@ -77,7 +79,8 @@ module.exports = {
                     _location     : post._location,
                     _locationName : post._locationName,
                     comments      : comments,
-                    commentNumber : comments.length
+                    commentNumber : comments.length,
+                    commentText   : (comments.length == 1) ? 'comment' : 'comments'
                 };    
             })
             .sortBy(function(post) {
