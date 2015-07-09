@@ -31,7 +31,8 @@ var MainFeed = FeedView.extend({
             this.location = initData.user._location;
             this.$location.val(initData.user._location);
         } else {
-            this.location = this.$location.val();
+            this.$location.val('all');
+            this.location = 'all'
         }
 
         // Set update url
