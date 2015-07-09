@@ -48,19 +48,3 @@ b.bundle()
             console.log(source.sourcePath + ' has been built and unlinked');
         });
     });
-
-//   .on('finish', function() {
-//        sources.push(common);
-//        _.forEach(sources, function(source) {
-//            console.log(source.sourcePath + ' has been bundled');
-//            var u = UglifyJS.minify(source.tempPath);
-//            fs.writeFile(source.exportPath, u.code, function(err) {
-//                if (err) return console.error(err);
-//                console.log(source.sourcePath + ' has been uglified');
-//                fs.unlink(source.tempPath, function(err) {
-//                    if (err) return console.error(err);
-//                    console.log(source.sourcePath + ' has been built and unlinked');
-//                });
-//            });
-//        });
-//    });
