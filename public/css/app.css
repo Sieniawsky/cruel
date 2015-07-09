@@ -12,16 +12,6 @@
 
 
 
-/**Font-face**/
-
-@font-face {
-    font-family: 'Bebas';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Bebas'), url('/fonts/BebasNeue.woff') format('woff');
-}
-
-
 /**Menubar**/
 
 .cruelheader {
@@ -187,7 +177,15 @@
 
 
 .notification-score-count:before {
-  content: url('/images/boltcountmobile2.png');
+  display:inline-block;
+  width:23px;
+  height:28px;
+  content:"";
+  margin-bottom:-7px;
+  margin-left:-20px;
+  margin-right:-2px;
+  background: url(/images/notification-bolt.png) no-repeat 0 0;
+  background-size: 100%;
   
 }
 
@@ -197,14 +195,68 @@
   font-size:17px;
   margin-left:20px;
   color:#bababa;;
-  top:5px;
+  top:0px;
   float:left;
 
 }
   
 .notification-box-score-count:before {
-  content: url('/images/boltcountmobile.png');
-  margin-left:-18px;
+  display:inline-block;
+  width:23px;
+  height:28px;
+  content:"";
+  margin-bottom:-7px;
+  margin-left:-24px;
+  margin-right:-2px;
+  background: url(/images/notification-bolt.png) no-repeat 0 0;
+  background-size: 100%;
+}
+
+
+.notification-box-comment {
+  font-family:'Oswald', sans-serif;
+  text-transform:uppercase;
+  font-size:17px;
+  margin-left:20px;
+  color:#bababa;;
+  top:3px;
+  float:left;
+}
+
+.notification-box-comment:before {
+  display:inline-block;
+  width:20px;
+  height:24px;
+  content:"";
+  margin-bottom:-3px;
+  margin-left:-24px;
+  margin-right:2px;
+  background: url(/images/comment-notification.png) no-repeat 0 0;
+  background-size: 100%;
+  
+}
+
+.notification-box-comment-like {
+  font-family:'Oswald', sans-serif;
+  text-transform:uppercase;
+  font-size:17px;
+  margin-left:20px;
+  color:#bababa;;
+  top:3px;
+  float:left;
+}
+
+.notification-box-comment-like:before {
+  display:inline-block;
+  width:20px;
+  height:24px;
+  content:"";
+  margin-bottom:-3px;
+  margin-left:-24px;
+  margin-right:2px;
+  background: url(/images/comment-like-notification.png) no-repeat 0 0;
+  background-size: 100%;
+  
 }
 
 .notification-box-empty {
@@ -213,15 +265,22 @@
   font-size:17px;
   margin-left:20px;
   color:#bababa;;
-  top:5px;
+  top:0px;
   float:left;
   
 
 }
 
 .notification-box-empty:before {
-  content: url('/images/mobile-bolt-icon2.png');
-  margin-left:-18px;
+  display:inline-block;
+  width:23px;
+  height:28px;
+  content:"";
+  margin-bottom:-7px;
+  margin-left:-24px;
+  margin-right:-2px;
+  background: url(/images/notification-bolt-empty.png) no-repeat 0 0;
+  background-size: 100%;
 }
 
 .notification-title {
@@ -483,31 +542,18 @@
     margin-top:0;
   }
 
-  .notification-score-count {
-    font-family:'Oswald', sans-serif;
-    text-transform:uppercase;
-    font-size:17px;
-    margin-left:20px;
-    color:#bababa;;
-    top:5px;
-
-  }
-    
-  .notification-score-count:before {
-    content: url('/images/mobile-bolt-icon2.png');
-    margin-left:-18px;
-  }
 
   .notification-title {
     text-decoration:none;
     color:#bababa;
     padding-left:7px;
-    margin-left:-20px;
+    margin-left:0px;
 
   }
 
   .notification-mobile a {
     font-size:14px;
+    margin-left:20px;
 
   }
  
