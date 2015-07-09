@@ -3,44 +3,64 @@
 /* Client-side build process for scripts */
 var _          = require('lodash');
 var fs         = require('fs');
-var UglifyJS   = require('uglify-js');
 var browserify = require('browserify');
 
-var sources = [{
-    sourcePath : 'assets/MainFeed.js',
+var common = {
+    sourcePath : 'common.js',
     tempPath   : 'public/js/temp1.js',
+    exportPath : 'public/js/bundles/common.js'
+};
+
+var sources    = [{
+    sourcePath : 'assets/MainFeed.js',
+    tempPath   : 'public/js/temp2.js',
     exportPath : 'public/js/bundles/feed.js'
 }, {
     sourcePath : 'assets/UserFeed.js',
-    tempPath   : 'public/js/temp2.js',
+    tempPath   : 'public/js/temp3.js',
     exportPath : 'public/js/bundles/user.js'
 }, {
     sourcePath : 'assets/NavBar.js',
-    tempPath   : 'public/js/temp3.js',
+    tempPath   : 'public/js/temp4.js',
     exportPath : 'public/js/bundles/nav.js'
 }, {
     sourcePath : 'assets/FullPost.js',
-    tempPath   : 'public/js/temp4.js',
+    tempPath   : 'public/js/temp5.js',
     exportPath : 'public/js/bundles/post.js'
 }];
 
-_.forEach(sources, function(source) {
-    var o = fs.createWriteStream(source.tempPath);
-    var b = browserify()
-        .add(source.sourcePath)
-        .bundle()
-        .pipe(o);
-
-    o.on('finish', function() {
-        console.log(source.sourcePath + ' has been bundled');
-        var u = UglifyJS.minify(source.tempPath);
-        fs.writeFile(source.exportPath, u.code, function(err) {
-            if (err) return console.error(err);
+var files   = _.pluck(sources, 'sourcePath');
+var temps   = _.pluck(sources, 'tempPath');
+var exports = _.pluck(sources, 'exportPath');
+var b = browserify(files);
+b.plugin('factor-bundle', {
+    outputs: exports
+});
+b.transform({
+    global: true}, 'uglifyify');
+b.bundle()
+    .pipe(fs.createWriteStream(common.exportPath))
+    .on('finish', function() {
+        sources.push(common);
+        _.forEach(sources, function(source) {
+            console.log(source.sourcePath + ' has been bundled');
             console.log(source.sourcePath + ' has been uglified');
-            fs.unlink(source.tempPath, function(err) {
-                if (err) return console.error(err);
-                console.log(source.sourcePath + ' has been built and unlinked');
-            });
+            console.log(source.sourcePath + ' has been built and unlinked');
         });
     });
-});
+
+//   .on('finish', function() {
+//        sources.push(common);
+//        _.forEach(sources, function(source) {
+//            console.log(source.sourcePath + ' has been bundled');
+//            var u = UglifyJS.minify(source.tempPath);
+//            fs.writeFile(source.exportPath, u.code, function(err) {
+//                if (err) return console.error(err);
+//                console.log(source.sourcePath + ' has been uglified');
+//                fs.unlink(source.tempPath, function(err) {
+//                    if (err) return console.error(err);
+//                    console.log(source.sourcePath + ' has been built and unlinked');
+//                });
+//            });
+//        });
+//    });
