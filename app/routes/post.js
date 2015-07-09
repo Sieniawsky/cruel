@@ -42,18 +42,24 @@ module.exports = function(app, passport) {
 
     /* Post handler */
     app.post('/post', function(req, res) {
-        var data = _.extend({
-            date          : new Date(),
-            _location     : req.user._location,
-            _locationName : req.user._locationName
-        }, req.body);
-        data = _.omit(data, function(value) {
-            return value === '';
-        });
-        var post = new Post(data);
-        post.save(function(err, post) {
-            if (err) return console.error(err);
-            res.redirect('/');
-        });
+        if (typeof req.user._id != 'undefined' && req.user._id != null) {
+            var data = _.extend(req.body, {
+                date          : new Date(),
+                _user         : req.user._id,
+                _username     : req.user.username,
+                _location     : req.user._location,
+                _locationName : req.user._locationName
+            });
+            data = _.omit(data, function(value) {
+                return value === '';
+            });
+            var post = new Post(data);
+            post.save(function(err, post) {
+                if (err) return console.error(err);
+                res.redirect('/');
+            });
+        } else {
+            res.send({outcome: false});
+        }
     });
 };

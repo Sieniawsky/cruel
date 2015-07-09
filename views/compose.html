@@ -4,7 +4,7 @@
             <h2>Make a post</h2>
         </div>
         <div class="forms">
-            <form class="js-compose" id="compose" data-toggle="validator"
+            <form class="js-compose" id="form" data-toggle="validator"
                 role="form" action="/post" method="post">
                 <div class="form-group">
                     <h4>POST TITLE</h4>
@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <h4>POST TEXT</h4>
                     <textarea rows="5" name="description" id="postDescription"
-                        form="compose" placeholder="Enter a description"></textarea>
+                        form="form" placeholder="Enter a description"></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit">Post</button>
@@ -32,15 +32,9 @@
     </div>
 </div>
 
-<!-- Data Load Point -->
-<script id="init-data" type="application/json">
-    {{{initData}}}
-</script>
-
 <!-- Load page specific scripts -->
 {{#yield-scripts}}
     <script src="/bower_components/H5F/h5f.min.js"></script>
     <script src="/bower_components/bootstrap-validator/dist/validator.min.js"></script>
-    <script src="/js/dataLoader.js"></script>
-    <script src="/js/compose.js"></script>
+    <script src="/js/polyfill.js"></script>
 {{/yield-scripts}}
