@@ -95,7 +95,7 @@ module.exports = {
             /* Take the scoreNotifications and commentNotifications
                arrays from the database and map them into usable objects. */
             var notificationCount   = 0;
-            var mappedPostScore = _(data.scoreNotifications)
+            var mappedPostScore = _(data.postScoreNotifications)
                 .groupBy(function(m) {
                     return m._post;
                 })
@@ -109,7 +109,7 @@ module.exports = {
                     };
                 }).value();
 
-            var mappedCommentScore = _(data.commentNotifications)
+            var mappedCommentScore = _(data.commentScoreNotifications)
                 .groupBy(function(m) {
                     return m._post;
                 })
@@ -122,6 +122,21 @@ module.exports = {
                         snippet  : n[0].comment.substring(0, 40).concat(' ...'),
                         newScore : n.length
                     };
+                }).value();
+
+            var mappedNewComments = _(data.commentNotifications)
+                .groupBy(function(m) {
+                    return m._post;
+                })
+                .map(function(n) {
+                    notificationCount += n.length;
+                    return {
+                        _post       : n[0]._post,
+                        _comment    : n[0]._comment,
+                        title       : n[0].title,
+                        snippet     : n[0].title.substring(0, 40).concat(' ...'),
+                        newComments : n.length
+                        };
                 }).value();
 
             /* Generate the final user object */
@@ -137,7 +152,8 @@ module.exports = {
                     hasNew        : notificationCount > 0,
                     notifications : notificationCount,
                     postScore     : mappedPostScore,
-                    commentScore  : mappedCommentScore
+                    commentScore  : mappedCommentScore,
+                    newComments   : mappedNewComments
                 }
             };
         }

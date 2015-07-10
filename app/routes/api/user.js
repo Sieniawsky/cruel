@@ -7,7 +7,11 @@ module.exports = function(app, passport) {
     app.put('/api/user/mark', function(req, res) {
         if (typeof req.user._id != 'undefined' && req.user._id != null) {
             User.update({_id: req.user._id},
-                {'$set': {scoreNotifications: [], commentNotifications: []}}, function(err, update) {
+                {'$set': {
+                    postScoreNotifications    : [],
+                    commentScoreNotifications : [],
+                    commentNotifications      : []
+                }}, function(err, update) {
                 if (err) return console.error(err);
                 res.send({outcome: true});
             });
