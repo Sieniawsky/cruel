@@ -59,7 +59,7 @@ var NavBar = Backbone.View.extend({
     },
 
     markAsRead: function() {
-        if (!this.isRead && initData.user.notifications.posts.length != 0) {
+        if (!this.isRead && initData.user.notifications.notifications != 0) {
             $('.js-new-score').fadeOut('fast');
             var that = this;
             $.ajax({

@@ -107,10 +107,11 @@ var FullPost = Backbone.View.extend({
         if (recentComments.length == 0) {
             var that = this;
             $.ajax({
-                url  : '/api/comment/' + this.model.get('_id'),
+                url  : '/api/comment',
                 type : 'POST',
                 data : {
-                    comment : this.$comment.val()
+                    comment : this.$comment.val(),
+                    post    : this.model.attributes
                 },
                 success : function(data) {
                     that.model.fetch();

@@ -32,7 +32,7 @@ module.exports = function(app, passport) {
                     {'$push': {likers: req.user._id}, '$inc': {score: 1}}, function(err, update) {
                     if (err) return console.error(err);
                     User.update({_id: post._user},
-                        {'$inc': {score: 1}, '$push': {scoreNotifications: {_post: post._id, title: post.title}}},
+                        {'$inc': {score: 1}, '$push': {postScoreNotifications: {_post: post._id, title: post.title}}},
                         function(err, user) {
                         if (err) return console.error(err);
                         res.send({outcome: true});
@@ -57,16 +57,15 @@ module.exports = function(app, passport) {
                     {'$pull': {likers: req.user._id}, '$inc': {score: -1}}, function(err, update) {
                     if (err) return console.error(err);
                     /* Decrement user score, remove notification */
-
                     User.findOne({_id: post._user}, function(err, user) {
                         if (err) return console.error(err);
-                        var notifications = user.scoreNotifications;
+                        var notifications = user.postScoreNotifications;
                         var index = _.indexOf(notifications, {_post: post._id, title: post.title});
                         notifications.splice(index, 1);
 
                         /* Update */
                         User.update({_id: post._user},
-                            {'$inc': {score: -1}, '$set': {scoreNotifications: notifications}}, function(err, u) {
+                            {'$inc': {score: -1}, '$set': {postScoreNotifications: notifications}}, function(err, u) {
                                 if (err) return console.error(err);
                                 res.send({outcome: true});
                         });
@@ -78,9 +77,11 @@ module.exports = function(app, passport) {
         });
     });
 
+    /* ============= */
     /* Comment logic */
+    /* ============= */
 
-    app.post('/api/comment/:id', function(req, res) {
+    app.post('/api/comment', function(req, res) {
         if (typeof req.user._id != 'undefined' && req.user._id != null) {
             var comment = {
                 _id       : mongoose.Types.ObjectId(),
@@ -88,13 +89,22 @@ module.exports = function(app, passport) {
                 score     : 0,
                 _user     : req.user._id,
                 _username : req.user.username,
-                _post     : req.params.id,
+                _post     : req.body.post._id,
                 date      : new Date(),
                 likers    : []
             };
-            Post.update({_id: req.params.id}, {'$push': {comments: comment}}, function(err, update) {
+            Post.update({_id: req.body.post._id}, {'$push': {comments: comment}}, function(err, update) {
                 if (err) return console.error(err);
-                res.send({outcome: true});
+                /* Add new comment to the post author */
+                User.update({_id: req.body.post._user},
+                    {'$push': {commentNotifications: {
+                        _post    : comment._post,
+                        _comment : comment._id,
+                        title    : req.body.post.title
+                    }}}, function(err, update) {
+                    if (err) return console.error(err);
+                    res.send({outcome: true});
+                });
             });
         } else {
             res.send({outcome: false});
@@ -121,7 +131,7 @@ module.exports = function(app, passport) {
                     User.update({_id: post._user},
                         {
                             '$inc': {score: 1},
-                            '$push': {commentNotifications: {
+                            '$push': {commentScoreNotifications: {
                                 _post    : post._id,
                                 _comment : comment._id,
                                 comment  : comment.comment}
@@ -156,13 +166,13 @@ module.exports = function(app, passport) {
 
                     User.findOne({_id: post._user}, function(err, user) {
                         if (err) return console.error(err);
-                        var notifications = user.commentNotifications;
+                        var notifications = user.commentScoreNotifications;
                         var index = _.indexOf(notifications, {_post: post._id, _comment: comment._id, title: post.title});
                         notifications.splice(index, 1);
 
                         /* Update */
                         User.update({_id: post._user},
-                            {'$inc': {score: -1}, '$set': {commentNotifications: notifications}}, function(err, u) {
+                            {'$inc': {score: -1}, '$set': {commentScoreNotifications: notifications}}, function(err, u) {
                                 if (err) return console.error(err);
                                 res.send({outcome: true});
                         });

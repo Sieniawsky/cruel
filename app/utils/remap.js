@@ -94,40 +94,50 @@ module.exports = {
 
             /* Take the scoreNotifications and commentNotifications
                arrays from the database and map them into usable objects. */
-            var newScore       = 0;
-            var mappedPosts    = [];
-            var mappedComments = [];
-
-            /* Map the post notifications into a usable form */
-            _(data.scoreNotifications)
-                .groupBy(function(n) {
-                    return n._post;
+            var notificationCount   = 0;
+            var mappedPostScore = _(data.postScoreNotifications)
+                .groupBy(function(m) {
+                    return m._post;
                 })
-                .forEach(function(m) {
-                    newScore += m.length;
-                    mappedPosts.push({
-                        _post    : m[0]._post,
-                        title    : m[0].title,
-                        snippet  : m[0].title.substring(0, 40).concat(' ...'),
-                        newScore : m.length
-                    });
-                }).value()
+                .map(function(n) {
+                    notificationCount += n.length;
+                    return {
+                        _post    : n[0]._post,
+                        title    : n[0].title,
+                        snippet  : n[0].title.substring(0, 40).concat(' ...'),
+                        newScore : n.length  
+                    };
+                }).value();
 
-            /* Map the post notification into a usable form */
-            _(data.commentNotifications)
-                .groupBy(function(n) {
-                    return n._post;
+            var mappedCommentScore = _(data.commentScoreNotifications)
+                .groupBy(function(m) {
+                    return m._post;
                 })
-                .forEach(function(m) {
-                    newScore += m.length;
-                    mappedPosts.push({
-                        _post    : m[0]._post,
-                        _comment : m[0]._comment,
-                        comment  : m[0].comment,
-                        snippet  : m[0].comment.substring(0, 40).concat(' ...'),
-                        newScore : m.length
-                    });
-                }).value()
+                .map(function(n) {
+                    notificationCount += n.length;
+                    return {
+                        _post    : n[0]._post,
+                        _comment : n[0]._comment,
+                        comment  : n[0].comment,
+                        snippet  : n[0].comment.substring(0, 40).concat(' ...'),
+                        newScore : n.length
+                    };
+                }).value();
+
+            var mappedNewComments = _(data.commentNotifications)
+                .groupBy(function(m) {
+                    return m._post;
+                })
+                .map(function(n) {
+                    notificationCount += n.length;
+                    return {
+                        _post       : n[0]._post,
+                        _comment    : n[0]._comment,
+                        title       : n[0].title,
+                        snippet     : n[0].title.substring(0, 40).concat(' ...'),
+                        newComments : n.length
+                        };
+                }).value();
 
             /* Generate the final user object */
             var user = {
@@ -139,10 +149,11 @@ module.exports = {
                 _location     : data._location,
                 _locationName : data._locationName,
                 notifications : {
-                    hasNew    : (mappedPosts.length > 0 || mappedComments.length > 0),
-                    newScore  : newScore,
-                    posts     : mappedPosts,
-                    comments  : mappedComments
+                    hasNew        : notificationCount > 0,
+                    notifications : notificationCount,
+                    postScore     : mappedPostScore,
+                    commentScore  : mappedCommentScore,
+                    newComments   : mappedNewComments
                 }
             };
         }
