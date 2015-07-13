@@ -46,4 +46,16 @@ module.exports = function(app, passport) {
             });
         });
     });
+
+    app.post('/u/edit', function(req, res) {
+        if (typeof req.user._id != 'undefined' && req.user._id != null) {
+            User.update({_id: req.user._id},
+                {'$set': {imageUrl: req.body.url, description: req.body.description}}, function(err, updates) {
+                if (err) return console.error(err);
+                res.redirect('/u/' + req.user.username);
+            });
+        } else {
+            res.send({outcome: false});
+        }
+    });
 };
