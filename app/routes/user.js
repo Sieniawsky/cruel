@@ -15,9 +15,10 @@ module.exports = function(app, passport) {
                     if (err) return console.error(err);
                     
                     res.render('user', {
-                        initData  : JSON.stringify({
-                            user  : remap.userRemap(user),
-                            posts : remap.postsRemap(posts, user)
+                        initData : JSON.stringify({
+                            user         : remap.userRemap(req.user),
+                            selectedUser : remap.userRemap(user),
+                            posts        : remap.postsRemap(posts, user)
                         }),
                         user       : remap.userRemap(req.user),
                         background : bg(),
@@ -30,6 +31,19 @@ module.exports = function(app, passport) {
             } else {
                 res.redirect('/404');
             }
+        });
+    });
+
+    app.get('/u/edit/:username', function(req, res) {
+        User.findOne({username: req.params.username}, function(err, user) {
+            if (err) return console.error(err);
+            res.render('user-edit', {
+                initData : JSON.stringify({
+                    user : remap.userRemap(user)
+                }),
+                user       : remap.userRemap(req.user),
+                background : bg()
+            });
         });
     });
 };

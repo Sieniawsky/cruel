@@ -4,6 +4,7 @@ module.exports = function(app) {
     app.use('/compose', restrictIfNotLoggedIn);
     app.use('/login', restrictIfLoggedIn);
     app.use('/signup', restrictIfLoggedIn);
+    app.use('/u/edit/:username', restrictIfNotLoggedIn);
 };
 
 /* If the user is not logged in then redirect to the feed */
