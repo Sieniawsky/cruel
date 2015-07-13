@@ -1549,7 +1549,13 @@ h4 {
   height:55px;
   margin-left:30px;
   margin-right:30px;
+}
 
+.user-edit-header {
+  height:55px;
+  margin-left:30px;
+  margin-right:30px;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .user-image {
@@ -1601,6 +1607,18 @@ h4 {
 
 }
 
+.user-edit {
+  position:absolute;
+  top:7px;
+  right:32px;
+  width:62px;
+  height:26px;
+  border:0;
+  background:url(/images/edit-button.png) no-repeat top left;
+  background-size: 62px 26px;
+  cursor:pointer;
+}
+
 .ranking {
   font-family: 'Oswald', sans-serif;
   text-transform:uppercase;
@@ -1639,7 +1657,17 @@ h4 {
     height:45px;
   }
 
+  .user-edit-header {
+    margin-left:0;
+    margin-right:0;
+    height:45px;
+  }
+
   .user-header h2 {
+    margin-left:-5px;
+  }
+
+  .user-edit-header h2 {
     margin-left:-5px;
   }
 
@@ -1663,6 +1691,10 @@ h4 {
     padding-left:0;
   }
 
+  .user-edit {
+    right:3px;
+    top:2px;
+  }
 
 }
 
