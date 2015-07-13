@@ -21,10 +21,13 @@ var UserFeed = FeedView.extend({
     initialize: function() {
         /* Call super initialize */
         FeedView.prototype.initialize.apply(this);
+
+        this.profileTemplate = _.template($('#user-profile-template').html());
+
         this.sort = 'new';
         this.$sort.val('new');
-        this.$username = $('.js-username');
-        this.user  = initData.user._id;
+        this.$userProfile = $('.js-user-profile');
+        this.user  = initData.selectedUser._id;
         this.url   = this.genURL(this.page);
         this.load();
     },
@@ -45,7 +48,7 @@ var UserFeed = FeedView.extend({
     },
 
     render: function() {
-        this.$username.html(initData.user.username);
+        this.$userProfile.html(this.profileTemplate(initData.selectedUser));
     }
 });
 

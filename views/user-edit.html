@@ -1,28 +1,41 @@
-<div class="row">
-    <div class="large-12 columns container">
-        <div class="user-edit-header">
-            <!-- User Header -->
-            <h2 class="js-username"></h2>
-        </div>
-        <div class="forms">
-            <form class="js-compose" id="form" data-toggle="validator"
-                role="form" action="/post" method="post">
-                <div class="form-group">
-                    <h4>PROFILE IMAGE URL</h4>
-                    <input type="url" pattern=".*\.(jpeg|jpg|gif|png|JPEG|JPG|GIF|PNG)$"
-                        class="js-image" name="url" placeholder="http://www.example.com/image.jpeg"
-                        data-error="Please enter a valid URL for a JPEG, GIF, or PNG image">
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                    <h4>PROFILE DESCRIPTION</h4>
-                    <textarea rows="5" name="description" id="postDescription"
-                        form="form" placeholder="Enter a description"></textarea>
-                </div>
-                <div class="form-group">
-                    <button type="submit">Save</button>
-                </div>
-            </form>
+<div class="js-edit-profile">
+    <div class="row">
+        <div class="large-12 columns container">
+            <div class="user-edit-header">
+                <!-- User Header -->
+                <h2 class="js-username"></h2>
+            </div>
+            <div class="forms">
+                <form class="js-edit" id="form" data-toggle="validator"
+                    role="form" action="/u/edit" method="post">
+                    <div class="form-group">
+                        <h4>PROFILE IMAGE URL</h4>
+                        <input class="js-url" type="url" pattern=".*\.(jpeg|jpg|gif|png|JPEG|JPG|GIF|PNG)$"
+                            class="js-image" name="url" placeholder="http://www.example.com/image.jpeg"
+                            data-error="Please enter a valid URL for a JPEG, GIF, or PNG image">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <h4>PROFILE DESCRIPTION</h4>
+                        <textarea class="js-description" rows="5" name="description" id="postDescription"
+                            form="form" placeholder="Enter a description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
+
+<!-- Load page specific scripts -->
+{{#yield-scripts}}
+    <script src="/js/dataLoader.js"></script>
+    <script src="/js/bundles/edit.js"></script>
+{{/yield-scripts}}

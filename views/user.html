@@ -1,22 +1,7 @@
 <div class="js-user">
     <div class="row">
         <div class="large-12 columns container">
-            <div class="user-header">
-                <!-- User Header -->
-                <h2 class="js-username"></h2>
-            </div>
-            <div class="large-5 columns user-image">
-                <img src="/images/placeholder.png">
-            </div>
-            <div class="large-7 columns user-content">
-                <span class="user-score"> 356</span>
-                <button class="user-edit"></button>
-                <span class="ranking"> Rank #1 at Western</span>
-                <span class="join-date"> Joined 1 month ago</span>
-                <p>Sample tagline description with links and embeds. Sample tagline description with links and embeds.</p>
-                <p>Sample tagline description with links and embeds. Sample tagline description with links and embeds.</p>
-                <p>Sample tagline description with links and embeds. Sample tagline description with links and embeds.</p>
-            </div>
+            <div class="js-user-profile"></div>
              <div class="user-feed-header">
                 <h2>All Posts</h2>
                 <div class="sorting user-sort">
@@ -32,8 +17,27 @@
     </div> 
 </div>
 
+<!-- Templates -->
 {{> feedPostTemplate}}
 {{> feedScripts}}
+
+<script id="user-profile-template" type="text/template">
+    <div class="user-header">
+        <h2><%= username %></h2>
+    </div>
+    <div class="large-5 columns user-image">
+        <img src="<%= imageUrl %>">
+    </div>
+    <div class="large-7 columns user-content">
+        <span class="user-score"> <%= score %></span>
+        <% if(typeof initData.user._id != 'undefined') {
+            %><a class="user-edit" href="/u/edit/<%= username %>"></a><%
+        }%>
+        <span class="ranking"> Rank #<%= locationRank %> at <%= _locationName %></span>
+        <span class="join-date"> Joined <%= date %></span>
+        <div class="description"><%= description %></div>
+    </div>
+</script>
 
 <!-- Data Load Point -->
 <script id="init-data" type="application/json">
