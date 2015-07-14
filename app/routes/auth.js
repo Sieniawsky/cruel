@@ -12,7 +12,7 @@ module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
         res.render('login', {
             initData : JSON.stringify({
-                referer : req.headers['referer']
+                referer : req.headers.referer
             }),
             message    : req.flash('loginMessage'),
             background : bg()
@@ -24,7 +24,7 @@ module.exports = function(app, passport) {
             if (err) return console.error(err);
             res.render('signup', {
                 initData    : JSON.stringify({
-                    referer : req.headers['referer']
+                    referer : req.headers.referer
                 }),
                 message     : req.flash('signupMessage'),
                 locations   : remap.locationRemap(locations),
