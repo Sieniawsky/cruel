@@ -13,6 +13,7 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
 var flash        = require('connect-flash');
+var bg           = require('./app/utils/background');
 
 var Location   = require('./app/models/location');
 var configDB   = require('./config/database.js');
@@ -87,9 +88,10 @@ app.use(function(req, res, next) {
 /* Handle errors at the end of the chain */
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: err
+    res.render('404', {
+        message    : err.message,
+        error      : err,
+        background : bg()
     });
 });
 
