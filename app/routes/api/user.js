@@ -4,7 +4,7 @@ var User   = require('../../models/user');
 var remap  = require('../../utils/remap');
 
 module.exports = function(app, passport) {
-    app.put('/api/user/mark', function(req, res) {
+    app.put('/api/user/notifications/clear', function(req, res) {
         if (typeof req.user._id != 'undefined' && req.user._id != null) {
             User.update({_id: req.user._id},
                 {'$set': {
