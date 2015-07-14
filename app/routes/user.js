@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
             if (exists(user)) {
                 Post.find({_user: user._id}, function(err, posts) {
                     if (err) return console.error(err);
-                    
+
                     res.render('user', {
                         initData : JSON.stringify({
                             user         : remap.userRemap(req.user),

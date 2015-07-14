@@ -19,6 +19,7 @@
                     <input type="password" name="password" id="password" required>
                     <div class="help-block with-errors"></div>
                 </div>
+                <input class="js-referer" type="hidden" name="referer" value="">
                 <div class="form-group">
                     <button type="submit">Login</button>
                 </div>
@@ -27,9 +28,20 @@
     </div>
 </div>
 
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
+
 <!-- Load page specific scripts -->
 {{#yield-scripts}}
     <script src="/bower_components/H5F/h5f.min.js"></script>
     <script src="/bower_components/bootstrap-validator/dist/validator.min.js"></script>
     <script src="/js/polyfill.js"></script>
+    <script src="/js/dataLoader.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('.js-referer').val(initData.referer);
+        });
+    </script>
 {{/yield-scripts}}
