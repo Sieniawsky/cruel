@@ -107,7 +107,7 @@ var FullPost = Backbone.View.extend({
         if (recentComments.length == 0) {
             var that = this;
             $.ajax({
-                url  : '/api/comment',
+                url  : '/api/post/comment',
                 type : 'POST',
                 data : {
                     comment : this.$comment.val(),
@@ -136,7 +136,7 @@ var FullPost = Backbone.View.extend({
 
             var that = this;
             $.ajax({
-                url  : '/api/like/' + this.model.get('_id'),
+                url  : '/api/post/like/' + this.model.get('_id'),
                 type : 'POST',
                 data : {
                     post : this.model.attributes,
@@ -159,7 +159,7 @@ var FullPost = Backbone.View.extend({
 
             var that = this;
             $.ajax({
-                url : '/api/unlike/' + this.model.get('_id'),
+                url : '/api/post/unlike/' + this.model.get('_id'),
                 type : 'POST',
                 data : {
                     post : this.model.attributes,
@@ -182,7 +182,7 @@ var FullPost = Backbone.View.extend({
 
             var that = this;
             $.ajax({
-                url  : '/api/comment/like/' + comment._id,
+                url  : '/api/post/comment/like/' + comment._id,
                 type : 'POST',
                 data : {
                     comment : comment,
@@ -206,7 +206,7 @@ var FullPost = Backbone.View.extend({
 
             var that = this;
             $.ajax({
-                url : '/api/comment/unlike/' + comment._id,
+                url : '/api/post/comment/unlike/' + comment._id,
                 type : 'POST',
                 data : {
                     comment : comment,

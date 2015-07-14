@@ -22,7 +22,7 @@ module.exports = function(app, passport) {
     });
 
     /* Perform a like operation if it's valid */
-    app.post('/api/like/:id', function(req, res) {
+    app.post('/api/post/like/:id', function(req, res) {
         // Check if allowed
         Post.findOne({_id: req.params.id}, function(err, post) {
             if (err) return console.error(err);
@@ -45,7 +45,7 @@ module.exports = function(app, passport) {
     });
 
     /* Perform an unlike operation if it's valid */
-    app.post('/api/unlike/:id', function(req, res) {
+    app.post('/api/post/unlike/:id', function(req, res) {
 
         Post.findOne({_id: req.params.id}, function(err, post) {
             if (err) return console.error(err);
@@ -81,7 +81,7 @@ module.exports = function(app, passport) {
     /* Comment logic */
     /* ============= */
 
-    app.post('/api/comment', function(req, res) {
+    app.post('/api/post/comment', function(req, res) {
         if (typeof req.user._id != 'undefined' && req.user._id != null) {
             var comment = {
                 _id       : mongoose.Types.ObjectId(),
@@ -112,7 +112,7 @@ module.exports = function(app, passport) {
     });
 
     /* Perform a comment like operation if it's valid */
-    app.post('/api/comment/like/:id', function(req, res) {
+    app.post('/api/post/comment/like/:id', function(req, res) {
         // Check if allowed
         Post.findOne({_id: req.body.post._id}, function(err, post) {
             if (err) return console.error(err);
@@ -149,7 +149,7 @@ module.exports = function(app, passport) {
     });
 
     /* Perform a comment unlike operation if it's valid */
-    app.post('/api/comment/unlike/:id', function(req, res) {
+    app.post('/api/post/comment/unlike/:id', function(req, res) {
 
         Post.findOne({_id: req.body.post._id}, function(err, post) {
             if (err) return console.error(err);

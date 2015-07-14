@@ -80,7 +80,7 @@ Location.find({}, function(err, locations) {
 
 /* Handle 404 */
 app.use(function(req, res, next) {
-    var err = new Error('Not Found!');
+    var err = new Error('The page that you\'re looking for does not exist!');
     err.status = 404;
     next(err);
 });

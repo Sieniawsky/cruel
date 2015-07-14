@@ -36,7 +36,7 @@ module.exports = Backbone.View.extend({
 
             var that = this;
             $.ajax({
-                url : '/api/like/' + this.model.get('_id'),
+                url : '/api/post/like/' + this.model.get('_id'),
                 type : 'POST',
                 data : {
                     post : this.model.attributes,
@@ -59,7 +59,7 @@ module.exports = Backbone.View.extend({
 
             var that = this;
             $.ajax({
-                url : '/api/unlike/' + this.model.get('_id'),
+                url : '/api/post/unlike/' + this.model.get('_id'),
                 type : 'POST',
                 data : {
                     post : this.model.attributes,
