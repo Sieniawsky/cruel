@@ -5,10 +5,15 @@ var User     = require('../models/user');
 var Location = require('../models/location'); 
 var remap    = require('../utils/remap');
 var bg       = require('../utils/background');
+var app      = require('../../server');
+var url      = require('url');
 
 module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
         res.render('login', {
+            initData : JSON.stringify({
+                referer : req.headers['referer']
+            }),
             message    : req.flash('loginMessage'),
             background : bg()
         });
@@ -18,9 +23,12 @@ module.exports = function(app, passport) {
         Location.find({}, function(err, locations) {
             if (err) return console.error(err);
             res.render('signup', {
-                message    : req.flash('signupMessage'),
-                locations  : remap.locationRemap(locations),
-                background : bg()
+                initData    : JSON.stringify({
+                    referer : req.headers['referer']
+                }),
+                message     : req.flash('signupMessage'),
+                locations   : remap.locationRemap(locations),
+                background  : bg()
             });
         });
     });
@@ -30,16 +38,33 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 
-    app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/',
-        failureRedirect : '/signup',
-        failureFlash    : true
-    }));
+    app.post('/signup', function(req, res, next) {
+        var referer = req.body.referer;
+        var host    = url.parse(referer).host;
+        var successRedirect = '/';
+        if (host === app.get('host')) {
+            successRedirect = referer;
+        }
+        passport.authenticate('local-signup', {
+            successRedirect : successRedirect,
+            failureRedirect : '/signup',
+            failureFlash    : true     
+        })(req, res, next);
+    });
 
-    /* User login */
-    app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/',
-        failureRedirect : '/login',
-        failureFlash    : true
-    }));
+    /* User login, redirect to the last page that they were on
+       as long as it was from the app host. */
+    app.post('/login', function(req, res, next) {
+        var referer = req.body.referer;
+        var host    = url.parse(referer).host;
+        var successRedirect = '/';
+        if (host === app.get('host')) {
+            successRedirect = referer;
+        }
+        passport.authenticate('local-login', {
+            successRedirect : successRedirect,
+            failureRedirect : '/login',
+            failureFlash    : true
+        })(req, res, next);
+    });
 };

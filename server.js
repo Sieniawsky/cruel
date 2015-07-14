@@ -14,18 +14,22 @@ var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
 var flash        = require('connect-flash');
 
-var Location = require('./app/models/location');
-var configDB = require('./config/database.js');
-var socket;
+var Location   = require('./app/models/location');
+var configDB   = require('./config/database.js');
+var configHost = require('./config/host.js');
+var socket, host;
 
 /* Set database socket */
 if (process.argv.length == 3 && process.argv[2] === 'prod') {
     socket = configDB.prodSocket;
+    host   = configHost.prodHost;
 } else {
     socket = configDB.devSocket;
+    host   = configHost.devHost;
 }
 
 mongoose.connect(socket);
+app.set('host', host);
 
 /* Load Passport config */
 require('./config/passport')(passport);
