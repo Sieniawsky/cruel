@@ -55,7 +55,7 @@ var MainFeed = FeedView.extend({
     },
 
     genURL: function(page) {
-        return '/api/feed/' + this.sort + '/' + this.location + '/' + page;
+        return '/api/feed/' + this.location + '/' + this.sort + '/' + page;
     },
 
     render: function() {

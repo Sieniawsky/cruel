@@ -44,7 +44,7 @@ var UserFeed = FeedView.extend({
     },
 
     genURL: function(page) {
-        return '/api/feed/' + this.user + '/' + this.sort + '/' + page;
+        return '/api/feed/user/' + this.user + '/' + this.sort + '/' + page;
     },
 
     render: function() {

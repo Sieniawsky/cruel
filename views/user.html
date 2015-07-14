@@ -31,7 +31,7 @@
     <div class="large-7 columns user-content">
         <span class="user-score"> <%= score %></span>
         <% if(typeof initData.user._id != 'undefined') {
-            %><a class="user-edit" href="/u/edit/<%= username %>"></a><%
+            %><a class="user-edit" href="/user/edit/<%= username %>"></a><%
         }%>
         <span class="ranking"> Rank #<%= locationRank %> at <%= _locationName %></span>
         <span class="join-date"> Joined <%= date %></span>

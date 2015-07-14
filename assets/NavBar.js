@@ -63,7 +63,7 @@ var NavBar = Backbone.View.extend({
             $('.js-new-score').fadeOut('fast');
             var that = this;
             $.ajax({
-                url : '/api/user/mark',
+                url : '/api/user/notifications/clear',
                 type : 'PUT',
                 success : function(data) {
                     that.isRead = true;
