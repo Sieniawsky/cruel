@@ -7,7 +7,7 @@ var bg     = require('../utils/background');
 var exists = require('../utils/exists');
 
 module.exports = function(app, passport) {
-    app.get('/u/:username', function(req, res) {
+    app.get('/user/:username', function(req, res) {
         User.findOne({username: req.params.username}, function(err, user) {
             if (err) return console.log(err);
             if (exists(user)) {
@@ -34,7 +34,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('/u/edit/:username', function(req, res) {
+    app.get('/user/edit/:username', function(req, res) {
         User.findOne({username: req.params.username}, function(err, user) {
             if (err) return console.error(err);
             res.render('user-edit', {
@@ -47,7 +47,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.post('/u/edit', function(req, res) {
+    app.post('/user/edit', function(req, res) {
         if (typeof req.user._id != 'undefined' && req.user._id != null) {
             User.update({_id: req.user._id},
                 {'$set': {imageUrl: req.body.url, description: req.body.description}}, function(err, updates) {
