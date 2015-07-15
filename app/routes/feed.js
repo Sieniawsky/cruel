@@ -31,7 +31,7 @@ module.exports = function(app, passport) {
                 options : {
                     locationName : req.params.locationName,
                     sort         : req.params.sort,
-                    page         : req.params.page
+                    page         : parseInt(req.params.page)
                 }
             }),
             user       : remap.userRemap(req.user),

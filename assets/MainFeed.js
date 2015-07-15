@@ -21,19 +21,26 @@ var MainFeed = FeedView.extend({
     initialize: function() {
         /* Call super initialize */
         FeedView.prototype.initialize.apply(this);
-
-        this.sort = 'hot';
-        this.$sort.val('hot');
         this.$location = $('.js-location');
         this.$locationName = $('.js-location-name');
 
-        // Set the location to the user's location setting
-        if (typeof initData.user._location != "undefined") {
-            this.location = initData.user._location;
-            this.$location.val(initData.user._location);
+        /* Check for feed load options */
+        if (typeof initData.options == 'undefined') {
+            this.sort = 'hot';
+            this.$sort.val('hot');
+            // Set the location to the user's location setting
+            if (typeof initData.user._location != "undefined") {
+                this.location = initData.user._location;
+                this.$location.val(initData.user._location);
+            } else {
+                this.$location.val('all');
+                this.location = 'all'
+            }
         } else {
-            this.$location.val('all');
-            this.location = 'all'
+            var options = initData.options;
+            this.page = options.page;
+            this.sort = options.sort;
+            this.$sort.val(this.sort);
         }
 
         // Set update url
@@ -61,7 +68,7 @@ var MainFeed = FeedView.extend({
         History.replaceState(
             {state:1},
             'Cruel',
-            $('.js-location option:selected').text() + '/' + this.sort + '/' + this.page
+            '/' + $('.js-location option:selected').text() + '/' + this.sort + '/' + this.page
         );
         var that = this;
         $.ajax({
