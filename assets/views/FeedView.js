@@ -43,13 +43,13 @@ module.exports = Backbone.View.extend({
         if (!this.isLoading && this.hasMore &&
             ($(window).scrollTop() + this.triggerPoint
                 > $(document).height() - $(window).height())) {
-            this.page += 1;
             this.loadPosts();
         }
     },
 
     loadPosts: function() {
         this.isLoading = true;
+        this.page += 1;
         var that = this;
         $.ajax({
             url  : this.genURL(this.page),

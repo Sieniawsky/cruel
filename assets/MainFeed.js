@@ -21,6 +21,7 @@ var MainFeed = FeedView.extend({
     initialize: function() {
         /* Call super initialize */
         FeedView.prototype.initialize.apply(this);
+
         this.sort = 'hot';
         this.$sort.val('hot');
         this.$location = $('.js-location');
@@ -52,6 +53,37 @@ var MainFeed = FeedView.extend({
             sort  : this.sort
         });
         this.render();
+    },
+
+    loadPosts: function() {
+        this.isLoading = true;
+        this.page += 1;
+        History.replaceState(
+            {state:1},
+            'Cruel',
+            $('.js-location option:selected').text() + '/' + this.sort + '/' + this.page
+        );
+        var that = this;
+        $.ajax({
+            url  : this.genURL(this.page),
+            type : 'GET',
+            success: function(data) {
+                _.each(data, function(post) {
+                    that.posts.add(new Post(post));
+                })
+                that.addAll();
+
+                if (data.length < 8) {
+                    that.hasMore = false;
+                    that.$feed.append(that.completed_template());
+                }
+
+                that.isLoading = false;
+            },
+            failure: function(data) {
+                that.isLoading = false;
+            }
+        });
     },
 
     genURL: function(page) {
