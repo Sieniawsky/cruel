@@ -98,5 +98,4 @@ var MainFeed = FeedView.extend({
 /* Start it up */
 $(function() {
     var feed = new MainFeed();
-    feed.render();
 });

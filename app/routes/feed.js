@@ -9,21 +9,38 @@ var bg       = require('../utils/background.js');
 module.exports = function(app, passport) {
     /* Index feed page */
     app.get('/', function(req, res) {
-        var query = Post.find().sort({date: 1}).limit(8);
-        query.exec(function(err, posts) {
-            if (err) return console.error(err);
-            res.render('feed', {
-                initData : JSON.stringify({
-                    user : remap.userRemap(req.user)
-                }),
-                user       : remap.userRemap(req.user),
-                locations  : app.get('locations'),
-                background : bg(),
-                partials   : {
-                    feedPostTemplate : 'partials/feed-post-template',
-                    feedScripts      : 'partials/feed-scripts'
+        res.render('feed', {
+            initData : JSON.stringify({
+                user : remap.userRemap(req.user)
+            }),
+            user       : remap.userRemap(req.user),
+            locations  : app.get('locations'),
+            background : bg(),
+            partials   : {
+                feedPostTemplate : 'partials/feed-post-template',
+                feedScripts      : 'partials/feed-scripts'
+            }
+        });
+    });
+
+    /* Pretty feed URLs */
+    app.get('/:locationName/:sort/:page', function(req, res) {
+        res.render('feed', {
+            initData    : JSON.stringify({
+                user    : remap.userRemap(req.user),
+                options : {
+                    locationName : req.params.locationName,
+                    sort         : req.params.sort,
+                    page         : req.params.page
                 }
-            });
+            }),
+            user       : remap.userRemap(req.user),
+            locations  : app.get('locations'),
+            background : bg(),
+            partials   : {
+                feedPostTemplate : 'partials/feed-post-template',
+                feedScripts      : 'partials/feed-scripts'
+            }
         });
     });
 };
