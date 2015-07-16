@@ -95,6 +95,7 @@ var MainFeed = FeedView.extend({
                 }
 
                 that.isLoading = false;
+                that.render();
             },
             failure: function(data) {
                 that.isLoading = false;

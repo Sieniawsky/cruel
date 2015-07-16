@@ -37,8 +37,8 @@ module.exports = function(app, passport) {
     app.get('/api/feed/:location/new/:page', function(req, res) {
         var query = Post
             .find(computeLocationQuery(req.params.location))
-            .skip(computeSkip(req.params.page))
             .sort({date: -1})
+            .skip(computeSkip(req.params.page))
             .limit(8);
         query.exec(function(err, posts) {
             if (err) return console.error(err);
