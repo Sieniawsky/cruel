@@ -50,6 +50,7 @@ module.exports = Backbone.View.extend({
 
     loadPosts: function() {
         this.isLoading = true;
+        this.page += 1;
         var that = this;
         $.ajax({
             url  : this.genURL(this.page),

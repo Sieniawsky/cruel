@@ -21,23 +21,36 @@ var MainFeed = FeedView.extend({
     initialize: function() {
         /* Call super initialize */
         FeedView.prototype.initialize.apply(this);
-        this.sort = 'hot';
-        this.$sort.val('hot');
         this.$location = $('.js-location');
         this.$locationName = $('.js-location-name');
 
-        // Set the location to the user's location setting
-        if (typeof initData.user._location != "undefined") {
-            this.location = initData.user._location;
-            this.$location.val(initData.user._location);
-        } else {
-            this.$location.val('all');
-            this.location = 'all'
-        }
+        /* Check for feed load options */
+        if (typeof initData.options == 'undefined') {
+            this.sort = 'hot';
+            this.$sort.val('hot');
+            // Set the location to the user's location setting
+            if (typeof initData.user._location != "undefined") {
+                this.location = initData.user._location;
+                this.$location.val(initData.user._location);
+            } else {
+                this.$location.val('all');
+                this.location = 'all'
+            }
 
-        // Set update url
-        this.url = this.genURL(this.page);
-        this.load();
+            this.url = this.genURL(this.page);
+            this.load();
+        } else {
+            var options = initData.options;
+            this.$location.val(_.find(initData.locations, function(location) {
+                return location.name === options.locationName;
+            })._id);
+            this.location = this.$location.val();
+            this.page = options.page;
+            this.sort = options.sort;
+            this.$sort.val(this.sort);
+            this.url = this.genURL(this.page);
+            this.loadPosts();
+        }
     },
 
     load: function() {
@@ -51,7 +64,42 @@ var MainFeed = FeedView.extend({
             url   : this.genURL(1),
             sort  : this.sort
         });
+        History.replaceState(
+            {state:1},
+            'Cruel',
+            '/'
+        );
         this.render();
+    },
+
+    loadPosts: function() {
+        this.isLoading = true;
+        History.replaceState(
+            {state:1},
+            'Cruel',
+            '/' + $('.js-location option:selected').text() + '/' + this.sort + '/' + this.page
+        );
+        var that = this;
+        $.ajax({
+            url  : this.genURL(this.page),
+            type : 'GET',
+            success: function(data) {
+                _.each(data, function(post) {
+                    that.posts.add(new Post(post));
+                })
+                that.addAll();
+
+                if (data.length < 8) {
+                    that.hasMore = false;
+                    that.$feed.append(that.completed_template());
+                }
+
+                that.isLoading = false;
+            },
+            failure: function(data) {
+                that.isLoading = false;
+            }
+        });
     },
 
     genURL: function(page) {
@@ -66,5 +114,4 @@ var MainFeed = FeedView.extend({
 /* Start it up */
 $(function() {
     var feed = new MainFeed();
-    feed.render();
 });
