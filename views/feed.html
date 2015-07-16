@@ -6,8 +6,8 @@
                 <h2 class="js-location-name"></h2>
                 <!-- Feed sort options -->
                 <div class="sorting">
-                    <span class="sortlabel">Browse by:</span>
-                    <select class="js-sort">
+                    <span class="sortlabel">SORT:</span>
+                    <select class="js-sort feed-dropdown">
                         <option value="new">New</option>
                         <option value="top">Top</option>
                         <option value="hot">Hot</option>
@@ -15,7 +15,7 @@
                         <option value="month">Month</option>
                     </select>
                     <!-- Feed location options -->
-                    <select class="js-location">
+                    <select class="js-location feed-dropdown">
                         <option value="all">All</option>
                         {{#locations}}
                             <option value="{{_id}}">{{name}}</option>

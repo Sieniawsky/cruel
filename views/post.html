@@ -1,7 +1,7 @@
 <div class="row js-post">
     <div class="large-12 columns container">
         <div class="container-header">
-            <a href="#"><h2 class="navigation">Back to feed</h2></a>
+            <button class="navigation js-navigation">Back to feed</button>
         </div>
         <div class="js-post-body"></div>
         <div class="large-12 columns comments">
@@ -13,15 +13,19 @@
                     </div>
                     <div class="js-messages"></div>
                     <div class="form-group comment-form">
-                        <button type="submit" class="js-form-submit comment-button">Post</button>
+                        <button type="submit" class="js-form-submit comment-button button">Post</button>
                     </div>
                 </form>
             {{/user._id}}
-            <span class="sortlabel">Browse by:</span>
-            <select class="js-sort">
-                <option value="new">New</option>
-                <option value="top">Top</option>
-            </select>
+            <div class="post-sorting">
+                <div class="sorting post-sorting-margin">
+                    <span class="sortlabel">SORT:</span>
+                    <select class="js-sort feed-dropdown">
+                        <option value="new">New</option>
+                        <option value="top">Top</option>
+                    </select>
+                </div>
+            </div>
             <div class="js-comments comments-feed">
             </div>
         </div>
