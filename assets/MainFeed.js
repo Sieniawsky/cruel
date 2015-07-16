@@ -36,16 +36,21 @@ var MainFeed = FeedView.extend({
                 this.$location.val('all');
                 this.location = 'all'
             }
+
+            this.url = this.genURL(this.page);
+            this.load();
         } else {
             var options = initData.options;
+            this.$location.val(_.find(initData.locations, function(location) {
+                return location.name === options.locationName;
+            })._id);
+            this.location = this.$location.val();
             this.page = options.page;
             this.sort = options.sort;
             this.$sort.val(this.sort);
+            this.url = this.genURL(this.page);
+            this.loadPosts();
         }
-
-        // Set update url
-        this.url = this.genURL(this.page);
-        this.load();
     },
 
     load: function() {
@@ -59,12 +64,16 @@ var MainFeed = FeedView.extend({
             url   : this.genURL(1),
             sort  : this.sort
         });
+        History.replaceState(
+            {state:1},
+            'Cruel',
+            '/'
+        );
         this.render();
     },
 
     loadPosts: function() {
         this.isLoading = true;
-        this.page += 1;
         History.replaceState(
             {state:1},
             'Cruel',

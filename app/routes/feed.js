@@ -26,9 +26,10 @@ module.exports = function(app, passport) {
     /* Pretty feed URLs */
     app.get('/:locationName/:sort/:page', function(req, res) {
         res.render('feed', {
-            initData    : JSON.stringify({
-                user    : remap.userRemap(req.user),
-                options : {
+            initData      : JSON.stringify({
+                user      : remap.userRemap(req.user),
+                locations : app.get('locations'),
+                options   : {
                     locationName : req.params.locationName,
                     sort         : req.params.sort,
                     page         : parseInt(req.params.page)
