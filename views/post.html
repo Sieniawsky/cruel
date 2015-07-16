@@ -9,7 +9,8 @@
             {{#user._id}}
                 <form id="js-form">
                     <div class="form-group comment-form">
-                       <textarea class="js-comment-text" rows="3" name="description" id="postDescription" placeholder="Write a comment"></textarea>
+                       <textarea class="js-comment-text" rows="3" name="description"
+                       id="postDescription" placeholder="Write a comment"></textarea>
                     </div>
                     <div class="js-messages"></div>
                     <div class="form-group comment-form">
@@ -70,6 +71,10 @@
 
 <script id="comment-timeout-template" type="text/template">
     <p>Please wait a bit before commenting again</p>
+</script>
+
+<script id="comment-empty-template" type="text/template">
+    <p>A comment cannot be empty</p>
 </script>
 
 <!-- Data Load Point -->
