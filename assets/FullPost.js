@@ -23,6 +23,7 @@ var FullPost = Backbone.View.extend({
         this.postTemplate    = _.template($('#post-detail-template').html());
         this.commentTemplate = _.template($('#post-comment-template').html());
         this.commentTimeoutTemplate = _.template($('#comment-timeout-template').html());
+        this.commentEmptyTemplate = _.template($('#comment-empty-template').html());
 
         this.nav       = nav || {};
         this.$post     = $('.js-post-body');
@@ -96,37 +97,45 @@ var FullPost = Backbone.View.extend({
 
     handleComment: function(e) {
 
-        /* Check if no comments were made by the user within 5 min */
-        var checkTime = 1000 * 60 * 5;
-        var recentComments = _.filter(this.model.get('comments'), function(comment) {
-            var timeDiff = new Date().getTime() - comment.rawDate.getTime();
-            var olderThanCheckTime = (new Date().getTime() - comment.rawDate.getTime() < checkTime) ? false : true;
-            return (comment._user == initData.user._id && !olderThanCheckTime);
-        });
-
-        /* Only POST comment if no comments were made by the user with 5 min */
-        if (recentComments.length == 0) {
-            var that = this;
-            $.ajax({
-                url  : '/api/post/comment',
-                type : 'POST',
-                data : {
-                    comment : this.$comment.val(),
-                    post    : this.model.attributes
-                },
-                success : function(data) {
-                    that.model.fetch();
-                },
-                failure : function(data) {
-                    console.log(data);
-                }
+        if (this.$comment.val().length != 0) {
+            /* Check if no comments were made by the user within 5 min */
+            var checkTime = 1000 * 60 * 5;
+            var recentComments = _.filter(this.model.get('comments'), function(comment) {
+                var timeDiff = new Date().getTime() - comment.rawDate.getTime();
+                var olderThanCheckTime = (new Date().getTime() - comment.rawDate.getTime() < checkTime) ? false : true;
+                return (comment._user == initData.user._id && !olderThanCheckTime);
             });
-            e.preventDefault();
-            this.$form.trigger('reset');
+
+            /* Only POST comment if no comments were made by the user with 5 min */
+            if (recentComments.length == 0) {
+                var that = this;
+                $.ajax({
+                    url  : '/api/post/comment',
+                    type : 'POST',
+                    data : {
+                        comment : this.$comment.val(),
+                        post    : this.model.attributes
+                    },
+                    success : function(data) {
+                        that.model.fetch();
+                    },
+                    failure : function(data) {
+                        console.log(data);
+                    }
+                });
+                e.preventDefault();
+                this.$messages.empty();
+                this.$form.trigger('reset');
+            } else {
+                /* Display an error message to the user */
+                e.preventDefault();
+                this.$messages.empty();
+                this.$messages.append(this.commentTimeoutTemplate());
+            }
         } else {
-            /* Display an error message to the user */
             e.preventDefault();
-            this.$messages.append(this.commentTimeoutTemplate());
+            this.$messages.empty();
+            this.$messages.append(this.commentEmptyTemplate());
         }
     },
 
