@@ -3,6 +3,9 @@ var _      = require('lodash');
 var Post   = require('../../models/post');
 var User   = require('../../models/user');
 var remap  = require('../../utils/remap');
+var config = require('../../../server').get('config');
+
+var page_size = config.page_size;
 
 /* API routes for the feed */
 module.exports = function(app, passport) {
@@ -13,7 +16,7 @@ module.exports = function(app, passport) {
             .find({_user: req.params.user})
             .sort({date: 1})
             .skip(computeSkip(req.params.page))
-            .limit(8);
+            .limit(page_size);
         query.exec(function(err, posts) {
             if (err) return console.error(err);
             res.send(remap.postsRemap(posts, req.user));
@@ -26,7 +29,7 @@ module.exports = function(app, passport) {
             .find({_user: req.params.user})
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
-            .limit(8);
+            .limit(page_size);
         query.exec(function(err, posts) {
             if (err) return console.error(err);
             res.send(remap.postsRemap(posts, req.user));
@@ -39,7 +42,7 @@ module.exports = function(app, passport) {
             .find(computeLocationQuery(req.params.location))
             .sort({date: -1})
             .skip(computeSkip(req.params.page))
-            .limit(8);
+            .limit(page_size);
         query.exec(function(err, posts) {
             if (err) return console.error(err);
             res.send(remap.postsRemap(posts, req.user));
@@ -52,7 +55,7 @@ module.exports = function(app, passport) {
             .find(computeLocationQuery(req.params.location))
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
-            .limit(8);
+            .limit(page_size);
         query.exec(function(err, posts) {
             if (err) return console.error(err);
             res.send(remap.postsRemap(posts, req.user));
@@ -75,7 +78,7 @@ module.exports = function(app, passport) {
                 }))
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
-            .limit(8);
+            .limit(page_size);
         query.exec(function(err, posts) {
             if (err) return console.error(err);
             res.send(remap.postsRemap(posts, req.user));
@@ -97,7 +100,7 @@ module.exports = function(app, passport) {
                 }))
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
-            .limit(8);
+            .limit(page_size);
         query.exec(function(err, posts) {
             if (err) return console.error(err);
             res.send(remap.postsRemap(posts, req.user));
@@ -131,12 +134,12 @@ module.exports = function(app, passport) {
     var computeSkip = function(page) {
         page = parseInt(page);
         if (page < 0) page = 0;
-        return (page - 1) * 8;
+        return (page - 1) * page_size;
     };
 
     var paginateHot = function(posts, page) {
         var skip = computeSkip(page);
-        var end = skip + 8;
+        var end = skip + page_size;
         if (end > posts.length) end = posts.length;
         return _.slice(posts, skip, end);
     };
