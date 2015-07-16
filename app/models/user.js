@@ -1,14 +1,14 @@
 /* User model */
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
-var defaults = require('../../config/default');
+var bcrypt   = require('bcrypt-nodejs');
+var config   = require('../../server').get('config');
 
 var userSchema = mongoose.Schema({
     username                  : String,
     email                     : String,
     password                  : String,
     date                      : Date,
-    imageUrl                  : {type : String, default : defaults.default_url},
+    imageUrl                  : {type : String, default : config.image_url},
     description               : {type : String, default : ''},
     locationRank              : {type : Number, default : 0},
     globalRank                : {type : Number, default : 0},

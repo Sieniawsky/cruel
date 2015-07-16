@@ -5,7 +5,7 @@ var User     = require('../models/user');
 var Location = require('../models/location'); 
 var remap    = require('../utils/remap');
 var bg       = require('../utils/background');
-var app      = require('../../server');
+var config   = require('../../server').get('config');
 var url      = require('url');
 
 module.exports = function(app, passport) {
@@ -42,7 +42,7 @@ module.exports = function(app, passport) {
         var referer = req.body.referer;
         var host    = url.parse(referer).host;
         var successRedirect = '/';
-        if (host === app.get('host')) {
+        if (host === config.host) {
             successRedirect = referer;
         }
         passport.authenticate('local-signup', {
@@ -58,7 +58,7 @@ module.exports = function(app, passport) {
         var referer = req.body.referer;
         var host    = url.parse(referer).host;
         var successRedirect = '/';
-        if (host === app.get('host')) {
+        if (host === config.host) {
             successRedirect = referer;
         }
         passport.authenticate('local-login', {

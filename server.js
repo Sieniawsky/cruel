@@ -1,6 +1,6 @@
 /* This is where it all begins */
 var express  = require('express');
-var app      = express();
+var app      =  module.exports = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
 var hogan    = require('hogan-express');
@@ -15,22 +15,12 @@ var MongoStore   = require('connect-mongo')(session);
 var flash        = require('connect-flash');
 var bg           = require('./app/utils/background');
 
-var Location   = require('./app/models/location');
-var configDB   = require('./config/database.js');
-var configHost = require('./config/host.js');
-var socket, host;
+var Location = require('./app/models/location');
+var config   = require('./config/config'); 
 
-/* Set database socket */
-if (process.argv.length == 3 && process.argv[2] === 'prod') {
-    socket = configDB.prodSocket;
-    host   = configHost.prodHost;
-} else {
-    socket = configDB.devSocket;
-    host   = configHost.devHost;
-}
-
-mongoose.connect(socket);
-app.set('host', host);
+/* Set server configuration */
+app.set('config', config(process.argv.length == 3 && process.argv[2] === 'prod'));
+mongoose.connect(app.get('config').socket);
 
 /* Load Passport config */
 require('./config/passport')(passport);
@@ -98,6 +88,3 @@ app.use(function(err, req, res, next) {
 app.listen(app.get('port'), function() {
     console.log('Starting on port ' + app.get('port'));
 });
-
-/* Export the app */
-module.exports = app;
