@@ -2,7 +2,8 @@ var _ = require('lodash');
 
 module.exports = function(isProd) {
     var common = {
-        image_url : 'https://pbs.twimg.com/profile_images/512279743241019392/sU297Cak.jpeg'
+        image_url : 'https://pbs.twimg.com/profile_images/512279743241019392/sU297Cak.jpeg',
+        page_size : 12
     };
     var dev = {
         host   : 'localhost:3000',
