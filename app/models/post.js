@@ -1,10 +1,10 @@
 /* Post model */
 var mongoose = require('mongoose');
-var defaults = require('../../config/default');
+var config   = require('../../server').get('config');
 
 var postSchema = mongoose.Schema({
     title         : String,
-    url           : { type : String, default : defaults.default_url },
+    url           : { type : String, default : config.image_url },
     description   : { type : String, default : '' },
     date          : Date,
     _user         : mongoose.Schema.Types.ObjectId,
