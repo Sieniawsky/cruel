@@ -1,21 +1,25 @@
 /* Utility module for remaping mongoose objects
    for use client-side */
-var _      = require('lodash');
-var moment = require('moment');
+var _       = require('lodash');
+var moment  = require('moment');
+var shortID = require('mongodb-short-id');
 
 module.exports = {
     postsRemap : function(posts, user) {
         return _.map(posts, function(post) {
+
             var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
             var comments = commentsRemap(post.comments, user);
             return {
                 _id           : post._id,
+                _shortID      : shortID.o2s(post._id),
                 title         : post.title,
                 url           : post.url,
                 date          : moment(new Date(post.date)).fromNow(),
                 rawDate       : post.date,
                 description   : post.description.replace(/\r?\n/g, '<br/>'),
                 snippet       : snippet,
+                prettySnippet : prettySnippet(post.title),
                 _user         : post._user,
                 _username     : post._username,
                 score         : post.score,
@@ -36,12 +40,14 @@ module.exports = {
         var comments = commentsRemap(post.comments, user);
         return {
             _id           : post._id,
+            _shortID      : shortID.o2s(post._id),
             title         : post.title,
             url           : post.url,
             date          : moment(new Date(post.date)).fromNow(),
             rawDate       : post.date,
             description   : post.description.replace(/\r?\n/g, '<br/>'),
             snippet       : snippet,
+            prettySnippet : prettySnippet(post.title),
             _user         : post._user,
             _username     : post._username,
             score         : post.score,
@@ -64,12 +70,14 @@ module.exports = {
                 var comments = commentsRemap(post.comments, user);
                 return {
                     _id           : post._id,
+                    _shortID      : shortID.o2s(post._id),
                     title         : post.title,
                     url           : post.url,
                     date          : moment(new Date(post.date)).fromNow(),
                     rawDate       : post.date,
                     description   : post.description.replace(/\r?\n/g, '<br/>'),
                     snippet       : snippet,
+                    prettySnippet : prettySnippet(post.title),
                     _user         : post._user,
                     _username     : post._username,
                     score         : post.score,
@@ -189,6 +197,17 @@ module.exports = {
                 liked     : beenLiked(comment.likers, ((_.isEmpty(user)) ? '' : String(user._id)))
             };
         });
+    },
+
+    /* Trim to 100 character, then trim to last space to preserve whole words*/
+    prettySnippet : prettySnippet = function(title) {
+        var trimmed = title.substr(0, 100);
+        var lastIndex = trimmed.lastIndexOf(' ');
+        if (lastIndex != -1) {
+            trimmed = trimmed.substr(0, Math.min(trimmed.length, trimmed.lastIndexOf(' ')));
+            trimmed = trimmed.replace(new RegExp(' ', 'g'), '_');
+        }
+        return trimmed;
     },
 
     beenLiked : beenLiked = function(likers, id) {
