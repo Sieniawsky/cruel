@@ -31,6 +31,10 @@ var sources    = [{
     sourcePath : 'assets/EditProfile.js',
     tempPath   : 'public/js/temp5.js',
     exportPath : 'public/js/bundles/edit.js'
+}, {
+    sourcePath : 'assets/Leaderboard.js',
+    tempPath   : 'public/js/temp6.js',
+    exportPath : 'public/js/bundles/leaderboard.js'
 }];
 
 var files   = _.pluck(sources, 'sourcePath');

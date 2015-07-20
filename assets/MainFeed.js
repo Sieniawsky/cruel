@@ -29,7 +29,7 @@ var MainFeed = FeedView.extend({
             this.sort = 'hot';
             this.$sort.val('hot');
             // Set the location to the user's location setting
-            if (typeof initData.user._location != "undefined") {
+            if (typeof initData.user._location != 'undefined') {
                 this.location = initData.user._location;
                 this.$location.val(initData.user._location);
             } else {
