@@ -5,7 +5,7 @@ var _        = require('lodash');
 var mongoose = require('mongoose');
 var configDB = require('../config/config');
 var Location = require('../app/models/location');
-var config   = confidDB(process.argv.length === 3 && process.argv[2] === 'prod');
+var config   = configDB(process.argv.length === 3 && process.argv[2] === 'prod');
 var added    = 0;
 
 /* location data */
