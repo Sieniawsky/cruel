@@ -1,10 +1,11 @@
 /* Routes for posts */
-var _      = require('lodash');
-var Post   = require('../models/post');
-var User   = require('../models/user');
-var remap  = require('../utils/remap');
-var bg     = require('../utils/background');
-var exists = require('../utils/exists');
+var _       = require('lodash');
+var shortID = require('mongodb-short-id');
+var Post    = require('../models/post');
+var User    = require('../models/user');
+var remap   = require('../utils/remap');
+var bg      = require('../utils/background');
+var exists  = require('../utils/exists');
 
 module.exports = function(app, passport) {
     /* Post composition page */
@@ -19,8 +20,9 @@ module.exports = function(app, passport) {
     });
 
     /* Get a single specific post */
-    app.get('/post/:id', function(req, res) {
-        Post.findOne({_id: req.params.id}, function(err, post) {
+    app.get('/post/:shortID/:prettySnippet', function(req, res) {
+        var id = shortID.s2l(req.params.shortID);
+        Post.findOne({_id: id}, function(err, post) {
             if (err) return console.error(err);
             if (exists(post)) {
                 var post = remap.postRemap(post, req.user);

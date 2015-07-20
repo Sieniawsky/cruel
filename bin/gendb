@@ -3,10 +3,10 @@
 /* Database generation script */
 var _        = require('lodash');
 var mongoose = require('mongoose');
-var configDB = require('../config/database.js');
+var configDB = require('../config/config');
 var Location = require('../app/models/location');
-var added = 0;
-var socket;
+var config   = confidDB(process.argv.length === 3 && process.argv[2] === 'prod');
+var added    = 0;
 
 /* location data */
 var data  = [
@@ -32,12 +32,6 @@ var data  = [
     }
 ];
 
-if (process.argv.length === 3 && process.argv[2] === 'prod') {
-    socket = configDB.prodSocket;
-} else {
-    socket = configDB.devSocket;
-}
-
 /* Close database connection and exit process */
 var close = function() {
     mongoose.connection.close(function () {
@@ -51,7 +45,7 @@ var close = function() {
 };
 
 /* Establish database connection */
-mongoose.connect(socket);
+mongoose.connect(config.socket);
 
 Location.find({}, function(err, locations) {
     if (err) return console.error(err);
