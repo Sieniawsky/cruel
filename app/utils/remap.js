@@ -183,6 +183,7 @@ module.exports = {
                 date          : moment(new Date(user.date).getTime()).fromNow(),
                 imageUrl      : user.imageUrl,
                 description   : user.description,
+                rank          : _.indexOf(users, user) + 1,
                 locationRank  : user.locationRank,
                 globalRank    : user.globalRank,
                 score         : user.score,

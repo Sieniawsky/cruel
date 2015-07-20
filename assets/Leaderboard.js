@@ -13,10 +13,14 @@ var Leaderboard = Backbone.View.extend({
     },
 
     initialize: function() {
-        this.nav = nav || {};
+        this.users         = [];
+        this.nav           = nav || {};
+        this.$leaderboard  = $('.js-leaderboard');
         this.$locationName = $('.js-location-name');
-        this.$sort = $('.js-sort');
-        this.$location = $('.js-location');
+        this.$sort         = $('.js-sort');
+        this.$location     = $('.js-location');
+
+        this.leaderboardUserTemplate = _.template($('#leaderboard-user-template').html());
 
         if (typeof initData.user._location != 'undefined') {
             this.location = initData.user._location;
@@ -26,16 +30,38 @@ var Leaderboard = Backbone.View.extend({
             this.$location.val('all');
         }
 
-        this.render();
+        this.sort = this.$sort.val();
+
+        this.load();
     },
 
-    load : function() {
-        
+    genURL: function() {
+        return '/api/leaderboard/' + this.location + '/' + this.sort;
+    },
+
+    load: function() {
+        this.sort = this.$sort.val();
+        this.location = this.$location.val();
+        var that = this;
+        $.ajax({
+            url  : this.genURL(),
+            type : 'GET',
+            success: function(data) {
+                that.users = data;
+                that.render();
+            },
+            failure: function(data) {}
+        });
     },
 
     render: function() {
+        var that = this;
         this.$locationName.empty();
+        this.$leaderboard.empty();
         this.$locationName.html($('.js-location option:selected').text());
+        _.forEach(this.users, function(user) {
+            that.$leaderboard.append(that.leaderboardUserTemplate(user));
+        });
     }
 });
 

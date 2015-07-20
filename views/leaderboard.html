@@ -27,13 +27,13 @@
 <!-- Templates -->
 <script id="leaderboard-user-template" type="text/template">
     <div class="leader-item">
-        <span class="ranking">1</span>
-        <span class="leader-score">396</span>
+        <span class="ranking"><%= rank %></span>
+        <span class="leader-score"><%= score %></span>
         <div class="leader-thumbnail">
-            <img src="/images/placeholder.png">
+            <img src="<%= imageUrl %>">
         </div>
-        <span class="leader-user">Swaglord69</span></br>
-        <span class="leader-join-date">Joined 2 weeks ago</span>
+        <span class="leader-user"><%= username %></span></br>
+        <span class="leader-join-date">Joined <%= date %></span>
     </div>
 </script>
 
