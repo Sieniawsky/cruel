@@ -7,7 +7,10 @@ var Leaderboard = Backbone.View.extend({
 
     el: '.js-app',
 
-    events: {},
+    events: {
+        'change .js-sort'     : 'load',
+        'change .js-location' : 'load'
+    },
 
     initialize: function() {
         this.nav = nav || {};
@@ -24,6 +27,10 @@ var Leaderboard = Backbone.View.extend({
         }
 
         this.render();
+    },
+
+    load : function() {
+        
     },
 
     render: function() {

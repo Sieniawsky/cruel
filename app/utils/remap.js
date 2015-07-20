@@ -173,6 +173,25 @@ module.exports = {
         return user || {};
     },
 
+    usersRemap : function(users) {
+        return _.map(users, function(user) {
+            return {
+                _id           : user._id,
+                username      : user.username,
+                email         : user.email,
+                rawDate       : user.date,
+                date          : moment(new Date(user.date).getTime()).fromNow(),
+                imageUrl      : user.imageUrl,
+                description   : user.description,
+                locationRank  : user.locationRank,
+                globalRank    : user.globalRank,
+                score         : user.score,
+                _location     : user._location,
+                _locationName : user._locationName,
+            };
+        });
+    },
+
     locationRemap : function(locations) {
         return _.map(locations, function(location) {
             return {
