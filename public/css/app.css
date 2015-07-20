@@ -1837,8 +1837,13 @@ h4 {
   color:#bababa;;
   position:relative;
   float:left;
-  width:24px;
-  line-height:48px;
+  width:auto;
+  min-width:24px;
+  line-height:26px;
+  border-right:1px solid #e8e8e8;
+  margin-top:7px;
+  margin-bottom:7px;
+  padding-right:8px;
   
 }
 
@@ -1850,6 +1855,7 @@ h4 {
   position:relative;
   float:left;
   line-height:39px;
+  margin-left:8px;
 }
 
 .leader-score:before {
@@ -1871,7 +1877,7 @@ h4 {
   margin-left:10px;
 }
 
-.leader-thumnail img {
+.leader-thumbnail img {
   width:100%;
   height:auto;
 }
@@ -1894,5 +1900,60 @@ h4 {
   line-height:16px;
   color:#a6a6a6;
   float:left;
+
+}
+
+/**Leaderboard media queries **/
+
+@media only screen and (max-width:768px) {
+
+  .leader-item {
+    margin-left:0px;
+    width:100%;
+  }
+
+  .leader-thumbnail {
+    height:40px;
+    width:auto;
+  }
+
+  .leader-thumbnail img {
+    height:40px;
+    width:auto;
+  }
+
+  .ranking {
+    font-size:18px;
+    min-width:5px;
+    border-right:none;
+    padding-right:5px;
+    line-height:24px;
+    
+  }
+
+  .leader-score {
+    font-size:18px;
+    color:#ffd800;
+    margin-left:0;
+  }
+
+  .leader-score:before {
+    display:inline-block;
+    width:auto;
+    height:auto;
+    content:'\00B7';
+    margin-bottom:0;
+    margin-right:0;
+    background:none;
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    padding-right:4px;
+    font-size:12px;
+    color:#bababa;
+   
+  }
+
+  
+
+
 
 }
