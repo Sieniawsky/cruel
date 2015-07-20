@@ -1814,3 +1814,85 @@ h4 {
   background-color:#61a7cc;
 
 }
+
+/** Leaderboard Page **/
+
+.leader-item {
+  margin-left:30px;
+  width:96%;
+  width: -moz-calc(100% - 56px);
+  width: -webkit-calc(100% - 56px);
+  width: calc(100% - 56px);
+  float:left;
+  border-top: 1px solid #e8e8e8;
+  padding-top:10px;
+  padding-bottom:3px;
+ 
+}
+
+.ranking {
+  font-family:'Oswald', sans-serif;
+  text-transform:uppercase;
+  font-size:22px;
+  color:#bababa;;
+  position:relative;
+  float:left;
+  width:24px;
+  line-height:48px;
+  
+}
+
+.leader-score {
+  font-family:'Oswald', sans-serif;
+  text-transform:uppercase;
+  font-size:22px;
+  color:#bababa;;
+  position:relative;
+  float:left;
+  line-height:39px;
+}
+
+.leader-score:before {
+  display:inline-block;
+  width:23px;
+  height:28px;
+  content:"";
+  margin-bottom:-5px;
+  margin-right:-2px;
+  background: url(/images/notification-bolt.png) no-repeat 0 0;
+  background-size: 100%;
+  
+}
+
+.leader-thumbnail {
+  width:5%;
+  height:auto;
+  float:left;
+  margin-left:10px;
+}
+
+.leader-thumnail img {
+  width:100%;
+  height:auto;
+}
+
+.leader-user {
+  font-family:'Oswald', sans-serif;
+  color:#333333;
+  font-size:17px;
+  text-transform:uppercase;
+  margin-left:10px;
+  margin-top:-3px;
+  line-height:20px;
+  
+}
+
+.leader-join-date {
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size: 13px;
+  margin-left:10px;
+  line-height:16px;
+  color:#a6a6a6;
+  float:left;
+
+}

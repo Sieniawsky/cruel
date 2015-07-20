@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="large-12 columns container">
+        <div class="container-header">
+            <!-- City Header -->
+            <h2 class="js-location-name"></h2>
+            <!-- Feed sort options -->
+            <div class="sorting">
+                <span class="sortlabel">SORT:</span>
+                <select class="js-sort feed-dropdown">
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="top">Top</option>
+                </select>
+                <!-- Feed location options -->
+                <select class="js-location feed-dropdown">
+                    <option value="all">All</option>
+                    {{#locations}}
+                        <option value="{{_id}}">{{name}}</option>
+                    {{/locations}}
+                </select>
+            </div>
+        </div>
+
+        <!-- Leaderboard Item Template -->
+        <div class="leader-item">
+            <span class="ranking">1</span>
+            <span class="leader-score">396</span>
+            <div class="leader-thumbnail">
+                <img src="/images/placeholder.png">
+            </div>
+            <span class="leader-user">Swaglord69</span></br>
+            <span class="leader-join-date">Joined 2 weeks ago</span>
+        </div>
+       
+
+
+    </div>
+</div>
