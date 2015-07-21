@@ -10,8 +10,6 @@ var userSchema = mongoose.Schema({
     date                      : Date,
     imageUrl                  : {type : String, default : config.image_url},
     description               : {type : String, default : ''},
-    locationRank              : {type : Number, default : 0},
-    globalRank                : {type : Number, default : 0},
     score                     : {type : Number, default : 0},
     _location                 : mongoose.Schema.Types.ObjectId,
     _locationName             : String,

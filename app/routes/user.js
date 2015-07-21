@@ -13,19 +13,26 @@ module.exports = function(app, passport) {
             if (exists(user)) {
                 Post.find({_user: user._id}, function(err, posts) {
                     if (err) return console.error(err);
-
-                    res.render('user', {
-                        initData : JSON.stringify({
-                            user         : remap.userRemap(req.user),
-                            selectedUser : remap.userRemap(user),
-                            posts        : remap.postsRemap(posts, user)
-                        }),
-                        user       : remap.userRemap(req.user),
-                        background : bg(),
-                        partials   : {
-                            feedPostTemplate : 'partials/feed-post-template',
-                            feedScripts      : 'partials/feed-scripts'
-                        }
+                    var id = user._id;
+                    var query = User.find({}).sort({score: -1});
+                    query.exec(function(err, users) {
+                        if (err) return console.error(err);
+                        var rank = _.indexOf(users, _.find(users, function(user) {
+                            return user._id.equals(id);
+                        })) + 1;
+                        res.render('user', {
+                            initData : JSON.stringify({
+                                user         : remap.userRemap(req.user),
+                                selectedUser : _.extend(remap.userRemap(user), {rank: rank}),
+                                posts        : remap.postsRemap(posts, user)
+                            }),
+                            user       : remap.userRemap(req.user),
+                            background : bg(),
+                            partials   : {
+                                feedPostTemplate : 'partials/feed-post-template',
+                                feedScripts      : 'partials/feed-scripts'
+                            }
+                        });
                     });
                 });
             } else {
