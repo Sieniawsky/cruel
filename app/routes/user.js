@@ -59,7 +59,7 @@ module.exports = function(app, passport) {
             User.update({_id: req.user._id},
                 {'$set': {imageUrl: req.body.url, description: req.body.description}}, function(err, updates) {
                 if (err) return console.error(err);
-                res.redirect('/u/' + req.user.username);
+                res.redirect('/user/' + req.user.username);
             });
         } else {
             res.send({outcome: false});
