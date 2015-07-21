@@ -217,6 +217,35 @@
                     <p><a href="/login">Log in</a>&nbsp;or&nbsp;<a href="/signup">Sign up</a></p>
                 </div>
             </div>
+
+             <!-- Login Modal -->
+
+            <div class="overlay-login">
+                <div class="modal">
+                    {{#message.length}}
+                        <div>{{message}}</div>
+                    {{/message.length}}
+                    <form id="form" data-toggle="validator" role="form" action="/login" method="post">
+                        <div class="form-group">
+                            <h4>Email</h4>
+                            <input type="email" name="email" id="email" placeholder="john@example.com"
+                                data-error="Please enter a valid email address" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <h4>Password</h4>
+                            <input type="password" name="password" id="password" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <input class="js-referer" type="hidden" name="referer" value="">
+                        <div class="form-group">
+                            <button class="button modal-button" type="submit">Login</button>
+                        </div>
+                    </form>
+                    <img class="js-close modal-close" src="/images/modal-close.png">
+                </div>
+            </div>
+
         </div>
 
         <!-- Content load point -->
