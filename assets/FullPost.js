@@ -15,8 +15,7 @@ var FullPost = Backbone.View.extend({
         'click .js-like'         : 'handleLike',
         'submit #js-form'        : 'handleComment',
         'change .js-sort'        : 'sort',
-        'click .js-comment-like' : 'handleCommentLike',
-        'click .js-navigation'   : 'back'
+        'click .js-comment-like' : 'handleCommentLike'
     },
 
     initialize: function() {
@@ -231,10 +230,6 @@ var FullPost = Backbone.View.extend({
         } else {
             this.nav.showModal();
         }
-    },
-
-    back: function() {
-        window.history.back();
     },
 
     render: function() {

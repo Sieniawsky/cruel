@@ -1,11 +1,13 @@
 /* Routes for posts */
 var _       = require('lodash');
 var shortID = require('mongodb-short-id');
+var url     = require('url');
 var Post    = require('../models/post');
 var User    = require('../models/user');
 var remap   = require('../utils/remap');
 var bg      = require('../utils/background');
 var exists  = require('../utils/exists');
+var config  = require('../../server').get('config');
 
 module.exports = function(app, passport) {
     /* Post composition page */
@@ -25,6 +27,12 @@ module.exports = function(app, passport) {
         Post.findOne({_id: id}, function(err, post) {
             if (err) return console.error(err);
             if (exists(post)) {
+                var referer = req.headers.referer;
+                var host = url.parse(req.headers.referer).host;
+                var successRedirect = '/';
+                if (host === config.host) {
+                    successRedirect = referer;
+                }
                 var post = remap.postRemap(post, req.user);
                 var user = remap.userRemap(req.user);
                 res.render('post', {
@@ -34,6 +42,7 @@ module.exports = function(app, passport) {
                     }),
                     post       : post,
                     user       : user,
+                    redirect   : successRedirect,
                     background : bg()
                 });               
             } else {
