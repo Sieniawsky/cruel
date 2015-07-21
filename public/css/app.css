@@ -1037,6 +1037,7 @@ h3 {
     width:30px;
     height:30px;
     padding:0;
+    background-color:#fff;
   }
 
   .bolt-liked {
@@ -1047,6 +1048,7 @@ h3 {
     background-image: URL("/images/boltbuttonmobilehover.png");
     width:30px;
     height:30px;
+    background-color:#fff;
   }
 
 
@@ -1351,6 +1353,14 @@ h4 {
   margin-bottom:30px;
 }
 
+.forms .button {
+  margin-top:10px;
+}
+
+.forms h4 {
+  margin-bottom:0;
+}
+
 .form-group select {
   height:30px;
   border: 1px solid #dcdcdc;
@@ -1396,6 +1406,7 @@ h4 {
   padding-left:5px;
   border: 1px solid #dcdcdc;
   border-radius:3px;
+  margin-top:0px;
 }
 
 .form-group input:focus {
@@ -1488,6 +1499,9 @@ h4 {
 .modal a:hover {
   background-color:#fff;
   color:#55bef5;
+  border:1px solid #55bef5;
+  line-height:31px;
+  padding: 1px 7px 0px 7px;
 
 }
 
@@ -1507,6 +1521,31 @@ h4 {
   right:7px;
   cursor:pointer;
 }
+
+.overlay-login {
+  display:none;
+  position: absolute;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+  text-align:center;
+  z-index:1000;
+  background:rgba(0,0,0,0.75);
+}
+
+.modal .form-group input {
+  width:90%;
+}
+
+.list-unstyled  {
+  padding-left:0;
+  list-style:none;
+
+}
+
+
+
 
 /**Modal media queries **/
 
@@ -1865,6 +1904,13 @@ h4 {
   outline:none;
 }
 
+.modal-button {
+  margin-top:10px;
+}
+
+
+
+
 /** Leaderboard Page **/
 
 .leader-item {
@@ -1914,7 +1960,7 @@ h4 {
   width:23px;
   height:28px;
   content:"";
-  margin-bottom:-5px;
+  margin-bottom:-6px;
   margin-right:-2px;
   background: url(/images/notification-bolt.png) no-repeat 0 0;
   background-size: 100%;
