@@ -42,16 +42,20 @@ module.exports = function(app, passport) {
     });
 
     app.get('/user/edit/:username', function(req, res) {
-        User.findOne({username: req.params.username}, function(err, user) {
-            if (err) return console.error(err);
-            res.render('user-edit', {
-                initData : JSON.stringify({
-                    user : remap.userRemap(user)
-                }),
-                user       : remap.userRemap(req.user),
-                background : bg()
+        if (req.user.username === req.params.username) {
+            User.findOne({username: req.params.username}, function(err, user) {
+                if (err) return console.error(err);
+                res.render('user-edit', {
+                    initData : JSON.stringify({
+                        user : remap.userRemap(user)
+                    }),
+                    user       : remap.userRemap(req.user),
+                    background : bg()
+                });
             });
-        });
+        } else {
+            res.redirect('/');
+        }
     });
 
     app.post('/user/edit', function(req, res) {
