@@ -1,4 +1,4 @@
-<div class="row">
+<div class="js-app row">
     <div class="large-12 columns container">
         <div class="container-header">
             <!-- City Header -->
@@ -11,7 +11,7 @@
                     <option value="month">Month</option>
                     <option value="top">Top</option>
                 </select>
-                <!-- Feed location options -->
+                <!-- Leaderboard location options -->
                 <select class="js-location feed-dropdown">
                     <option value="all">All</option>
                     {{#locations}}
@@ -20,18 +20,30 @@
                 </select>
             </div>
         </div>
-
-        <!-- Leaderboard Item Template -->
-        <div class="leader-item">
-            <span class="ranking">1</span>
-            <span class="leader-score">396</span>
-            <div class="leader-thumbnail">
-                <img src="/images/placeholder.png">
-            </div>
-            <span class="leader-user">Swaglord69</span></br>
-            <span class="leader-join-date">Joined 2 weeks ago</span>
-        </div>
-       
-
+        <div class="js-leaderboard"></div>
     </div>
 </div>
+
+<!-- Templates -->
+<script id="leaderboard-user-template" type="text/template">
+    <div class="leader-item">
+        <span class="ranking"><%= rank %></span>
+        <span class="leader-score"><%= score %></span>
+        <div class="leader-thumbnail">
+            <img src="<%= imageUrl %>">
+        </div>
+        <a href="/user/<%= username %>"><span class="leader-user"><%= username %></span></a></br>
+        <span class="leader-join-date">Joined <%= date %></span>
+    </div>
+</script>
+
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
+
+<!-- Load page specific scripts -->
+{{#yield-scripts}}
+    <script src="/js/dataLoader.js"></script>
+    <script src="/js/bundles/leaderboard.js"></script>
+{{/yield-scripts}}

@@ -69,13 +69,12 @@ module.exports = function(app, passport) {
         var first = new Date(date.getFullYear(), date.getMonth(), firstDay);
         var last = new Date(date.getFullYear(), date.getMonth(), firstDay + 6);
         var query = Post
-            .find(
-                computeLocationQuery(req.params.location, {
-                    '$and': [
-                        {date: {'$gte': first}},
-                        {date: {'$lte': last}}
-                    ]
-                }))
+            .find(computeLocationQuery(req.params.location, {
+                '$and': [
+                    {date: {'$gte': first}},
+                    {date: {'$lte': last}}
+                ]
+            }))
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
             .limit(page_size);
@@ -91,13 +90,12 @@ module.exports = function(app, passport) {
         var first = new Date(date.getFullYear(), date.getMonth(), 1);
         var last = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         var query = Post
-            .find(
-                computeLocationQuery(req.params.location, {
-                    '$and': [
-                        {date: {'$gte': first}},
-                        {date: {'$lte': last}}
-                    ]
-                }))
+            .find(computeLocationQuery(req.params.location, {
+                '$and': [
+                    {date: {'$gte': first}},
+                    {date: {'$lte': last}}
+                ]
+            }))
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
             .limit(page_size);
