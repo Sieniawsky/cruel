@@ -42,16 +42,20 @@ module.exports = function(app, passport) {
     });
 
     app.get('/user/edit/:username', function(req, res) {
-        User.findOne({username: req.params.username}, function(err, user) {
-            if (err) return console.error(err);
-            res.render('user-edit', {
-                initData : JSON.stringify({
-                    user : remap.userRemap(user)
-                }),
-                user       : remap.userRemap(req.user),
-                background : bg()
+        if (req.user.username === req.params.username) {
+            User.findOne({username: req.params.username}, function(err, user) {
+                if (err) return console.error(err);
+                res.render('user-edit', {
+                    initData : JSON.stringify({
+                        user : remap.userRemap(user)
+                    }),
+                    user       : remap.userRemap(req.user),
+                    background : bg()
+                });
             });
-        });
+        } else {
+            res.redirect('/');
+        }
     });
 
     app.post('/user/edit', function(req, res) {
@@ -59,7 +63,7 @@ module.exports = function(app, passport) {
             User.update({_id: req.user._id},
                 {'$set': {imageUrl: req.body.url, description: req.body.description}}, function(err, updates) {
                 if (err) return console.error(err);
-                res.redirect('/u/' + req.user.username);
+                res.redirect('/user/' + req.user.username);
             });
         } else {
             res.send({outcome: false});

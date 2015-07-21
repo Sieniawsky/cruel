@@ -16,7 +16,8 @@ var flash        = require('connect-flash');
 var bg           = require('./app/utils/background');
 
 var Location = require('./app/models/location');
-var config   = require('./config/config'); 
+var config   = require('./config/config');
+var remap    = require('./app/utils/remap');
 
 /* Set server configuration */
 app.set('config', config(process.argv.length == 3 && process.argv[2] === 'prod'));
@@ -79,6 +80,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('404', {
+        user       : remap.userRemap(req.user),
         message    : err.message,
         error      : err,
         background : bg()
