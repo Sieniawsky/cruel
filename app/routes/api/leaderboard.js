@@ -11,7 +11,7 @@ module.exports = function(app, passport) {
 
     app.get('/api/leaderboard/:location/top', function(req, res) {
         var query = User
-            .find({})
+            .find(computeLocationQuery(req.params.location, {}))
             .sort({score: -1})
             .limit(leaderboard_size);
         query.exec(function(err, users) {
