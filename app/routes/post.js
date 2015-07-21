@@ -67,7 +67,8 @@ module.exports = function(app, passport) {
             var post = new Post(data);
             post.save(function(err, post) {
                 if (err) return console.error(err);
-                res.redirect('/');
+                var remapped = remap.postRemap(post);
+                res.redirect('/post/' + shortID.o2s(post._id) + '/' + remapped.prettySnippet);
             });
         } else {
             res.send({outcome: false});
