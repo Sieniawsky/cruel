@@ -41,11 +41,16 @@ var MainFeed = FeedView.extend({
             this.load();
         } else {
             var options = initData.options;
-            this.$location.val(_.find(initData.locations, function(location) {
-                return location.name === options.locationName;
-            })._id);
+            if (options.locationName !== 'All') {
+                this.$location.val(_.find(initData.locations, function(location) {
+                    return location.name === options.locationName;
+                })._id);
+            } else {
+                this.$location.val('all');
+            }
             this.location = this.$location.val();
             this.page = options.page;
+
             this.sort = options.sort;
             this.$sort.val(this.sort);
             this.url = this.genURL(this.page);
