@@ -24,7 +24,7 @@ module.exports = function(app, passport) {
     });
 
     /* Pretty feed URLs */
-    app.get('/:locationName/:sort(hot|new|top|all)/:page(\\d+)', function(req, res) {
+    app.get('/:locationName/:sort(hot|new|top|week|month)/:page(\\d+)', function(req, res) {
         res.render('feed', {
             initData      : JSON.stringify({
                 user      : remap.userRemap(req.user),
