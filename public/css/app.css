@@ -6,10 +6,18 @@
 
   html {
     background:none !important;
-    background-color:#fff;
+    background-color:#f6f5f2;
   }
 }
 
+
+/**Fonts**/
+
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('/fonts/BebasNeue.eot');
+  src: url('BebasNeue'), url('/fonts/BebasNeue.woff') format('woff'), url('/fonts/BebasNeue.ttf') format('truetype');
+}
 
 
 /**Menubar**/
@@ -41,7 +49,7 @@
 
 .nav {
     float:right;
-    margin-top:10px;
+    margin-top:8px;
     margin-right:-14px;
     padding-right:30px;
 }
@@ -49,13 +57,13 @@
 
 .nav a {
   text-decoration: none;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
   color: #6e6e6e;
   padding-right:18px;
   margin-right:-5px;
-  font-size: 14px;
-  letter-spacing:0px;
+  font-size: 18px;
+  letter-spacing:0.0;
   float:left;
 }
 
@@ -160,9 +168,10 @@
 }
 
 .notification-score-count {
-  font-family:'Oswald', sans-serif;
+  font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size:17px;
+  font-size:22px;
+  letter-spacing:0.03em;
   color:#bababa;;
   position:relative;
   float:left;
@@ -190,9 +199,10 @@
 }
 
  .notification-box-score-count {
-  font-family:'Oswald', sans-serif;
+  font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size:17px;
+  font-size:20px;
+  letter-spacing:0.03em;
   margin-left:20px;
   color:#bababa;;
   top:0px;
@@ -214,9 +224,10 @@
 
 
 .notification-box-comment {
-  font-family:'Oswald', sans-serif;
+  font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size:17px;
+  font-size:20px;
+  letter-spacing:0.03em;
   margin-left:20px;
   color:#bababa;;
   top:3px;
@@ -237,9 +248,10 @@
 }
 
 .notification-box-comment-like {
-  font-family:'Oswald', sans-serif;
+  font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size:17px;
+  font-size:20px;
+  letter-spacing:0.03em;
   margin-left:20px;
   color:#bababa;;
   top:3px;
@@ -260,9 +272,10 @@
 }
 
 .notification-box-empty {
-  font-family:'Oswald', sans-serif;
+  font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size:17px;
+  font-size:20px;
+  letter-spacing:0.03em;
   margin-left:20px;
   color:#bababa;;
   top:0px;
@@ -404,9 +417,9 @@
     position:absolute;
     top:-23px;
     left:12px;
-    font-family:'Oswald', sans-serif;
+    font-family:'BebasNeue', sans-serif;
     text-transform:uppercase;
-    font-size:18px;
+    font-size:22px;
     cursor:pointer;
   }
 
@@ -584,7 +597,7 @@
     border-radius: 7px;
     border: 1px solid #e8e8e8; 
     height:auto;
-    background-color: #fff;
+    background-color: #f8f8f6;
     margin-bottom:50px;
     margin-top:70px;
     position:relative;
@@ -599,22 +612,22 @@
 
 h2 {
     float:left;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'BebasNeue', sans-serif;
     text-transform:uppercase;
-    font-size: 24px;
+    font-size: 26px;
     color: #a6a6a6;
     padding-top:10px;
-    letter-spacing: 0px;
+    letter-spacing: 0.03em;
     margin:0;
 }
 
 .navigation {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'BebasNeue', sans-serif;
     text-transform:uppercase;
-    font-size: 24px;
+    font-size: 26px;
     color: #a6a6a6;
     padding-top:10px;
-    letter-spacing: 0px;
+    letter-spacing: 0.03em;
     margin:0;
     background:none;
     outline:none;
@@ -648,14 +661,14 @@ h2 {
 
 
 .sortlabel {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'BebasNeue', sans-serif;
     text-transform:uppercase;
     font-size: 16px;
     letter-spacing:0px;
     color: #a6a6a6;
     position:absolute;
-    left:-43px;
-    top:0px;
+    left:-36px;
+    top:1px;
 
 
    
@@ -698,15 +711,15 @@ h2 {
     
   h2 {
     float:left;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'BebasNeue', sans-serif;
     text-transform:uppercase;
-    font-size: 18px;
+    font-size: 22px;
     color: #a6a6a6;
-    padding-top:10px;
+    padding-top:7px;
     padding-left:3px;
-    letter-spacing: 0px;
+    letter-spacing: 0.03em;
     margin:0;
-    margin-left:-2px;
+    margin-left:0px;
   }
 
   .navigation {
@@ -735,8 +748,7 @@ h2 {
   }
 
   .sortlabel {
-    top:1px;
-    left:-40px;
+    display:none;
   }
 }
 
@@ -744,21 +756,21 @@ h2 {
 
 
 h3 {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size: 20px;
-  letter-spacing:0px;
+  font-size: 22px;
+  letter-spacing: 0.03em;
   color: #333333;
-  line-height: 24px;
-  margin-top:-2px;
+  line-height: 22px;
+  margin-top:0px;
   margin-bottom: 0px;
 }
 
 .author {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size: 16px;
-  letter-spacing:0px;
+  font-size: 22px;
+  letter-spacing:0.03em;
   color: #a6a6a6;
   padding-left:4px;
   padding-right:3px;
@@ -826,7 +838,7 @@ h3 {
   padding:0;
   border:none;
   cursor: pointer;
-  background-color:#fff;
+  background-color:#f8f8f6;
 }
 
 .bolt-liked {
@@ -840,7 +852,7 @@ h3 {
   padding:0;
   border:none;
   cursor: pointer;
-  background-color:#fff;
+  background-color:#f8f8f6;
 }
 
 .bolt-liked:focus {
@@ -857,21 +869,27 @@ h3 {
 
 
 .score {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size: 16px;
+  font-size: 22px;
   color: #a6a6a6;
   margin-right:-2px;
-  margin-left:-5px;
-  line-height:35px;
+  margin-left:13px;
+  line-height:24px;
 
 }
 
 .score:before {
-  content: url(/images/boltcountmobile2.png);
-  margin-right:-4px;
-  padding-top:5px;
-    
+  display:inline-block;
+  width:23px;
+  height:28px;
+  content:"";
+  margin-bottom:-7px;
+  margin-left:-20px;
+  margin-right:-5px;
+  background: url(/images/notification-bolt.png) no-repeat 0 0;
+  background-size: 100%;
+  
 }
 
 .comment-count {
@@ -1094,8 +1112,11 @@ h3 {
 }
 
 .post-content {
+    float:left;
+    width:390px;
     padding-left:5px;
     padding-top:15px;
+    padding-right:0;
 }
 
 .post-content a {
@@ -1117,6 +1138,77 @@ h3 {
   margin-top:-40px;
 
 }
+
+/**Post Media Queries**/
+
+@media only screen and (max-width:768px) {
+  .post {
+    margin-left:0;
+    margin-right:0;
+  }
+  .post-content {
+    padding-left:16px;
+    padding-right:16px;
+    padding-top:0px;
+    width:100%;
+  }
+  
+  .post .score {
+    font-family: 'BebasNeue', sans-serif;
+    text-transform:uppercase;
+    font-size: 20px;
+    color: #a6a6a6;
+  }
+
+  
+
+  .post h3 {
+    font-family: 'BebasNeue', sans-serif;
+    text-transform:uppercase;
+    font-size: 20px;
+    letter-spacing:0px;
+    color: #333333;
+    line-height: 24px;
+    margin-top:-8px;
+    margin-bottom: 0px;
+  }
+
+  .post .author {
+      font-family: 'BebasNeue', sans-serif;
+      text-transform:uppercase;
+      font-size: 20px;
+      letter-spacing:0px;
+      color: #a6a6a6;
+      padding-left:4px;
+      padding-right:3px;
+      
+  }
+
+  .post .date {
+      font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+      font-size: 13px;
+      color:#a6a6a6;
+      }
+
+  .post .date:before {
+      content:'\00B7';
+      padding-right:1px;
+      font-size:14px;
+       }
+
+
+}
+
+@media only screen and (min-width:1400px) {
+  .post-content {
+    width:58%;
+    width: -moz-calc(58.33333% - 25px);
+    width: -webkit-calc(58.33333% - 25px);
+    width: calc(58.33333% - 25px);
+
+  }
+}
+
 /**Post like button**/
 
 .post-like {
@@ -1164,6 +1256,9 @@ h3 {
 .post-liked-mobile {
   display:none;
 }
+
+
+
 
 /**Post Like Button Media Queries**/
 
@@ -1220,80 +1315,15 @@ h3 {
 
 
 
-/**Post Media Queries**/
-
-@media only screen and (max-width:768px) {
-  .post {
-    margin-left:0;
-    margin-right:0;
-  }
-  .post-content {
-    padding-left:15px;
-    padding-right:15px;
-    padding-top:0px;
-  }
-  .post .score {
-    font-family: 'Oswald', sans-serif;
-    text-transform:uppercase;
-    font-size: 16px;
-    color: #a6a6a6;
-  }
-
-  
-
-  .post .score:before {
-      content: url(/images/boltcountmobile2.png);
-      margin-left:-2px;
-      padding-top:5px;
-      margin-right:-4px;
-  }
-
-  .post h3 {
-    font-family: 'Oswald', sans-serif;
-    text-transform:uppercase;
-    font-size: 18px;
-    letter-spacing:0px;
-    color: #333333;
-    line-height: 24px;
-    margin-top:-8px;
-    margin-bottom: 0px;
-  }
-
-  .post .author {
-      font-family: 'Oswald', sans-serif;
-      text-transform:uppercase;
-      font-size: 16px;
-      letter-spacing:0px;
-      color: #a6a6a6;
-      padding-left:4px;
-      padding-right:3px;
-      
-  }
-
-  .post .date {
-      font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-      font-size: 13px;
-      color:#a6a6a6;
-      }
-
-  .post .date:before {
-      content:'\00B7';
-      padding-right:1px;
-      font-size:14px;
-       }
-
-
-}
-
 
 /**Form Styles**/
 
 h4 {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'BebasNeue', sans-serif;
     text-transform:uppercase;
-    font-size: 16px;
-    letter-spacing:0px;
-    color:#4f4f4f;
+    font-size: 22px;
+    letter-spacing:0.03em;
+    color:#333333;
     margin-left:1px;
     padding-right:3px;
     margin-bottom:8px;
@@ -1308,7 +1338,7 @@ h4 {
 }
 
 .postform h1 {
-    font-family:'Oswald', sans-serif;
+    font-family:'BebasNeue', sans-serif;
     text-transform:uppercase;
     color:#4f4f4f;
     margin-left:1px;
@@ -1403,6 +1433,8 @@ h4 {
   .postform h1 {
     margin-left:30px;
   }
+
+
 }
 
 
@@ -1440,23 +1472,30 @@ h4 {
 
 .modal a {
   text-decoration:none;
-  padding:4px 8px 4px 8px;
-  background-color:#dedede;
-  font-family: 'Oswald', sans-serif;
+  display:inline-block;
+  line-height:33px;
+  padding:1px 8px 0px 8px;
+  background-color:#55bef5;
+  font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size: 16px;
-  color:#9a9a9a;
+  font-size: 18px;
+  color:#fff;
   border-radius:3px;
   margin-right:10px;
   margin-left:10px;
-  
+}
+
+.modal a:hover {
+  background-color:#fff;
+  color:#55bef5;
+
 }
 
 .modal h1 {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size: 16px;
-  letter-spacing:0px;
+  font-size: 18px;
+  letter-spacing:0.03em;
   color:#f2f2f2;
 }
 
@@ -1549,7 +1588,7 @@ h4 {
 }
 
 .comment-score {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size: 16px;
   letter-spacing:0px;
@@ -1599,10 +1638,10 @@ h4 {
   }
 
   .comment .author {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'BebasNeue', sans-serif;
     text-transform:uppercase;
     font-size: 16px;
-    letter-spacing:0px;
+    letter-spacing:0.03em;
     color: #a6a6a6;
     padding-left:5px;
     padding-right:3px;
@@ -1657,6 +1696,12 @@ h4 {
   margin-bottom:0;
 }
 
+.user-content .ranking {
+  border-right:none;
+  margin-top:0;
+  margin-bottom:2px;
+}
+
 .user-feed-header {
   position:relative;
   float:left;
@@ -1669,12 +1714,13 @@ h4 {
 } 
 
 .user-score {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size: 20px;
-  color: #a6a6a6;
+  font-size: 24px;
+  color: #bababa;
   margin-right:-2px;
-  margin-left:-5px;
+  margin-top:2px;
+  margin-left:13px;
   line-height:35px;
   float:left;
   width:100%;
@@ -1693,17 +1739,6 @@ h4 {
   cursor:pointer;
 }
 
-.ranking {
-  font-family: 'Oswald', sans-serif;
-  text-transform:uppercase;
-  font-size: 20px;
-  color: #a6a6a6;
-  line-height:35px;
-  float:left;
-  width:100%;
-  margin-top:-5px;
-
-}
 
 .join-date {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -1715,9 +1750,15 @@ h4 {
 }
 
 .user-score:before {
-  content: url(/images/boltcountmobile2.png);
-  margin-right:-4px;
-  padding-top:5px;
+  display:inline-block;
+  width:23px;
+  height:28px;
+  content:"";
+  margin-bottom:-7px;
+  margin-left:-20px;
+  margin-right:-5px;
+  background: url(/images/notification-bolt.png) no-repeat 0 0;
+  background-size: 100%;
     
 }
 
@@ -1767,11 +1808,12 @@ h4 {
   .user-content {
     padding-right:0;
     padding-left:0;
+    margin-top:0px;
   }
 
   .user-edit {
     right:3px;
-    top:2px;
+    top:6px;
   }
 
 }
@@ -1790,7 +1832,7 @@ h4 {
   font-size: 36px;
   line-height:60px;
   text-align:center;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
 }
 
@@ -1798,12 +1840,13 @@ h4 {
 
 .button {
   text-decoration:none;
-  letter-spacing:0.03em;
-  padding:4px 8px 4px 8px;
+  line-height:33px;
+  padding:1px 8px 0px 8px;
   background-color:#55bef5;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size: 16px;
+  font-size: 18px;
+  letter-spacing:0.03em;
   color:#fff;
   border-radius:3px;
   border:none;
@@ -1811,8 +1854,15 @@ h4 {
 }
 
 .button:hover {
-  background-color:#61a7cc;
+  background-color:#fff;
+  color:#55bef5;
+  border:1px solid #55bef5;
+  line-height:31px;
 
+}
+
+.button:focus {
+  outline:none;
 }
 
 /** Leaderboard Page **/
@@ -1831,9 +1881,9 @@ h4 {
 }
 
 .ranking {
-  font-family:'Oswald', sans-serif;
+  font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size:22px;
+  font-size:24px;
   color:#bababa;;
   position:relative;
   float:left;
@@ -1848,14 +1898,15 @@ h4 {
 }
 
 .leader-score {
-  font-family:'Oswald', sans-serif;
+  font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
-  font-size:22px;
+  font-size:24px;
   color:#bababa;;
   position:relative;
   float:left;
   line-height:39px;
   margin-left:8px;
+  min-width:55px;
 }
 
 .leader-score:before {
@@ -1883,9 +1934,9 @@ h4 {
 }
 
 .leader-user {
-  font-family:'Oswald', sans-serif;
+  font-family:'BebasNeue', sans-serif;
   color:#333333;
-  font-size:17px;
+  font-size:20px;
   text-transform:uppercase;
   margin-left:10px;
   margin-top:-3px;
@@ -1897,7 +1948,7 @@ h4 {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 13px;
   margin-left:10px;
-  line-height:16px;
+  line-height:15px;
   color:#a6a6a6;
   float:left;
 
@@ -1923,7 +1974,7 @@ h4 {
   }
 
   .ranking {
-    font-size:18px;
+    font-size:20px;
     min-width:5px;
     border-right:none;
     padding-right:5px;
@@ -1932,9 +1983,10 @@ h4 {
   }
 
   .leader-score {
-    font-size:18px;
+    font-size:20px;
     color:#ffd800;
     margin-left:0;
+    min-width:1px;
   }
 
   .leader-score:before {
@@ -1950,6 +2002,10 @@ h4 {
     font-size:12px;
     color:#bababa;
    
+  }
+
+  .leader-user {
+
   }
 
   
