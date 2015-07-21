@@ -82,14 +82,13 @@
                                 <a href="/user/{{user.username}}">{{user.username}}</a>
                                 <a href="/leaderboard">Leaderboard</a>
                                 <a href="/post">Make A Post</a>
-                                <a href="/logout">Logout</a>
                                 <div class="menu-button" tabindex="0">
                                     <img src="/images/menu-icon.png">
                                 </div>
                                 <div class="dropdown">
                                     <ul>
                                         <li><a href="/">Home</a></li></br>
-                                        <li><a href="#">Logout</a></li></br>
+                                        <li><a href="/logout">Logout</a></li></br>
                                         <li><a href="#">Contact</a></li></br>
                                         <li><a href="#">Terms &amp; Conditions</a></li></br>
                                         <li><a href="#">User License Agreement</a></li></br>
@@ -97,6 +96,7 @@
                                 </div>
                             {{/user._id}}
                             {{^user._id}}
+                                <a href="/leaderboard">Leaderboard</a>
                                 <a href="/login">Login</a>
                                 <a href="/signup">Signup</a>
                                 <div class="menu-button" tabindex="0">
@@ -105,7 +105,7 @@
                                 <div class="dropdown">
                                     <ul>
                                         <li><a href="/">Home</a></li></br>
-                                        <li><a href="#">Logout</a></li></br>
+                                        <li><a href="/login">Login</a></li></br>
                                         <li><a href="#">Contact</a></li></br>
                                         <li><a href="#">Terms &amp; Conditions</a></li></br>
                                         <li><a href="#">User License Agreement</a></li></br>
