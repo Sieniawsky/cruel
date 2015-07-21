@@ -16,7 +16,7 @@
 @font-face {
   font-family: 'BebasNeue';
   src: url('/fonts/BebasNeue.eot');
-  src: url('BebasNeue'), url('/fonts/BebasNeue.woff') format('woff'), url('/fonts/BebasNeue.ttf') format('truetype');
+  src: local('BebasNeue'), url('/fonts/BebasNeue.woff') format('woff'), url('/fonts/BebasNeue.ttf') format('truetype');
 }
 
 
@@ -623,17 +623,15 @@ h2 {
 
 .navigation {
     font-family: 'BebasNeue', sans-serif;
+    float:left;
+    padding-top:10px;
     text-transform:uppercase;
     font-size: 26px;
     color: #a6a6a6;
-    padding-top:10px;
     letter-spacing: 0.03em;
-    margin:0;
-    background:none;
-    outline:none;
-    border:none;
     padding-left:0;
     cursor:pointer;
+    text-decoration:none;
   }
 
 .navigation:focus {
@@ -668,7 +666,7 @@ h2 {
     color: #a6a6a6;
     position:absolute;
     left:-36px;
-    top:1px;
+    top:2px;
 
 
    
@@ -908,7 +906,7 @@ h3 {
 }
 
 .snippet {
-  margin-top:5px;
+  margin-top:-1px;
   margin-bottom:10px;
   font-size: 14px;
   color: #4f4f4f;
@@ -1382,6 +1380,8 @@ h4 {
   padding-left:5px;
   border: 1px solid #dcdcdc;
   border-radius:3px;
+  font-size:12px;
+  padding-top:5px;
   
   
 }
@@ -1941,8 +1941,20 @@ h4 {
   margin-left:10px;
   margin-top:-3px;
   line-height:20px;
-  
+  text-decoration:none;
+
 }
+
+.leader-item a {
+  text-decoration:none;
+  outline:none;
+}
+
+.leader-item a:focus {
+  outline:none;
+}
+
+
 
 .leader-join-date {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
