@@ -112,6 +112,7 @@ module.exports = {
                     return {
                         _post    : n[0]._post,
                         title    : n[0].title,
+                        url      : n[0].url,
                         snippet  : n[0].title.substring(0, 40).concat(' ...'),
                         newScore : n.length  
                     };
@@ -127,6 +128,7 @@ module.exports = {
                         _post    : n[0]._post,
                         _comment : n[0]._comment,
                         comment  : n[0].comment,
+                        url      : n[0].url,
                         snippet  : n[0].comment.substring(0, 40).concat(' ...'),
                         newScore : n.length
                     };
@@ -142,6 +144,7 @@ module.exports = {
                         _post       : n[0]._post,
                         _comment    : n[0]._comment,
                         title       : n[0].title,
+                        url         : n[0].url,
                         snippet     : n[0].title.substring(0, 40).concat(' ...'),
                         newComments : n.length
                         };

@@ -51,15 +51,6 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('/post/:id', function(req, res) {
-        Post.findOne({_id: req.params.id}, function(err, post) {
-            if (err) return console.error(err);
-            var remapped = remap.postRemap(post);
-            var url = '/post/' + remapped._shortID + '/' + remapped.prettySnippet;
-            res.redirect(url);
-        });
-    });
-
     /* Post handler */
     app.post('/post', function(req, res) {
         if (typeof req.user._id != 'undefined' && req.user._id != null) {
