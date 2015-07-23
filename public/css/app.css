@@ -167,6 +167,7 @@
   margin-top:0;
 }
 
+
 .notification-score-count {
   font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
@@ -297,16 +298,13 @@
 }
 
 .notification-title {
-  text-decoration:none;
-  color:#bababa;
   padding-left:7px;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size:13px;
   padding-top:5px;
   float:left;
-
-
 }
+
 
 .notification a {
   font-size:13px;
@@ -317,7 +315,12 @@
   padding-right:0;
   margin-right:0;
   text-transform:none;
+  width:100%;
 
+}
+
+.notification a:hover {
+  color:#333;
 }
 
 
@@ -333,8 +336,11 @@
   height:40px;
   padding-top:5px;
   padding-bottom:8px;
+  width:100%;
 
 }
+
+
 
 /**Menubar Media Queries**/
 
