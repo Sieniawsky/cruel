@@ -60,14 +60,14 @@
                                                     </a>
                                                 </li>
                                             {{/user.notifications.commentScore}}
-                                            {{#user.notifications.commentScore}}
+                                            {{#user.notifications.newComments}}
                                                 <li class="notification">
                                                     <span class="notification-box-comment">+{{newComments}}</span>
                                                     <a href="/post/{{_post}}" class="notification-title">
                                                         {{snippet}}
                                                     </a>
                                                 </li>
-                                            {{/user.notifications.commentScore}}
+                                            {{/user.notifications.newComments}}
                                         {{/user.notifications.hasNew}}
                                         {{^user.notifications.hasNew}}
                                             <li class="notification">
@@ -161,14 +161,14 @@
                                     </a>
                                 </li>
                             {{/user.notifications.commentScore}}
-                            {{#user.notifications.commentScore}}
+                            {{#user.notifications.newComments}}
                                 <li class="notification">
                                     <span class="notification-box-comment">+{{newComments}}</span>
                                     <a href="/post/{{_post}}" class="notification-title">
                                         {{snippet}}
                                     </a>
                                 </li>
-                            {{/user.notifications.commentScore}}
+                            {{/user.notifications.newComments}}
                         {{/user.notifications.hasNew}}
                         {{^user.notifications.hasNew}}
                             <li class="notification">
