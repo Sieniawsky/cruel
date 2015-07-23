@@ -1,5 +1,6 @@
 /* Routes for posts */
 var _        = require('lodash');
+var shortID  = require('mongodb-short-id');
 var Post     = require('../../models/post');
 var User     = require('../../models/user');
 var remap    = require('../../utils/remap');
@@ -32,7 +33,11 @@ module.exports = function(app, passport) {
                     {'$push': {likers: req.user._id}, '$inc': {score: 1}}, function(err, update) {
                     if (err) return console.error(err);
                     User.update({_id: post._user},
-                        {'$inc': {score: 1}, '$push': {postScoreNotifications: {_post: post._id, title: post.title}}},
+                        {'$inc': {score: 1}, '$push': {postScoreNotifications: {
+                            _post : post._id,
+                            title : post.title,
+                            url   : '/post/' + shortID.o2s(post._id) + '/' + remap.prettySnippet(post.title)
+                        }}},
                         function(err, user) {
                         if (err) return console.error(err);
                         res.send({outcome: true});
@@ -60,7 +65,11 @@ module.exports = function(app, passport) {
                     User.findOne({_id: post._user}, function(err, user) {
                         if (err) return console.error(err);
                         var notifications = user.postScoreNotifications;
-                        var index = _.indexOf(notifications, {_post: post._id, title: post.title});
+                        var index = _.indexOf(notifications, {
+                            _post : post._id,
+                            title : post.title,
+                            url   : '/post/' + shortID.o2s(post._id) + '/' + remap.prettySnippet(post.title)
+                        });
                         notifications.splice(index, 1);
 
                         /* Update */
@@ -100,7 +109,10 @@ module.exports = function(app, passport) {
                     {'$push': {commentNotifications: {
                         _post    : comment._post,
                         _comment : comment._id,
-                        title    : req.body.post.title
+                        title    : req.body.post.title,
+                        url      : '/post/'
+                            + shortID.o2s(req.body.post._id)
+                            + '/' + remap.prettySnippet(req.body.post.title)
                     }}}, function(err, update) {
                     if (err) return console.error(err);
                     res.send({outcome: true});
@@ -134,7 +146,8 @@ module.exports = function(app, passport) {
                             '$push': {commentScoreNotifications: {
                                 _post    : post._id,
                                 _comment : comment._id,
-                                comment  : comment.comment}
+                                comment  : comment.comment},
+                                url      : '/post/' + shortID.o2s(post._id) + '/' + remap.prettySnippet(post.title)
                             }
                         },
                         function(err, user) {
@@ -167,7 +180,12 @@ module.exports = function(app, passport) {
                     User.findOne({_id: post._user}, function(err, user) {
                         if (err) return console.error(err);
                         var notifications = user.commentScoreNotifications;
-                        var index = _.indexOf(notifications, {_post: post._id, _comment: comment._id, title: post.title});
+                        var index = _.indexOf(notifications, {
+                            _post    : post._id,
+                            _comment : comment._id,
+                            comment  : comment.comment,
+                            url      : '/post/' + shortID.o2s(post._id) + remap.prettySnippet(post.title)
+                        });
                         notifications.splice(index, 1);
 
                         /* Update */
