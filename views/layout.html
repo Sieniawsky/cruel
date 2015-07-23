@@ -145,22 +145,38 @@
                 <div class="notification-box-mobile">
                     <ul class="notifications-list">
                         {{#user.notifications.hasNew}}
-                            {{#user.notifications.posts}}
+                            {{#user.notifications.postScore}}
                                 <li class="notification">
                                     <span class="notification-box-score-count">+{{newScore}}</span>
                                     <a href="/post/{{_post}}" class="notification-title">
                                         {{snippet}}
                                     </a>
                                 </li>
-                            {{/user.notifications.posts}}
+                            {{/user.notifications.postScore}}
+                            {{#user.notifications.commentScore}}
+                                <li class="notification">
+                                    <span class="notification-box-comment-like">+{{newScore}}</span>
+                                    <a href="/post/{{_post}}" class="notification-title">
+                                        {{snippet}}
+                                    </a>
+                                </li>
+                            {{/user.notifications.commentScore}}
+                            {{#user.notifications.commentScore}}
+                                <li class="notification">
+                                    <span class="notification-box-comment">+{{newComments}}</span>
+                                    <a href="/post/{{_post}}" class="notification-title">
+                                        {{snippet}}
+                                    </a>
+                                </li>
+                            {{/user.notifications.commentScore}}
                         {{/user.notifications.hasNew}}
                         {{^user.notifications.hasNew}}
-                             <li class="notification">
-                                    <span class="notification-box-empty">+0</span>
-                                    <span class="notification-title">
-                                        No new notifications
-                                    </span>
-                                </li>
+                            <li class="notification">
+                                <span class="notification-box-empty">+0</span>
+                                <span class="notification-title">
+                                    No new notifications.
+                                </span>
+                            </li>
                         {{/user.notifications.hasNew}}
                     </ul>
                 </div>
@@ -170,7 +186,7 @@
                             <div class="mobile-score-count">{{user.score}}
                                 {{#user.notifications.hasNew}}
                                     <span class="js-new-score notification-counter-mobile">
-                                        {{user.notifications.newScore}}
+                                        {{user.notifications.notifications}}
                                     </span>
                                 {{/user.notifications.hasNew}}
                             </div>
