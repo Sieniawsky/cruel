@@ -303,6 +303,7 @@
   font-size:13px;
   padding-top:5px;
   float:left;
+  color:#bababa;
 }
 
 
@@ -315,7 +316,7 @@
   padding-right:0;
   margin-right:0;
   text-transform:none;
-  width:100%;
+
 
 }
 
@@ -591,6 +592,14 @@
     padding-bottom:8px;
 
   }
+
+  .notification-link {
+    height:auto;
+    display:inline-block;
+    width:100%;
+  }
+
+
 
 }
 

@@ -128,23 +128,67 @@
                 {{#user._id}}
                     <div class="dropdown-mobile">
                         <ul>
-                            <li><a href="/">Home</a></li></br>
-                            <li><a href="/logout">Logout</a></li></br>
-                            <li><a href="#">Contact</a></li></br>
-                            <li><a href="#">Terms &amp; Conditions</a></li></br>
-                            <li><a href="#">User License Agreement</a></li></br>
+                            <li>
+                                <a href="/">
+                                    <div>Home</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/logout">
+                                    <div>Logout</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    <div>Contact</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    <div>Terms & Conditions</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    <div>User License Agreement</div>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 {{/user._id}}
                 {{^user._id}}
                     <div class="dropdown-mobile">
                         <ul>
-                            <li><a href="/">Home</a></li></br>
-                            <li><a href="/login">Log in</a></li></br>
-                            <li><a href="/signup">Sign up</a></li></br>
-                            <li><a href="#">Contact</a></li></br>
-                            <li><a href="#">Terms &amp; Conditions</a></li></br>
-                            <li><a href="#">User License Agreement</a></li></br>
+                            <li>
+                                <a href="/">
+                                    <div>Home</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/login">
+                                    <div>Log in</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/signup">
+                                    <div>Sign up</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    <div>Contact</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    <div>Terms & Conditions</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    <div>User License Agreement</div>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 {{/user._id}}
@@ -153,25 +197,31 @@
                         {{#user.notifications.hasNew}}
                             {{#user.notifications.postScore}}
                                 <li class="notification">
-                                    <span class="notification-box-score-count">+{{newScore}}</span>
-                                    <a href="{{url}}" class="notification-title">
-                                        {{snippet}}
+                                    <a href="{{url}}">
+                                        <div class="notification-link">
+                                            <span class="notification-box-score-count">+{{newScore}}</span>
+                                            <span class="notification-title">{{snippet}}</span>
+                                        </div>
                                     </a>
                                 </li>
                             {{/user.notifications.postScore}}
                             {{#user.notifications.commentScore}}
                                 <li class="notification">
-                                    <span class="notification-box-comment-like">+{{newScore}}</span>
-                                    <a href="{{url}}" class="notification-title">
-                                        {{snippet}}
+                                    <a href="{{url}}">
+                                        <div class="notification-link">
+                                            <span class="notification-box-comment-like">+{{newScore}}</span>
+                                            <span class="notification-title">{{snippet}}</span>
+                                        </div>
                                     </a>
                                 </li>
                             {{/user.notifications.commentScore}}
                             {{#user.notifications.newComments}}
                                 <li class="notification">
-                                    <span class="notification-box-comment">+{{newComments}}</span>
-                                    <a href="{{url}}" class="notification-title">
-                                        {{snippet}}
+                                    <a href="{{url}}">
+                                        <div class="notification-link">
+                                            <span class="notification-box-comment">+{{newComments}}</span>
+                                            <span class="notification-title">{{snippet}}</span>
+                                        </div>
                                     </a>
                                 </li>
                             {{/user.notifications.newComments}}
