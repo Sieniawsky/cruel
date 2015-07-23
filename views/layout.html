@@ -46,7 +46,7 @@
                                         {{#user.notifications.hasNew}}
                                             {{#user.notifications.postScore}}
                                                 <li class="notification">
-                                                    <a href="/post/{{_post}}">
+                                                    <a href="{{url}}">
                                                         <div class="notification-link">
                                                             <span class="notification-box-score-count">+{{newScore}}</span>
                                                             <span class="notification-title">{{snippet}}</span>
@@ -56,7 +56,7 @@
                                             {{/user.notifications.postScore}}
                                             {{#user.notifications.commentScore}}
                                                 <li class="notification">
-                                                    <a href="/post/{{_post}}">
+                                                    <a href="{{url}}">
                                                         <div class="notification-link">
                                                             <span class="notification-box-comment-like">+{{newScore}}</span>
                                                             <span class="notification-title">{{snippet}}</span>
@@ -66,7 +66,7 @@
                                             {{/user.notifications.commentScore}}
                                             {{#user.notifications.newComments}}
                                                 <li class="notification">
-                                                    <a href="/post/{{_post}}">
+                                                    <a href="{{url}}">
                                                         <div class="notification-link">
                                                             <span class="notification-box-comment">+{{newComments}}</span>
                                                             <span class="notification-title">{{snippet}}</span>
@@ -154,7 +154,7 @@
                             {{#user.notifications.postScore}}
                                 <li class="notification">
                                     <span class="notification-box-score-count">+{{newScore}}</span>
-                                    <a href="/post/{{_post}}" class="notification-title">
+                                    <a href="{{url}}" class="notification-title">
                                         {{snippet}}
                                     </a>
                                 </li>
@@ -162,7 +162,7 @@
                             {{#user.notifications.commentScore}}
                                 <li class="notification">
                                     <span class="notification-box-comment-like">+{{newScore}}</span>
-                                    <a href="/post/{{_post}}" class="notification-title">
+                                    <a href="{{url}}" class="notification-title">
                                         {{snippet}}
                                     </a>
                                 </li>
@@ -170,7 +170,7 @@
                             {{#user.notifications.newComments}}
                                 <li class="notification">
                                     <span class="notification-box-comment">+{{newComments}}</span>
-                                    <a href="/post/{{_post}}" class="notification-title">
+                                    <a href="{{url}}" class="notification-title">
                                         {{snippet}}
                                     </a>
                                 </li>

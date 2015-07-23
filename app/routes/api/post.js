@@ -111,7 +111,7 @@ module.exports = function(app, passport) {
                         _comment : comment._id,
                         title    : req.body.post.title,
                         url      : '/post/'
-                            + shortID.o2s(req.body.post._id)
+                            + shortID.l2s(req.body.post._id)
                             + '/' + remap.prettySnippet(req.body.post.title)
                     }}}, function(err, update) {
                     if (err) return console.error(err);
