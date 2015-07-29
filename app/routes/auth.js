@@ -9,16 +9,6 @@ var config   = require('../../server').get('config');
 var url      = require('url');
 
 module.exports = function(app, passport) {
-    app.get('/login', function(req, res) {
-        res.render('login', {
-            initData : JSON.stringify({
-                referer : req.headers.referer
-            }),
-            message    : req.flash('loginMessage'),
-            background : bg()
-        });
-    });
-
     app.get('/signup', function(req, res) {
         Location.find({}, function(err, locations) {
             if (err) return console.error(err);
@@ -55,7 +45,7 @@ module.exports = function(app, passport) {
     /* User login, redirect to the last page that they were on
        as long as it was from the app host. */
     app.post('/login', function(req, res, next) {
-        var referer = req.body.referer;
+        var referer = req.headers.referer;
         var host    = url.parse(referer).host;
         var successRedirect = '/';
         if (host === config.host) {
@@ -63,7 +53,7 @@ module.exports = function(app, passport) {
         }
         passport.authenticate('local-login', {
             successRedirect : successRedirect,
-            failureRedirect : '/login',
+            failureRedirect : successRedirect + '?failure=true',
             failureFlash    : true
         })(req, res, next);
     });

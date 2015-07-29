@@ -103,7 +103,7 @@
                             {{/user._id}}
                             {{^user._id}}
                                 <a href="/leaderboard">Leaderboard</a>
-                                <a href="/login">Login</a>
+                                <button class="js-login">Login</button>
                                 <a href="/signup">Signup</a>
                                 <div class="menu-button" tabindex="0">
                                     <img src="/images/menu-icon.png">
@@ -111,7 +111,7 @@
                                 <div class="dropdown">
                                     <ul>
                                         <li><a href="/">Home</a></li></br>
-                                        <li><a href="/login">Login</a></li></br>
+                                        <li><button class="js-login">Login</button></li></br>
                                         <li><a href="#">Contact</a></li></br>
                                         <li><a href="#">Terms &amp; Conditions</a></li></br>
                                         <li><a href="#">User License Agreement</a></li></br>
@@ -165,9 +165,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/login">
-                                    <div>Log in</div>
-                                </a>
+                                <button class="js-login">Login</button>
                             </li>
                             <li>
                                 <a href="/signup">
@@ -314,7 +312,7 @@
                             <button class="button modal-button" type="submit">Login</button>
                         </div>
                     </form>
-                    <img class="js-close modal-close" src="/images/modal-close.png">
+                    <img class="js-login-close modal-close" src="/images/modal-close.png">
                 </div>
             </div>
 
