@@ -1,6 +1,6 @@
 /* This is where it all begins */
 var express  = require('express');
-var app      =  module.exports = express();
+var app      = module.exports = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
 var hogan    = require('hogan-express');

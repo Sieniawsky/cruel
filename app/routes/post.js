@@ -27,22 +27,14 @@ module.exports = function(app, passport) {
         Post.findOne({_id: id}, function(err, post) {
             if (err) return console.error(err);
             if (exists(post)) {
-                var referer = req.headers.referer;
-                var host = url.parse(req.headers.referer).host;
-                var successRedirect = '/';
-                if (host === config.host) {
-                    successRedirect = referer;
-                }
-                var post = remap.postRemap(post, req.user);
-                var user = remap.userRemap(req.user);
                 res.render('post', {
                     initData : JSON.stringify({
-                        post : post,
-                        user : user
+                        post : remap.postRemap(post, req.user),
+                        user : remap.userRemap(req.user)
                     }),
-                    post       : post,
-                    user       : user,
-                    redirect   : successRedirect,
+                    post       : remap.postRemap(post, req.user),
+                    user       : remap.userRemap(req.user),
+                    redirect   : generateRedirect(req.headers.referer),
                     background : bg()
                 });               
             } else {
@@ -74,4 +66,16 @@ module.exports = function(app, passport) {
             res.send({outcome: false});
         }
     });
+
+    var generateRedirect = function(referer) {
+        var redirect;
+        if (typeof referer == 'undefined' || referer == null) {
+            redirect = '/';
+        } else if (url.parse(referer).host === config.host && url.parse(referer).pathname !== '/post') {
+            redirect = referer;
+        } else {
+            redirect = '/';
+        }
+        return redirect;
+    };
 };
