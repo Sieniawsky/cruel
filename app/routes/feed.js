@@ -16,6 +16,7 @@ module.exports = function(app, passport) {
             user       : remap.userRemap(req.user),
             locations  : app.get('locations'),
             background : bg(),
+            message    : req.flash('loginMessage'),
             partials   : {
                 feedPostTemplate : 'partials/feed-post-template',
                 feedScripts      : 'partials/feed-scripts'

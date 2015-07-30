@@ -53,7 +53,7 @@ module.exports = function(app, passport) {
         }
         passport.authenticate('local-login', {
             successRedirect : successRedirect,
-            failureRedirect : successRedirect + '?failure=true',
+            failureRedirect : url.resolve(successRedirect, '/?s=' + encodeURIComponent('false')),
             failureFlash    : true
         })(req, res, next);
     });
