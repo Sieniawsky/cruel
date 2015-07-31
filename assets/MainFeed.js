@@ -24,6 +24,8 @@ var MainFeed = FeedView.extend({
         this.$location = $('.js-location');
         this.$locationName = $('.js-location-name');
 
+        this.nav = nav || {};
+
         /* Check for feed load options */
         if (typeof initData.options == 'undefined') {
             this.sort = 'hot';
@@ -69,11 +71,18 @@ var MainFeed = FeedView.extend({
             url   : this.genURL(1),
             sort  : this.sort
         });
-        History.replaceState(
-            {state:1},
-            'Cruel',
-            '/'
-        );
+
+        console.log(this.getParameterByName('failure'));
+
+        if (this.getParameterByName('s') !== 'false') {
+            History.replaceState(
+                {state:1},
+                'Cruel',
+                '/'
+            );
+        } else {
+            this.nav.showLoginModal();
+        }
         this.render();
     },
 
@@ -110,6 +119,13 @@ var MainFeed = FeedView.extend({
 
     genURL: function(page) {
         return '/api/feed/' + this.location + '/' + this.sort + '/' + page;
+    },
+
+    getParameterByName: function(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     },
 
     render: function() {

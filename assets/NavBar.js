@@ -19,7 +19,10 @@ var NavBar = Backbone.View.extend({
         'click .js-close'         : 'hideModal',
         'click .js-link-messages' : 'handleLink',
         'click .js-link-post'     : 'handleLink',
-        'click .js-link-user'     : 'handleLink'
+        'click .js-link-user'     : 'handleLink',
+
+        'click .js-login'        : 'showLoginModal',
+        'click .js-login-close'  : 'hideLoginModal'
     },
 
     initialize: function() {
@@ -30,6 +33,15 @@ var NavBar = Backbone.View.extend({
         this.$navDropdown           = $('.dropdown');
         this.$dropdownMobile        = $('.dropdown-mobile');
         this.$modal = $('.overlay');
+        this.$loginModal = $('.overlay-login');
+    },
+
+    showLoginModal: function() {
+        this.$loginModal.show();
+    },
+
+    hideLoginModal: function() {
+        this.$loginModal.hide();
     },
 
     showModal: function() {
