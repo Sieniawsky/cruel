@@ -63,7 +63,6 @@
   padding-right:18px;
   margin-right:-5px;
   font-size: 18px;
-  letter-spacing:0.0;
   float:left;
 }
 
@@ -75,6 +74,27 @@
 
 .nav-score:before {
   content: url('/images/boltcountmobile2.png');
+}
+
+.login-button {
+  background:none;
+  border:none;
+  font-family: 'BebasNeue', sans-serif;
+  text-transform:uppercase;
+  color: #6e6e6e;
+  padding-right:18px;
+  font-size: 18px;
+  float:left;
+  line-height:26px;
+  cursor:pointer;
+}
+
+.login-button:hover {
+  color:#fff;
+}
+
+.login-button:focus {
+  outline:none;
 }
 
 /**Nav Dropdown**/
@@ -597,6 +617,15 @@
     height:auto;
     display:inline-block;
     width:100%;
+  }
+
+  .login-button-mobile {
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size:13px;
+    letter-spacing:0;
+    color:#bababa;
+    background:none;
+    border:none;
   }
 
 
@@ -1450,8 +1479,8 @@ h4 {
     margin-bottom:10px;
     height:100%;
     overflow-y:hidden;
-
   }
+  
   .form-group textarea {
     width:100%;
   }
@@ -1474,7 +1503,7 @@ h4 {
 
 .overlay {
   display: none;
-  position: absolute;
+  position: fixed;
   left:0px;
   top:0px;
   width:100%;
@@ -1482,6 +1511,7 @@ h4 {
   text-align:center;
   z-index:1000;
   background:rgba(0,0,0,0.75);
+  overflow:hidden;
 }
 
 .modal {
