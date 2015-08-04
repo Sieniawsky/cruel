@@ -12,7 +12,12 @@ module.exports = function(isProd) {
             'www.vimeo.com',
             'soundcloud.com',
             'www.soundcloud.com'
-        ]
+        ],
+        oEmbedFormats   : {
+            youtube     : 'https://youtube.com/oembed?format=json&url=',
+            vimeo       : 'https://vimeo.com/api/oembed.json?url=',
+            soundcloud  : 'https://soundcloud.com/oembed?format=json&url='
+        }
     };
     var dev = {
         hosts  : [
