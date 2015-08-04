@@ -6,11 +6,15 @@ module.exports = function(isProd) {
         page_size : 12
     };
     var dev = {
-        host   : 'localhost:3000',
+        hosts  : [
+            'localhost:3000'
+        ],
         socket : 'mongodb://localhost:27017/cruel'
     };
     var prod = {
-        host   : 'bobbybottleservice.com',
+        hosts  : [
+            'app.1v1v1.ca'
+        ],
         socket : 'mongodb://swaglord69:myballs@ds047722.mongolab.com:47722/heroku_k2lqlzp8'
     };
 

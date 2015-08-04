@@ -71,7 +71,7 @@ module.exports = function(app, passport) {
         var redirect;
         if (typeof referer == 'undefined' || referer == null) {
             redirect = '/';
-        } else if (url.parse(referer).host === config.host && url.parse(referer).pathname !== '/post') {
+        } else if (_.contains(config.hosts, url.parse(referer).host) && url.parse(referer).pathname !== '/post') {
             redirect = referer;
         } else {
             redirect = '/';
