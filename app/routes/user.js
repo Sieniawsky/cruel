@@ -14,7 +14,7 @@ module.exports = function(app, passport) {
                 Post.find({_user: user._id}, function(err, posts) {
                     if (err) return console.error(err);
                     var id = user._id;
-                    var query = User.find({}).sort({score: -1});
+                    var query = User.find({_location: user._location}).sort({score: -1});
                     query.exec(function(err, users) {
                         if (err) return console.error(err);
                         var rank = _.indexOf(users, _.find(users, function(user) {

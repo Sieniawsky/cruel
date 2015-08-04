@@ -30,10 +30,10 @@ module.exports = function(app, passport) {
 
     app.post('/signup', function(req, res, next) {
         var referer = req.body.referer;
-        var host    = url.parse(referer).host;
+        var parsed  = url.parse(referer);
         var successRedirect = '/';
-        if (host === config.host) {
-            successRedirect = referer;
+        if (parsed.host === config.host) {
+            successRedirect = parsed.pathname;
         }
         passport.authenticate('local-signup', {
             successRedirect : successRedirect,
@@ -46,10 +46,10 @@ module.exports = function(app, passport) {
        as long as it was from the app host. */
     app.post('/login', function(req, res, next) {
         var referer = req.headers.referer;
-        var host    = url.parse(referer).host;
+        var parsed  = url.parse(referer);
         var successRedirect = '/';
-        if (host === config.host) {
-            successRedirect = referer;
+        if (parsed.host === config.host) {
+            successRedirect = parsed.pathname;
         }
         passport.authenticate('local-login', {
             successRedirect : successRedirect,
