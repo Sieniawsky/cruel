@@ -32,7 +32,7 @@ module.exports = function(app, passport) {
         var referer = req.body.referer;
         var parsed  = url.parse(referer);
         var successRedirect = '/';
-        if (parsed.host === config.host) {
+        if (_.contains(config.hosts, parsed.host)) {
             successRedirect = parsed.pathname;
         }
         passport.authenticate('local-signup', {
@@ -48,7 +48,7 @@ module.exports = function(app, passport) {
         var referer = req.headers.referer;
         var parsed  = url.parse(referer);
         var successRedirect = '/';
-        if (parsed.host === config.host) {
+        if (_.contains(config.hosts, parsed.host)) {
             successRedirect = parsed.pathname;
         }
         passport.authenticate('local-login', {
