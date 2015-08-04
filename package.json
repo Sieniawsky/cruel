@@ -38,8 +38,10 @@
     "morgan": "~1.0.0",
     "passport": "latest",
     "passport-local": "latest",
+    "request": "^2.60.0",
     "serve-favicon": "~2.0.1",
-    "uglifyify": "^3.0.1"
+    "uglifyify": "^3.0.1",
+    "xml2js": "^0.4.9"
   },
-  "engine": "node 0.10.31"
+  "engine": "node 0.12.7"
 }

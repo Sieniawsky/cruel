@@ -1,12 +1,13 @@
 /* Routes for posts */
 var _       = require('lodash');
-var shortID = require('mongodb-short-id');
 var url     = require('url');
+var shortID = require('mongodb-short-id');
 var Post    = require('../models/post');
 var User    = require('../models/user');
 var remap   = require('../utils/remap');
 var bg      = require('../utils/background');
 var exists  = require('../utils/exists');
+var parser  = require('../utils/parser');
 var config  = require('../../server').get('config');
 
 module.exports = function(app, passport) {
@@ -56,9 +57,11 @@ module.exports = function(app, passport) {
                 _location     : req.user._location,
                 _locationName : req.user._locationName
             });
+            data.formatted = parser.format(data.description);
             data = _.omit(data, function(value) {
                 return value === '';
             });
+
             var post = new Post(data);
             post.save(function(err, post) {
                 if (err) return console.error(err);

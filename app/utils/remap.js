@@ -40,7 +40,7 @@ module.exports = {
             date          : moment(new Date(post.date)).fromNow(),
             rawDate       : post.date,
             description   : post.description.replace(/\r?\n/g, '<br/>'),
-            formatted     : post.description.replace(/\r?\n/g, '<br/>'),
+            formatted     : post.formatted,
             snippet       : snippet,
             prettySnippet : prettySnippet(post.title),
             _user         : post._user,

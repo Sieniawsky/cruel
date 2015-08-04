@@ -1,9 +1,15 @@
 var _ = require('lodash');
 
 module.exports = function(isProd) {
+    var bundle = {};
     var common = {
-        image_url : 'https://pbs.twimg.com/profile_images/512279743241019392/sU297Cak.jpeg',
-        page_size : 12
+        image_url       : 'https://pbs.twimg.com/profile_images/512279743241019392/sU297Cak.jpeg',
+        page_size       : 12,
+        oEmbedProviders : [
+            "youtube.com",
+            "vimeo.com",
+            "soundcloud.com"
+        ]
     };
     var dev = {
         hosts  : [
@@ -18,8 +24,6 @@ module.exports = function(isProd) {
         ],
         socket : 'mongodb://swaglord69:myballs@ds047722.mongolab.com:47722/heroku_k2lqlzp8'
     };
-
-    var bundle = {};
 
     if (isProd) {
         bundle = _.extend(common, prod);
