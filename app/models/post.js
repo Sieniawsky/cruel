@@ -6,6 +6,7 @@ var postSchema = mongoose.Schema({
     title         : String,
     url           : { type : String, default : config.image_url },
     description   : { type : String, default : '' },
+    formatted     : { type : String, default : '' },
     date          : Date,
     _user         : mongoose.Schema.Types.ObjectId,
     _username     : String,

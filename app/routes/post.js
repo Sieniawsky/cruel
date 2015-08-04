@@ -12,11 +12,12 @@ var config  = require('../../server').get('config');
 module.exports = function(app, passport) {
     /* Post composition page */
     app.get('/post', function(req, res) {
+        var mappedUser = remap.userRemap(req.user);
         res.render('compose', {
             initData : JSON.stringify({
-                user : remap.userRemap(req.user)
+                user : mappedUser
             }),
-            user       : remap.userRemap(req.user),
+            user       : mappedUser,
             background : bg()
         });
     });
@@ -27,14 +28,16 @@ module.exports = function(app, passport) {
         Post.findOne({_id: id}, function(err, post) {
             if (err) return console.error(err);
             if (exists(post)) {
+                var remappedPost = remap.postRemap(post, req.user);
+                var remappedUser = remap.userRemap(req.user);
                 res.render('post', {
                     initData : JSON.stringify({
-                        post : remap.postRemap(post, req.user),
-                        user : remap.userRemap(req.user)
+                        post : remappedPost,
+                        user : remappedUser
                     }),
-                    post       : remap.postRemap(post, req.user),
-                    user       : remap.userRemap(req.user),
-                    redirect   : generateRedirect(req.headers.referer),
+                    post       : remappedPost,
+                    user       : remappedUser,
+                    redirect   : generateRedirect(req.headers.referer, remappedPost.postURL),
                     background : bg()
                 });               
             } else {
@@ -59,19 +62,21 @@ module.exports = function(app, passport) {
             var post = new Post(data);
             post.save(function(err, post) {
                 if (err) return console.error(err);
-                var remapped = remap.postRemap(post);
-                res.redirect('/post/' + shortID.o2s(post._id) + '/' + remapped.prettySnippet);
+                var mapped = remap.postRemap(post);
+                res.redirect(mapped.postURL);
             });
         } else {
             res.send({outcome: false});
         }
     });
 
-    var generateRedirect = function(referer) {
+    var generateRedirect = function(referer, postURL) {
         var redirect;
         if (typeof referer == 'undefined' || referer == null) {
             redirect = '/';
-        } else if (_.contains(config.hosts, url.parse(referer).host) && url.parse(referer).pathname !== '/post') {
+        } else if (_.contains(config.hosts, url.parse(referer).host)
+            && url.parse(referer).pathname !== '/post'
+            && referer !== postURL) {
             redirect = referer;
         } else {
             redirect = '/';
