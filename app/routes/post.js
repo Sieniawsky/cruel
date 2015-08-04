@@ -57,16 +57,18 @@ module.exports = function(app, passport) {
                 _location     : req.user._location,
                 _locationName : req.user._locationName
             });
-            data.formatted = parser.format(data.description);
-            data = _.omit(data, function(value) {
-                return value === '';
-            });
+            parser.format(data.description, function(formatted) {
+                data.formatted = formatted;
+                data = _.omit(data, function(value) {
+                    return value === '';
+                });
 
-            var post = new Post(data);
-            post.save(function(err, post) {
-                if (err) return console.error(err);
-                var mapped = remap.postRemap(post);
-                res.redirect(mapped.postURL);
+                var post = new Post(data);
+                post.save(function(err, post) {
+                    if (err) return console.error(err);
+                    var mapped = remap.postRemap(post);
+                    res.redirect(mapped.postURL);
+                });
             });
         } else {
             res.send({outcome: false});

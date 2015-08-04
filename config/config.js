@@ -6,9 +6,12 @@ module.exports = function(isProd) {
         image_url       : 'https://pbs.twimg.com/profile_images/512279743241019392/sU297Cak.jpeg',
         page_size       : 12,
         oEmbedProviders : [
-            "youtube.com",
-            "vimeo.com",
-            "soundcloud.com"
+            'youtube.com',
+            'www.youtube.com',
+            'vimeo.com',
+            'www.vimeo.com',
+            'soundcloud.com',
+            'www.soundcloud.com'
         ]
     };
     var dev = {

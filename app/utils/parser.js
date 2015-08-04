@@ -4,20 +4,16 @@ var url     = require('url');
 var oembed  = require('./oembed');
 var config  = require('../../server').get('config');
 
-module.exports = {
-    format
+var format = function(input, next) {
+    parseURL(input, next);
 };
 
-var format = function(input) {
-    return parseURL(input);
-};
-
-var parseURL = function(url) {
+var parseURL = function(input, next) {
     var html;
-    if (typeof url == 'undefined' || url == null || url == '')
+    if (typeof input == 'undefined' || input == null || input == '')
         throw new Error('Invalid URL');
     var options = {
-        url                : url,
+        url                : input,
         method             : 'HEAD',
         followAllRedirects : true
     };
@@ -26,10 +22,13 @@ var parseURL = function(url) {
         var longURL = response.request.href;
         var parsed  = url.parse(longURL);
         if (_.contains(config.oEmbedProviders, parsed.host)) {
-            html = oembed(longURL);
+            oembed(longURL, next);
         } else {
-            html = '';
+            next('');
         }
-        return html;
     });
+};
+
+module.exports = {
+    format : format
 };
