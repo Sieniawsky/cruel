@@ -13,7 +13,8 @@ module.exports = function(isProd) {
     };
     var prod = {
         hosts  : [
-            'app.1v1v1.ca'
+            'hatchet.io',
+            'www.hatchet.io'
         ],
         socket : 'mongodb://swaglord69:myballs@ds047722.mongolab.com:47722/heroku_k2lqlzp8'
     };
