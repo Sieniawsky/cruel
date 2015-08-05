@@ -44,8 +44,7 @@ var b = browserify(files);
 b.plugin('factor-bundle', {
     outputs: exports
 });
-b.transform({
-    global: true}, 'uglifyify');
+b.transform({global: true}, 'uglifyify');
 b.bundle()
     .pipe(fs.createWriteStream(common.exportPath))
     .on('finish', function() {

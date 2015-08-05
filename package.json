@@ -43,5 +43,5 @@
     "serve-favicon": "~2.0.1",
     "uglifyify": "^3.0.1"
   },
-  "engine": "node 0.12.7"
+  "engine": "node 0.10.31"
 }

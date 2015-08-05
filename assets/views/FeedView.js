@@ -40,9 +40,8 @@ module.exports = Backbone.View.extend({
     },
 
     checkScroll: function() {
-        if (!this.isLoading && this.hasMore &&
-            ($(window).scrollTop() + this.triggerPoint
-                > $(document).height() - $(window).height())) {
+        var triggerReached = ($(window).scrollTop() + this.triggerPoint) > ($(document).height() - $(window).height());
+        if (!this.isLoading && this.hasMore && triggerReached && this.posts.length > 12) {
             this.page += 1;
             this.loadPosts();
         }
