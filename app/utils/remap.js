@@ -7,38 +7,32 @@ var shortID = require('mongodb-short-id');
 module.exports = {
     postsRemap : function(posts, user) {
         return _.map(posts, function(post) {
-
-            var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
-            var comments = commentsRemap(post.comments, user);
-            return {
-                _id           : post._id,
-                _shortID      : shortID.o2s(post._id),
-                title         : post.title,
-                url           : post.url,
-                date          : moment(new Date(post.date)).fromNow(),
-                rawDate       : post.date,
-                description   : post.description.replace(/\r?\n/g, '<br/>'),
-                snippet       : snippet,
-                prettySnippet : prettySnippet(post.title),
-                _user         : post._user,
-                _username     : post._username,
-                score         : post.score,
-                liked         : beenLiked(post.likers, ((_.isEmpty(user)) ? '' : String(user._id))),
-                likers        : post.likers,
-                hotScore      : 0,
-                _location     : post._location,
-                _locationName : post._locationName,
-                comments      : comments,
-                commentNumber : comments.length,
-                commentText   : (comments.length == 1) ? 'comment' : 'comments'
-            };
+            return singlePostRemap(post, user);
         });
     },
 
     postRemap : function(post, user) {
+        return singlePostRemap(post, user);
+    },
+
+    postsHotRemap : function(posts, user) {
+        return _(posts)
+            .map(function(post) {
+                var hours = Math.abs(new Date(post.date) - new Date()) / 36e5;
+                var hotPost = singlePostRemap(post, user);
+                hotPost.hotScore = Math.round(((post.score + 9)/Math.pow(hours + 2, 1.2)) * 100)/100;
+                return hotPost;
+            })
+            .sortBy(function(post) {
+                return -post.hotScore;
+            })
+            .value();
+    },
+
+    singlePostRemap : singlePostRemap = function(post, user) {
         var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
         var comments = commentsRemap(post.comments, user);
-        return {
+        var mapped = {
             _id           : post._id,
             _shortID      : shortID.o2s(post._id),
             title         : post.title,
@@ -46,6 +40,7 @@ module.exports = {
             date          : moment(new Date(post.date)).fromNow(),
             rawDate       : post.date,
             description   : post.description.replace(/\r?\n/g, '<br/>'),
+            formatted     : post.formatted,
             snippet       : snippet,
             prettySnippet : prettySnippet(post.title),
             _user         : post._user,
@@ -60,41 +55,8 @@ module.exports = {
             commentNumber : comments.length,
             commentText   : (comments.length == 1) ? 'comment' : 'comments'
         };
-    },
-
-    postsHotRemap : function(posts, user) {
-        return _(posts)
-            .map(function(post) {
-                var hours = Math.abs(new Date(post.date) - new Date()) / 36e5;
-                var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
-                var comments = commentsRemap(post.comments, user);
-                return {
-                    _id           : post._id,
-                    _shortID      : shortID.o2s(post._id),
-                    title         : post.title,
-                    url           : post.url,
-                    date          : moment(new Date(post.date)).fromNow(),
-                    rawDate       : post.date,
-                    description   : post.description.replace(/\r?\n/g, '<br/>'),
-                    snippet       : snippet,
-                    prettySnippet : prettySnippet(post.title),
-                    _user         : post._user,
-                    _username     : post._username,
-                    score         : post.score,
-                    liked         : beenLiked(post.likers, ((_.isEmpty(user)) ? '' : String(user._id))),
-                    likers        : post.likers,
-                    hotScore      : Math.round(((post.score + 9)/Math.pow(hours + 2, 1.2)) * 100)/100,
-                    _location     : post._location,
-                    _locationName : post._locationName,
-                    comments      : comments,
-                    commentNumber : comments.length,
-                    commentText   : (comments.length == 1) ? 'comment' : 'comments'
-                };    
-            })
-            .sortBy(function(post) {
-                return -post.hotScore;
-            })
-            .value();
+        mapped.postURL = '/post/' + mapped._shortID + '/' + mapped.prettySnippet;
+        return mapped;
     },
 
     userRemap : userRemap = function(data) {

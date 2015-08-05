@@ -16,6 +16,7 @@
     "postinstall": "./node_modules/bower/bin/bower install && ./bin/gendb prod && ./bin/build"
   },
   "dependencies": {
+    "async": "^1.4.0",
     "backbone": "^1.2.0",
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.0.0",
@@ -38,8 +39,9 @@
     "morgan": "~1.0.0",
     "passport": "latest",
     "passport-local": "latest",
+    "request": "^2.60.0",
     "serve-favicon": "~2.0.1",
     "uglifyify": "^3.0.1"
   },
-  "engine": "node 0.10.31"
+  "engine": "node 0.12.7"
 }

@@ -1,9 +1,23 @@
 var _ = require('lodash');
 
 module.exports = function(isProd) {
+    var bundle = {};
     var common = {
-        image_url : 'https://pbs.twimg.com/profile_images/512279743241019392/sU297Cak.jpeg',
-        page_size : 12
+        image_url       : 'https://pbs.twimg.com/profile_images/512279743241019392/sU297Cak.jpeg',
+        page_size       : 12,
+        oEmbedProviders : [
+            'youtube.com',
+            'www.youtube.com',
+            'vimeo.com',
+            'www.vimeo.com',
+            'soundcloud.com',
+            'www.soundcloud.com'
+        ],
+        oEmbedFormats   : {
+            youtube     : 'https://youtube.com/oembed?format=json&url=',
+            vimeo       : 'https://vimeo.com/api/oembed.json?url=',
+            soundcloud  : 'https://soundcloud.com/oembed?format=json&maxheight=100&url='
+        }
     };
     var dev = {
         hosts  : [
@@ -18,8 +32,6 @@ module.exports = function(isProd) {
         ],
         socket : 'mongodb://swaglord69:myballs@ds047722.mongolab.com:47722/heroku_k2lqlzp8'
     };
-
-    var bundle = {};
 
     if (isProd) {
         bundle = _.extend(common, prod);

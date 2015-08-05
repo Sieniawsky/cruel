@@ -3,7 +3,7 @@
         <div class="row">
             <div class="feed-post">
                <div class="large-2 columns feed-post-header">
-                    <a href="/post/<%= _shortID %>/<%= prettySnippet %>">
+                    <a href="<%= postURL %>">
                         <img class="thumbnail" src="<%= url %>"/>
                     </a>
                     <button type="button"
@@ -11,15 +11,15 @@
                         name="<%= _id %>"></button>
                 </div>
                 <div class="large-10 columns feed-post-content">
-                    <a href="/post/<%= _shortID %>/<%= prettySnippet %>"><h3><%= title %></h3></a>
+                    <a href="<%= postURL %>"><h3><%= title %></h3></a>
                     <span class="score"> <%= score %></span>
                     <a href="/user/<%= _username %>"><span class="author"><%= _username %></span></a>
-                    <a href="/post/<%= _shortID %>/<%= prettySnippet %>">
+                    <a href="<%= postURL %>">
                         <span class="comment-count"><%= commentNumber %> <%= commentText %></span>
                     </a>
                     <span class="date"><%= date %></span>
                     <p class="snippet"><%= snippet %>
-                        <% if(snippet.length != 0) { %><a href="/post/<%= _id %>">[...]</a><% } %>
+                        <% if(snippet.length != 0) { %><a href="<%= postURL %>">[...]</a><% } %>
                     </p>
                 </div>
             </div>
