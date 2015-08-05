@@ -16,6 +16,7 @@
     "postinstall": "./node_modules/bower/bin/bower install && ./bin/gendb prod && ./bin/build"
   },
   "dependencies": {
+    "async": "^1.4.0",
     "backbone": "^1.2.0",
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.0.0",
