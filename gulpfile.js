@@ -3,6 +3,7 @@ var _          = require('lodash');
 var glob       = require('glob');
 var path       = require('path');
 var gulp       = require('gulp');
+var gls        = require('gulp-live-server');
 var gutil      = require('gulp-util');
 var jshint     = require('gulp-jshint');
 var uglify     = require('gulp-uglify');
@@ -14,10 +15,27 @@ var browserify = require('browserify');
 var source     = require('vinyl-source-stream');
 
 /* The default task is the watch task */
-gulp.task('default', ['server', 'watch']);
+gulp.task('default', ['watch']);
 
-/* Task that runs the node server */
-gulp.task('server', function() {});
+/* The watch task used during development */
+gulp.task('watch', function() {
+    var server = gls.new('server.js');
+    server.start();
+
+    gutil.log('Watching for snitches and fakes');
+    gulp.watch('.views/**/*.html', function() {
+        server.notify.apply(server);
+    });
+    gulp.watch('./assets/less/**/*.less', ['build-css'], function() {
+        server.notify.apply(server);
+    });
+    gulp.watch('./assets/js/**/*.js', ['jshint', 'build-js'], function() {
+        server.notify.apply(server);
+    });
+    gulp.watch('./app/**/*.js', function() {
+        server.start.bind(server);
+    });
+});
 
 /* Task that run the jshint linter */
 gulp.task('jshint', function() {
@@ -64,13 +82,6 @@ gulp.task('build-js', function() {
         .pipe(source('common.js'))
         .pipe(gulp.dest('public/js/bundles'))
         .on('end', function() {gutil.log('JS build complete')};);
-});
-
-/* The watch task used during development */
-gulp.task('watch', ['build-css', 'jshint', 'build-js'], function() {
-    gutil.log('Watching for snitches and fakes');
-    gulp.watch('./assets/less/**/*.less', ['build-css']);
-    gulp.watch('./assets/js/**/*.js', ['jshint', 'build-js']);
 });
 
 /* Task that builds a production version of the application */
