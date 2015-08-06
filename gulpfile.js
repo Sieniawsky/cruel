@@ -6,7 +6,6 @@ var gulp       = require('gulp');
 var gls        = require('gulp-live-server');
 var gutil      = require('gulp-util');
 var jshint     = require('gulp-jshint');
-var uglify     = require('gulp-uglify');
 var less       = require('gulp-less');
 var minify     = require('gulp-minify-css');
 var autoprefix = require('gulp-autoprefixer');
@@ -63,13 +62,29 @@ gulp.task('build-css', function() {
             browsers : ['last 2 versions'],
             cascade  : false
         }))
-        .pipe(gutil.env.type === 'production' ? minify() : gutil.noop())
+        .pipe(gulp.dest('./public/css'))
+        .on('end', function() {
+            gutil.log('CSS build complete');
+        });
+});
+
+gulp.task('build-css-prod', function() {
+    gutil.log('Building production css');
+    return gulp.src('./assets/less/**/*.less')
+        .pipe(less({
+            paths: [path.join(__dirname, 'less', 'includes')]
+        }))
+        .pipe(autoprefix({
+            browsers : ['last 2 versions'],
+            cascade  : false
+        }))
+        .pipe(minify())
         .pipe(rename(function(path) {
             path.basename += '-min';
         }))
         .pipe(gulp.dest('./public/css'))
         .on('end', function() {
-            gutil.log('CSS build complete');
+            gutil.log('Production CSS build complete');
         });
 });
 
@@ -95,4 +110,4 @@ gulp.task('build-js', function() {
 });
 
 /* Task that builds a production version of the application */
-gulp.task('build', ['jshint', 'build-css --type production', 'build-js']);
+gulp.task('build', ['jshint', 'build-css-prod', 'build-js']);

@@ -10,11 +10,11 @@
   "scripts": {
     "start": "node server.js",
     "watch": "node node_modules/gulp/bin/gulp.js watch",
-    "build": "node node_modules/gulp/bin/gulp.js build",
-    "preinstall": "./bin/gendb prod",
-    "postinstall": "./node_modules/bower/bin/bower install && ./bin/build",
+    "build": "npm run clean-public && node node_modules/gulp/bin/gulp.js build",
+    "postinstall": "./node_modules/bower/bin/bower install && ./bin/gendb prod && npm run build",
     "gendb": "./bin/gendb",
-    "clean": "rm -r node_modules && rm -r bower_components"
+    "clean": "rm -r node_modules && rm -r bower_components",
+    "clean-public": "rm public/css/*.css && rm public/js/bundles/*.js"
   },
   "dependencies": {
     "async": "^1.4.0",
