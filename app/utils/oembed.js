@@ -12,6 +12,6 @@ module.exports = function(input, next) {
     var oEmbedURL = config.oEmbedFormats[provider] + encodeURIComponent(input);
     request({url: oEmbedURL}, function(err, response, body) {
         if (err) return console.error(err);
-        next(JSON.parse(body).html);
+        next('<div class="video-wrapper">' + JSON.parse(body).html + '</div>');
     });
 };
