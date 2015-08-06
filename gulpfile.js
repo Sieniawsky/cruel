@@ -18,11 +18,10 @@ var source     = require('vinyl-source-stream');
 gulp.task('default', ['watch']);
 
 /* The watch task used during development */
-gulp.task('watch', function() {
+gulp.task('watch', ['jshint', 'build-css', 'build-js'], function() {
     var server = gls.new('server.js');
     server.start();
 
-    gutil.log('Watching for snitches and fakes');
     gulp.watch('.views/**/*.html', function() {
         server.notify.apply(server);
     });
@@ -35,7 +34,12 @@ gulp.task('watch', function() {
     gulp.watch('./app/**/*.js', function() {
         server.start.bind(server);
     });
+    gutil.log('Watching for snitches and fakes');
 });
+
+/* ************************************************** */
+/*                     Build tasks                    */
+/* ************************************************** */
 
 /* Task that run the jshint linter */
 gulp.task('jshint', function() {
@@ -43,7 +47,9 @@ gulp.task('jshint', function() {
     return gulp.src('./assets/js/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
-        .on('end', function() {gutil.log('jshint complete');});
+        .on('end', function() {
+            gutil.log('jshint complete');
+        });
 });
 
 /* Task that compiles all less files */
@@ -62,7 +68,9 @@ gulp.task('build-css', function() {
             path.basename += '-min';
         }))
         .pipe(gulp.dest('./public/css'))
-        .on('end', function() {gutil.log('CSS build complete');});
+        .on('end', function() {
+            gutil.log('CSS build complete');
+        });
 });
 
 /* Task that browserifies and uglifies all js */
@@ -81,7 +89,9 @@ gulp.task('build-js', function() {
         .bundle()
         .pipe(source('common.js'))
         .pipe(gulp.dest('public/js/bundles'))
-        .on('end', function() {gutil.log('JS build complete')};);
+        .on('end', function() {
+            gutil.log('JS build complete');
+        });
 });
 
 /* Task that builds a production version of the application */

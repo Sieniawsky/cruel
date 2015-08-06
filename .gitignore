@@ -11,4 +11,3 @@ public/js/bundles/*.js
 
 # app
 public/js/bundles/**/*.js
-public/css/**/*.css
