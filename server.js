@@ -21,6 +21,11 @@ var remap    = require('./app/utils/remap');
 
 /* Set server configuration */
 app.set('config', config(process.argv.length == 3 && process.argv[2] === 'prod'));
+if (process.argv.length != 3 && process.argv[2] !== 'prod') {
+    app.use(require('connect-livereload')({
+        port: 35729
+    }));
+}
 mongoose.connect(app.get('config').socket);
 
 /* Load Passport config */

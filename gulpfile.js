@@ -22,8 +22,8 @@ gulp.task('watch', ['jshint', 'build-css', 'build-js'], function() {
     var server = gls.new('server.js');
     server.start();
 
-    gulp.watch('.views/**/*.html', function() {
-        server.notify.apply(server);
+    gulp.watch('./views/**/*.html', function() {
+        server.notify.apply(server, arguments);
     });
     gulp.watch('./assets/less/**/*.less', ['build-css'], function() {
         server.notify.apply(server);
