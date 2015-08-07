@@ -71,9 +71,26 @@ gulp.task('less', function() {
             browsers : ['last 2 versions'],
             cascade  : false
         }))
-        .pipe(gutil.env.type === 'prod' ? minify() : gutil.noop())
         .pipe(gulp.dest('./public/css'))
-        .pipe(gutil.env.type !== 'prod' ? livereload() : gutil.noop())
+        .pipe(livereload())
+        .on('end', function() {
+            gutil.log('CSS build complete');
+        });
+});
+
+gulp.task('less-prod', function() {
+    gutil.log('Building CSS');
+    return gulp.src('./assets/less/**/*.less')
+        .pipe(plumber())
+        .pipe(less({
+            paths: [path.join(__dirname, 'less', 'includes')]
+        }))
+        .pipe(autoprefix({
+            browsers : ['last 2 versions'],
+            cascade  : false
+        }))
+        .pipe(minify())
+        .pipe(gulp.dest('./public/css'))
         .on('end', function() {
             gutil.log('CSS build complete');
         });
@@ -101,7 +118,7 @@ gulp.task('scripts', ['lint-assets'], function() {
 });
 
 gulp.task('build', ['less', 'scripts']);
-gulp.task('build-prod', ['less --type prod', 'scripts']);
+gulp.task('build-prod', ['less-prod', 'scripts']);
 
 gulp.task('watch', function() {
     gulp.watch('views/**/*.html', ['html']);
