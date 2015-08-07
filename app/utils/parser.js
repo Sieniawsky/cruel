@@ -17,6 +17,7 @@ var format = function(input, next) {
         });
     }, function(err) {
         if (err) return console.error(err);
+        input = input.replace(/\r?\n/g, '<br/>');
         _.each(map, function(n, key) {
             input = input.replace(key, map[key]);
         });

@@ -1,9 +1,10 @@
-/* Gulpfile for the Cruel project */
 var _          = require('lodash');
 var glob       = require('glob');
 var path       = require('path');
 var gulp       = require('gulp');
-var gls        = require('gulp-live-server');
+var server     = require('gulp-develop-server');
+var plumber    = require('gulp-plumber');
+var livereload = require('gulp-livereload');
 var gutil      = require('gulp-util');
 var jshint     = require('gulp-jshint');
 var less       = require('gulp-less');
@@ -13,48 +14,57 @@ var rename     = require('gulp-rename');
 var browserify = require('browserify');
 var source     = require('vinyl-source-stream');
 
-/* The default task is the watch task */
-gulp.task('default', ['watch']);
+var port = 35729;
 
-/* The watch task used during development */
-gulp.task('watch', ['jshint', 'build-css', 'build-js'], function() {
-    var server = gls.new('server.js');
-    server.start();
+gulp.task('default', ['go']);
 
-    gulp.watch('./views/**/*.html', function() {
-        server.notify.apply(server, arguments);
-    });
-    gulp.watch('./assets/less/**/*.less', ['build-css'], function() {
-        server.notify.apply(server);
-    });
-    gulp.watch('./assets/js/**/*.js', ['jshint', 'build-js'], function() {
-        server.notify.apply(server);
-    });
-    gulp.watch('./app/**/*.js', function() {
-        server.start.bind(server);
-    });
-    gutil.log('Watching for snitches and fakes');
+gulp.task('server:start', function() {
+    server.listen({path: 'server.js'}, livereload.listen);
+});
+gulp.task('serve', ['server:start', 'lint'], function() {
+    var restart = function(file) {
+        server.changed(function(err) {
+            if (!err) livereload.changed(file.path);
+        });
+    };
+
+    gulp.watch(['server.js', 'app/**/*.js', 'config/**/*.js']).on('change', restart);
 });
 
-/* ************************************************** */
-/*                     Build tasks                    */
-/* ************************************************** */
-
-/* Task that run the jshint linter */
-gulp.task('jshint', function() {
-    gutil.log('Running jshint');
-    return gulp.src('./assets/js/**/*.js')
+gulp.task('lint', function() {
+    gutil.log('Running lint on source');
+    return gulp.src(['app/**/*.js', 'config/**/*.js'])
+        .pipe(plumber())
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .on('end', function() {
-            gutil.log('jshint complete');
+            gutil.log('Lint complete');
         });
 });
 
-/* Task that compiles all less files */
-gulp.task('build-css', function() {
+gulp.task('lint-assets', function() {
+    gutil.log('Running lint on assets');
+    return gulp.src(['assets/js/**/*.js'])
+        .pipe(plumber())
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish'))
+        .on('end', function() {
+            gutil.log('Lint complete');
+        });
+});
+
+gulp.task('html', function() {
+    return gulp.src('views/**/*.html')
+        .pipe(livereload())
+        .on('end', function() {
+            gutil.log('Views refreshed');
+        })
+});
+
+gulp.task('less', function() {
     gutil.log('Building CSS');
     return gulp.src('./assets/less/**/*.less')
+        .pipe(plumber())
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
         }))
@@ -62,34 +72,15 @@ gulp.task('build-css', function() {
             browsers : ['last 2 versions'],
             cascade  : false
         }))
+        .pipe(gutil.env.type === 'prod' ? minify() : gutil.noop())
         .pipe(gulp.dest('./public/css'))
+        .pipe(gutil.env.type !== 'prod' ? livereload() : gutil.noop())
         .on('end', function() {
             gutil.log('CSS build complete');
         });
 });
 
-gulp.task('build-css-prod', function() {
-    gutil.log('Building production css');
-    return gulp.src('./assets/less/**/*.less')
-        .pipe(less({
-            paths: [path.join(__dirname, 'less', 'includes')]
-        }))
-        .pipe(autoprefix({
-            browsers : ['last 2 versions'],
-            cascade  : false
-        }))
-        .pipe(minify())
-        .pipe(rename(function(path) {
-            path.basename += '-min';
-        }))
-        .pipe(gulp.dest('./public/css'))
-        .on('end', function() {
-            gutil.log('Production CSS build complete');
-        });
-});
-
-/* Task that browserifies and uglifies all js */
-gulp.task('build-js', function() {
+gulp.task('scripts', ['lint-assets'], function() {
     var sourceFiles = _.map(glob.sync('assets/js/*.js'), function(file) {
         return file;
     });
@@ -104,10 +95,19 @@ gulp.task('build-js', function() {
         .bundle()
         .pipe(source('common.js'))
         .pipe(gulp.dest('public/js/bundles'))
+        .pipe(livereload())
         .on('end', function() {
             gutil.log('JS build complete');
         });
 });
 
-/* Task that builds a production version of the application */
-gulp.task('build', ['jshint', 'build-css-prod', 'build-js']);
+gulp.task('build', ['less', 'scripts']);
+gulp.task('build-prod', ['less --type prod', 'scripts']);
+
+gulp.task('watch', function() {
+    gulp.watch('views/**/*.html', ['html']);
+    gulp.watch('assets/js/**/*,js', ['scripts']);
+    gulp.watch('assets/less/**/*.less', ['less']);
+});
+
+gulp.task('go', ['build', 'serve', 'watch']);

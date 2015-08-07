@@ -36,7 +36,7 @@ var MainFeed = FeedView.extend({
                 this.$location.val(initData.user._location);
             } else {
                 this.$location.val('all');
-                this.location = 'all'
+                this.location = 'all';
             }
 
             this.url = this.genURL(this.page);
@@ -100,7 +100,7 @@ var MainFeed = FeedView.extend({
             success: function(data) {
                 _.each(data, function(post) {
                     that.posts.add(new Post(post));
-                })
+                });
                 that.addAll();
 
                 if (data.length < 8) {

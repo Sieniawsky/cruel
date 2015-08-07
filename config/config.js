@@ -16,7 +16,7 @@ module.exports = function(isProd) {
         oEmbedFormats   : {
             youtube     : 'https://youtube.com/oembed?format=json&url=',
             vimeo       : 'https://vimeo.com/api/oembed.json?url=',
-            soundcloud  : 'https://soundcloud.com/oembed?format=json&maxheight=100&url='
+            soundcloud  : 'https://soundcloud.com/oembed?format=json&maxheight=81&url='
         }
     };
     var dev = {
