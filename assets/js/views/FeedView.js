@@ -57,7 +57,7 @@ module.exports = Backbone.View.extend({
             success: function(data) {
                 _.each(data, function(post) {
                     that.posts.add(new Post(post));
-                })
+                });
                 that.addAll();
 
                 if (data.length < 8) {

@@ -96,7 +96,7 @@ var FullPost = Backbone.View.extend({
 
     handleComment: function(e) {
 
-        if (this.$comment.val().length != 0) {
+        if (this.$comment.val().length !== 0) {
             /* Check if no comments were made by the user within 5 min */
             var checkTime = 1000 * 60 * 5;
             var recentComments = _.filter(this.model.get('comments'), function(comment) {
@@ -106,7 +106,7 @@ var FullPost = Backbone.View.extend({
             });
 
             /* Only POST comment if no comments were made by the user with 5 min */
-            if (recentComments.length == 0) {
+            if (recentComments.length === 0) {
                 var that = this;
                 $.ajax({
                     url  : '/api/post/comment',
@@ -139,9 +139,9 @@ var FullPost = Backbone.View.extend({
     },
 
     like: function() {
-        if (typeof initData.user !== 'undefined'
-            && typeof initData.user._id !== 'undefined'
-            && initData.user._id !== null) {
+        if (typeof initData.user !== 'undefined' &&
+            typeof initData.user._id !== 'undefined' &&
+            initData.user._id !== null) {
 
             var that = this;
             $.ajax({
@@ -162,9 +162,9 @@ var FullPost = Backbone.View.extend({
     },
 
     unlike: function() {
-        if (typeof initData.user !== 'undefined'
-            && typeof initData.user._id !== 'undefined'
-            && initData.user._id !== null) {
+        if (typeof initData.user !== 'undefined' &&
+            typeof initData.user._id !== 'undefined' &&
+            initData.user._id !== null) {
 
             var that = this;
             $.ajax({
@@ -185,9 +185,9 @@ var FullPost = Backbone.View.extend({
     },
 
     commentLike: function(comment) {
-        if (typeof initData.user !== 'undefined'
-            && typeof initData.user._id !== 'undefined'
-            && initData.user._id !== null) {
+        if (typeof initData.user !== 'undefined' &&
+            typeof initData.user._id !== 'undefined' &&
+            initData.user._id !== null) {
 
             var that = this;
             $.ajax({
@@ -209,9 +209,9 @@ var FullPost = Backbone.View.extend({
     },
 
     commentUnlike: function(comment) {
-        if (typeof initData.user !== 'undefined'
-            && typeof initData.user._id !== 'undefined'
-            && initData.user._id !== null) {
+        if (typeof initData.user !== 'undefined' &&
+            typeof initData.user._id !== 'undefined' &&
+            initData.user._id !== null) {
 
             var that = this;
             $.ajax({

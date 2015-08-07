@@ -30,9 +30,9 @@ module.exports = Backbone.View.extend({
     },
 
     like: function() {
-        if (typeof initData.user._id !== "undefined"
-            && initData.user._id !== null
-            && !this.model.get('liked')) {
+        if (typeof initData.user._id !== "undefined" &&
+            initData.user._id !== null &&
+            !this.model.get('liked')) {
 
             var that = this;
             $.ajax({
@@ -53,9 +53,9 @@ module.exports = Backbone.View.extend({
     },
 
     unlike: function() {
-        if (typeof initData.user._id !== "undefined"
-            && initData.user._id !== null
-            && this.model.get('liked')) {
+        if (typeof initData.user._id !== "undefined" &&
+            initData.user._id !== null &&
+            this.model.get('liked')) {
 
             var that = this;
             $.ajax({

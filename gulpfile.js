@@ -3,9 +3,9 @@ var glob       = require('glob');
 var path       = require('path');
 var gulp       = require('gulp');
 var nodemon    = require('gulp-nodemon');
-var server     = require('tiny-lr')();
+//var server     = require('tiny-lr')();
 var plumber    = require('gulp-plumber');
-var refresh    = require('gulp-livereload');
+var livereload = require('gulp-livereload');
 var gutil      = require('gulp-util');
 var jshint     = require('gulp-jshint');
 var less       = require('gulp-less');
@@ -21,14 +21,15 @@ gulp.task('default', ['go']);
 
 gulp.task('serve', function() {
     nodemon({
-        script: 'server.js',
-        ignore: ['public/css/**/*.css', 'public/js/bundles/**/*.js']
-    });
+        script : 'server.js',
+        ext    : 'html js less',
+        ignore : ['public/css/**/*.css', 'public/js/bundles/**/*.js']
+    })
 });
 
 gulp.task('lint', function() {
     gutil.log('Running lint');
-    return gulp.src('assets/js/**/*.js')
+    return gulp.src(['app/**/*.js', 'config/**/*.js', 'assets/js/**/*.js'])
         .pipe(plumber())
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
@@ -39,7 +40,7 @@ gulp.task('lint', function() {
 
 gulp.task('html', function() {
     return gulp.src('views/**/*.html')
-        .pipe(refresh(server))
+        .pipe(livereload())
         .on('end', function() {
             gutil.log('Views refreshed');
         })
@@ -57,7 +58,7 @@ gulp.task('less', function() {
             cascade  : false
         }))
         .pipe(gulp.dest('./public/css'))
-        .pipe(refresh(server))
+        .pipe(livereload())
         .on('end', function() {
             gutil.log('CSS build complete');
         });
@@ -99,7 +100,7 @@ gulp.task('scripts', function() {
         .bundle()
         .pipe(source('common.js'))
         .pipe(gulp.dest('public/js/bundles'))
-        .pipe(refresh(server))
+        .pipe(livereload())
         .on('end', function() {
             gutil.log('JS build complete');
         });
@@ -108,9 +109,7 @@ gulp.task('scripts', function() {
 gulp.task('build', ['less', 'scripts', 'lint']);
 
 gulp.task('lr', function() {
-    server.listen(port, function(err) {
-        if (err) return console.error(err);
-    });
+    livereload.listen();
 });
 
 gulp.task('watch', function() {
