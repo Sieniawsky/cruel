@@ -29,10 +29,12 @@
     <div class="leader-item">
         <span class="ranking"><%= rank %></span>
         <span class="leader-score"><%= score %></span>
-        <div class="leader-thumbnail">
-            <img src="<%= imageUrl %>">
-        </div>
-        <a href="/user/<%= username %>"><span class="leader-user"><%= username %></span></a></br>
+        <a href="/user/<%= username %>">
+            <div class="leader-thumbnail">
+                <img src="<%= imageUrl %>">
+            </div>
+            <span class="leader-user"><%= username %></span></br>
+        </a>
         <span class="leader-join-date">Joined <%= date %></span>
     </div>
 </script>

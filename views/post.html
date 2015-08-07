@@ -39,20 +39,19 @@
         <div class="row">
             <div class="js-image large-5 columns">
                 <img src="<%= url %>" data-action="zoom">
+            </div>
+            <div class="post-content">
                 <button type="button"
                     class="<% if(liked) { %>js-like post-liked<% } else { %>js-like post-like<% }%>"
                     name="<%= _id %>"></button>
                 <button type="button"
                     class="<% if(liked) { %>js-like post-liked-mobile<% } else { %>js-like post-like-mobile<% }%>"
                     name="<%= _id %>"></button>
-
-            </div>
-            <div class="post-content">
                 <h3><%= title %></h3>
                 <span class="score"> <%= score %></span>
                 <a href="/user/<%= _username %>"><span class="author"> <%= _username %></span></a>
                 <span class="date"> <%= date %></span>
-                <div><%= formatted %></div>
+                <div class="post-description"><%= formatted %></div>
             </div>
         </div>
     </div>
