@@ -32,7 +32,7 @@ var parseURL = function(input, next) {
     if (_.contains(config.oEmbedProviders, parsed.host)) {
         oembed(input, next);
     } else {
-        next('<a href=">' + input + '">' + input + '</a>');
+        next('<a href="' + input + '" target="_blank">' + input + '</a>');
     }
 };
 

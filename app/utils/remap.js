@@ -53,7 +53,8 @@ module.exports = {
             _locationName : post._locationName,
             comments      : comments,
             commentNumber : comments.length,
-            commentText   : (comments.length == 1) ? 'comment' : 'comments'
+            commentText   : (comments.length == 1) ? 'comment' : 'comments',
+            type          : post.type
         };
         mapped.postURL = '/post/' + mapped._shortID + '/' + mapped.prettySnippet;
         return mapped;
