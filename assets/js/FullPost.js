@@ -35,6 +35,11 @@ var FullPost = Backbone.View.extend({
         this.sortOption = 'top';
         this.$sort.val('top');
 
+        if (this.model.get('type') === 'text') {
+            $('.js-image').addClass('post-image-hidden');
+            $('post-content').addClass('post-content-full-width');
+        }
+
         _.bindAll(this, 'render');
         this.model.bind('change', this.render);
         this.render();

@@ -28,21 +28,12 @@ var parseURL = function(input, next) {
     var html;
     if (typeof input == 'undefined' || input == null || input == '')
         throw new Error('Invalid URL');
-    var options = {
-        url                : input,
-        method             : 'HEAD',
-        followAllRedirects : true
-    };
-    request(options, function(err, response, body) {
-        if (err) return console.error(err);
-        var longURL = response.request.href;
-        var parsed  = url.parse(longURL);
-        if (_.contains(config.oEmbedProviders, parsed.host)) {
-            oembed(longURL, next);
-        } else {
-            next('<a href="' + longURL + '">' + longURL + '</a>');
-        }
-    });
+    var parsed = url.parse(input);
+    if (_.contains(config.oEmbedProviders, parsed.host)) {
+        oembed(input, next);
+    } else {
+        next('<a href=">' + input + '">' + input + '</a>');
+    }
 };
 
 module.exports = {

@@ -14,7 +14,8 @@ var postSchema = mongoose.Schema({
     score         : { type : Number, default : 0},
     _location     : mongoose.Schema.Types.ObjectId,
     _locationName : String,
-    comments      : []
+    comments      : [],
+    type          : { type : String, default : 'image' }
 });
 
 module.exports = mongoose.model('Post', postSchema);
