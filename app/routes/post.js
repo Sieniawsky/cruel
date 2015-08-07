@@ -58,6 +58,7 @@ module.exports = function(app, passport) {
                 _locationName : req.user._locationName
             });
             parser.format(data.description, function(formatted) {
+                data.description = data.description.replace(/\r?\n/g, '<br/>');
                 data.formatted = formatted;
                 data = _.omit(data, function(value) {
                     return value === '';

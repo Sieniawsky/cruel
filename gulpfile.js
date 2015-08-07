@@ -2,8 +2,7 @@ var _          = require('lodash');
 var glob       = require('glob');
 var path       = require('path');
 var gulp       = require('gulp');
-var nodemon    = require('gulp-nodemon');
-//var server     = require('tiny-lr')();
+var server     = require('gulp-develop-server');
 var plumber    = require('gulp-plumber');
 var livereload = require('gulp-livereload');
 var gutil      = require('gulp-util');
@@ -19,17 +18,33 @@ var port = 35729;
 
 gulp.task('default', ['go']);
 
-gulp.task('serve', function() {
-    nodemon({
-        script : 'server.js',
-        ext    : 'html js less',
-        ignore : ['public/css/**/*.css', 'public/js/bundles/**/*.js']
-    })
+gulp.task('server:start', function() {
+    server.listen({path: 'server.js'}, livereload.listen);
+});
+gulp.task('serve', ['server:start', 'lint'], function() {
+    var restart = function(file) {
+        server.changed(function(err) {
+            if (!err) livereload.changed(file.path);
+        });
+    };
+
+    gulp.watch(['server.js', 'app/**/*.js', 'config/**/*.js']).on('change', restart);
 });
 
 gulp.task('lint', function() {
-    gutil.log('Running lint');
-    return gulp.src(['app/**/*.js', 'config/**/*.js', 'assets/js/**/*.js'])
+    gutil.log('Running lint on source');
+    return gulp.src(['app/**/*.js', 'config/**/*.js'])
+        .pipe(plumber())
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish'))
+        .on('end', function() {
+            gutil.log('Lint complete');
+        });
+});
+
+gulp.task('lint-assets', function() {
+    gutil.log('Running lint on assets');
+    return gulp.src(['assets/js/**/*.js'])
         .pipe(plumber())
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
@@ -57,35 +72,15 @@ gulp.task('less', function() {
             browsers : ['last 2 versions'],
             cascade  : false
         }))
+        .pipe(gutil.env.type === 'prod' ? minify() : gutil.noop())
         .pipe(gulp.dest('./public/css'))
-        .pipe(livereload())
+        .pipe(gutil.env.type !== 'prod' ? livereload() : gutil.noop())
         .on('end', function() {
             gutil.log('CSS build complete');
         });
 });
 
-gulp.task('less-prod', function() {
-    gutil.log('Building production css');
-    return gulp.src('assets/less/**/*.less')
-        .pipe(plumber())
-        .pipe(less({
-            paths: [path.join(__dirname, 'less', 'includes')]
-        }))
-        .pipe(autoprefix({
-            browsers : ['last 2 versions'],
-            cascade  : false
-        }))
-        .pipe(minify())
-        .pipe(rename(function(path) {
-            path.basename += '-min';
-        }))
-        .pipe(gulp.dest('public/css'))
-        .on('end', function() {
-            gutil.log('Production CSS build complete');
-        });
-});
-
-gulp.task('scripts', function() {
+gulp.task('scripts', ['lint-assets'], function() {
     var sourceFiles = _.map(glob.sync('assets/js/*.js'), function(file) {
         return file;
     });
@@ -106,18 +101,13 @@ gulp.task('scripts', function() {
         });
 });
 
-gulp.task('build', ['less', 'scripts', 'lint']);
-
-gulp.task('lr', function() {
-    livereload.listen();
-});
+gulp.task('build', ['less', 'scripts']);
+gulp.task('build-prod', ['less --type prod', 'scripts']);
 
 gulp.task('watch', function() {
     gulp.watch('views/**/*.html', ['html']);
-    gulp.watch('assets/js/**/*,js', ['lint', 'scripts']);
+    gulp.watch('assets/js/**/*,js', ['scripts']);
     gulp.watch('assets/less/**/*.less', ['less']);
 });
 
-gulp.task('develop', ['build', 'lr', 'serve', 'watch']);
-
-gulp.task('go', ['develop']);
+gulp.task('go', ['build', 'serve', 'watch']);

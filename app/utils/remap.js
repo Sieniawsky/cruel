@@ -39,7 +39,7 @@ module.exports = {
             url           : post.url,
             date          : moment(new Date(post.date)).fromNow(),
             rawDate       : post.date,
-            description   : post.description.replace(/\r?\n/g, '<br/>'),
+            description   : post.description,
             formatted     : post.formatted,
             snippet       : snippet,
             prettySnippet : prettySnippet(post.title),
