@@ -3,7 +3,7 @@ var _ = require('lodash');
 module.exports = function(isProd) {
     var bundle = {};
     var common = {
-        image_url       : 'https://pbs.twimg.com/profile_images/512279743241019392/sU297Cak.jpeg',
+        image_url       : 'http://i.imgur.com/vp0gAcZ.png',
         page_size       : 12,
         oEmbedProviders : [
             'youtube.com',

@@ -59,6 +59,9 @@ module.exports = function(app, passport) {
             });
             parser.format(data.description, function(formatted) {
                 data.formatted = formatted;
+                if (data.url === '') {
+                    data.type = 'text';
+                }
                 data = _.omit(data, function(value) {
                     return value === '';
                 });

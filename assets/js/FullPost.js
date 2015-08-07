@@ -242,6 +242,10 @@ var FullPost = Backbone.View.extend({
         _.forEach(this.model.get('comments'), function(comment) {
             that.$comments.append(that.commentTemplate(comment));
         });
+        if (this.model.get('type') === 'text') {
+            $('.js-image').addClass('post-image-hidden');
+            $('.post-content').addClass('post-content-full-width');
+        }
     }
 
 });
