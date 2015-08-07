@@ -10,7 +10,6 @@ var jshint     = require('gulp-jshint');
 var less       = require('gulp-less');
 var minify     = require('gulp-minify-css');
 var autoprefix = require('gulp-autoprefixer');
-var rename     = require('gulp-rename');
 var browserify = require('browserify');
 var source     = require('vinyl-source-stream');
 
