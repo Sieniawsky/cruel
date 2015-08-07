@@ -1821,6 +1821,14 @@ h4 {
 .form-group h1 {
   padding-bottom: 5px;
 }
+.optional {
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  color: #4f4f4f;
+  font-size: 13px;
+  font-weight: normal;
+  text-transform: none;
+  margin-bottom: 8px;
+}
 /**Forms Media Queries**/
 @media only screen and (max-width: 768px) {
   .forms {
