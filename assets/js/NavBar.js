@@ -34,21 +34,26 @@ var NavBar = Backbone.View.extend({
         this.$dropdownMobile        = $('.dropdown-mobile');
         this.$modal = $('.overlay');
         this.$loginModal = $('.overlay-login');
+        this.$body = $('body');
     },
 
     showLoginModal: function() {
+        this.$body.addClass('modal-scroll-lock');
         this.$loginModal.show();
     },
 
     hideLoginModal: function() {
+        this.$body.removeClass('modal-scroll-lock');
         this.$loginModal.hide();
     },
 
     showModal: function() {
+        this.$body.addClass('modal-scroll-lock');
         this.$modal.show();
     },
 
     hideModal: function() {
+        this.$body.removeClass('modal-scroll-lock');
         this.$modal.hide();
     },
 
