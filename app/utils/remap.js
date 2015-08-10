@@ -80,7 +80,7 @@ module.exports = {
                         title    : n[0].title,
                         url      : n[0].url,
                         snippet  : n[0].title.substring(0, 40).concat(' ...'),
-                        newScore : n.length  
+                        newScore : n.length
                     };
                 }).value();
 
@@ -113,7 +113,7 @@ module.exports = {
                         url         : n[0].url,
                         snippet     : n[0].title.substring(0, 40).concat(' ...'),
                         newComments : n.length
-                        };
+                    };
                 }).value();
 
             /* Generate the final user object */
@@ -126,6 +126,8 @@ module.exports = {
                 imageUrl      : data.imageUrl,
                 description   : data.description,
                 score         : data.score,
+                weekScore     : data.weekScore,
+                monthScore    : data.monthScore,
                 _location     : data._location,
                 _locationName : data._locationName,
                 notifications : {

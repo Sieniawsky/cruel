@@ -29,11 +29,17 @@ module.exports = function(app, passport) {
             if (err) return console.error(err);
             if (!has(post.likers, req.user._id)) {
                 // User has not voted on this post yet
-                Post.update({_id: req.params.id},
-                    {'$push': {likers: req.user._id}, '$inc': {score: 1}}, function(err, update) {
+                Post.update({_id: req.params.id}, {
+                        '$push': {likers: req.user._id},
+                        '$inc': {score: 1}
+                    }, function(err, update) {
                     if (err) return console.error(err);
-                    User.update({_id: post._user},
-                        {'$inc': {score: 1}, '$push': {postScoreNotifications: {
+                    User.update({_id: post._user}, {
+                        '$inc': {
+                            score: 1,
+                            weekScore: 1,
+                            monthScore: 1
+                        }, '$push': {postScoreNotifications: {
                             _post : post._id,
                             title : post.title,
                             url   : '/post/' + shortID.o2s(post._id) + '/' + remap.prettySnippet(post.title)
@@ -73,8 +79,13 @@ module.exports = function(app, passport) {
                         notifications.splice(index, 1);
 
                         /* Update */
-                        User.update({_id: post._user},
-                            {'$inc': {score: -1}, '$set': {postScoreNotifications: notifications}}, function(err, u) {
+                        User.update({_id: post._user}, {
+                            '$inc': {
+                                score: -1,
+                                weekScore: -1,
+                                monthScore: -1
+                            },
+                            '$set': {postScoreNotifications: notifications}}, function(err, u) {
                                 if (err) return console.error(err);
                                 res.send({outcome: true});
                         });
@@ -140,16 +151,21 @@ module.exports = function(app, passport) {
                     },
                     function(err, update) {
                     if (err) return console.error(err);
+
                     User.update({_id: post._user},
                         {
-                            '$inc': {score: 1},
+                            '$inc': {
+                                score: 1,
+                                weekScore: 1,
+                                monthScore: 1
+                            },
                             '$push': {commentScoreNotifications: {
                                 _post    : post._id,
                                 _comment : comment._id,
-                                comment  : comment.comment},
+                                comment  : comment.comment,
                                 url      : '/post/' + shortID.o2s(post._id) + '/' + remap.prettySnippet(post.title)
                             }
-                        },
+                        }},
                         function(err, user) {
                         if (err) return console.error(err);
                         res.send({outcome: true});
@@ -190,7 +206,15 @@ module.exports = function(app, passport) {
 
                         /* Update */
                         User.update({_id: post._user},
-                            {'$inc': {score: -1}, '$set': {commentScoreNotifications: notifications}}, function(err, u) {
+                            {
+                                '$inc': {
+                                    score: -1,
+                                    weekScore: -1,
+                                    monthScore: -1
+                                },
+                                '$set': {commentScoreNotifications: notifications}
+                            },
+                                function(err, u) {
                                 if (err) return console.error(err);
                                 res.send({outcome: true});
                         });

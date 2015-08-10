@@ -32,7 +32,7 @@ module.exports = function(app, passport) {
                     {date: {'$lte': last}}
                 ]
             }))
-            .sort({score: -1})
+            .sort({weekScore: -1})
             .limit(leaderboard_size);
         query.exec(function(err, users) {
             if (err) return console.error(err);
@@ -51,7 +51,7 @@ module.exports = function(app, passport) {
                     {date: {'$lte': last}}
                 ]
             }))
-            .sort({score: -1})
+            .sort({monthScore: -1})
             .limit(leaderboard_size);
         query.exec(function(err, users) {
             if (err) return console.error(err);

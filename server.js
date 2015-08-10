@@ -13,6 +13,7 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
 var flash        = require('connect-flash');
+var scoreUtil    = require('./app/utils/score');
 var bg           = require('./app/utils/background');
 
 var Location = require('./app/models/location');
@@ -27,6 +28,9 @@ if (process.argv.length != 3 && process.argv[2] !== 'prod') {
     }));
 }
 mongoose.connect(app.get('config').socket);
+
+/* Initialize the score utility */
+scoreUtil();
 
 /* Load Passport config */
 require('./config/passport')(passport);
