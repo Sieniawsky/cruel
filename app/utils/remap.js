@@ -30,11 +30,17 @@ module.exports = {
     },
 
     singlePostRemap : singlePostRemap = function(post, user) {
-        var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
+        var _shortID = shortID.o2s(post._id);
+        var prettySnippet = prettySnippet(post.title);
+        var postURL = '/post/' + _shortID + '/' + prettySnippet;
         var comments = commentsRemap(post.comments, user);
+        var snippet = '';
+        if (post.description.length !== 0) {
+            snippet = post.description.substring(0, 160) + ' <a href="' + postURL + '">[...]</a>'
+        }
         var mapped = {
             _id           : post._id,
-            _shortID      : shortID.o2s(post._id),
+            _shortID      : _shortID,
             title         : post.title,
             url           : post.url,
             date          : moment(new Date(post.date)).fromNow(),
@@ -42,7 +48,7 @@ module.exports = {
             description   : post.description,
             formatted     : post.formatted,
             snippet       : snippet,
-            prettySnippet : prettySnippet(post.title),
+            prettySnippet : prettySnippet,
             _user         : post._user,
             _username     : post._username,
             score         : post.score,
@@ -54,9 +60,9 @@ module.exports = {
             comments      : comments,
             commentNumber : comments.length,
             commentText   : (comments.length == 1) ? 'comment' : 'comments',
-            type          : post.type
+            type          : post.type,
+            postURL       : postURL
         };
-        mapped.postURL = '/post/' + mapped._shortID + '/' + mapped.prettySnippet;
         return mapped;
     },
 
