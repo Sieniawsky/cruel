@@ -31,13 +31,10 @@ module.exports = {
 
     singlePostRemap : singlePostRemap = function(post, user) {
         var _shortID = shortID.o2s(post._id);
-        var prettySnippet = prettySnippet(post.title);
-        var postURL = '/post/' + _shortID + '/' + prettySnippet;
+        var formattedSnippet = prettySnippet(post.title);
+        var postURL = '/post/' + _shortID + '/' + formattedSnippet;
         var comments = commentsRemap(post.comments, user);
-        var snippet = '';
-        if (post.description.length !== 0) {
-            snippet = post.description.substring(0, 160) + ' <a href="' + postURL + '">[...]</a>'
-        }
+        var snippet = computeSnippet(post.description, postURL);
         var mapped = {
             _id           : post._id,
             _shortID      : _shortID,
@@ -48,7 +45,7 @@ module.exports = {
             description   : post.description,
             formatted     : post.formatted,
             snippet       : snippet,
-            prettySnippet : prettySnippet,
+            prettySnippet : formattedSnippet,
             _user         : post._user,
             _username     : post._username,
             score         : post.score,
@@ -204,5 +201,18 @@ module.exports = {
             if (liker == id) x = true;
         });
         return x;
+    },
+
+    computeSnippet : computeSnippet = function(input, postURL) {
+        var snippet = '';
+        if (input.length !== 0) {
+            input = input.replace(/<br\/>/g, ' ');
+            if (input.length < 160) {
+                snippet = input + ' <a href="' + postURL + '">[...]</a>';
+            } else {
+                snippet = input.substring(0, 160) + ' <a href="' + postURL + '">[...]</a>';
+            }
+        }
+        return snippet;
     }
 };
