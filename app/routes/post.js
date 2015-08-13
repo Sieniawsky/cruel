@@ -63,6 +63,7 @@ module.exports = function(app, passport) {
                 if (data.url === '') {
                     data.type = 'text';
                 }
+                data.likers = [data._user];
                 data = _.omit(data, function(value) {
                     return value === '';
                 });
