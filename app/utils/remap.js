@@ -30,11 +30,14 @@ module.exports = {
     },
 
     singlePostRemap : singlePostRemap = function(post, user) {
-        var snippet = post.description.length == 0 ? '' : post.description.substring(0, 160);
+        var _shortID = shortID.o2s(post._id);
+        var formattedSnippet = prettySnippet(post.title);
+        var postURL = '/post/' + _shortID + '/' + formattedSnippet;
         var comments = commentsRemap(post.comments, user);
+        var snippet = computeSnippet(post.description, postURL);
         var mapped = {
             _id           : post._id,
-            _shortID      : shortID.o2s(post._id),
+            _shortID      : _shortID,
             title         : post.title,
             url           : post.url,
             date          : moment(new Date(post.date)).fromNow(),
@@ -42,7 +45,7 @@ module.exports = {
             description   : post.description,
             formatted     : post.formatted,
             snippet       : snippet,
-            prettySnippet : prettySnippet(post.title),
+            prettySnippet : formattedSnippet,
             _user         : post._user,
             _username     : post._username,
             score         : post.score,
@@ -54,9 +57,9 @@ module.exports = {
             comments      : comments,
             commentNumber : comments.length,
             commentText   : (comments.length == 1) ? 'comment' : 'comments',
-            type          : post.type
+            type          : post.type,
+            postURL       : postURL
         };
-        mapped.postURL = '/post/' + mapped._shortID + '/' + mapped.prettySnippet;
         return mapped;
     },
 
@@ -198,5 +201,18 @@ module.exports = {
             if (liker == id) x = true;
         });
         return x;
+    },
+
+    computeSnippet : computeSnippet = function(input, postURL) {
+        var snippet = '';
+        if (input.length !== 0) {
+            input = input.replace(/<br\/>/g, ' ');
+            if (input.length < 160) {
+                snippet = input + ' <a href="' + postURL + '">[...]</a>';
+            } else {
+                snippet = input.substring(0, 160) + ' <a href="' + postURL + '">[...]</a>';
+            }
+        }
+        return snippet;
     }
 };
