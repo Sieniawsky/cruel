@@ -22,10 +22,12 @@ module.exports = Backbone.View.extend({
     },
 
     handleLike: function() {
-        if (!this.model.get('liked')) {
-            this.like();
-        } else {
-            this.unlike();
+        if (this.model.get('_id') !== initData.user._id) {
+            if (!this.model.get('liked')) {
+                this.like();
+            } else {
+                this.unlike();
+            }
         }
     },
 

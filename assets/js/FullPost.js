@@ -72,10 +72,12 @@ var FullPost = Backbone.View.extend({
     },
 
     handleLike: function() {
-        if (!this.model.get('liked')) {
-            this.like();
-        } else {
-            this.unlike();
+        if (this.model.get('_user') !== initData.user._id) {
+            if (!this.model.get('liked')) {
+                this.like();
+            } else {
+                this.unlike();
+            }
         }
     },
 
@@ -87,10 +89,12 @@ var FullPost = Backbone.View.extend({
         var comment = _.find(this.model.get('comments'), function(comment) {
             return comment._id == e.currentTarget.name;
         });
-        if (comment.liked) {
-            this.commentUnlike(comment);
-        } else {
-            this.commentLike(comment);
+        if (comment._user !== initData.user._id) {
+            if (comment.liked) {
+                this.commentUnlike(comment);
+            } else {
+                this.commentLike(comment);
+            }
         }
     },
 
