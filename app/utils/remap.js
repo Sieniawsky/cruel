@@ -204,11 +204,13 @@ module.exports = {
     },
 
     computeSnippet : computeSnippet = function(input, postURL) {
+        var urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
         var snippet = '';
         if (input.length !== 0) {
+            input = input.replace(urlRegex, ' ... ');
             input = input.replace(/<br\/>/g, ' ');
             if (input.length < 160) {
-                snippet = input + ' <a href="' + postURL + '">[...]</a>';
+                snippet = input;
             } else {
                 snippet = input.substring(0, 160) + ' <a href="' + postURL + '">[...]</a>';
             }
