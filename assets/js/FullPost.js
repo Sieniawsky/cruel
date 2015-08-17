@@ -35,8 +35,8 @@ var FullPost = Backbone.View.extend({
         this.sortOption = 'top';
         this.$sort.val('top');
 
-        _.bindAll(this, 'render');
-        this.model.bind('change', this.render);
+        _.bindAll(this, 'partialRender');
+        this.model.bind('change', this.partialRender);
         this.render();
     },
 
@@ -236,20 +236,54 @@ var FullPost = Backbone.View.extend({
         }
     },
 
-    render: function() {
+    partialRender: function() {
+        /* Partial render for post */
         this.initDates();
-        this[this.sortOption + 'Sort']();
+        var score = this.model.get('score');
+        var liked = this.model.get('liked');
+        $('.js-post-score').html(score);
+        var likeButton = $('.js-like-button');
+        likeButton.removeClass('post-liked');
+        likeButton.removeClass('post-like');
+
+        var likeButtonMobile = $('.js-like-button-mobile');
+        likeButtonMobile.removeClass('post-liked-mobile');
+        likeButtonMobile.removeClass('post-like-mobile');
+
+        if (liked) {
+            likeButton.addClass('post-liked');
+            likeButtonMobile.addClass('post-liked-mobile');
+        } else {
+            likeButton.addClass('post-like');
+            likeButtonMobile.addClass('post-like-mobile');
+        }
+
+        this.commentsRender();
+    },
+
+    commentsRender: function() {
         var that = this;
-        this.$post.empty();
-        this.$post.html(this.postTemplate(this.model.toJSON()));
         this.$comments.empty();
         _.forEach(this.model.get('comments'), function(comment) {
             that.$comments.append(that.commentTemplate(comment));
         });
+    },
+
+    render: function() {
+        /* Initialize dates and sort the comment sort option */
+        this.initDates();
+        this[this.sortOption + 'Sort']();
+
+        /* Render the post content */
+        this.$post.empty();
+        this.$post.html(this.postTemplate(this.model.toJSON()));
         if (this.model.get('type') === 'text') {
             $('.js-image').addClass('post-image-hidden');
             $('.post-content').addClass('post-content-full-width');
         }
+
+        /* Render the comments section */
+        this.commentsRender();
     }
 
 });

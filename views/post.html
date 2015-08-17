@@ -42,13 +42,14 @@
             </div>
             <div class="post-content">
                 <button type="button"
-                    class="<% if(liked) { %>js-like post-liked<% } else { %>js-like post-like<% }%>"
+                    class="js-like-button <% if(liked) { %>js-like post-liked<% } else { %>js-like post-like<% }%>"
                     name="<%= _id %>"></button>
                 <button type="button"
-                    class="<% if(liked) { %>js-like post-liked-mobile<% } else { %>js-like post-like-mobile<% }%>"
+                    class="js-like-button-mobile <% if(liked) { %>js-like post-liked-mobile<% } else
+                    { %>js-like post-like-mobile<% }%>"
                     name="<%= _id %>"></button>
                 <h3><%= title %></h3>
-                <span class="score"> <%= score %></span>
+                <span class="js-post-score score"> <%= score %></span>
                 <a href="/user/<%= _username %>"><span class="author"> <%= _username %></span></a>
                 <span class="date"> <%= date %></span>
                 <div class="post-description"><%= formatted %></div>
