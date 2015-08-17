@@ -207,7 +207,10 @@ module.exports = {
         var urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
         var snippet = '';
         if (input.length !== 0) {
-            input = input.replace(urlRegex, ' ... ');
+            var links = input.match(urlRegex);
+            _.forEach(links, function(link) {
+                input = input.replace(link, link.substring(0, 30) + '...');
+            });
             input = input.replace(/<br\/>/g, ' ');
             if (input.length < 160) {
                 snippet = input;
