@@ -250,20 +250,14 @@ var FullPost = Backbone.View.extend({
         var score = this.model.get('score');
         var liked = this.model.get('liked');
         $('.js-post-score').html(score);
-        var likeButton = $('.js-like-button');
+        var likeButton = $('.js-like');
         likeButton.removeClass('post-liked');
         likeButton.removeClass('post-like');
 
-        var likeButtonMobile = $('.js-like-button-mobile');
-        likeButtonMobile.removeClass('post-liked-mobile');
-        likeButtonMobile.removeClass('post-like-mobile');
-
         if (liked) {
             likeButton.addClass('post-liked');
-            likeButtonMobile.addClass('post-liked-mobile');
         } else {
             likeButton.addClass('post-like');
-            likeButtonMobile.addClass('post-like-mobile');
         }
 
         this.commentsRender();
