@@ -35,19 +35,19 @@
         </div>
         <div class="js-post-body"></div>
         <div class="large-12 columns comments">
-            <h4>COMMENTS</h4>
-            {{#user._id}}
-                <form id="js-form">
-                    <div class="form-group comment-form">
-                       <textarea class="js-comment-text" rows="3" name="description"
-                       id="postDescription" placeholder="Write a comment"></textarea>
+                {{#user._id}}
+                    <div class="comment-form-wrapper">
+                        <form id="js-form">
+                            <div class="form-group comment-form">
+                               <textarea class="js-comment-text" rows="3" name="description"
+                               id="postDescription" placeholder="Write a comment..."></textarea>
+                                <button type="submit" class="js-form-submit comment-button button">Post</button>
+                            </div>
+                            <div class="js-messages"></div>
+                        </form>
                     </div>
-                    <div class="js-messages"></div>
-                    <div class="form-group comment-form">
-                        <button type="submit" class="js-form-submit comment-button button">Post</button>
-                    </div>
-                </form>
-            {{/user._id}}
+                {{/user._id}}
+            <h4 class="comments-header">COMMENTS</h4>
             <div class="post-sorting">
                 <div class="sorting post-sorting-margin">
                     <span class="sortlabel">SORT:</span>
@@ -71,13 +71,10 @@
                 <img src="<%= url %>" data-action="zoom">
             </div>
             <div class="post-content">
-                <button type="button"
-                    class="js-like-button <% if(liked) { %>js-like post-liked<% } else { %>js-like post-like<% }%>"
-                    name="<%= _id %>"></button>
-                <button type="button"
-                    class="js-like-button-mobile <% if(liked) { %>js-like post-liked-mobile<% } else
-                    { %>js-like post-like-mobile<% }%>"
-                    name="<%= _id %>"></button>
+                <button class="button js-share facebook-button"></button>
+                <button class="<% if(liked) { %>js-like post-liked button<% } else { %>js-like post-like button<% }%>"
+                    name="<%= _id %>">
+                </button>
                 <h3><%= title %></h3>
                 <span class="js-post-score score"> <%= score %></span>
                 <a href="/user/<%= _username %>"><span class="author"> <%= _username %></span></a>

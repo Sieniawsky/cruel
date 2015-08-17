@@ -1,3 +1,9 @@
+/**Less Variables**/
+
+@spacing:0.01em;
+
+
+
 /** Base Styles **/
 
 html {
@@ -844,7 +850,7 @@ textarea {
   font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size:22px;
-  letter-spacing:0.03em;
+  letter-spacing:@spacing;
   color:#bababa;;
   position:relative;
   float:left;
@@ -873,7 +879,7 @@ textarea {
   font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size:20px;
-  letter-spacing:0.03em;
+  letter-spacing:@spacing;
   margin-left:20px;
   color:#bababa;;
   top:0px;
@@ -896,7 +902,7 @@ textarea {
   font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size:20px;
-  letter-spacing:0.03em;
+  letter-spacing:@spacing;
   margin-left:20px;
   color:#bababa;;
   top:3px;
@@ -919,7 +925,7 @@ textarea {
   font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size:20px;
-  letter-spacing:0.03em;
+  letter-spacing:@spacing;
   margin-left:20px;
   color:#bababa;;
   top:3px;
@@ -942,7 +948,7 @@ textarea {
   font-family:'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size:20px;
-  letter-spacing:0.03em;
+  letter-spacing:@spacing;
   margin-left:20px;
   color:#bababa;;
   top:0px;
@@ -979,6 +985,8 @@ textarea {
   padding-right:0;
   margin-right:0;
   text-transform:none;
+  width:100%;
+  height:100%;
 }
 
 .notification a:hover {
@@ -1280,7 +1288,7 @@ h2 {
   font-size: 26px;
   color: #a6a6a6;
   padding-top:10px;
-  letter-spacing: 0.03em;
+  letter-spacing: @spacing;
   margin:0;
 }
 
@@ -1291,7 +1299,7 @@ h2 {
   text-transform:uppercase;
   font-size: 26px;
   color: #a6a6a6;
-  letter-spacing: 0.03em;
+  letter-spacing: @spacing;
   padding-left:0;
   cursor:pointer;
   text-decoration:none;
@@ -1371,7 +1379,7 @@ h2 {
     color: #a6a6a6;
     padding-top:7px;
     padding-left:3px;
-    letter-spacing: 0.03em;
+    letter-spacing: @spacing;
     margin:0;
     margin-left:0px;
   }
@@ -1413,7 +1421,7 @@ h3 {
   font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size: 22px;
-  letter-spacing: 0.03em;
+  letter-spacing: @spacing;
   color: #333333;
   line-height: 22px;
   margin-top:0px;
@@ -1424,7 +1432,7 @@ h3 {
   font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size: 22px;
-  letter-spacing:0.03em;
+  letter-spacing: @spacing;
   color: #a6a6a6;
   padding-left:4px;
   padding-right:3px;
@@ -1484,6 +1492,7 @@ h3 {
   margin-top:-16px;
   left:-25px;
   background-image: url(/images/boltbutton.png);
+  background-size: 35px 35px;
   width:32px;
   height:32px;
   padding:0;
@@ -1498,6 +1507,7 @@ h3 {
   margin-top:-16px;
   left:-25px;
   background-image: url(/images/boltbuttonhover.png);
+  background-size: 35px 35px;
   width:32px;
   height:32px;
   padding:0;
@@ -1602,7 +1612,7 @@ h3 {
     line-height: 20px;
     margin-top:-1px;
     margin-bottom: 0px;
-    letter-spacing:0.03em;
+    letter-spacing:@spacing;
     color:#333333;
   }
 
@@ -1635,7 +1645,7 @@ h3 {
 
   .feed-post-header {
     position:relative;
-    margin-left: 10px;
+    margin-left: 13px;
     padding-right:9px;
     margin-bottom:5px;
   }
@@ -1677,30 +1687,15 @@ h3 {
   }
   
   .bolt {
-    position:absolute;
-    top:50%;
-    margin-top:-15px;
-    left:-18px;
-    background-image: url(/images/boltbuttonmobile.png);
-    width:30px;
-    height:30px;
-    padding:0;
+    left:-22px;
     background-color:#fff;
+    margin-top:-19px;
   }
 
   .bolt-liked {
-    position:absolute;
-    top:50%;
-    margin-top:-15px;
-    left:-18px;
-    background-image: url(/images/boltbuttonmobilehover.png);
-    width:30px;
-    height:30px;
+    left:-22px;
     background-color:#fff;
-  }
-
-  .bolt:hover {
-    background-image: url(/images/boltbuttonmobilehover.png);
+    margin-top:-19px;
   }
 
   .score {
@@ -1725,7 +1720,7 @@ h3 {
 
   .feed-post-content {
     margin-left:-25px;
-    padding-left:12px;
+    padding-left:14px;
     margin-bottom:8px;
   }
 
@@ -1780,6 +1775,7 @@ h3 {
 
 .post-content a {
   text-decoration:none;
+  word-wrap:break-word;
 }
 
 .post-content-full-width {
@@ -1879,112 +1875,13 @@ h3 {
 
 }
 
-
-/**Post like button**/
-
-.post-like {
-  position:absolute;
-  top:16px;
-  right:45px;
-  width:89px;
-  height:26px;
-  border:0;
-  background:url(/images/post-like3.png) no-repeat top left;
-  background-size: 89px 26px;
-  cursor:pointer;
-}
-
-.post-like:hover {
-  background:url(/images/post-like2.png) no-repeat top left;
-  background-size: 89px 26px;
-}
-
-.post-like:focus {
-  outline:none;
-}
-
-.post-liked {
-  position:absolute;
-  top:16px;
-  right:45px;
-  width:64px;
-  height:26px;
-  border:0;
-  background:url(/images/post-liked2.png) no-repeat top left;
-  background-size: 63px 26px;
-  cursor:pointer;
-}
-
-.post-liked:focus {
-  outline:none;
-}
-
-.post-like-mobile {
-  display:none;
-}
-
-.post-liked-mobile {
-  display:none;
-}
-
-/**Post Like Button Media Queries**/
-
-@media only screen and (max-width:768px) {
-  
-  .post-like {
-    display:none;
-  }
-
-  .post-liked {
-    display:none;
-  }
-
-  .post-like-mobile {
-    display:block;
-    position:absolute;
-    top:10px;
-    right:15px;
-    width:89px;
-    height:26px;
-    border:0;
-    background:url(/images/post-like3.png) no-repeat top left;
-    background-size: 89px 26px;
-    cursor:pointer;
-  }
-
-  .post-like-mobile:hover {
-    background:url(/images/post-like2.png) no-repeat top left;
-    background-size: 89px 26px;
-  }
-
-  .post-like-mobile:focus {
-    outline:none;
-  }
-
-  .post-liked-mobile {
-    display:block;
-    position:absolute;
-    top:10px;
-    right:15px;
-    width:64px;
-    height:26px;
-    border:0;
-    background:url(/images/post-liked2.png) no-repeat top left;
-    background-size: 63px 26px;
-  }
-
-  .post-liked-mobile:focus {
-    outline:none;
-  }
-}
-
 /**Form Styles**/
 
 h4 {
   font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size: 22px;
-  letter-spacing:0.03em;
+  letter-spacing:@spacing;
   color:#333333;
   margin-left:1px;
   padding-right:3px;
@@ -2059,6 +1956,7 @@ h4 {
   border: 1px solid #dcdcdc;
   border-radius:3px;
   margin-top:0px;
+  font-size:13px;
 }
 
 .form-group input:focus {
@@ -2172,7 +2070,7 @@ h4 {
   font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size: 18px;
-  letter-spacing:0.03em;
+  letter-spacing:@spacing;
   color:#f2f2f2;
 }
 
@@ -2256,20 +2154,38 @@ h4 {
   padding-right:30px;
 }
 
-.comment-form {
-  margin-bottom:0px;
+.comments-header {
+  float:left;
+  margin-bottom:0;
+  padding-bottom:0;
 }
 
-.comments form {
-  margin-bottom:25px;
+.comment-form {
+  margin-bottom:0px;
+  width:100%;
+}
+
+.comment-form-wrapper {
+  background-color:#e0e0e0;
+  margin-top:25px;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius:3px;
+  padding:15px 15px 8px 15px;
+  margin-bottom:5px;
 }
 
 .comments textarea {
-  width: 100%;
+  width: 88.5%;
+  resize:none;
+  height:54px;
 }
 
 .comments-feed {
   margin-top:8px;
+  width:100%;
+  float:left;
 }
 
 .comment {
@@ -2318,8 +2234,10 @@ h4 {
 }
 
 .comment-button {
-  margin-top:5px;
-  margin-bottom:10px;
+  height:52px;
+  margin-top:1px;
+  width:10%;
+  float:right;
 }
 
 /**Comment media queries **/
@@ -2332,7 +2250,7 @@ h4 {
   }
 
   .comment {
-    padding-left:24px;
+    padding-left:27px;
   }
 
   .comment .bolt {
@@ -2343,7 +2261,7 @@ h4 {
     font-family: 'BebasNeue', sans-serif;
     text-transform:uppercase;
     font-size: 16px;
-    letter-spacing:0.03em;
+    letter-spacing:@spacing;
     color: #a6a6a6;
     padding-left:4px;
     padding-right:3px;
@@ -2359,6 +2277,15 @@ h4 {
 
   .comment-score {
     font-size:16px;
+  }
+
+  .comments textarea {
+    width:70%;
+  }
+
+  .comment-button {
+    width:26%;
+    height:52px;
   }
 }
 
@@ -2565,7 +2492,7 @@ h4 {
   font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
   font-size: 18px;
-  letter-spacing:0.03em;
+  letter-spacing:@spacing;
   color:#fff;
   border-radius:3px;
   border:none;
@@ -2585,6 +2512,156 @@ h4 {
 
 .modal-button {
   margin-top:10px;
+}
+
+/**Post like button**/
+
+.post-like {
+  position:absolute;
+  top:11px;
+  right:134px;
+  width:80px;
+  height:35px;
+  border:0;
+  cursor:pointer;
+  background-color:#ffd800;
+}
+
+.post-like:before {
+  content:'\00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 LIKE';
+  background:url(/images/likebutton.png) no-repeat;
+  background-size: 14px 22px;
+  background-position:0px -1px;
+  margin-left:-20px;
+}
+
+.post-like:hover {
+  border: 1px solid #ffd800;
+  color:#ffd800;
+}
+
+.post-like:hover:before {
+  background:url(/images/likebuttonhover.png) no-repeat;
+  background-size: 14px 22px;
+  background-position:0px -1px;
+}
+
+.post-like:focus {
+  outline:none;
+}
+
+.post-liked {
+  position:absolute;
+  top:11px;
+  right:134px;
+  width:80px;
+  height:35px;
+  border:0;
+  background:url() no-repeat top left;
+  background-size: 63px 26px;
+  background-color:#ffd800;
+  cursor:pointer;
+}
+
+.post-liked:hover {
+  border: 1px solid #ffd800;
+  color:#ffd800;
+}
+
+.post-liked:before {
+  content:'\00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 LIKED';
+  background:url(/images/likebutton.png) no-repeat;
+  background-size: 14px 22px;
+  background-position:0px -1px;
+  margin-left:-15px;
+}
+
+.post-liked:hover:before {
+  content:'\00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 UNLIKE';
+  background:url(/images/likebuttonhover.png) no-repeat;
+  background-size: 14px 22px;
+  background-position:0px -1px;
+  margin-left:-8px;
+}
+
+.post-liked:focus {
+  outline:none;
+}
+
+.facebook-button {
+  position:absolute;
+  top:11px;
+  right:45px;
+  width:80px;
+  height:35px;
+  border:0;
+  cursor:pointer;
+  background-color:#3d539f;
+}
+
+.facebook-button:hover {
+  color:#3d539f;
+  border: 1px solid #3d539f;
+}
+
+.facebook-button:before {
+  content:'\00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 SHARE';
+  background:url(/images/facebook.png) no-repeat;
+  background-size: 22px 22px;
+  background-position:0px -1px;
+  margin-left:-6px;
+}
+
+.facebook-button:hover:before {
+  content:'\00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 SHARE';
+  background:url(/images/facebookhover.png) no-repeat;
+  background-size: 22px 22px;
+  background-position:0px -1px;
+  margin-left:-6px;
+}
+
+.facebook-button:focus {
+  outline:none;
+}
+
+
+/**Post Like Button Media Queries**/
+
+@media only screen and (max-width:768px) {
+  
+  .facebook-button {
+    right:15px;
+    top:8px;
+    height:30px;
+    line-height:30px;
+  }
+
+  .facebook-button:hover {
+    line-height:30px;
+  }
+
+  .post-like {
+    right:102px;
+    top:8px;
+    height:30px;
+    line-height:30px;
+  }
+
+  .post-like:hover {
+    line-height:30px;
+  }
+
+  .post-liked {
+    right:102px;
+    top:8px;
+    height:30px;
+    line-height:30px;
+  }
+
+   .post-liked:hover {
+    line-height:30px;
+  }
+
 }
 
 /** Leaderboard Page **/
