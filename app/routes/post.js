@@ -49,7 +49,7 @@ module.exports = function(app, passport) {
 
     /* Post handler */
     app.post('/post', function(req, res) {
-        if (typeof req.user._id != 'undefined' && req.user._id != null) {
+        if (typeof req.user._id !== 'undefined' && req.user._id !== null) {
             var data = _.extend(req.body, {
                 date          : new Date(),
                 _user         : req.user._id,
@@ -82,11 +82,11 @@ module.exports = function(app, passport) {
 
     var generateRedirect = function(referer, postURL) {
         var redirect;
-        if (typeof referer == 'undefined' || referer == null) {
+        if (typeof referer === 'undefined' || referer === null) {
             redirect = '/';
-        } else if (_.contains(config.hosts, url.parse(referer).host)
-            && url.parse(referer).pathname !== '/post'
-            && referer !== postURL) {
+        } else if (_.contains(config.hosts, url.parse(referer).host) &&
+            url.parse(referer).pathname !== '/post' &&
+            referer !== postURL) {
             redirect = referer;
         } else {
             redirect = '/';

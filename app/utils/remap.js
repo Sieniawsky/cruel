@@ -64,6 +64,7 @@ module.exports = {
     },
 
     userRemap : userRemap = function(data) {
+        var user = {};
         if (typeof data !== "undefined" && data !== null) {
 
             /* Take the scoreNotifications and commentNotifications
@@ -117,7 +118,7 @@ module.exports = {
                 }).value();
 
             /* Generate the final user object */
-            var user = {
+            user = {
                 _id           : data._id,
                 username      : data.username,
                 email         : data.email,
@@ -139,7 +140,7 @@ module.exports = {
                 }
             };
         }
-        return user || {};
+        return user;
     },
 
     usersRemap : function(users) {
