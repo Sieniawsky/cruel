@@ -27,10 +27,8 @@ if (process.argv.length != 3 && process.argv[2] !== 'prod') {
         port: 35729
     }));
 }
-mongoose.connect(app.get('config').socket);
 
-/* Initialize the score utility */
-scoreUtil();
+mongoose.connect(app.get('config').socket);
 
 /* Load Passport config */
 require('./config/passport')(passport);
@@ -95,6 +93,9 @@ app.use(function(err, req, res, next) {
         background : bg()
     });
 });
+
+/* Initialize the score utility */
+scoreUtil();
 
 app.listen(app.get('port'), function() {
     console.log('Starting on port ' + app.get('port'));
