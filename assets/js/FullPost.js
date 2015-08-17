@@ -15,7 +15,8 @@ var FullPost = Backbone.View.extend({
         'click .js-like'         : 'handleLike',
         'submit #js-form'        : 'handleComment',
         'change .js-sort'        : 'sort',
-        'click .js-comment-like' : 'handleCommentLike'
+        'click .js-comment-like' : 'handleCommentLike',
+        'click .js-share'        : 'share'
     },
 
     initialize: function() {
@@ -46,6 +47,13 @@ var FullPost = Backbone.View.extend({
             return comment;
         });
         this.model.set('comments', comments);
+    },
+
+    share: function() {
+        FB.ui({
+            method : 'share',
+            href   : 'http://www.hatchet.io' + this.model.get('postURL')
+        }, function(response) {});
     },
 
     /* ========== */
