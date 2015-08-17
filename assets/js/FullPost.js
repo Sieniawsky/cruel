@@ -54,7 +54,7 @@ var FullPost = Backbone.View.extend({
 
     sort: function() {
         this.sortOption = this.$sort.val();
-        this.render();
+        this.partialRender();
     },
 
     newSort: function() {

@@ -1,3 +1,13 @@
+<!-- Facebook Meta Tags -->
+{{#yield-meta}}
+    <meta property="og:url"         content ="http://www.hatchet.io{{post.postURL}}">
+    <meta property="og:type"        content ="website">
+    <meta property="og:title"       content ="{{post.title}}">
+    <meta property="og:description" content ="{{post.description}}">
+    <meta property="og:image"       content ="{{post.url}}">
+{{/yield-meta}}
+
+<!-- Body Content -->
 <div class="row js-post">
     <div class="large-12 columns container">
         <div class="container-header">
@@ -82,7 +92,7 @@
     {{{initData}}}
 </script>
 
-<!-- Load page specific scripts -->
+<!-- Load Page Specific Scripts -->
 {{#yield-scripts}}
     <script src="/js/dataLoader.js"></script>
     <script src="/js/bundles/FullPost.js"></script>
