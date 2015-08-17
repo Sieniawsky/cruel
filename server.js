@@ -13,6 +13,7 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
 var flash        = require('connect-flash');
+var scoreUtil    = require('./app/utils/score');
 var bg           = require('./app/utils/background');
 
 var Location = require('./app/models/location');
@@ -26,6 +27,7 @@ if (process.argv.length != 3 && process.argv[2] !== 'prod') {
         port: 35729
     }));
 }
+
 mongoose.connect(app.get('config').socket);
 
 /* Load Passport config */
@@ -91,6 +93,9 @@ app.use(function(err, req, res, next) {
         background : bg()
     });
 });
+
+/* Initialize the score utility */
+scoreUtil();
 
 app.listen(app.get('port'), function() {
     console.log('Starting on port ' + app.get('port'));

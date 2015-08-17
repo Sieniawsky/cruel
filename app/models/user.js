@@ -11,6 +11,8 @@ var userSchema = mongoose.Schema({
     imageUrl                  : {type : String, default : config.image_url},
     description               : {type : String, default : ''},
     score                     : {type : Number, default : 0},
+    weekScore                 : {type : Number, default : 0},
+    monthScore                : {type : Number, default : 0},
     _location                 : mongoose.Schema.Types.ObjectId,
     _locationName             : String,
     postScoreNotifications    : [],
