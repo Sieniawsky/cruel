@@ -21,7 +21,7 @@ module.exports = function(app, passport) {
     });
 
     app.get('/api/leaderboard/:location/week', function(req, res) {
-        var date = new Date;
+        var date = new Date();
         var firstDay = date.getDate() - date.getDay();
         var first = new Date(date.getFullYear(), date.getMonth(), firstDay);
         var last = new Date(date.getFullYear(), date.getMonth(), firstDay + 6);
@@ -59,9 +59,9 @@ module.exports = function(app, passport) {
         });
     });
 
-    var computeLocationQuery = function(location, other) {
-        var other = other || {};
-        var query = _.extend(other, {});
+    var computeLocationQuery = function(location, data) {
+        var options = data || {};
+        var query = _.extend(options, {});
         if (location !== 'all') {
             query = _.extend(query, {_location: location});
         }

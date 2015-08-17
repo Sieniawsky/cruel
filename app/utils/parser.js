@@ -27,7 +27,7 @@ var format = function(input, next) {
 
 var parseURL = function(input, next) {
     var html;
-    if (typeof input == 'undefined' || input == null || input == '')
+    if (typeof input === 'undefined' || input === null || input === '')
         throw new Error('Invalid URL');
     var parsed = url.parse(input);
     if (_.contains(config.oEmbedProviders, parsed.host)) {

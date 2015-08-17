@@ -40,7 +40,7 @@ module.exports = function(passport) {
                         if (user) {
                             return done(null, false, req.flash('signupMessage', 'This username is aleady in use!'));
                         } else {
-                            var user = new User();
+                            user = new User();
 
                             locationData = req.body.location.split(',');
 

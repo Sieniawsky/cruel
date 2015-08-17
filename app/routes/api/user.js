@@ -5,7 +5,7 @@ var remap  = require('../../utils/remap');
 
 module.exports = function(app, passport) {
     app.put('/api/user/notifications/clear', function(req, res) {
-        if (typeof req.user._id != 'undefined' && req.user._id != null) {
+        if (typeof req.user._id !== 'undefined' && req.user._id !== null) {
             User.update({_id: req.user._id},
                 {'$set': {
                     postScoreNotifications    : [],

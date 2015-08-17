@@ -102,7 +102,7 @@ module.exports = function(app, passport) {
     /* ============= */
 
     app.post('/api/post/comment', function(req, res) {
-        if (typeof req.user._id != 'undefined' && req.user._id != null) {
+        if (typeof req.user._id !== 'undefined' && req.user._id !== null) {
             var comment = {
                 _id       : mongoose.Types.ObjectId(),
                 comment   : req.body.comment,
@@ -121,9 +121,9 @@ module.exports = function(app, passport) {
                         _post    : comment._post,
                         _comment : comment._id,
                         title    : req.body.post.title,
-                        url      : '/post/'
-                            + shortID.l2s(req.body.post._id)
-                            + '/' + remap.prettySnippet(req.body.post.title)
+                        url      : '/post/' +
+                            shortID.l2s(req.body.post._id) +
+                            '/' + remap.prettySnippet(req.body.post.title)
                     }}}, function(err, update) {
                     if (err) return console.error(err);
                     res.send({outcome: true});
