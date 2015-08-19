@@ -4,30 +4,32 @@
             <h2>Make a post</h2>
         </div>
         <div class="forms">
-            <form class="js-compose" id="form" data-toggle="validator"
-                role="form" action="/post" method="post">
-                <div class="form-group">
-                    <h4>POST TITLE</h4>
-                    <input type="text" name="title" id="postTitle" placeholder="Enter post title" minlength="10"
-                        data-error="Post title must be at least 10 characters long" required>
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                    <h4>IMAGE URL</h4>
-                    <input type="url" pattern=".*\.(jpeg|jpg|gif|png|JPEG|JPG|GIF|PNG)$"
-                        class="js-image" name="url" placeholder="(Optional) http://www.example.com/image.jpeg"
-                        data-error="Please enter a valid URL for a JPEG, GIF, or PNG image">
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                    <h4>POST TEXT</h4>
-                    <textarea rows="5" name="description" id="postDescription"
-                        placeholder="Enter a description. Paste Soundcloud, Youtube, and Vimeo links to embed songs and videos."></textarea>
-                </div>
-                <div class="form-group">
-                    <button class="button post-button" type="submit">Post</button>
-                </div>
-            </form>
+            <div class="form-wrapper">
+                <form class="js-compose" id="form" data-toggle="validator"
+                    role="form" action="/post" method="post">
+                    <div class="form-group">
+                        <h4>POST TITLE</h4>
+                        <input type="text" name="title" id="postTitle" placeholder="Enter post title" minlength="10"
+                            data-error="Post title must be at least 10 characters long" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <h4>IMAGE URL</h4>
+                        <input type="url" pattern=".*\.(jpeg|jpg|gif|png|JPEG|JPG|GIF|PNG)$"
+                            class="js-image" name="url" placeholder="(Optional) http://www.example.com/image.jpeg"
+                            data-error="Please enter a valid URL for a JPEG, GIF, or PNG image">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <h4>POST TEXT</h4>
+                        <textarea rows="5" name="description" id="postDescription"
+                            placeholder="Enter a description. Paste Soundcloud, Youtube, and Vimeo links to embed songs and videos."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="button post-button" type="submit">Post</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
