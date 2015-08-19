@@ -281,9 +281,6 @@ input[type="search"] {
     line-height: 46px;
   }
 }
-.form-group {
-  margin-bottom: 10px;
-}
 .radio,
 .checkbox {
   position: relative;
@@ -854,7 +851,7 @@ textarea {
   text-transform:uppercase;
   font-size:22px;
   letter-spacing:@spacing;
-  color:#bababa;;
+  color:#efeee6;;
   position:relative;
   float:left;
   margin-top:-3px;
@@ -868,14 +865,14 @@ textarea {
 
 .notification-score-count:before {
   display:inline-block;
-  width:23px;
-  height:28px;
+  width:26px;
+  height:22px;
   content:"";
-  margin-bottom:-7px;
-  margin-left:-20px;
-  margin-right:-2px;
-  background: url(/images/notification-bolt.png) no-repeat 0 0;
-  background-size: 100%;
+  margin-bottom:-5px;
+  margin-left:-15px;
+  margin-right:-10px;
+  background: url(/images/bolt-counter.png) no-repeat 0 0;
+  background-size: 50%;
 }
 
  .notification-box-score-count {
@@ -1543,14 +1540,14 @@ h3 {
 
 .score:before {
   display:inline-block;
-  width:23px;
-  height:28px;
+  width:26px;
+  height:22px;
   content:"";
-  margin-bottom:-7px;
-  margin-left:-20px;
-  margin-right:-5px;
-  background: url(/images/notification-bolt.png) no-repeat 0 0;
-  background-size: 100%;
+  margin-bottom:-5px;
+  margin-left:-15px;
+  margin-right:-14px;
+  background: url(/images/bolt-counter.png) no-repeat 0 0;
+  background-size: 50%;
 }
 
 .comment-count {
@@ -1884,6 +1881,20 @@ h3 {
 
 /**Form Styles**/
 
+.form-wrapper {
+  position:relative;
+  float:left;
+  background-color:#e0e0e0;
+  margin-top:50px;
+  width:75%;
+  height:auto;
+  border-radius:3px;
+  padding:30px 30px 30px 30px;
+  margin-bottom:75px;
+  margin-right:12.5%;
+  margin-left:12.5%;
+}
+
 h4 {
   font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
@@ -1919,12 +1930,15 @@ h4 {
 }
 
 .forms h4 {
+  color:#626262;
+  font-size:18px;
   margin-bottom:0;
+  margin-top:0;
 }
 
 .form-group select {
   height:30px;
-  border: 1px solid #dcdcdc;
+  border: none;
   padding-left:3px;
   border-radius: 3px;
 }
@@ -1935,6 +1949,8 @@ h4 {
 
 #location {
   color:#9c9c9c;
+  margin-bottom:10px;
+  width:100%;
 }
 
 .form-group select:focus {
@@ -1942,14 +1958,15 @@ h4 {
 }
 
 .form-group textarea {
-  width:50%;
+  width:100%;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   color:#4f4f4f;
   padding-left:5px;
-  border: 1px solid #dcdcdc;
+  border: none;
   border-radius:3px;
   font-size:13px;
-  padding-top:5px;
+  padding:8px;
+  resize:none;
 }
 
 .form-group textarea:focus {
@@ -1957,10 +1974,10 @@ h4 {
 }
 
 .form-group input {
-  width:50%;
-  height:28px;
-  padding-left:5px;
-  border: 1px solid #dcdcdc;
+  width:100%;
+  height:30px;
+  padding:8px;
+  border: none;
   border-radius:3px;
   margin-top:0px;
   font-size:13px;
@@ -1981,7 +1998,43 @@ h4 {
   font-weight:normal;
   text-transform:none;
   margin-bottom:8px;
+}
 
+.username-password {
+  width:100%;
+  float:left;
+}
+
+.username {
+  width:48%;
+  float:left;
+}
+
+.password {
+  width:48%;
+  float:right;
+}
+
+.email-campus {
+  width:100%;
+  float:right;
+}
+
+.email {
+  width:48%;
+  float:left;
+}
+
+.campus {
+  width:48%;
+  float:right;
+}
+
+.signup-button {
+  float:right;
+  margin-top:10px!important;
+  height:45px;
+  width:100%;
 }
 
 
@@ -1997,7 +2050,28 @@ h4 {
     height:100%;
     overflow-y:hidden;
   }
+
+  .form-wrapper {
+    width:100%;
+    margin:20px 0 0 0;
+    padding:25px 20px 25px 20px;
+  }
+
+  .username {
+    width:100%;
+  }
+
+  .password {
+    width:100%
+  }
   
+  .email {
+    width:100%
+  }
+
+  .campus {
+    width:100%
+  }
   .form-group textarea {
     width:100%;
   }
@@ -2038,7 +2112,7 @@ h4 {
   margin-top: 17%;
   margin-left:auto;
   margin-right:auto;
-  background-color:#959595;
+  background-color:#b0b0b0;
   padding:15px;
   text-align:center;
 }
@@ -2053,25 +2127,9 @@ h4 {
 .modal a {
   text-decoration:none;
   display:inline-block;
-  line-height:33px;
-  padding:1px 8px 0px 8px;
-  background-color:#55bef5;
-  font-family: 'BebasNeue', sans-serif;
-  text-transform:uppercase;
-  font-size: 18px;
-  color:#fff;
-  border-radius:3px;
-  margin-right:10px;
-  margin-left:10px;
+  margin-left:20px;
 }
 
-.modal a:hover {
-  background-color:#fff;
-  color:#55bef5;
-  border:1px solid #55bef5;
-  line-height:31px;
-  padding: 1px 7px 0px 7px;
-}
 
 .modal h1 {
   font-family: 'BebasNeue', sans-serif;
@@ -2079,6 +2137,15 @@ h4 {
   font-size: 18px;
   letter-spacing:@spacing;
   color:#f2f2f2;
+}
+
+.modal h4 {
+  color:#626262;
+  font-size:18px;
+  margin-bottom:0;
+  margin-top:0;
+  text-align:left;
+  padding-left:12px;
 }
 
 .modal-close {
@@ -2109,6 +2176,12 @@ h4 {
 .list-unstyled {
   padding-left:0;
   list-style:none;
+}
+
+.modal-login-button {
+  width:90%;
+  margin-top:6px!important;
+  margin-bottom:10px;
 }
 
 /**Modal media queries **/
@@ -2179,12 +2252,12 @@ h4 {
   margin-left:auto;
   margin-right:auto;
   border-radius:3px;
-  padding:15px 15px 8px 15px;
+  padding:15px 15px 9px 15px;
   margin-bottom:5px;
 }
 
 .comments textarea {
-  width: 88.5%;
+  width: 88%;
   resize:none;
   height:54px;
 }
@@ -2241,8 +2314,7 @@ h4 {
 }
 
 .comment-button {
-  height:52px;
-  margin-top:1px;
+  height:54px;
   width:10%;
   float:right;
 }
@@ -2369,18 +2441,6 @@ h4 {
   width:100%;
 }
 
-.user-edit {
-  position:absolute;
-  top:7px;
-  right:32px;
-  width:62px;
-  height:26px;
-  border:0;
-  background:url(/images/edit-button.png) no-repeat top left;
-  background-size: 62px 26px;
-  cursor:pointer;
-}
-
 .join-date {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 13px;
@@ -2392,14 +2452,14 @@ h4 {
 
 .user-score:before {
   display:inline-block;
-  width:23px;
-  height:28px;
+  width:26px;
+  height:22px;
   content:"";
-  margin-bottom:-7px;
-  margin-left:-20px;
-  margin-right:-5px;
-  background: url(/images/notification-bolt.png) no-repeat 0 0;
-  background-size: 100%;
+  margin-bottom:-4px;
+  margin-left:-15px;
+  margin-right:-14px;
+  background: url(/images/bolt-counter.png) no-repeat 0 0;
+  background-size: 50%;
 }
 
 .user-sort {
@@ -2414,6 +2474,14 @@ h4 {
   letter-spacing: 0; 
   float:left;
   margin-top:0;
+}
+
+.user-edit-button {
+  position:absolute;
+  top:-53px;
+  right:31px;
+  display:inline-block;
+  text-decoration:none;
 }
 
 /**User page media queries **/
@@ -2465,10 +2533,6 @@ h4 {
     font-size:22px;
   }
 
-  .user-edit {
-    right:3px;
-    top:6px;
-  }
 }
 
 /**  404 page Styles **/
@@ -2493,7 +2557,7 @@ h4 {
 
 .button {
   text-decoration:none;
-  line-height:33px;
+  line-height:35px;
   padding:1px 8px 0px 8px;
   background-color:#55bef5;
   font-family: 'BebasNeue', sans-serif;
@@ -2504,13 +2568,16 @@ h4 {
   border-radius:3px;
   border:none;
   cursor:pointer;
+  min-width:80px;
 }
 
 .button:hover {
   background-color:#fff;
   color:#55bef5;
   border:1px solid #55bef5;
-  line-height:31px;
+  line-height:33px;
+  padding:1px 8px 0px 7px;
+
 }
 
 .button:focus {
@@ -2519,6 +2586,12 @@ h4 {
 
 .modal-button {
   margin-top:10px;
+  height:45px;
+  line-height:45px;
+}
+
+.modal-button:hover {
+  line-height:43px;
 }
 
 /**Post like button**/
@@ -2529,6 +2602,7 @@ h4 {
   right:134px;
   width:80px;
   height:35px;
+  line-height:35px;
   border:0;
   cursor:pointer;
   background-color:#ffd800;
@@ -2563,6 +2637,7 @@ h4 {
   right:134px;
   width:80px;
   height:35px;
+  line-height:35px;
   border:0;
   background:url() no-repeat top left;
   background-size: 63px 26px;
@@ -2576,11 +2651,11 @@ h4 {
 }
 
 .post-liked:before {
-  content:'\00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 LIKED';
+  content:'\00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 \00a0 LIKED';
   background:url(/images/likebutton.png) no-repeat;
   background-size: 14px 22px;
   background-position:0px -1px;
-  margin-left:-15px;
+  margin-left:-14px;
 }
 
 .post-liked:hover:before {
@@ -2588,7 +2663,7 @@ h4 {
   background:url(/images/likebuttonhover.png) no-repeat;
   background-size: 14px 22px;
   background-position:0px -1px;
-  margin-left:-8px;
+  margin-left:-7px;
 }
 
 .post-liked:focus {
@@ -2634,8 +2709,9 @@ h4 {
 .post-button {
   height:45px;
   line-height:45px;
-  width:80px;
-  margin-top:0px!important;
+  width:100%;
+  margin-top:12px!important; 
+  margin-bottom:8px;
 }
 
 
@@ -2723,13 +2799,13 @@ h4 {
 
 .leader-score:before {
   display:inline-block;
-  width:23px;
-  height:28px;
+  width:26px;
+  height:22px;
   content:"";
-  margin-bottom:-6px;
-  margin-right:-2px;
-  background: url(/images/notification-bolt.png) no-repeat 0 0;
-  background-size: 100%;
+  margin-bottom:-4px;
+  margin-right:-10px;
+  background: url(/images/bolt-counter.png) no-repeat 0 0;
+  background-size: 50%;
 }
 
 .leader-thumbnail {

@@ -7,39 +7,46 @@
             {{#message.length}}
                 <div>{{message}}</div>
             {{/message.length}}
-            <form id="form" data-toggle="validator" role="form" action="/signup" method="post">
-                <div class="form-group">
-                    <h4>Username</h4>
-                    <input type="text" name="username" id="username" placeholder="Username" minlength="8"
-                        data-error="Username must be at least 8 characters long" required>
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                    <h4>Email</h4>
-                    <input type="email" name="email" id="email" placeholder="john@example.com"
-                        data-error="Please enter a valid email address" required>
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                    <h4>Password</h4>
-                    <input type="password" name="password" id="password" minlength="10"
-                        data-error="Password must be at least 10 characters long" required>
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                    <h4>Campus</h4>
-                    <select id="location" name="location">
-                        {{#locations}}
-                            <option value="{{_id}},{{name}}">{{name}}</option>
-                        {{/locations}}
-                    </select>
-                    <div class="help-block with-errors"></div>
-                </div>
-                <input class="js-referer" type="hidden" name="referer" value="">
-                <div class="form-group">
-                    <button class="button" type="submit">Signup</button>
-                </div>
-            </form>
+            <div class="form-wrapper">
+                <form id="form" data-toggle="validator" role="form" action="/signup" method="post">
+                    <div class="username-password">
+                        <div class="form-group username">
+                            <h4>Username</h4>
+                            <input type="text" name="username" id="username" placeholder="Username" minlength="8"
+                                data-error="Username must be at least 8 characters long" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group password">
+                            <h4>Password</h4>
+                            <input type="password" name="password" id="password" minlength="10"
+                                data-error="Password must be at least 10 characters long" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="email-campus">
+                        <div class="form-group email">
+                            <h4>Email</h4>
+                            <input type="email" name="email" id="email" placeholder="john@example.com"
+                                data-error="Please enter a valid email address" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group campus">
+                            <h4>Campus</h4>
+                            <select id="location" name="location">
+                                {{#locations}}
+                                    <option value="{{_id}},{{name}}">{{name}}</option>
+                                {{/locations}}
+                            </select>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <input class="js-referer" type="hidden" name="referer" value="">
+                    <div class="form-group">
+                        <button class="button signup-button" type="submit">Signup</button>
+                    </div>
+                    
+                </form>
+            </div>
         </div>
     </div>
 </div>
