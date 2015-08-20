@@ -73,7 +73,7 @@ module.exports = function(passport) {
 
             if (err) return done(err);
 
-            if (!user) return done(null, false, req.flash('loginMessage', 'No user found!'));
+            if (!user || user.deleted === true) return done(null, false, req.flash('loginMessage', 'No user found!'));
 
             if (!user.validPassword(password)) return done(null, false,
                 req.flash('loginMessage', 'Username or password incorrect!'));
