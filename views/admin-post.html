@@ -1,0 +1,89 @@
+<!-- Body Content -->
+<div class="row js-post">
+    <div class="large-12 columns container">
+        <div class="container-header">
+            <a href="/" class="navigation">Back</a>
+        </div>
+        <div class="js-post-body"></div>
+        <div class="large-12 columns comments">
+                {{#user._id}}
+                    <div class="comment-form-wrapper">
+                        <form id="js-form">
+                            <div class="form-group comment-form">
+                               <textarea class="js-comment-text" rows="3" name="description"
+                               id="postDescription" placeholder="Write a comment..."></textarea>
+                                <button type="submit" class="js-form-submit comment-button button">Post</button>
+                            </div>
+                            <div class="js-messages"></div>
+                        </form>
+                    </div>
+                {{/user._id}}
+            <h4 class="comments-header">COMMENTS</h4>
+            <div class="post-sorting">
+                <div class="sorting post-sorting-margin">
+                    <span class="sortlabel">SORT:</span>
+                    <select class="js-sort feed-dropdown">
+                        <option value="new">New</option>
+                        <option value="top">Top</option>
+                    </select>
+                </div>
+            </div>
+            <div class="js-comments comments-feed">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Templates -->
+<script id="post-detail-template" type="text/template">
+    <div class="post">
+        <div class="row">
+            <div class="js-image large-5 columns">
+                <img src="<%= url %>" data-action="zoom">
+            </div>
+            <div class="post-content">
+                <button class="button js-delete-post">Delete</button>
+                <button class="button js-share facebook-button"></button>
+                <button class="<% if(liked) { %>js-like post-liked button<% } else { %>js-like post-like button<% }%>"
+                    name="<%= _id %>">
+                </button>
+                <h3><%= title %></h3>
+                <span class="js-post-score score"> <%= score %></span>
+                <a href="/user/<%= _username %>"><span class="author"> <%= _username %></span></a>
+                <span class="date"> <%= date %></span>
+                <div class="post-description"><%= formatted %></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="post-comment-template" type="text/template">
+    <div class="comment">
+        <button type="button" name="<%= _id %>"
+            class="<% if(liked) { %>js-comment-like bolt-liked<% } else { %>js-comment-like bolt<% }%>"></button>
+        <span class="comment-score"><%= score %></span>
+        <a href="/user/<%= _username %>"><span class="author"><%= _username %></span></a>
+        <span class="date"> <%= date %></span>
+        <button class="button js-delete-comment">Delete</button>
+        <p><%= comment %></p>
+    </div>
+</script>
+
+<script id="comment-timeout-template" type="text/template">
+    <p>Please wait a bit before commenting again</p>
+</script>
+
+<script id="comment-empty-template" type="text/template">
+    <p>A comment cannot be empty</p>
+</script>
+
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
+
+<!-- Load Page Specific Scripts -->
+{{#yield-scripts}}
+    <script src="/js/dataLoader.js"></script>
+    <script src="/js/bundles/FullPost.js"></script>
+{{/yield-scripts}}

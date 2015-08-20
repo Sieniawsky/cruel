@@ -1,0 +1,53 @@
+<div class="js-user">
+    <div class="row">
+        <div class="large-12 columns container">
+            <div class="js-user-profile"></div>
+                <div class="user-feed-header">
+                    <h2>All Posts</h2>
+                    <div class="sorting user-sort">
+                        <span class="sortlabel">Sort:</span>
+                        <select class="js-sort feed-dropdown">
+                            <option value="new">New</option>
+                            <option value="top">Top</option>
+                        </select>
+                </div>
+            </div>
+            <div class="js-feed"></div>
+        </div>
+    </div> 
+</div>
+
+<!-- Templates -->
+{{> feedPostTemplate}}
+{{> feedScripts}}
+
+<script id="user-profile-template" type="text/template">
+    <div class="user-header">
+        <h2><%= username %></h2>
+    </div>
+    <div class="large-5 columns user-image">
+        <img src="<%= imageUrl %>">
+    </div>
+    <div class="large-7 columns user-content">
+        <span class="user-score"> <%= score %></span>
+        <% if(typeof initData.user._id != 'undefined' && initData.user._id == initData.selectedUser._id) {
+            %><a class="user-edit" href="/user/edit/<%= username %>"></a><%}%>
+        <span class="ranking"> Rank #<%= rank %> at <%= _locationName %></span>
+        <span class="join-date"> Joined <%= date %></span>
+        <div class="description">
+            <p><%= description %></p>
+        </div>
+        <button class="js-delete-user">Delete</button>
+    </div>
+</script>
+
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
+
+<!-- Load page specific scripts -->
+{{#yield-scripts}}
+    <script src="/js/dataLoader.js"></script>
+    <script src="/js/bundles/UserFeed.js"></script>
+{{/yield-scripts}}
