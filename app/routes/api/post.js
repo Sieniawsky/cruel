@@ -111,7 +111,8 @@ module.exports = function(app, passport) {
                 _username : req.user.username,
                 _post     : req.body.post._id,
                 date      : new Date(),
-                likers    : [req.user._id]
+                likers    : [req.user._id],
+                deleted   : false
             };
             Post.update({_id: req.body.post._id}, {'$push': {comments: comment}}, function(err, update) {
                 if (err) return console.error(err);
