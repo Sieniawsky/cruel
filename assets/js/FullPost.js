@@ -12,11 +12,13 @@ var FullPost = Backbone.View.extend({
     template: _.template($('#post-detail-template').html()),
 
     events: {
-        'click .js-like'         : 'handleLike',
-        'submit #js-form'        : 'handleComment',
-        'change .js-sort'        : 'sort',
-        'click .js-comment-like' : 'handleCommentLike',
-        'click .js-share'        : 'share'
+        'click .js-like'           : 'handleLike',
+        'submit #js-form'          : 'handleComment',
+        'change .js-sort'          : 'sort',
+        'click .js-comment-like'   : 'handleCommentLike',
+        'click .js-share'          : 'share',
+        'click .js-delete-post'    : 'deletePost',
+        'click .js-delete-comment' : 'deleteComment'
     },
 
     initialize: function() {
@@ -242,6 +244,18 @@ var FullPost = Backbone.View.extend({
         } else {
             this.nav.showModal();
         }
+    },
+
+    /* ============== */
+    /* Deletion Logic */
+    /* ============== */
+
+    deletePost: function() {
+
+    },
+
+    deleteComment: function() {
+        
     },
 
     partialRender: function() {

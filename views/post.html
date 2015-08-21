@@ -71,6 +71,7 @@
                 <img src="<%= url %>" data-action="zoom">
             </div>
             <div class="post-content">
+                {{> postDelete}}
                 <button class="button js-share facebook-button"></button>
                 <button class="<% if(liked) { %>js-like post-liked button<% } else { %>js-like post-like button<% }%>"
                     name="<%= _id %>">
@@ -93,6 +94,7 @@
         <a href="/user/<%= _username %>"><span class="author"><%= _username %></span></a>
         <span class="date"> <%= date %></span>
         <p><%= comment %></p>
+        {{> commentDelete}}
     </div>
 </script>
 

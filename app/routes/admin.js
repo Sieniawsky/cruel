@@ -22,7 +22,7 @@ module.exports = function(app, passport) {
                             var rank = _.indexOf(users, _.find(users, function(user) {
                                 return user._id.equals(id);
                             })) + 1;
-                            res.render('admin-user', {
+                            res.render('user', {
                                 initData : JSON.stringify({
                                     user         : remap.userRemap(req.user),
                                     selectedUser : _.extend(remap.userRemap(user), {rank: rank}),
@@ -32,7 +32,8 @@ module.exports = function(app, passport) {
                                 background : bg(),
                                 partials   : {
                                     feedPostTemplate : 'partials/feed-post-template',
-                                    feedScripts      : 'partials/feed-scripts'
+                                    feedScripts      : 'partials/feed-scripts',
+                                    userDelete       : 'partials/user-delete'
                                 }
                             });
                         });
@@ -54,14 +55,18 @@ module.exports = function(app, passport) {
                 if (exists(post)) {
                     var remappedPost = remap.postRemap(post, req.user);
                     var remappedUser = remap.userRemap(req.user);
-                    res.render('admin-post', {
+                    res.render('post', {
                         initData : JSON.stringify({
                             post : remappedPost,
                             user : remappedUser
                         }),
                         post       : remappedPost,
                         user       : remappedUser,
-                        background : bg()
+                        background : bg(),
+                        partials   : {
+                            postDelete    : 'partials/post-delete',
+                            commentDelete : 'partials/comment-delete'
+                        }
                     });               
                 } else {
                     res.redirect('/404');
