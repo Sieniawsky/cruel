@@ -251,11 +251,31 @@ var FullPost = Backbone.View.extend({
     /* ============== */
 
     deletePost: function() {
-
+        var id = this.model.get('_id');
+        $.ajax({
+            url     : '/admin/post/' + id,
+            type    : 'DELETE',
+            success : function(data) {
+                console.log(data);
+            },
+            failure : function(data) {
+                console.log(data);
+            }
+        });
     },
 
-    deleteComment: function() {
-        
+    deleteComment: function(e) {
+        var id = $(e.target).parent().children()[0].name;
+        $.ajax({
+            url     : '/admin/post/comment/' + id,
+            type    : 'DELETE',
+            success : function(data) {
+                console.log(data);
+            },
+            failure : function(data) {
+                console.log(data);
+            }
+        });
     },
 
     partialRender: function() {

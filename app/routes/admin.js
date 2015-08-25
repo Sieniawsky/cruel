@@ -1,11 +1,13 @@
 /* Routes for administrating the application */
-var _       = require('lodash');
-var shortID = require('mongodb-short-id');
-var Post    = require('../models/post');
-var User    = require('../models/user');
-var remap   = require('../utils/remap');
-var bg      = require('../utils/background');
-var exists  = require('../utils/exists');
+var _        = require('lodash');
+var mongoose = require('monogoose');
+var shortID  = require('mongodb-short-id');
+var isValid  = mongoose.Schema.Types.ObjectId.isValid;
+var Post     = require('../models/post');
+var User     = require('../models/user');
+var remap    = require('../utils/remap');
+var bg       = require('../utils/background');
+var exists   = require('../utils/exists');
 
 module.exports = function(app, passport) {
     app.get('/admin/user/:username', function(req, res) {
@@ -75,5 +77,33 @@ module.exports = function(app, passport) {
         } else {
             res.redirect('/');
         }
+    });
+
+    app.delete('/admin/post/:id', function(req, res) {
+        res.send({outcome: true});
+    });
+    app.delete('/admin/post/comment/:id', function(req, res) {
+        var deleteComment = function() {
+            var id = req.params.id;
+            if (isValid(id)) {
+                Post.findByIdAndUpdate(id, {'$set': {deleted: true}}, function(err, result) {
+                    if (err) return console.error(err);
+                    updateUser();
+                });
+            } else {
+                res.send({outcome: false});
+            }
+        };
+        var updateUser = function() {
+            User.update({}, {}, function(err, result) {
+                if (err) return console.error(err);
+                res.send({outcome: true});
+            });
+        };
+
+        deleteComment();
+    });
+    app.delete('/admin/user/:id', function(req, res) {
+        res.send({outcome: true});
     });
 };
