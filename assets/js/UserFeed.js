@@ -14,8 +14,9 @@ var UserFeed = FeedView.extend({
     el: '.js-user',
 
     events: {
-        'change .js-sort'     : 'load',
-        'change .js-location' : 'load'
+        'change .js-sort'       : 'load',
+        'change .js-location'   : 'load',
+        'click .js-delete-user' : 'deleteUser'
     },
 
     initialize: function() {
@@ -45,6 +46,25 @@ var UserFeed = FeedView.extend({
 
     genURL: function(page) {
         return '/api/feed/user/' + this.user + '/' + this.sort + '/' + page;
+    },
+
+    deleteUser: function() {
+        var id = initData.selectedUser._id;
+        $.ajax({
+            url : '/admin/user/' + id,
+            type : 'DELETE',
+            data : {
+                user: initData.selectedUser
+            },
+            success : function(data) {
+                if (data && data.outcome === true) {
+                    window.location.href = '/user/' + initData.selectedUser.username;
+                }
+            },
+            failure : function(data) {
+                console.log(data);
+            }
+        });
     },
 
     render: function() {

@@ -251,12 +251,15 @@ var FullPost = Backbone.View.extend({
     /* ============== */
 
     deletePost: function() {
+        var that = this;
         var id = this.model.get('_id');
         $.ajax({
             url     : '/admin/post/' + id,
             type    : 'DELETE',
             success : function(data) {
-                console.log(data);
+                if (data && data.outcome === true) {
+                    window.location.href = that.model.get('postURL');
+                }
             },
             failure : function(data) {
                 console.log(data);
@@ -266,10 +269,19 @@ var FullPost = Backbone.View.extend({
 
     deleteComment: function(e) {
         var id = $(e.target).parent().children()[0].name;
+        var comment = _.find(this.model.get('comments'), function(comment) {
+            return comment._id == id;
+        });
+        console.log(comment);
         $.ajax({
             url     : '/admin/post/comment/' + id,
             type    : 'DELETE',
+            data    : {
+                comment : comment,
+                post    : this.model.attributes
+            },
             success : function(data) {
+                this.model.fetch();
                 console.log(data);
             },
             failure : function(data) {

@@ -1,8 +1,7 @@
 /* Routes for administrating the application */
 var _        = require('lodash');
-var mongoose = require('monogoose');
+var mongoose = require('mongoose');
 var shortID  = require('mongodb-short-id');
-var isValid  = mongoose.Schema.Types.ObjectId.isValid;
 var Post     = require('../models/post');
 var User     = require('../models/user');
 var remap    = require('../utils/remap');
@@ -80,30 +79,99 @@ module.exports = function(app, passport) {
     });
 
     app.delete('/admin/post/:id', function(req, res) {
-        res.send({outcome: true});
+        var deletePost = function() {
+            Post.findByIdAndUpdate(id, {'$set': {deleted: true}}, function(err, result) {
+                if (err) return console.error(err);
+                updateUser(result);
+            });
+        };
+        var updateUser = function(post) {
+            User.update({_id: post._user}, {'$inc': {score: -post.score}}, function(err, result) {
+                if (err) return console.error(err);
+                var mapped = remap.postRemap(post, req.user);
+                res.send({outcome: true});
+            });
+        };
+
+        var id = req.params.id;
+        if (isMongoObjectId(id)) {
+            deletePost();
+        } else {
+            res.send({outcome: false});
+        }
     });
+
     app.delete('/admin/post/comment/:id', function(req, res) {
         var deleteComment = function() {
-            var id = req.params.id;
-            if (isValid(id)) {
-                Post.findByIdAndUpdate(id, {'$set': {deleted: true}}, function(err, result) {
-                    if (err) return console.error(err);
-                    updateUser();
-                });
-            } else {
-                res.send({outcome: false});
-            }
+            Post.update({
+                'comments._id': mongoose.Types.ObjectId(id)},
+                {'$set': {'comments.$.deleted': true}
+            }, function(err, result) {
+                if (err) return console.error(err);
+                findPost();
+            });
         };
-        var updateUser = function() {
-            User.update({}, {}, function(err, result) {
+
+        var findPost = function() {
+            Post.findOne({_id: req.body.post._id}, function(err, post) {
+                if (err) return console.error(err);
+                updateUser(post);
+            });
+        };
+
+        var updateUser = function(post) {
+            var index = findIndex(post.comments, '_id', id);
+            var comment = post.comments[index];
+            User.update({_id: comment._user}, {'$inc': {score: -comment.score}}, function(err, result) {
                 if (err) return console.error(err);
                 res.send({outcome: true});
             });
         };
 
-        deleteComment();
+        var id = req.params.id;
+        if (isMongoObjectId(id)) {
+            deleteComment();
+        } else {
+            res.send({outcome: false});
+        }
     });
+
     app.delete('/admin/user/:id', function(req, res) {
-        res.send({outcome: true});
+        var deleteUser = function() {
+            User.findOneAndUpdate({_id: id}, {'$set': {deleted: true}}, function(err, result) {
+                if (err) return console.error(err);
+                deletePosts();
+            });
+        };
+
+        var deletePosts = function() {
+            Post.update({_user: id}, {'$set': {deleted: true}}, {multi: true}, function(err, result) {
+                if (err) return console.error(err);
+                res.send({outcome: true});
+            });
+        };
+
+        var id = req.params.id;
+        if (isMongoObjectId(id)) {
+            deleteUser();
+        } else {
+            res.send({outcome: false});
+        }
     });
+
+    var isMongoObjectId = function(id) {
+        var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+        return checkForHexRegExp.test(id);
+    };
+
+    var findIndex = function(array, attr, target) {
+        var index = -1;
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][attr] == target) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    };
 };
