@@ -173,18 +173,23 @@ module.exports = {
     },
 
     commentsRemap : commentsRemap = function(comments, user) {
-        return _.map(comments, function(comment) {
-            return {
-                _id       : comment._id,
-                _user     : comment._user,
-                _username : comment._username,
-                comment   : comment.comment,
-                score     : comment.score,
-                rawDate   : new Date(comment.date),
-                date      : moment(new Date(comment.date)).fromNow(),
-                liked     : beenLiked(comment.likers, ((_.isEmpty(user)) ? '' : String(user._id)))
-            };
-        });
+        return _(comments)
+            .filter(function(comment) {
+                return comment.deleted === false;
+            })
+            .map(function(comment) {
+                return {
+                    _id       : comment._id,
+                    _user     : comment._user,
+                    _username : comment._username,
+                    comment   : comment.comment,
+                    score     : comment.score,
+                    rawDate   : new Date(comment.date),
+                    date      : moment(new Date(comment.date)).fromNow(),
+                    liked     : beenLiked(comment.likers, ((_.isEmpty(user)) ? '' : String(user._id)))
+                };
+            })
+            .value();
     },
 
     /* Trim to 100 character, then trim to last space to preserve whole words*/

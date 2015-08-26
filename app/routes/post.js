@@ -26,7 +26,7 @@ module.exports = function(app, passport) {
     /* Get a single specific post */
     app.get('/post/:shortID/:prettySnippet', function(req, res) {
         var id = shortID.s2l(req.params.shortID);
-        Post.findOne({_id: id}, function(err, post) {
+        Post.findOne({_id: id, deleted: false}, function(err, post) {
             if (err) return console.error(err);
             if (exists(post)) {
                 var remappedPost = remap.postRemap(post, req.user);

@@ -8,7 +8,7 @@ var exists = require('../utils/exists');
 
 module.exports = function(app, passport) {
     app.get('/user/:username', function(req, res) {
-        User.findOne({username: req.params.username}, function(err, user) {
+        User.findOne({username: req.params.username, deleted: false}, function(err, user) {
             if (err) return console.log(err);
             if (exists(user)) {
                 Post.find({_user: user._id}, function(err, posts) {
@@ -42,7 +42,7 @@ module.exports = function(app, passport) {
     });
 
     app.get('/user/edit/:username', function(req, res) {
-        if (req.user.username === req.params.username) {
+        if (req.user && req.user.username === req.params.username) {
             User.findOne({username: req.params.username}, function(err, user) {
                 if (err) return console.error(err);
                 res.render('user-edit', {

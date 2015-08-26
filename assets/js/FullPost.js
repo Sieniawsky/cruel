@@ -12,11 +12,13 @@ var FullPost = Backbone.View.extend({
     template: _.template($('#post-detail-template').html()),
 
     events: {
-        'click .js-like'         : 'handleLike',
-        'submit #js-form'        : 'handleComment',
-        'change .js-sort'        : 'sort',
-        'click .js-comment-like' : 'handleCommentLike',
-        'click .js-share'        : 'share'
+        'click .js-like'           : 'handleLike',
+        'submit #js-form'          : 'handleComment',
+        'change .js-sort'          : 'sort',
+        'click .js-comment-like'   : 'handleCommentLike',
+        'click .js-share'          : 'share',
+        'click .js-delete-post'    : 'deletePost',
+        'click .js-delete-comment' : 'deleteComment'
     },
 
     initialize: function() {
@@ -242,6 +244,50 @@ var FullPost = Backbone.View.extend({
         } else {
             this.nav.showModal();
         }
+    },
+
+    /* ============== */
+    /* Deletion Logic */
+    /* ============== */
+
+    deletePost: function() {
+        var that = this;
+        var id = this.model.get('_id');
+        $.ajax({
+            url     : '/admin/post/' + id,
+            type    : 'DELETE',
+            success : function(data) {
+                if (data && data.outcome === true) {
+                    window.location.href = that.model.get('postURL');
+                }
+            },
+            failure : function(data) {
+                console.log(data);
+            }
+        });
+    },
+
+    deleteComment: function(e) {
+        var id = $(e.target).parent().children()[0].name;
+        var comment = _.find(this.model.get('comments'), function(comment) {
+            return comment._id == id;
+        });
+        console.log(comment);
+        $.ajax({
+            url     : '/admin/post/comment/' + id,
+            type    : 'DELETE',
+            data    : {
+                comment : comment,
+                post    : this.model.attributes
+            },
+            success : function(data) {
+                this.model.fetch();
+                console.log(data);
+            },
+            failure : function(data) {
+                console.log(data);
+            }
+        });
     },
 
     partialRender: function() {
