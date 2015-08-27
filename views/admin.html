@@ -1,0 +1,13 @@
+<div class="js-app">
+    <div class="js-export">
+        <form id="download-form" role="form" action="/admin/user" method="get">
+            <h4>Campus</h4>
+            <select id="location" name="location">
+                {{#locations}}
+                    <option value="{{_id}}">{{name}}</option>
+                {{/locations}}
+            </select>
+            <button type="submit">Download</button>
+        </form>
+    </div>
+</div>

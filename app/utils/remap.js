@@ -172,6 +172,21 @@ module.exports = {
         });
     },
 
+    userDownloadRemap : function(users) {
+        return _.map(users, function(user) {
+            var date = new Date(user.date);
+            return {
+                username   : user.username,
+                location   : user._locationName,
+                email      : user.email,
+                date       : [date.getMonth(), date.getDate(), date.getYear()].join('-'),
+                score      : user.score,
+                weekScore  : user.weekScore,
+                monthScore : user.monthScore
+            };
+        });
+    },
+
     commentsRemap : commentsRemap = function(comments, user) {
         return _(comments)
             .filter(function(comment) {
