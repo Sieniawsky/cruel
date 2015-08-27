@@ -10,6 +10,7 @@ var Post     = require('../models/post');
 var User     = require('../models/user');
 var remap    = require('../utils/remap');
 var bg       = require('../utils/background');
+var parser   = require('../utils/parser');
 var exists   = require('../utils/exists');
 
 module.exports = function(app, passport) {
@@ -113,6 +114,39 @@ module.exports = function(app, passport) {
                     res.setHeader('Content-type', mimetype);
                     res.write(csv);
                     res.end();
+                });
+            });
+        } else {
+            res.send({outcome: false});
+        }
+    });
+
+    app.post('/admin/post', function(req, res) {
+        if (req.user && req.user.privilege === 'admin') {
+            var locationElements = req.body.location.split(',');
+            var data = _.extend(req.body, {
+                date          : new Date(),
+                _user         : req.user._id,
+                _username     : req.user.username,
+                _location     : locationElements[0],
+                _locationName : locationElements[1]
+            });
+            parser.format(data.description, function(formatted) {
+                data.description = data.description.replace(/\r?\n/g, '<br/>');
+                data.formatted = formatted;
+                data.priority = 'admin';
+                if (data.url === '') {
+                    data.type = 'text';
+                }
+                data = _.omit(data, function(value) {
+                    return value === '';
+                });
+
+                var post = new Post(data);
+                post.save(function(err, post) {
+                    if (err) return console.error(err);
+                    var mapped = remap.postRemap(post);
+                    res.redirect(mapped.postURL);
                 });
             });
         } else {

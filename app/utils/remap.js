@@ -58,7 +58,8 @@ module.exports = {
             commentNumber : comments.length,
             commentText   : (comments.length == 1) ? 'comment' : 'comments',
             type          : post.type,
-            postURL       : postURL
+            postURL       : postURL,
+            priority      : post.priority
         };
         return mapped;
     },
