@@ -1445,6 +1445,15 @@ h3 {
   font-size:12px;
 }
 
+.admin-author {
+  padding:0 3px 0 0;
+}
+
+.admin-author:before {
+  content:'';
+  padding:0;
+}
+
 .date {
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size: 13px;
@@ -1471,6 +1480,10 @@ h3 {
   width: ~"-moz-calc(100% - 90px)";
   width: ~"-webkit-calc(100% - 90px)";
   width: ~"calc(100% - 90px)";
+}
+
+.admin-post {
+  background-color:#e7f1f7;
 }
 
 .feed-post-header {
@@ -1676,6 +1689,16 @@ h3 {
   .author:after {
     content:"\a";
     white-space:pre;
+  }
+
+  .admin-author {
+    padding:0 3px 0 0;
+    line-height:22px;
+  }
+
+  .admin-author:before {
+    content:'';
+    padding:0;
   }
 
   .post .author:after {

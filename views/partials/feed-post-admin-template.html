@@ -1,0 +1,24 @@
+<script id="post-admin-template" type="text/template">
+    <div class="js-post">
+        <div class="row">
+            <div class="feed-post admin-post">
+                <div class="large-2 columns feed-post-header">
+                    <a href="<%= postURL %>">
+                        <img class="thumbnail" src="<%= url %>"/>
+                    </a>
+                </div>
+                <div class="large-10 columns feed-post-content">
+                    <a href="<%= postURL %>"><h3><%= title %></h3></a>
+                    <span class="author admin-author">Cruel</span>
+                    <a href="<%= postURL %>">
+                        <span class="comment-count"><%= commentNumber %> <%= commentText %></span>
+                    </a>
+                    <span class="date"><%= date %></span>
+                    <p class="snippet"><%= snippet %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+

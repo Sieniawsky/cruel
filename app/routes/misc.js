@@ -10,4 +10,11 @@ module.exports = function(app, passport) {
             background : bg()
         });
     });
+    
+    app.get('/welcome', function(req,res) {
+        res.render('welcome', {
+            user       : remap.userRemap(req.user),
+            background : bg()
+        });
+    });
 };
