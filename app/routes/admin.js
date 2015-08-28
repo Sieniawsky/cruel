@@ -14,6 +14,11 @@ var parser   = require('../utils/parser');
 var exists   = require('../utils/exists');
 
 module.exports = function(app, passport) {
+
+    /* ========================= */
+    /* Admin backend page routes */
+    /* ========================= */
+
     app.get('/admin', function(req, res) {
         if (req.user && req.user.privilege === 'admin') {
             res.render('admin', {
@@ -98,6 +103,10 @@ module.exports = function(app, passport) {
         }
     });
 
+    /* ============================= */
+    /* Admin user CSV download route */
+    /* ============================= */
+
     app.get('/admin/user', function(req, res) {
         if (req.user && req.user.privilege === 'admin') {
             var urlQuery = url.parse(req.url, true).query;
@@ -120,6 +129,10 @@ module.exports = function(app, passport) {
             res.send({outcome: false});
         }
     });
+
+    /* ======================== */
+    /* Admin post handler route */
+    /* ======================== */
 
     app.post('/admin/post', function(req, res) {
         if (req.user && req.user.privilege === 'admin') {
@@ -153,6 +166,10 @@ module.exports = function(app, passport) {
             res.send({outcome: false});
         }
     });
+
+    /* ======================================= */
+    /* Admin post/comment/user deletion routes */
+    /* ======================================= */
 
     app.delete('/admin/post/:id', function(req, res) {
         var deletePost = function() {
@@ -235,6 +252,10 @@ module.exports = function(app, passport) {
         }
     });
 
+    /* ================ */
+    /* Helper functions */
+    /* ================ */
+
     var isMongoObjectId = function(id) {
         var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
         return checkForHexRegExp.test(id);
@@ -254,7 +275,7 @@ module.exports = function(app, passport) {
     var formatLocationQuery = function(query) {
         var locationQuery = {};
         if (query && query.location && isMongoObjectId(query.location)) {
-            locationQuery = {_location: query.location}
+            locationQuery = {_location: query.location};
         }
         return locationQuery;
     };

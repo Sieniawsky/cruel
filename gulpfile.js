@@ -32,7 +32,7 @@ gulp.task('serve', ['server:start', 'lint'], function() {
 
 gulp.task('lint', function() {
     gutil.log('Running lint on source');
-    return gulp.src(['app/**/*.js', 'config/**/*.js'])
+    return gulp.src(['app/**/*.js', 'config/**/*.js', 'server.js'])
         .pipe(plumber())
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
