@@ -21,8 +21,13 @@ var MainFeed = FeedView.extend({
     initialize: function() {
         /* Call super initialize */
         FeedView.prototype.initialize.apply(this);
-        this.$location = $('.js-location');
+        this.$location     = $('.js-location');
         this.$locationName = $('.js-location-name');
+        this.$welcome      = $('.js-welcome');
+        this.$admin        = $('.js-admin');
+
+        this.$feedPostWelcomeTemplate = _.template($('#post-welcome-template').html());
+        this.$feedPostAdminTemplate   = _.template($('#post-admin-template').html());
 
         this.nav = nav || {};
 
@@ -129,6 +134,7 @@ var MainFeed = FeedView.extend({
     },
 
     render: function() {
+        this.$welcome.html(this.$feedPostWelcomeTemplate());
         this.$locationName.html($('.js-location option:selected').text());
     }
 });

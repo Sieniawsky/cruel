@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
     /* Get new posts for a given user */
     app.get('/api/feed/user/:user/new/:page', function(req, res) {
         var query = Post
-            .find({_user: req.params.user, deleted: false})
+            .find({_user: req.params.user, deleted: false, priority: 'default'})
             .sort({date: 1})
             .skip(computeSkip(req.params.page))
             .limit(page_size);
@@ -26,7 +26,7 @@ module.exports = function(app, passport) {
     /* Get top posts for a given user */
     app.get('/api/feed/user/:user/top/:page', function(req, res) {
         var query = Post
-            .find({_user: req.params.user, deleted: false})
+            .find({_user: req.params.user, deleted: false, priority: 'default'})
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
             .limit(page_size);
@@ -39,7 +39,7 @@ module.exports = function(app, passport) {
     /* Get new posts */
     app.get('/api/feed/:location/new/:page', function(req, res) {
         var query = Post
-            .find(computeLocationQuery(req.params.location, {deleted: false}))
+            .find(computeLocationQuery(req.params.location, {deleted: false, priority: 'default'}))
             .sort({date: -1})
             .skip(computeSkip(req.params.page))
             .limit(page_size);
@@ -52,7 +52,7 @@ module.exports = function(app, passport) {
     /* Get top rated posts */
     app.get('/api/feed/:location/top/:page', function(req, res) {
         var query = Post
-            .find(computeLocationQuery(req.params.location, {deleted: false}))
+            .find(computeLocationQuery(req.params.location, {deleted: false, priority: 'default'}))
             .sort({score: -1})
             .skip(computeSkip(req.params.page))
             .limit(page_size);
@@ -71,6 +71,7 @@ module.exports = function(app, passport) {
         var query = Post
             .find(computeLocationQuery(req.params.location, {
                 deleted: false,
+                priority: 'default',
                 '$and': [
                     {date: {'$gte': first}},
                     {date: {'$lte': last}}
@@ -93,6 +94,7 @@ module.exports = function(app, passport) {
         var query = Post
             .find(computeLocationQuery(req.params.location, {
                 deleted: false,
+                priority: 'default',
                 '$and': [
                     {date: {'$gte': first}},
                     {date: {'$lte': last}}
@@ -114,6 +116,7 @@ module.exports = function(app, passport) {
         var query = Post.find(
             computeLocationQuery(req.params.location, {
                 deleted: false,
+                priority: 'default',
                 date: {'$gte': range}
             }));
         query.exec(function(err, posts) {

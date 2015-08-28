@@ -19,7 +19,9 @@ module.exports = function(app, passport) {
             message    : req.flash('loginMessage'),
             partials   : {
                 feedPostTemplate : 'partials/feed-post-template',
-                feedScripts      : 'partials/feed-scripts'
+                feedScripts      : 'partials/feed-scripts',
+                feedPostWelcome  : 'partials/feed-post-welcome-template',
+                feedPostAdmin    : 'partials/feed-post-admin-template'  
             }
         });
     });
