@@ -88,8 +88,9 @@
                                     </ul>
                                 </div>
                                 <a href="/user/{{user.username}}">{{user.username}}</a>
-                                <a href="/leaderboard">Leaderboard</a>
+                                <a href="/leaderboard">Ladder</a>
                                 <a href="/post">Make A Post</a>
+                                <button class="facebook-button-nav"></button>
                                 <div class="menu-button" tabindex="0">
                                     <img src="/images/menu-icon.png">
                                 </div>
@@ -104,9 +105,10 @@
                                 </div>
                             {{/user._id}}
                             {{^user._id}}
-                                <a href="/leaderboard">Leaderboard</a>
+                                <a href="/leaderboard">Ladder</a>
                                 <button class="js-login login-button">Login</button>
                                 <a href="/signup">Signup</a>
+                                <button class="facebook-button-nav"></button>
                                 <div class="menu-button" tabindex="0">
                                     <img src="/images/menu-icon.png">
                                 </div>
@@ -126,6 +128,7 @@
 
             <!-- Mobile Nav -->
             <div class="mobile-nav-bottom">
+                <button class="facebook-button-nav facebook-button-nav-mobile"></button>
                 {{#user._id}}
                     <div class="dropdown-mobile">
                         <ul>
@@ -136,7 +139,7 @@
                             </li>
                             <li>
                                 <a href="/leaderboard">
-                                    <div>Leaderboard</div>
+                                    <div>Ladder</div>
                                 </a>
                             </li>
                             <li>
@@ -180,7 +183,7 @@
                             </li>
                             <li>
                                 <a href="/leaderboard">
-                                    <div>Leaderboard</div>
+                                    <div>Ladder</div>
                                 </a>
                             </li>
                             <li>
@@ -322,6 +325,7 @@
                         <div class="form-group">
                             <button class="button modal-button modal-login-button" type="submit">Login</button>
                         </div>
+                        <p class="no-account"><a href="/signup">Don't have an account? Sign up.</a></p>
                     </form>
                     <img class="js-login-close modal-close" src="/images/modal-close.png">
                 </div>
@@ -344,6 +348,13 @@
 
         <!-- Script load point -->
         {{{ yield-scripts }}}
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=1653168968231541";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
     </body>
 </html>

@@ -754,6 +754,42 @@ textarea {
   outline:none;
 }
 
+.facebook-button-nav {
+  background:none;
+  outline:none;
+  width:22px;
+  height:22px;
+  border:none;
+  cursor:pointer;
+  margin-left:4px;
+  margin-right:4px;
+}
+
+.facebook-button-nav:before {
+  position:absolute;
+  content:'';
+  width:22px;
+  height:22px;
+  background:url(/images/facebook.png) no-repeat;
+  background-size:22px 22px;
+  background-position:0px 0px;
+  margin-left:-14px;
+  margin-top:-9px;
+}
+
+.facebook-button-nav:focus {
+  outline:none;
+  border:none;
+}
+
+.pluginButton {
+  background:none!important;
+}
+
+.sp_plugin-button {
+  background:none!important;
+}
+
 /**Nav Dropdown**/
 
 .menu-button {
@@ -1046,6 +1082,12 @@ textarea {
     z-index:1;
     background-color:#f2f2f2;
     border-top: 1px solid #e8e8e8;
+  }
+
+  .facebook-button-nav-mobile {
+    position:fixed;
+    right:5px;
+    top:2px;
   }
 
   .mobile-icons {
@@ -2207,6 +2249,15 @@ h4 {
   margin-bottom:10px;
 }
 
+.no-account {
+  margin-top:3px;
+  margin-bottom:0;
+}
+
+.no-account a {
+  color:#eaeaea;
+  margin-left:0;
+}
 /**Modal media queries **/
 
 @media only screen and (max-width:768px) {
@@ -2921,6 +2972,127 @@ h4 {
     color:#bababa;
   }
 }
+
+/**Welcome Page**/
+
+.welcome-post {
+  width:100%;
+}
+
+.welcome-banner-container {
+  display:block;
+}
+
+.welcome-banner-container-mobile {
+  display:none;
+}
+
+@media only screen and (max-width:768px) {
+  .welcome-banner-container {
+    display:none;
+  }
+  .welcome-banner-container-mobile {
+    display:block;
+  }
+} 
+.welcome-banner {
+  width:100%;
+  height:auto;
+}
+
+.welcome-header {
+  font-size:36px!important;
+  margin-bottom:10px;
+}
+
+.welcome-buzz-gif {
+  width:200px!important;
+  height:200px;
+  float:left;
+  padding:0!important;
+  margin-top:10px;
+}
+
+@media only screen and (max-width:340px) {
+  .welcome-buzz-gif {
+    width:150px!important;
+    height:150px!important;
+  }
+}
+
+.welcome-buzz {
+  padding-top:30px;
+  font-size:36px;
+  color:#ffd800!important;
+}
+
+.welcome-buzz-p {
+  margin-bottom:60px;
+}
+
+@media only screen and (max-width:768px) {
+  .welcome-buzz-p {
+    margin-bottom:40px;
+  }
+} 
+
+.welcome-ladder-p {
+  margin-bottom:35px;
+}
+
+.welcome-leader {
+  margin-top:15px;
+  border-bottom:1px solid #e8e8e8;
+  float:left;
+  margin-bottom:20px;
+}
+
+.welcome-leader-item {
+  width:100%;
+  margin-left:0px;
+  padding-bottom:5px;
+}
+
+.welcome-leader img {
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+
+.welcome-a {
+  text-decoration: none;
+  font-weight:bold;
+  color:#55bef5;
+}
+
+.welcome-button {
+  display:inline-block;
+  line-height:45px;
+  text-align:center;
+  margin-top:25px;
+  width:100%;
+  margin-bottom:-20px;
+}
+
+.welcome-button:hover {
+  line-height:43px;
+}
+
+.welcome-description {
+  margin-bottom:55px;
+}
+
+.welcome-facebook-like {
+  position:absolute!important;
+  top:77px;
+  left:57px;
+}
+
+@media only screen and (max-width:768px) {
+  .welcome-facebook-like {
+    top:64px;
+    left:22px;
+  }
+} 
 
 /**Video Wrapper**/
 
