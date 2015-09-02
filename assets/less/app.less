@@ -1541,9 +1541,15 @@ h3 {
 }
 
 .thumbnail {
-  min-height:100px;
-  max-height:150px;
+  min-height:75px;
+  max-height:175px;
   width: 100%;
+}
+
+@media only screen and (min-width:1450px) {
+  .thumbnail {
+    max-height:250px;
+  }
 }
 
 .bolt {
@@ -2585,6 +2591,12 @@ h4 {
 
   .user-header h2 {
     margin-left:-5px;
+  }
+
+  .user-edit-button {
+    position:absolute;
+    top:3px;
+    right:0px;
   }
 
   .user-edit-header h2 {
