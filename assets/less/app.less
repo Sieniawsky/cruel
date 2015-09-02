@@ -761,8 +761,8 @@ textarea {
   height:22px;
   border:none;
   cursor:pointer;
-  margin-left:4px;
-  margin-right:4px;
+  margin: 2px 4px 0 2px!important;
+  padding:0!important;
 }
 
 .facebook-button-nav:before {
@@ -773,8 +773,7 @@ textarea {
   background:url(/images/facebook.png) no-repeat;
   background-size:22px 22px;
   background-position:0px 0px;
-  margin-left:-14px;
-  margin-top:-9px;
+  
 }
 
 .facebook-button-nav:focus {
@@ -1086,8 +1085,14 @@ textarea {
 
   .facebook-button-nav-mobile {
     position:fixed;
-    right:5px;
+    right:6px;
     top:2px;
+  }
+
+  .facebook-button-nav:before {
+    position:absolute;
+    left:0;
+    top:0;
   }
 
   .mobile-icons {
@@ -1711,6 +1716,10 @@ h3 {
     min-height:65px;
     max-height:150px;
     margin-bottom:5px;
+  }
+
+  .welcome-thumbnail {
+    margin-left:-3px;
   }
 
   .author {
@@ -2987,7 +2996,7 @@ h4 {
   display:none;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width:500px) {
   .welcome-banner-container {
     display:none;
   }
@@ -3034,7 +3043,19 @@ h4 {
   .welcome-buzz-p {
     margin-bottom:40px;
   }
+}
+
+@media only screen and (min-width:1600px) {
+  .welcome-buzz-p {
+    margin-bottom:80px;
+  }
 } 
+
+@media only screen and (min-width:1870px) {
+  .welcome-buzz-p {
+    margin-bottom:100px;
+  }
+}   
 
 .welcome-ladder-p {
   margin-bottom:35px;
@@ -3091,6 +3112,10 @@ h4 {
   .welcome-facebook-like {
     top:64px;
     left:22px;
+  }
+
+  .welcome-description p {
+    text-align:justify;
   }
 } 
 

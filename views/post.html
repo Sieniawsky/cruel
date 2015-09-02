@@ -86,6 +86,24 @@
     </div>
 </script>
 
+<script id="post-admin-detail-template" type="text/template">
+    <div class="post">
+        <div class="row">
+            <div class="js-image large-5 columns">
+                <img src="<%= url %>" data-action="zoom">
+            </div>
+            <div class="post-content">
+                {{> postDelete}}
+                <button class="button js-share facebook-button"></button>
+                <h3><%= title %></h3>
+                <a href="/user/<%= _username %>"><span class="author"> <%= _username %></span></a>
+                <span class="date"> <%= date %></span>
+                <div class="post-description"><%= formatted %></div>
+            </div>
+        </div>
+    </div>
+</script>
+
 <script id="post-comment-template" type="text/template">
     <div class="comment">
         <button type="button" name="<%= _id %>"
