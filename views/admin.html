@@ -1,0 +1,54 @@
+<div class="js-app">
+    <div class="js-export">
+        <form id="download-form" role="form" action="/admin/user" method="get">
+            <h4>Location</h4>
+            <select id="location" name="location">
+                {{#locations}}
+                    <option value="{{_id}}">{{name}}</option>
+                {{/locations}}
+            </select>
+            <button type="submit">Download</button>
+        </form>
+    </div>
+    <div class="js-compose">
+        <form class="js-compose" id="compose-form" data-toggle="validator"
+            role="form" action="/admin/post" method="post">
+            <div class="form-group">
+            <h4>Location</h4>
+                <select id="location" name="location">
+                    {{#locations}}
+                        <option value="{{_id}},{{name}}">{{name}}</option>
+                    {{/locations}}
+                </select>
+            </div>
+            <div class="form-group">
+                <h4>POST TITLE</h4>
+                <input type="text" name="title" id="postTitle" placeholder="Enter post title" minlength="10"
+                    data-error="Post title must be at least 10 characters long" required>
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <h4>IMAGE URL</h4>
+                <input type="url" pattern=".*\.(jpeg|jpg|gif|png|JPEG|JPG|GIF|PNG)$"
+                    class="js-image" name="url" placeholder="(Optional) http://www.example.com/image.jpeg"
+                    data-error="Please enter a valid URL for a JPEG, GIF, or PNG image">
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <h4>POST TEXT</h4>
+                <textarea rows="5" name="description" id="postDescription"
+                    placeholder="Enter a description. Paste Soundcloud, Youtube, and Vimeo links to embed songs and videos."></textarea>
+            </div>
+            <div class="form-group">
+                <button class="button post-button" type="submit">Post</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Load page specific scripts -->
+{{#yield-scripts}}
+    <script src="/bower_components/H5F/h5f.min.js"></script>
+    <script src="/bower_components/bootstrap-validator/dist/validator.min.js"></script>
+    <script src="/js/polyfill.js"></script>
+{{/yield-scripts}}

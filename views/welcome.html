@@ -1,4 +1,4 @@
-<div class="row js-post">
+<div class="row js-welcome-page">
     <div class="large-12 columns container">
         <div class="container-header">
             <a href="{{redirect}}" class="navigation">Back</a>
@@ -54,11 +54,14 @@
                     <h3 class="welcome-header">The Rules</h3>
                     <p class="welcome-ladder-p">Posts or comments containing nudity or offensive content will be removed, and Buzz accumulated on those posts will be removed from your total score. Repeat offenders will be banned. In order to be eligible to win prizes, you must be a student at the campus associated with your account. Any evidence of spamming or cheating on an account will result in the account(s) being banned. For our full set of rules, check out the <a class="welcome-a" href="#" target="_blank">User License Agreement</a>.</p>
                     <h3 class="welcome-header">Let's Get Started!</h3> 
-                    <button class="js-login welcome-button button">Log in</button><a href="/signup" class="button welcome-button">Sign up</a>
+                    <button class="js-welcome-login welcome-button button">Log in</button>
+                    <a href="/signup" class="button welcome-button">Sign up</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
- 
+{{#yield-scripts}}
+    <script src="/js/bundles/Welcome.js"></script>
+{{/yield-scripts}}

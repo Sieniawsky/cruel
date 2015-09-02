@@ -57,7 +57,7 @@ app.use(session({
         maxAge  : new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
     },
     store   : new MongoStore({mongooseConnection: mongoose.connection}, function(err) {
-        console.log(err || 'connect-mongodb setup ok')
+        console.log(err || 'connect-mongodb setup ok');
     })
 }));
 app.use(passport.initialize());

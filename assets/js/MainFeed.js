@@ -21,8 +21,13 @@ var MainFeed = FeedView.extend({
     initialize: function() {
         /* Call super initialize */
         FeedView.prototype.initialize.apply(this);
-        this.$location = $('.js-location');
+        this.$location     = $('.js-location');
         this.$locationName = $('.js-location-name');
+        this.$welcome      = $('.js-welcome');
+        this.$admin        = $('.js-admin');
+
+        this.$feedPostWelcomeTemplate = _.template($('#post-welcome-template').html());
+        this.$feedPostAdminTemplate   = _.template($('#post-admin-template').html());
 
         this.nav = nav || {};
 
@@ -71,8 +76,6 @@ var MainFeed = FeedView.extend({
             url   : this.genURL(1),
             sort  : this.sort
         });
-
-        console.log(this.getParameterByName('failure'));
 
         if (this.getParameterByName('s') !== 'false') {
             History.replaceState(
@@ -129,7 +132,16 @@ var MainFeed = FeedView.extend({
     },
 
     render: function() {
+        var that = this;
+        this.$welcome.html(this.$feedPostWelcomeTemplate());
         this.$locationName.html($('.js-location option:selected').text());
+        this.$admin.empty();
+        var adminPosts = _.filter(initData.adminPosts, function(post) {
+            return post._location === that.$location.val();
+        });
+        _.forEach(adminPosts, function(post) {
+            that.$admin.append(that.$feedPostAdminTemplate(post));
+        });
     }
 });
 

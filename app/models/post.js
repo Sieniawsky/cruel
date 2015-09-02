@@ -16,7 +16,8 @@ var postSchema = mongoose.Schema({
     _locationName : String,
     comments      : [],
     type          : {type : String, default : 'image'},
-    deleted       : {type : Boolean, default : false}
+    deleted       : {type : Boolean, default : false},
+    priority      : {type : String, default : 'default'}
 });
 
 module.exports = mongoose.model('Post', postSchema);

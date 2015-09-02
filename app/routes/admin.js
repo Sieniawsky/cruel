@@ -2,17 +2,42 @@
 var _        = require('lodash');
 var mongoose = require('mongoose');
 var shortID  = require('mongodb-short-id');
+var json2csv = require('json2csv');
+var fs       = require('fs');
+var url      = require('url');
+var app      = require('../../server');
 var Post     = require('../models/post');
 var User     = require('../models/user');
 var remap    = require('../utils/remap');
 var bg       = require('../utils/background');
+var parser   = require('../utils/parser');
 var exists   = require('../utils/exists');
 
 module.exports = function(app, passport) {
+
+    /* ========================= */
+    /* Admin backend page routes */
+    /* ========================= */
+
+    app.get('/admin', function(req, res) {
+        if (req.user && req.user.privilege === 'admin') {
+            res.render('admin', {
+                initData : JSON.stringify({
+                    user : remap.userRemap(req.user)
+                }),
+                user       : remap.userRemap(req.user),
+                locations  : remap.locationRemap(app.get('locations')),
+                background : bg()
+            });
+        } else {
+            res.redirect('/');
+        }
+    });
+
     app.get('/admin/user/:username', function(req, res) {
         if (req.user && req.user.privilege === 'admin') {
             User.findOne({username: req.params.username, deleted: false}, function(err, user) {
-                if (err) return console.log(err);
+                if (err) return console.error(err);
                 if (exists(user)) {
                     Post.find({_user: user._id}, function(err, posts) {
                         if (err) return console.error(err);
@@ -77,6 +102,74 @@ module.exports = function(app, passport) {
             res.redirect('/');
         }
     });
+
+    /* ============================= */
+    /* Admin user CSV download route */
+    /* ============================= */
+
+    app.get('/admin/user', function(req, res) {
+        if (req.user && req.user.privilege === 'admin') {
+            var urlQuery = url.parse(req.url, true).query;
+            var query = User.find(formatLocationQuery(urlQuery)).sort({date: 1});
+            query.exec(function(err, users) {
+                if (err) return console.error(err);
+                var fields = ['username', 'location', 'email', 'date', 'score', 'weekScore', 'monthScore'];
+                var mapped = remap.userDownloadRemap(users);
+                json2csv({data: mapped, field: fields}, function(err, csv) {
+                    if (err) return console.error(err);
+                    var filename = generateFilename(urlQuery.location);
+                    var mimetype = 'text/csv';
+                    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                    res.setHeader('Content-type', mimetype);
+                    res.write(csv);
+                    res.end();
+                });
+            });
+        } else {
+            res.send({outcome: false});
+        }
+    });
+
+    /* ======================== */
+    /* Admin post handler route */
+    /* ======================== */
+
+    app.post('/admin/post', function(req, res) {
+        if (req.user && req.user.privilege === 'admin') {
+            var locationElements = req.body.location.split(',');
+            var data = _.extend(req.body, {
+                date          : new Date(),
+                _user         : req.user._id,
+                _username     : req.user.username,
+                _location     : locationElements[0],
+                _locationName : locationElements[1]
+            });
+            parser.format(data.description, function(formatted) {
+                data.description = data.description.replace(/\r?\n/g, '<br/>');
+                data.formatted = formatted;
+                data.priority = 'admin';
+                if (data.url === '') {
+                    data.type = 'text';
+                }
+                data = _.omit(data, function(value) {
+                    return value === '';
+                });
+
+                var post = new Post(data);
+                post.save(function(err, post) {
+                    if (err) return console.error(err);
+                    var mapped = remap.postRemap(post);
+                    res.redirect(mapped.postURL);
+                });
+            });
+        } else {
+            res.send({outcome: false});
+        }
+    });
+
+    /* ======================================= */
+    /* Admin post/comment/user deletion routes */
+    /* ======================================= */
 
     app.delete('/admin/post/:id', function(req, res) {
         var deletePost = function() {
@@ -159,6 +252,10 @@ module.exports = function(app, passport) {
         }
     });
 
+    /* ================ */
+    /* Helper functions */
+    /* ================ */
+
     var isMongoObjectId = function(id) {
         var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
         return checkForHexRegExp.test(id);
@@ -173,5 +270,26 @@ module.exports = function(app, passport) {
             }
         }
         return index;
+    };
+
+    var formatLocationQuery = function(query) {
+        var locationQuery = {};
+        if (query && query.location && isMongoObjectId(query.location)) {
+            locationQuery = {_location: query.location};
+        }
+        return locationQuery;
+    };
+
+    var generateFilename = function(location) {
+        var filename = '';
+        var locationName = 'All';
+        if (location !== 'All') {
+            locationName = _.find(app.get('locations'), function(loc) {
+                return loc._id.equals(location);
+            }).name;
+        }
+        var date = new Date();
+        filename = [locationName, 'Users', date.getMonth(), date.getDate(), date.getYear()].join('-') + '.csv';
+        return filename;
     };
 };
