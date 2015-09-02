@@ -29,14 +29,8 @@ module.exports = function(app, passport) {
     });
 
     app.post('/signup', function(req, res, next) {
-        var referer = req.body.referer;
-        var parsed  = url.parse(referer);
-        var successRedirect = '/';
-        if (_.contains(config.hosts, parsed.host)) {
-            successRedirect = parsed.pathname;
-        }
         passport.authenticate('local-signup', {
-            successRedirect : successRedirect,
+            successRedirect : '/welcome',
             failureRedirect : '/signup',
             failureFlash    : true     
         })(req, res, next);
