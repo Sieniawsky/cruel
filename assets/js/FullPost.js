@@ -23,6 +23,7 @@ var FullPost = Backbone.View.extend({
 
     initialize: function() {
         this.postTemplate    = _.template($('#post-detail-template').html());
+        this.postAdminTemplate = _.template($('#post-admin-detail-template').html());
         this.commentTemplate = _.template($('#post-comment-template').html());
         this.commentTimeoutTemplate = _.template($('#comment-timeout-template').html());
         this.commentEmptyTemplate = _.template($('#comment-empty-template').html());
@@ -37,6 +38,9 @@ var FullPost = Backbone.View.extend({
 
         this.sortOption = 'top';
         this.$sort.val('top');
+
+        this.template = this.postTemplate;
+        if (this.model.get('priority') === 'admin') this.template = this.postAdminTemplate;
 
         _.bindAll(this, 'partialRender');
         this.model.bind('change', this.partialRender);
@@ -324,7 +328,7 @@ var FullPost = Backbone.View.extend({
 
         /* Render the post content */
         this.$post.empty();
-        this.$post.html(this.postTemplate(this.model.toJSON()));
+        this.$post.html(this.template(this.model.toJSON()));
         if (this.model.get('type') === 'text') {
             $('.js-image').addClass('post-image-hidden');
             $('.post-content').addClass('post-content-full-width');
