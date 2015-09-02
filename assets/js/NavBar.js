@@ -38,6 +38,7 @@ var NavBar = Backbone.View.extend({
     },
 
     showLoginModal: function() {
+        window.scrollTo(0, 0);
         this.$body.addClass('modal-scroll-lock');
         this.$loginModal.show();
     },

@@ -77,8 +77,6 @@ var MainFeed = FeedView.extend({
             sort  : this.sort
         });
 
-        console.log(this.getParameterByName('failure'));
-
         if (this.getParameterByName('s') !== 'false') {
             History.replaceState(
                 {state:1},
@@ -134,8 +132,16 @@ var MainFeed = FeedView.extend({
     },
 
     render: function() {
+        var that = this;
         this.$welcome.html(this.$feedPostWelcomeTemplate());
         this.$locationName.html($('.js-location option:selected').text());
+        this.$admin.empty();
+        var adminPosts = _.filter(initData.adminPosts, function(post) {
+            return post._location === that.$location.val();
+        });
+        _.forEach(adminPosts, function(post) {
+            that.$admin.append(that.$feedPostAdminTemplate(post));
+        });
     }
 });
 
