@@ -733,7 +733,7 @@ textarea {
 
 .login-button {
   background:none;
-  border:none;
+  border: 0px;
   font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
   color: #6e6e6e;
@@ -743,7 +743,6 @@ textarea {
   line-height:28px;
   cursor:pointer;
   margin:0;
-
 }
 
 .login-button:hover {
@@ -752,6 +751,7 @@ textarea {
 
 .login-button:focus {
   outline:none;
+  outline:0px;
 }
 
 .facebook-button-nav {
@@ -905,7 +905,7 @@ textarea {
   content:"";
   margin-bottom:-5px;
   margin-left:-15px;
-  margin-right:-10px;
+  margin-right:-12px;
   background: url(/images/bolt-counter.png) no-repeat 0 0;
   background-size: 50%;
 }
@@ -1006,9 +1006,9 @@ textarea {
   padding-left:7px;
   font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   font-size:13px;
-  padding-top:5px;
   float:left;
   color:#bababa;
+  line-height:28px;
 }
 
 .notification a {
@@ -1273,6 +1273,7 @@ textarea {
     color:#bababa;
     padding-left:7px;
     margin-left:0px;
+    line-height:32px;
   }
 
   .notification-mobile a {
@@ -1374,7 +1375,6 @@ h2 {
   outline: none;
 }
 
-
 .sortlabel {
   font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
@@ -1386,9 +1386,10 @@ h2 {
   top:2px;
 }
 
+
 .feed-dropdown {
   height:24px;
-  border: 1px solid #dcdcdc;
+  border: none;
   padding-left:3px;
   border-radius: 3px;
   color:#9c9c9c;
@@ -1396,8 +1397,7 @@ h2 {
 }
 
 .feed-dropdown option {
-  background-color:#fff;
-  color:#9c9c9c;
+
 }
 
 /**Container Media Queries**/
@@ -1460,6 +1460,11 @@ h2 {
   .sortlabel {
     display:none;
   }
+
+  .feed-dropdown {
+    background-color:#55bef5;
+    color:#fff;
+  }
 }
 
 /**Feed Styles**/
@@ -1494,6 +1499,7 @@ h3 {
 
 .admin-author {
   padding:0 3px 0 0;
+  color:#8f8f8f;
 }
 
 .admin-author:before {
@@ -1530,9 +1536,15 @@ h3 {
 }
 
 .admin-post {
-  background-color:#e7f1f7;
+  background-color:#d4ecfa;
+  border-radius:5px;
+  border-top:none;
+  margin-bottom:15px;
 }
 
+.admin-post h3 {
+  color:#50b9f0;
+}
 .feed-post-header {
   position:relative;
   margin-left: -15px;
@@ -1709,6 +1721,11 @@ h3 {
     line-height:14px;
   }
 
+  .admin-post {
+    margin-bottom:12px;
+    border-top:none;
+  }
+
   .feed-post-header {
     position:relative;
     margin-left: 13px;
@@ -1719,13 +1736,13 @@ h3 {
   .thumbnail {
     width:100%;
     height: auto;
-    min-height:65px;
+    min-height:25px;
     max-height:150px;
     margin-bottom:5px;
   }
 
   .welcome-thumbnail {
-    margin-left:-3px;
+    margin-left:-12px;
   }
 
   .author {
@@ -2341,7 +2358,7 @@ h4 {
   margin-left:auto;
   margin-right:auto;
   border-radius:3px;
-  padding:15px 15px 9px 15px;
+  padding:15px 15px 8px 15px;
   margin-bottom:5px;
 }
 
@@ -2410,6 +2427,12 @@ h4 {
 
 /**Comment media queries **/
 
+@media only screen and (max-width:1450px) {
+  .comments textarea {
+    width:87%;
+  }
+}
+
 @media only screen and (max-width:768px) {
 
   .comments {
@@ -2447,13 +2470,20 @@ h4 {
     font-size:16px;
   }
 
+  .comment-form-wrapper {
+    padding:12px;
+    margin-bottom:5px;
+    float:left;
+  }
+
   .comments textarea {
-    width:70%;
+    width:100%;
   }
 
   .comment-button {
-    width:26%;
-    height:52px;
+    width:100%;
+    height:45px;
+    float:left;
   }
 }
 
@@ -3101,9 +3131,9 @@ h4 {
   display:inline-block;
   line-height:45px;
   text-align:center;
-  margin-top:25px;
+  margin-top:15px;
   width:100%;
-  margin-bottom:-20px;
+  margin-bottom:-5px;
 }
 
 .welcome-button:hover {
@@ -3147,3 +3177,5 @@ h4 {
   width:100%;
   height:100%;
 }
+
+
