@@ -10,9 +10,10 @@
                     <form class="js-edit" id="form" data-toggle="validator"
                         role="form" action="/user/edit" method="post">
                         <div class="form-group">
-                            <h4>PROFILE IMAGE URL</h4>
+                            <h4>PROFILE IMAGE</h4>
+                            <button class="button upload-button"></button>
                             <input class="js-url" type="url" pattern=".*\.(jpeg|jpg|gif|png|JPEG|JPG|GIF|PNG)$"
-                                class="js-image" name="url" placeholder="http://www.example.com/image.jpeg"
+                                class="js-image" name="url" placeholder="Or paste URL (http://example.com/image.jpeg)"
                                 data-error="Please enter a valid URL for a JPEG, GIF, or PNG image">
                             <div class="help-block with-errors"></div>
                         </div>
