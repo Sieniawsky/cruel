@@ -44,11 +44,11 @@ var Compose = Backbone.View.extend({
         xhr.onload = function() {
             if (xhr.status === 200) {
                 document.getElementById("preview").src = url;
-                document.getElementById("avatar_url").value = url;
+                document.getElementById("upload_url").value = url;
             }
         };
         xhr.onerror = function() {
-            alert("Could not upload file.");
+            console.log("Could not upload file.");
         };
         xhr.send(file);
     },

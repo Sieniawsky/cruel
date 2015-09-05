@@ -52,6 +52,10 @@ module.exports = function(app, passport) {
     /* Post handler */
     app.post('/post', function(req, res) {
         if (typeof req.user._id !== 'undefined' && req.user._id !== null) {
+            if (typeof req.body.upload_url !== 'undefined' && req.body.upload_url !== null) {
+                req.body.url = req.body.upload_url;
+                delete req.body.upload_url;
+            }
             var data = _.extend(req.body, {
                 date          : new Date(),
                 _user         : req.user._id,
