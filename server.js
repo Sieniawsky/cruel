@@ -7,6 +7,7 @@ var hogan    = require('hogan-express');
 var favicon  = require('serve-favicon');
 var morgan   = require('morgan');
 var path     = require('path');
+var aws      = require('aws-sdk');
 
 var bodyParser   = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -32,6 +33,13 @@ mongoose.connect(app.get('config').socket);
 
 /* Load Passport config */
 require('./config/passport')(passport);
+
+/* Create and set s3 client */
+aws.config.update({
+    accessKeyId     : 'AKIAJPZQVXB5ICEY25AQ',
+    secretAccessKey : '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'
+});
+app.set('s3', new aws.S3());
 
 /* Configure Application */
 app.set('port', process.env.PORT || 3000);

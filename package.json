@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "async": "^1.4.0",
+    "aws-sdk": "^2.1.50",
     "backbone": "^1.2.0",
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.0.0",
@@ -45,6 +46,7 @@
     "jquery": "^2.1.4",
     "jshint-stylish": "^2.0.1",
     "json2csv": "^2.11.0",
+    "knox": "^0.9.2",
     "lodash": "3.8.0",
     "method-override": "~1.0.0",
     "moment": "latest",
