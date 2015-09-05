@@ -1,14 +1,16 @@
 /* Routes for posts */
 var _       = require('lodash');
-var url     = require('url');
 var shortID = require('mongodb-short-id');
+var url     = require('url');
 var Post    = require('../models/post');
 var User    = require('../models/user');
 var remap   = require('../utils/remap');
 var bg      = require('../utils/background');
 var exists  = require('../utils/exists');
 var parser  = require('../utils/parser');
-var config  = require('../../server').get('config');
+var app     = require('../../server');
+var config  = app.get('config');
+var s3      = app.get('s3');
 
 module.exports = function(app, passport) {
     /* Post composition page */
@@ -50,6 +52,10 @@ module.exports = function(app, passport) {
     /* Post handler */
     app.post('/post', function(req, res) {
         if (typeof req.user._id !== 'undefined' && req.user._id !== null) {
+            if (typeof req.body.upload_url !== 'undefined' && req.body.upload_url !== null) {
+                req.body.url = req.body.upload_url;
+                delete req.body.upload_url;
+            }
             var data = _.extend(req.body, {
                 date          : new Date(),
                 _user         : req.user._id,
@@ -78,6 +84,24 @@ module.exports = function(app, passport) {
         } else {
             res.send({outcome: false});
         }
+    });
+
+    app.get('/sign_s3', function(req, res) {
+        // Check for filname and type in query
+        var params = {
+            Bucket      : 'cruelco',
+            Key         : req.query.file_name,
+            ContentType : req.query.file_type,
+            ACL         : 'public-read'
+        };
+        s3.getSignedUrl('putObject', params, function(err, data) {
+            if (err) return console.error(err);
+            var return_data = {
+                signed_request : data,
+                url            : config.s3_base + req.query.file_name
+            };
+            res.send(JSON.stringify(return_data));
+        });
     });
 
     var generateRedirect = function(referer, postURL) {

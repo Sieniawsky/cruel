@@ -4,6 +4,7 @@ module.exports = function(isProd) {
     var bundle = {};
     var common = {
         image_url       : 'http://i.imgur.com/vp0gAcZ.png',
+        s3_base         : 'https://s3.amazonaws.com/cruelco/',
         page_size       : 12,
         oEmbedProviders : [
             'youtube.com',
