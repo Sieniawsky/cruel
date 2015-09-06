@@ -17,4 +17,18 @@ module.exports = function(app, passport) {
             background : bg()
         });
     });
+
+    app.get('/contact', function(req, res) {
+        res.render('contact', {
+            user: remap.userRemap(req.user),
+            background : bg()
+        });
+    });
+
+    app.get('/user-agreement', function(req, res) {
+        res.render('user-agreement', {
+            user: remap.userRemap(req.user),
+            background : bg()
+        });
+    });
 };
