@@ -31,7 +31,7 @@ module.exports = function(isProd) {
             'hatchet.io',
             'www.hatchet.io'
         ],
-        socket : 'mongodb://swaglord69:myballs@ds047722.mongolab.com:47722/heroku_k2lqlzp8'
+        socket : 'mongodb://swaglord69:myballs@ds045403-a0.mongolab.com:45403/heroku_bmpxrfvm'
     };
 
     if (isProd) {
