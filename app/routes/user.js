@@ -60,6 +60,13 @@ module.exports = function(app, passport) {
 
     app.post('/user/edit', function(req, res) {
         if (typeof req.user._id !== 'undefined' && req.user._id !== null) {
+            if (typeof req.body.upload_url !== 'undefined' &&
+                req.body.upload_url !== null &&
+                req.body.upload_url !== '') {
+
+                req.body.url = req.body.upload_url;
+                delete req.body.upload_url;
+            }
             User.update({_id: req.user._id},
                 {'$set': {imageUrl: req.body.url, description: req.body.description}}, function(err, updates) {
                 if (err) return console.error(err);

@@ -9,13 +9,20 @@
                 <div class="form-wrapper">
                     <form class="js-edit" id="form" data-toggle="validator"
                         role="form" action="/user/edit" method="post">
+                        <input type="hidden" id="upload_url" name="upload_url" value="">
                         <div class="form-group">
                             <h4>PROFILE IMAGE</h4>
-                            <button class="button upload-button"></button>
-                            <input class="js-url" type="url" pattern=".*\.(jpeg|jpg|gif|png|JPEG|JPG|GIF|PNG)$"
+                            <div class="upload-hidden-input button upload-button">
+                                <input class="js-image-upload" type="file" id="file_input">
+                                <p id="status">Please select a file</p>
+                            </div>
+                            <input type="url" pattern=".*\.(jpeg|jpg|gif|png|JPEG|JPG|GIF|PNG)$"
                                 class="js-image" name="url" placeholder="Or paste URL (http://example.com/image.jpeg)"
                                 data-error="Please enter a valid URL for a JPEG, GIF, or PNG image">
                             <div class="help-block with-errors"></div>
+                            <div class="preview-container">
+                                <img id="preview" src="/images/loading.gif">
+                            </div>
                         </div>
                         <div class="form-group">
                             <h4>PROFILE DESCRIPTION</h4>
