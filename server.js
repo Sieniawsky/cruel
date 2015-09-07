@@ -22,11 +22,19 @@ var config   = require('./config/config');
 var remap    = require('./app/utils/remap');
 
 /* Set server configuration */
-app.set('config', config(process.argv.length == 3 && process.argv[2] === 'prod'));
 if (process.argv.length != 3 && process.argv[2] !== 'prod') {
+    app.set('config', config(false));
     app.use(require('connect-livereload')({
         port: 35729
     }));
+} else {
+    app.set('config', config(true));
+    app.use(function(req, res, next) {
+        if (req.headers['x-forwarded-proto'] !== 'https') {
+            return res.redirect(['https://', req.get('Host'), req.url].join(''));
+        }
+        return next();
+    });
 }
 
 mongoose.connect(app.get('config').socket);
