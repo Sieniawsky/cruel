@@ -1,5 +1,22 @@
 {
     "images": [
-        "https://i.imgur.com/KFpmPQQ.jpg"
+        "https://s3.amazonaws.com/cruelco/aa.jpg",   
+        "https://s3.amazonaws.com/cruelco/dd.jpg", 
+        "https://s3.amazonaws.com/cruelco/ee.jpg", 
+        "https://s3.amazonaws.com/cruelco/ff.jpg",  
+        "https://s3.amazonaws.com/cruelco/uu.jpg", 
+        "https://s3.amazonaws.com/cruelco/ii.jpg", 
+        "https://s3.amazonaws.com/cruelco/jj.jpg", 
+        "https://s3.amazonaws.com/cruelco/kk.jpg", 
+        "https://s3.amazonaws.com/cruelco/ll.jpg", 
+        "https://s3.amazonaws.com/cruelco/mm.jpg", 
+        "https://s3.amazonaws.com/cruelco/nn.jpg", 
+        "https://s3.amazonaws.com/cruelco/oo.jpg", 
+        "https://s3.amazonaws.com/cruelco/pp.jpg", 
+        "https://s3.amazonaws.com/cruelco/rr.jpg", 
+        "https://s3.amazonaws.com/cruelco/ss.jpg", 
+        "https://s3.amazonaws.com/cruelco/tt.jpg"
+
+
     ]
 }
