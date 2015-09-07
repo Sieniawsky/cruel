@@ -3,7 +3,7 @@ var _ = require('lodash');
 module.exports = function(isProd) {
     var bundle = {};
     var common = {
-        image_url       : 'https://i.imgur.com/vp0gAcZ.png',
+        image_url       : 'https://s3.amazonaws.com/cruelco/placeholder.png',
         s3_base         : 'https://s3.amazonaws.com/cruelco/',
         page_size       : 12,
         oEmbedProviders : [
