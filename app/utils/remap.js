@@ -3,6 +3,7 @@
 var _       = require('lodash');
 var moment  = require('moment');
 var shortID = require('mongodb-short-id');
+var server  = require('../../server');
 
 module.exports = {
     postsRemap : function(posts, user) {
@@ -30,6 +31,7 @@ module.exports = {
     },
 
     singlePostRemap : singlePostRemap = function(post, user) {
+        var config = server.get('config');
         var _shortID = shortID.o2s(post._id);
         var formattedSnippet = prettySnippet(post.title);
         var postURL = '/post/' + _shortID + '/' + formattedSnippet;
@@ -39,7 +41,7 @@ module.exports = {
             _id           : post._id,
             _shortID      : _shortID,
             title         : post.title,
-            url           : post.url,
+            url           : config.image_proxy + encodeURIComponent(post.url),
             date          : moment(new Date(post.date)).fromNow(),
             rawDate       : post.date,
             description   : post.description,

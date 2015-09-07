@@ -24,6 +24,7 @@ module.exports = function(isProd) {
         hosts  : [
             'localhost:3000'
         ],
+        image_proxy: 'http://localhost:3000/proxy?url=',
         socket : 'mongodb://localhost:27017/cruel'
     };
     var prod = {
@@ -31,6 +32,7 @@ module.exports = function(isProd) {
             'cruel.co',
             'www.cruel.co'
         ],
+        image_proxy: 'https://cruel.co/proxy?url=',
         socket : 'mongodb://swaglord69:myballs@ds045403-a0.mongolab.com:45403/heroku_bmpxrfvm'
     };
 

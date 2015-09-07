@@ -4,6 +4,7 @@ var Post     = require('../models/post');
 var User     = require('../models/user');
 var remap    = require('../utils/remap');
 var app      = require('../../server');
+var config   = app.get('config');
 var bg       = require('../utils/background');
 
 module.exports = function(app, passport) {

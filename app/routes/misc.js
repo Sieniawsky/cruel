@@ -1,5 +1,7 @@
-var bg    = require('../utils/background');
-var remap = require('../utils/remap');
+var url     = require('url');
+var request = require('request');
+var bg      = require('../utils/background');
+var remap   = require('../utils/remap');
 
 module.exports = function(app, passport) {
     app.get('/404', function(req, res) {
@@ -30,5 +32,16 @@ module.exports = function(app, passport) {
             user: remap.userRemap(req.user),
             background : bg()
         });
+    });
+
+    app.get('/proxy', function(req, res) {
+        var query = url.parse(req.url, true).query;
+        if (query.url) {
+            var x = request(query.url);
+            req.pipe(x).pipe(res);
+        } else {
+            res.writeHead(400, {'Content-Type': 'text/plain'});
+            res.end('No url');
+        }
     });
 };
