@@ -59,6 +59,7 @@
     "request": "^2.60.0",
     "serve-favicon": "~2.0.1",
     "uglifyify": "^3.0.1",
+    "valid-url": "^1.0.9",
     "vinyl-source-stream": "^1.1.0"
   },
   "engine": "node 0.10.31"

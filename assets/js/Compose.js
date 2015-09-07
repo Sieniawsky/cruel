@@ -1,12 +1,15 @@
-var $ = require('jquery');
-var _ = require('lodash');
-var Backbone = require('backbone');
-Backbone.$ = $;
+var $         = require('jquery');
+var _         = require('lodash');
+var Backbone  = require('backbone');
+var valid     = require('valid-url');
+Backbone.$    = $;
 
 var Compose = Backbone.View.extend({
     el: '.js-compose',
 
-    events: {},
+    events: {
+        'input .js-image': 'updatePreview'
+    },
 
     initialize: function() {
         var that = this;
@@ -16,10 +19,22 @@ var Compose = Backbone.View.extend({
             if (file === null) {
                 console.log('No file selected');
             } else {
+                $('.js-image').val('');
+                $('#preview').attr('src', '/images/loading.gif');
+                $('.preview-container').show();
                 that.get_signed_request(file);
             }
         };
         this.render();
+    },
+
+    updatePreview: function() {
+        var url = $('.js-image').val();
+        if (valid.isUri(url)) {
+            $('.preview-container').show();
+            $('#upload_url').val('');
+            $('#preview').attr('src', url);
+        }
     },
 
     get_signed_request: function(file) {
