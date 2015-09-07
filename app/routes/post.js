@@ -15,14 +15,18 @@ var s3      = app.get('s3');
 module.exports = function(app, passport) {
     /* Post composition page */
     app.get('/post', function(req, res) {
-        var mappedUser = remap.userRemap(req.user);
-        res.render('compose', {
-            initData : JSON.stringify({
-                user : mappedUser
-            }),
-            user       : mappedUser,
-            background : bg()
-        });
+        if (req.user) {
+            var mappedUser = remap.userRemap(req.user);
+            res.render('compose', {
+                initData : JSON.stringify({
+                    user : mappedUser
+                }),
+                user       : mappedUser,
+                background : bg()
+            });
+        } else {
+            res.redirect('/');
+        }
     });
 
     /* Get a single specific post */
