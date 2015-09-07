@@ -5,11 +5,10 @@
         <meta charset="UTF-8">
         <title>Cruel</title>
         <meta name="viewport"    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-        <meta name="author"      content="Cruel Inc.">
-        <meta name="keywords"    content="Cruel, campus, culture, swag">
-        <meta name="description" content="">
+        <meta name="keywords"    content="Cruel, campus, culture, swag, Western, Dalhousie, Halifax, Queen's, Queens, Kingston, cruel.co">
+        <meta name="description" content="Win Your Campus.">
         <meta propert="og:site_name" content="Cruel.co"/>
-        <meta property="og:image"    content="//cruel.co/images/default-fb.jpg"/>
+        <meta property="og:image"    content="http://cruel.co/images/default-fb.jpg"/>
         <meta name="google-site-verification" content="hnVoNQ3OlfVTPHZOZit_BKH7MflV3m6J5mfRSCGmvOs" />
 
         <!-- Facebook -->
@@ -37,6 +36,7 @@
                         <a href="/">
                             <img src="/images/headerlogo.png" class="logo">
                         </a>
+                        <a class="facebook-button-nav facebook-button-nav-mobile" href="https://www.facebook.com/CruelCo" target="_blank"></a>
                         <div class="nav">
                             {{#user._id}}
                                 <div class="notification-score-count" tabindex="0">{{user.score}}
@@ -131,7 +131,6 @@
 
             <!-- Mobile Nav -->
             <div class="mobile-nav-bottom">
-                <a class="facebook-button-nav facebook-button-nav-mobile" href="https://www.facebook.com/CruelCo" target="_blank"></a>
                 {{#user._id}}
                     <div class="dropdown-mobile">
                         <ul>
@@ -349,13 +348,37 @@
 
         <!-- Script load point -->
         {{{ yield-scripts }}}
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=1653168968231541";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+
+         <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-67231951-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+
+        <!-- Facebook SDK -->
+        <div id="fb-root"></div>
+        <script type="text/javascript">
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId   : '1653168968231541',
+                    xfbml   : true,
+                    version : 'v2.4'
+                });
+            };
+
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+
     </body>
 </html>
