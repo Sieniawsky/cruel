@@ -1,7 +1,8 @@
-var $ = require('jquery');
-var _ = require('lodash');
+var $        = require('jquery');
+var _        = require('lodash');
 var Backbone = require('backbone');
-Backbone.$ = $;
+var valid    = require('valid-url');
+Backbone.$   = $;
 
 var EditProfile = Backbone.View.extend({
 
@@ -65,8 +66,8 @@ var EditProfile = Backbone.View.extend({
         xhr.setRequestHeader('x-amz-acl', 'public-read');
         xhr.onload = function() {
             if (xhr.status === 200) {
-                that.$preview.src = url;
-                that.$uploadImage.value = url;
+                that.$preview.attr('src', url);
+                that.$uploadImage.val(url);
             }
         };
         xhr.onerror = function() {
@@ -76,7 +77,6 @@ var EditProfile = Backbone.View.extend({
     },
 
     render: function() {
-        this.$imageUrl.val(initData.user.imageUrl);
         this.$description.val(initData.user.description);    
     }
 });
