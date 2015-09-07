@@ -58,7 +58,7 @@ var FullPost = Backbone.View.extend({
     share: function() {
         FB.ui({
             method : 'share',
-            href   : 'http://www.hatchet.io' + this.model.get('postURL')
+            href   : 'https://cruel.co' + this.model.get('postURL')
         }, function(response) {});
     },
 
