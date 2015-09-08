@@ -42,8 +42,9 @@
                     </div>
                     <div class="form-group user-agreement">
                         <h4>User Agreement</h4>
-                        <input type="checkbox" name="agree">
+                        <input type="checkbox" name="agree" data-error="You must accept the User Agreement" required>
                         <span class="user-agreement-message">I have read and agree to the <a href="/user-agreement" target="_blank">User Agreement.</a></span>
+                        <div class="help-block with-errors"></div>
                     </div>
                     <input class="js-referer" type="hidden" name="referer" value="">
                     <div class="form-group">
