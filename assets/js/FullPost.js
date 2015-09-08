@@ -114,7 +114,7 @@ var FullPost = Backbone.View.extend({
 
     handleComment: function(e) {
 
-        if (this.$comment.val().length !== 0) {
+        if (this.$comment.val().length >= 6 && this.$comment.val().length <= 200) {
             /* Check if no comments were made by the user within 5 min */
             var checkTime = 1000 * 60 * 5;
             var recentComments = _.filter(this.model.get('comments'), function(comment) {

@@ -12,8 +12,8 @@
                     <input type="hidden" id="upload_url" name="upload_url" value="">
                     <div class="form-group">
                         <h4>POST TITLE</h4>
-                        <input type="text" name="title" id="postTitle" placeholder="Enter post title" minlength="10"
-                            data-error="Post title must be at least 10 characters long" required>
+                        <input type="text" name="title" id="postTitle" placeholder="Enter post title" minlength="6"
+                            maxlength="200" data-error="Post title must be between 6 and 200 characters" required>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <h4>POST TEXT</h4>
-                        <textarea rows="5" name="description" id="postDescription"
+                        <textarea rows="5" name="description" id="postDescription" maxlength="2500"
                             placeholder="Enter a description. Paste Soundcloud, Youtube, and Vimeo links to embed songs and videos."></textarea>
                     </div>
                     <div class="form-group">
