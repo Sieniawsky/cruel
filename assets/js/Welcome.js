@@ -23,7 +23,7 @@ var Welcome = Backbone.View.extend({
     share: function() {
         FB.ui({
             method : 'share',
-            href   : 'https://cruel.co' + this.model.get('postURL')
+            href   : 'https://cruel.co/welcome'
         }, function(response) {});
     },
 
