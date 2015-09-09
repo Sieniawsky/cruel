@@ -18,7 +18,8 @@ var FullPost = Backbone.View.extend({
         'click .js-comment-like'   : 'handleCommentLike',
         'click .js-share'          : 'share',
         'click .js-delete-post'    : 'deletePost',
-        'click .js-delete-comment' : 'deleteComment'
+        'click .js-delete-comment' : 'deleteComment',
+        'click .js-close-facebook' : 'closeFacebookModal'
     },
 
     initialize: function() {
@@ -27,6 +28,7 @@ var FullPost = Backbone.View.extend({
         this.commentTemplate = _.template($('#post-comment-template').html());
         this.commentTimeoutTemplate = _.template($('#comment-timeout-template').html());
         this.commentEmptyTemplate = _.template($('#comment-empty-template').html());
+        this.$facebookModal = $('.overlay-facebook-share');
 
         this.nav       = nav || {};
         this.$post     = $('.js-post-body');
@@ -56,6 +58,7 @@ var FullPost = Backbone.View.extend({
     },
 
     share: function() {
+        this.$facebookModal.hide();
         FB.ui({
             method : 'share',
             href   : 'https://cruel.co' + this.model.get('postURL')
@@ -321,6 +324,17 @@ var FullPost = Backbone.View.extend({
         });
     },
 
+    getParameterByName: function(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    },
+
+    closeFacebookModal: function() {
+        this.$facebookModal.hide();
+    },
+
     render: function() {
         /* Initialize dates and sort the comment sort option */
         this.initDates();
@@ -336,6 +350,11 @@ var FullPost = Backbone.View.extend({
 
         /* Render the comments section */
         this.commentsRender();
+
+        /* Check for Facebook modal */
+        if (this.getParameterByName('newPost') === 'true') {
+            this.$facebookModal.show();
+        }
     }
 
 });
