@@ -85,7 +85,7 @@ module.exports = function(app, passport) {
                 post.save(function(err, post) {
                     if (err) return console.error(err);
                     var mapped = remap.postRemap(post);
-                    res.redirect(mapped.postURL);
+                    res.redirect(mapped.postURL + '?newPost=true');
                 });
             });
         } else {
