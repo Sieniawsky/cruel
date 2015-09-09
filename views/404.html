@@ -9,3 +9,13 @@
         </div>
     </div>
 </div>
+
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
+
+<!-- Load Page Specific Scripts -->
+{{#yield-scripts}}
+    <script src="/js/dataLoader.js"></script>
+{{/yield-scripts}}

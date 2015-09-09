@@ -101,8 +101,12 @@ app.use(function(req, res, next) {
 
 /* Handle errors at the end of the chain */
 app.use(function(err, req, res, next) {
+    var mappedUser = remap.userRemap(req.user);
     res.status(err.status || 500);
     res.render('404', {
+        initData   : JSON.stringify({
+            user   : mappedUser
+        }),
         user       : remap.userRemap(req.user),
         message    : err.message,
         error      : err,

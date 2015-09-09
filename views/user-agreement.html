@@ -57,21 +57,18 @@
                         <h3>Limitation of Liability</h3>
                         <p>We will not be liable for any special, consequential, indirect, incidental, punitive, reliance, or exemplary damages, whether in tort, contract, or any other legal theory, arising out of or in any way connected with this agreement or your use of or attempt to use Cruel.co, including (but not limited to) damages for loss of profits, goodwill, use, or data. This limitation on liability shall not be affected even if we have been advised of the possibility of such damages. Some states do not allow for the exclusion of implied warranties or the limitation or exclusion of liability for incidental or consequential damages, so the above exclusions may not apply to you.</p>
                         <p>You agree to release us, our affiliates, and third-party service providers, and each associated director, employee, agents, and officers, from claims, demands and damages (actual and consequential), of every kind and nature, known and unknown, disclosed or undisclosed, arising out of or in any way connected to your use of Cruel.co.</p>
-
-
-
-
-
-
-
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
 
-
-
-
-
+<!-- Load Page Specific Scripts -->
+{{#yield-scripts}}
+    <script src="/js/dataLoader.js"></script>
+{{/yield-scripts}}

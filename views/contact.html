@@ -1,42 +1,52 @@
 <div class="row">
-        <div class="large-12 columns container">
-            <div class="container-header">
-                <h2>CONTACT</h2>
+    <div class="large-12 columns container">
+        <div class="container-header">
+            <h2>CONTACT</h2>
+        </div>
+        <div class="post">
+            <div class="post-description">
+                <h3 class="welcome-header contact-header">Drop us a Line</h3>
+                <p>Thanks for visiting Cruel.co! We are a group of young people from across Canada who are inspired by arts, music, and nightlife. If you're interested in getting in touch, use the contact form below, or shoot us an e-mail at <span class="welcome-a">hello@cruel.co</span>.</p>
             </div>
-            <div class="post">
-                <div class="post-description">
-                    <h3 class="welcome-header contact-header">Drop us a Line</h3>
-                    <p>Thanks for visiting Cruel.co! We are a group of young people from across Canada who are inspired by arts, music, and nightlife. If you're interested in getting in touch, use the contact form below, or shoot us an e-mail at <span class="welcome-a">hello@cruel.co</span>.</p>
-                </div>
-            </div>
-            <div class="contact-links">
-                <a href="https://www.facebook.com/CruelCo" target="_blank">
-                    <img class="contact-icon" src="/images/facebook-contact.png">
-                </a>
-                <a href="https://www.linkedin.com/company/cruel-collective" target="_blank">
-                    <img class="contact-icon" src="/images/linkedin.png">
-                </a>
-            </div>
-            <div class="forms contact-forms">
-                <div class="form-wrapper">
-                    <form class="js-edit" id="form" data-toggle="validator"
-                        role="form" action="/user/edit" method="post">
-                        <div class="form-group">
-                            <h4>Email</h4>
-                            <input type="email" name="email" id="email" placeholder="john@example.com"
-                                data-error="Please enter a valid email address" required>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="form-group">
-                            <h4>Message</h4>
-                            <textarea rows="5" 
-                                placeholder="Write your message here..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button class="button post-button" type="submit">Send</button>
-                        </div>
-                    </form>
-                </div>
+        </div>
+        <div class="contact-links">
+            <a href="https://www.facebook.com/CruelCo" target="_blank">
+                <img class="contact-icon" src="/images/facebook-contact.png">
+            </a>
+            <a href="https://www.linkedin.com/company/cruel-collective" target="_blank">
+                <img class="contact-icon" src="/images/linkedin.png">
+            </a>
+        </div>
+        <div class="forms contact-forms">
+            <div class="form-wrapper">
+                <form class="js-edit" id="form" data-toggle="validator"
+                    role="form" action="/user/edit" method="post">
+                    <div class="form-group">
+                        <h4>Email</h4>
+                        <input type="email" name="email" id="email" placeholder="john@example.com"
+                            data-error="Please enter a valid email address" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <h4>Message</h4>
+                        <textarea rows="5" 
+                            placeholder="Write your message here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="button post-button" type="submit">Send</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
+
+<!-- Load Page Specific Scripts -->
+{{#yield-scripts}}
+    <script src="/js/dataLoader.js"></script>
+{{/yield-scripts}}
