@@ -11,23 +11,18 @@ var added    = 0;
 /* location data */
 var data  = [
     {
-        name    : 'Toronto',
-        city    : 'Toronto',
-        country : 'Canada'
-    },
-    {
-        name    : 'Ottawa',
-        city    : 'Ottawa',
-        country : 'Canada'
-    },
-    {
-        name    : 'Laurier',
-        city    : 'Waterloo',
+        name    : 'Halifax',
+        city    : 'Halifax',
         country : 'Canada'
     },
     {
         name    : 'Western',
         city    : 'London',
+        country : 'Canada'
+    },
+    {
+        name    : 'Queen's,
+        city    : 'Kingston',
         country : 'Canada'
     }
 ];

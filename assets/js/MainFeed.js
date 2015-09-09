@@ -76,15 +76,14 @@ var MainFeed = FeedView.extend({
             url   : this.genURL(1),
             sort  : this.sort
         });
-
-        if (this.getParameterByName('s') !== 'false') {
-            History.replaceState(
-                {state:1},
-                'Cruel',
-                '/'
-            );
-        } else {
+        if (this.getParameterByName('s') === 'false') {
             this.nav.showLoginModal();
+        } else {
+            History.replaceState(
+                {state: 1},
+                'Cruel',
+                '/' + $('.js-location option:selected').text() + '/' + this.sort + '/' + this.page
+            );
         }
         this.render();
     },
