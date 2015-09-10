@@ -2370,6 +2370,32 @@ h4 {
   top:7px;
   right:7px;
   cursor:pointer;
+  border:none;
+  outline:none;
+  background:transparent;
+}
+
+.modal-close:before {
+  content:'';
+  background:url(/images/modal-close.png) no-repeat top left;
+  background-size: 15px 15px;
+  background-position:0px 0px;
+  position:absolute;
+  width:15px;
+  height:15px;
+  left:0;
+  top:0;
+}
+
+.modal-close:hover:before {
+  background:url(/images/modal-close-hover.png);
+  background-size: 15px 15px;
+  background-position:0px 0px;
+  position:absolute;
+  width:15px;
+  height:15px;
+  left:0;
+  top:0;
 }
 
 .overlay-login {
