@@ -1476,6 +1476,16 @@ h2 {
 
 /**Feed Styles**/
 
+.feed-loading {
+  width:100%;
+}
+
+.loading-animation {
+  width:50%;
+  margin:0 25% 0 25%;
+  mix-blend-mode: multiply;
+}
+
 h3 {
   font-family: 'BebasNeue', sans-serif;
   text-transform:uppercase;
@@ -1692,6 +1702,11 @@ h3 {
 
 @media only screen and (max-width:768px) {
   
+  .loading-animation {
+    width:90%;
+    margin:0 5% 0 5%;
+  }
+
   h3 {
     font-size: 16px;
     line-height: 20px;
