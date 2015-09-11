@@ -1,7 +1,8 @@
-var $ = require('jquery');
-var _ = require('lodash');
+var $        = require('jquery');
+var _        = require('lodash');
 var Backbone = require('backbone');
-Backbone.$ = $;
+var moment   = require('moment');
+Backbone.$   = $;
 
 var Post           = require('./models/Post');
 var PostCollection = require('./collections/PostCollection');
@@ -132,7 +133,14 @@ var MainFeed = FeedView.extend({
 
     render: function() {
         var that = this;
-        this.$welcome.html(this.$feedPostWelcomeTemplate());
+
+        var end = moment(new Date().getTime());
+        var start = moment(initData.user.rawDate);
+        var hours = moment.duration(end.diff(start)).asHours();
+        if (hours < 48) {
+            this.$welcome.html(this.$feedPostWelcomeTemplate());
+        }
+
         this.$locationName.html($('.js-location option:selected').text());
         this.$admin.empty();
         var adminPosts = _.filter(initData.adminPosts, function(post) {
