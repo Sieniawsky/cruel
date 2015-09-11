@@ -15,7 +15,7 @@ var source     = require('vinyl-source-stream');
 
 var port = 35729;
 
-gulp.task('default', ['go']);
+gulp.task('default', ['build']);
 
 gulp.task('server:start', function() {
     server.listen({path: 'server.js'}, livereload.listen);
