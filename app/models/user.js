@@ -19,7 +19,9 @@ var userSchema = mongoose.Schema({
     commentScoreNotifications : [],
     commentNotifications      : [],
     privilege                 : {type : String, default : 'user'},
-    deleted                   : {type : Boolean, default : false}
+    deleted                   : {type : Boolean, default : false},
+    passwordResetToken        : String,
+    passwordResetExpires      : Date
 });
 
 userSchema.methods.generateHash = function(password) {
