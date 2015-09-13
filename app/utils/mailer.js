@@ -46,7 +46,7 @@ var contact = function(email, body, next) {
 };
 
 var forgot = function(email, host, token, next) {
-    var subject = 'Cruel.co Password Reset',
+    var subject = 'Cruel.co Password Reset';
     var body = 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
           'http://<%= host %>/reset/<%= token %>\n\n' +
@@ -71,7 +71,8 @@ var reset = function(email, next) {
 };
 
 module.exports = {
-    welcome : welcome,
-    contact : contact,
-    forgot  : forgot
+    welcome     : welcome,
+    contact     : contact,
+    forgot      : forgot,
+    newPassword : reset
 };

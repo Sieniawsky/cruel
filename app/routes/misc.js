@@ -76,9 +76,10 @@ module.exports = function(app, passport) {
     });
 
     app.get('/forgot', function(req, res) {
-        if (req.user) {
+        if (!req.user) {
             res.render('forgot', {
                 user       : remap.userRemap(req.user),
+                message    : req.flash('message'),
                 background : bg()
             });
         } else {
@@ -92,29 +93,29 @@ module.exports = function(app, passport) {
                 crypto.randomBytes(20, function(err, buf) {
                     if (err) return console.error(err);
                     var token = buf.toString('hex');
-                    next(err, token);
+                    next(null, token);
                 });
             },
             function(token, next) {
                 User.findOne({email: req.body.email}, function(err, user) {
                     if (err) return console.error(err);
                     if (!user) {
-                        req.flash('error', 'No account with that email address exists.')
+                        req.flash('message', 'No account with that email address exists.')
                         res.redirect('/forgot');
                     }
 
-                    user.resetPasswordToken = token;
-                    user.resetPasswordExpires = Date.now() + 3600000;
-
-                    user.save(function(err) {
-                        next(err, token, user);
+                    User.update({email: req.body.email}, {
+                        '$set': {passwordResetToken: token, passwordResetExpires: Date.now() + 3600000}
+                    }, function(err, result) {
+                        if (err) return console.error(err);
+                        next(null, token, user);
                     });
                 });
             },
             function(token, user, next) {
-                req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+                req.flash('message', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
                 mailer.forgot(user.email, req.headers.host, token, function() {
-                    next(err, 'done');
+                    next(null);
                 });
             }
         ], function(err) {
@@ -125,16 +126,17 @@ module.exports = function(app, passport) {
 
     app.get('/reset/:token', function(req, res) {
         User.findOne({
-            resetPasswordToken: req.params.token,
-            resetPasswordExpires: {'$gt': {Date.now()}}
+            passwordResetToken: req.params.token,
+            passwordResetExpires: {'$gt': Date.now()}
         }, function(err, user) {
             if (err) return console.error(err);
             if (!user) {
-                req.flash('error', 'Password reset token is invalid or has expired.');
+                req.flash('message', 'Password reset token is invalid or has expired.');
                 return res.redirect('/forgot');
             }
             res.render('reset', {
                 user       : remap.userRemap(req.user),
+                message    : req.flash('message'),
                 background : bg()
             });
         });
@@ -144,29 +146,30 @@ module.exports = function(app, passport) {
         async.waterfall([
             function(next) {
                 User.findOne({
-                    resetPasswordToken: req.params.token,
-                    resetPasswordExpires: {'$gt': {Date.now()}}
+                    passwordResetToken: req.params.token,
+                    passwordResetExpires: {'$gt': Date.now()}
                 }, function(err, user) {
+                    if (err) return console.error(err);
                     if (!user) {
-                        req.flash('error', 'Password reset token is invalid or has expired.');
+                        req.flash('message', 'Password reset token is invalid or has expired.');
                         return res.redirect('back');
                     }
 
-                    user.password = user.generateHash(req.body.password);
-                    user.resetPasswordToken = undefined;
-                    user.resetPasswordExpires = undefined;
-
-                    user.save(function(err) {
+                    User.update({_id: user._id}, {
+                        '$set': {password: user.generateHash(req.body.password)}
+                    }, function(err, result) {
+                        if (err) return console.error(err);
                         req.logIn(user, function(err) {
-                            next(err, user);
+                            if (err) return console.error(err);
+                            next(null, user);
                         });
                     });
                 });
             },
             function(user, next) {
-                req.flash('success', 'Success! Your password has been changed.');
-                mailer.reset(user.email, function() {
-                    next(err);
+                req.flash('message', 'Success! Your password has been changed.');
+                mailer.newPassword(user.email, function() {
+                    next(null);
                 });
             }
         ], function(err) {
