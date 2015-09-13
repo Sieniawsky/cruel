@@ -1,6 +1,7 @@
 /* Passport configuration */
 var LocalStrategy = require('passport-local').Strategy;
 var User          = require('../app/models/user');
+var mailer        = require('../app/utils/mailer');
 
 module.exports = function(passport) {
 
@@ -53,7 +54,9 @@ module.exports = function(passport) {
 
                             user.save(function(err) {
                                 if (err) console.error(err);
-                                return done(null, user);
+                                mailer.welcome(user, function() {
+                                    return done(null, user);
+                                });
                             });
                         }
                     });

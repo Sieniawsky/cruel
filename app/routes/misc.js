@@ -2,6 +2,7 @@ var url     = require('url');
 var request = require('request');
 var bg      = require('../utils/background');
 var remap   = require('../utils/remap');
+var mailer  = require('../utils/mailer');
 
 module.exports = function(app, passport) {
     app.get('/404', function(req, res) {
@@ -58,6 +59,16 @@ module.exports = function(app, passport) {
         } else {
             res.writeHead(400, {'Content-Type': 'text/plain'});
             res.end('No url');
+        }
+    });
+
+    app.post('/contact', function(req, res) {
+        if (req.body && req.body.email.length !== 0 && req.body.body.length !== 0) {
+            mailer.contact(req.body.email, req.body.body, function() {
+                res.send({outcome: true});
+            });
+        } else {
+            res.send({outcome: false});
         }
     });
 };
