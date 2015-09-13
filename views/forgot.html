@@ -1,0 +1,17 @@
+<div class="js-forgot">
+    {{#message.length}}
+        <div>{{message}}</div>
+    {{/message.length}}
+    <form data-toggle="validator" role="form" action="/forgot" method="post">
+        <legend>Forgot Password</legend>
+        <div class="form-group email">
+            <h4>Email</h4>
+            <input type="email" name="email" id="email" placeholder="john@example.com"
+                data-error="Please enter a valid email address" required autofocus>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <button class="button signup-button" type="submit">Reset Password</button>
+        </div>
+    </form>
+</div>
