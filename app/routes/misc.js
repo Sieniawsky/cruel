@@ -39,6 +39,7 @@ module.exports = function(app, passport) {
                 user   : mappedUser
             }),
             user       : remap.userRemap(req.user),
+            message    : req.flash('message'),
             background : bg()
         });
     });
@@ -66,13 +67,10 @@ module.exports = function(app, passport) {
     });
 
     app.post('/contact', function(req, res) {
-        if (req.body && req.body.email.length !== 0 && req.body.body.length !== 0) {
-            mailer.contact(req.body.email, req.body.body, function() {
-                res.send({outcome: true});
-            });
-        } else {
-            res.send({outcome: false});
-        }
+        mailer.contact(req.body.email, req.body.contactBody, function() {
+            req.flash('message', 'An email has been sent.');
+            res.redirect('/contact');
+        });
     });
 
     app.get('/forgot', function(req, res) {
