@@ -67,6 +67,7 @@ module.exports = {
     },
 
     userRemap : userRemap = function(data) {
+        var config = server.get('config');
         var user = {};
         if (typeof data !== "undefined" && data !== null) {
 
@@ -127,7 +128,7 @@ module.exports = {
                 email         : data.email,
                 rawDate       : data.date,
                 date          : moment(new Date(data.date).getTime()).fromNow(),
-                imageUrl      : data.imageUrl,
+                imageUrl      : config.image_proxy + encodeURIComponent(data.imageUrl),
                 description   : data.description,
                 score         : data.score,
                 weekScore     : data.weekScore,
@@ -147,6 +148,7 @@ module.exports = {
     },
 
     usersRemap : function(users) {
+        var config = server.get('config');
         return _.map(users, function(user) {
             return {
                 _id           : user._id,
@@ -154,7 +156,7 @@ module.exports = {
                 email         : user.email,
                 rawDate       : user.date,
                 date          : moment(new Date(user.date).getTime()).fromNow(),
-                imageUrl      : user.imageUrl,
+                imageUrl      : config.image_proxy + encodeURIComponent(user.imageUrl),
                 description   : user.description,
                 rank          : _.indexOf(users, user) + 1,
                 score         : user.score,
