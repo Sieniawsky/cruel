@@ -20,19 +20,21 @@
         <div class="js-success"></div>
         <div class="forms contact-forms">
             <div class="form-wrapper">
-                <div class="js-errors"></div>
+                {{#message.length}}
+                    <div>{{message}}</div>
+                {{/message.length}}
                 <form class="js-contact-form" id="form" data-toggle="validator"
                     role="form" action="/contact" method="post">
                     <div class="form-group">
                         <h4>Email</h4>
-                        <input class="js-contact-email" type="email" name="email" id="email" placeholder="john@example.com"
+                        <input type="email" name="email" id="email" placeholder="john@example.com"
                             data-error="Please enter a valid email address" required>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
                         <h4>Message</h4>
-                        <textarea class="js-contact-body" rows="5" 
-                            placeholder="Write your message here..."></textarea>
+                        <textarea rows="5" name="contactBody" minlength="10" maxlength="2500"
+                            placeholder="Write your message here..." required></textarea>
                     </div>
                     <div class="form-group">
                         <button class="js-contact-submit button post-button" type="submit">Send</button>
@@ -43,19 +45,6 @@
     </div>
 </div>
 
-<!-- Templates -->
-<script id="contact-empty-template" type="text/template">
-    <p>A valid email and a message must be entered.</p>
-</script>
-
-<script id="contact-success-template" type="text/template">
-    <p>Your message has been sent, we will get back to you as soon as we can.</p>
-</script>
-
-<script id="contact-failure-template" type="text/template">
-    <p>Something went wrong, please try again.</p>
-</script>
-
 <!-- Data Load Point -->
 <script id="init-data" type="application/json">
     {{{initData}}}
@@ -64,5 +53,4 @@
 <!-- Load Page Specific Scripts -->
 {{#yield-scripts}}
     <script src="/js/dataLoader.js"></script>
-    <script src="/js/bundles/Contact.js"></script>
 {{/yield-scripts}}
