@@ -35,12 +35,12 @@ module.exports = function(app, passport) {
     app.get('/contact', function(req, res) {
         var mappedUser = remap.userRemap(req.user);
         res.render('contact', {
-            initData   : JSON.stringify({
-                user   : mappedUser
+            initData       : JSON.stringify({
+                user       : mappedUser
             }),
-            user       : remap.userRemap(req.user),
-            message    : req.flash('message'),
-            background : bg()
+            user           : remap.userRemap(req.user),
+            contactSuccess : req.flash('contact-success'),
+            background     : bg()
         });
     });
 
@@ -68,7 +68,7 @@ module.exports = function(app, passport) {
 
     app.post('/contact', function(req, res) {
         mailer.contact(req.body.email, req.body.contactBody, function() {
-            req.flash('message', 'An email has been sent.');
+            req.flash('contact-success', 'An email has been sent.');
             res.redirect('/contact');
         });
     });
@@ -76,9 +76,10 @@ module.exports = function(app, passport) {
     app.get('/forgot', function(req, res) {
         if (!req.user) {
             res.render('forgot', {
-                user       : remap.userRemap(req.user),
-                message    : req.flash('message'),
-                background : bg()
+                user          : remap.userRemap(req.user),
+                forgotError   : req.flash('forgot-error'),
+                forgotSuccess : req.flash('forgot-success'),
+                background    : bg()
             });
         } else {
             res.redirect('/');
@@ -98,10 +99,9 @@ module.exports = function(app, passport) {
                 User.findOne({email: req.body.email}, function(err, user) {
                     if (err) return console.error(err);
                     if (!user) {
-                        req.flash('message', 'No account with that email address exists.')
-                        res.redirect('/forgot');
+                        req.flash('forgot-error', 'No account with that email address exists.')
+                        return res.redirect('/forgot');
                     }
-
                     User.update({email: req.body.email}, {
                         '$set': {passwordResetToken: token, passwordResetExpires: Date.now() + 3600000}
                     }, function(err, result) {
@@ -111,7 +111,7 @@ module.exports = function(app, passport) {
                 });
             },
             function(token, user, next) {
-                req.flash('message', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+                req.flash('forgot-success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
                 mailer.forgot(user.email, req.headers.host, token, function() {
                     next(null);
                 });
@@ -129,13 +129,14 @@ module.exports = function(app, passport) {
         }, function(err, user) {
             if (err) return console.error(err);
             if (!user) {
-                req.flash('message', 'Password reset token is invalid or has expired.');
+                req.flash('reset-error', 'Password reset token is invalid or has expired.');
                 return res.redirect('/forgot');
             }
             res.render('reset', {
-                user       : remap.userRemap(req.user),
-                message    : req.flash('message'),
-                background : bg()
+                user         : remap.userRemap(req.user),
+                resetError   : req.flash('reset-error'),
+                resetSuccess : req.flash('reset-success'),
+                background   : bg()
             });
         });
     });
@@ -149,7 +150,7 @@ module.exports = function(app, passport) {
                 }, function(err, user) {
                     if (err) return console.error(err);
                     if (!user) {
-                        req.flash('message', 'Password reset token is invalid or has expired.');
+                        req.flash('reset-error', 'Password reset token is invalid or has expired.');
                         return res.redirect('back');
                     }
 
@@ -165,14 +166,14 @@ module.exports = function(app, passport) {
                 });
             },
             function(user, next) {
-                req.flash('message', 'Success! Your password has been changed.');
+                req.flash('reset-success', 'Success! Your password has been changed.');
                 mailer.newPassword(user.email, function() {
                     next(null);
                 });
             }
         ], function(err) {
             if (err) return console.error(err);
-            res.redirect('/');
+            res.redirect('/reset');
         });
     });
 

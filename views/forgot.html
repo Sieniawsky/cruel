@@ -6,9 +6,12 @@
         <div class="forms">
             <div class="form-wrapper">
                 <div class="js-forgot">
-                    {{#message.length}}
-                        <div class="form-message-error">{{message}}</div>
-                    {{/message.length}}
+                    {{#forgotError}}
+                        <div class="form-message-error">{{forgotError}}</div>
+                    {{/forgotError}}
+                    {{#forgotSuccess}}
+                        <div class="form-message-error">{{forgotSuccess}}</div>
+                    {{/forgotSuccess}}
                     <form data-toggle="validator" role="form" action="/forgot" method="post">
                         <div class="form-group">
                             <h4>Email</h4>

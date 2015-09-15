@@ -20,9 +20,9 @@
         <div class="js-success"></div>
         <div class="forms contact-forms">
             <div class="form-wrapper">
-                {{#message.length}}
-                    <div class-"form-message-error">{{message}}</div>
-                {{/message.length}}
+                {{#contactSuccess}}
+                    <div class-"form-message-error">{{contactSuccess}}</div>
+                {{/contactSuccess}}
                 <form class="js-contact-form" id="form" data-toggle="validator"
                     role="form" action="/contact" method="post">
                     <div class="form-group">
