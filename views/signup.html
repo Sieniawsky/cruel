@@ -4,10 +4,10 @@
             <h2>Create an Account</h2>
         </div>
         <div class="forms">
-            {{#message.length}}
-                <div>{{message}}</div>
-            {{/message.length}}
             <div class="form-wrapper">
+                {{#message.length}}
+                <div class="form-message-error">{{message}}</div>
+                {{/message.length}}
                 <form id="form" data-toggle="validator" role="form" action="/signup" method="post">
                     <div class="username-password">
                         <div class="form-group username">
