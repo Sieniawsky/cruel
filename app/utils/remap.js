@@ -31,7 +31,6 @@ module.exports = {
     },
 
     singlePostRemap : singlePostRemap = function(post, user) {
-        var config = server.get('config');
         var _shortID = shortID.o2s(post._id);
         var formattedSnippet = prettySnippet(post.title);
         var postURL = '/post/' + _shortID + '/' + formattedSnippet;
@@ -41,7 +40,7 @@ module.exports = {
             _id           : post._id,
             _shortID      : _shortID,
             title         : post.title,
-            url           : config.image_proxy + encodeURIComponent(post.url),
+            url           : post.url,
             date          : moment(new Date(post.date)).fromNow(),
             rawDate       : post.date,
             description   : post.description,
@@ -67,7 +66,6 @@ module.exports = {
     },
 
     userRemap : userRemap = function(data) {
-        var config = server.get('config');
         var user = {};
         if (typeof data !== "undefined" && data !== null) {
 
@@ -128,7 +126,7 @@ module.exports = {
                 email         : data.email,
                 rawDate       : data.date,
                 date          : moment(new Date(data.date).getTime()).fromNow(),
-                imageUrl      : config.image_proxy + encodeURIComponent(data.imageUrl),
+                imageUrl      : data.imageUrl,
                 description   : data.description,
                 score         : data.score,
                 weekScore     : data.weekScore,
@@ -148,7 +146,6 @@ module.exports = {
     },
 
     usersRemap : function(users) {
-        var config = server.get('config');
         return _.map(users, function(user) {
             return {
                 _id           : user._id,
@@ -156,7 +153,7 @@ module.exports = {
                 email         : user.email,
                 rawDate       : user.date,
                 date          : moment(new Date(user.date).getTime()).fromNow(),
-                imageUrl      : config.image_proxy + encodeURIComponent(user.imageUrl),
+                imageUrl      : user.imageUrl,
                 description   : user.description,
                 rank          : _.indexOf(users, user) + 1,
                 score         : user.score,
