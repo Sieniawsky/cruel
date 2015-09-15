@@ -6,9 +6,12 @@
         <div class="forms">
             <div class="form-wrapper">
                 <div class="js-reset">
-                    {{#message.length}}
-                        <div class="form-message-error">{{message}}</div>
-                    {{/message.length}}
+                    {{#resetError}}
+                        <div class="form-message-error">{{resetError}}</div>
+                    {{/resetError}}
+                    {{#resetSuccess}}
+                        <div class="form-message-error">{{resetSuccess}}</div>
+                    {{/resetSuccess}}
                     <form data-toggle="validator" role="form" method="post">
                         <div class="form-group password">
                             <h4>Password</h4>
