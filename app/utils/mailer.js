@@ -46,7 +46,7 @@ var contact = function(email, text, next) {
 
 var forgot = function(email, host, token, next) {
     var subject = 'Cruel.co Password Reset';
-    var html = '<p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p><p>Please click on the following link, or paste this into your browser to complete the process:</p><p>http://<%= host %>/reset/<%= token %></p><p>If you did not request this, please ignore this email and your password will remain unchanged.</p>';
+    var html = '<p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p><p>Please click on the following link, or paste this into your browser to complete the process:</p><p><a href="http://<%= host %>/reset/<%= token %>">http://<%= host %>/reset/<%= token %></a></p><p>If you did not request this, please ignore this email and your password will remain unchanged.</p>';
     var data = {
         host: host,
         token: token
