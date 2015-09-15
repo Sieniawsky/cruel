@@ -175,4 +175,11 @@ module.exports = function(app, passport) {
             res.redirect('/');
         });
     });
+
+    app.get('/jobs', function(req, res) {
+        res.render('jobs', {
+            layout     : false,
+            background : bg()
+        });
+    });
 };
