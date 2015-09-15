@@ -31,7 +31,7 @@ module.exports = function(passport) {
                 if (err) return done(err);
 
                 if (user) {
-                    return done(null, false, req.flash('signupMessage', 'This email is aleady in use!'));
+                    return done(null, false, req.flash('signupMessage', 'This email is already in use!'));
                 } else {
 
                     /* Check if username already exists */
@@ -39,7 +39,7 @@ module.exports = function(passport) {
                         if (err) return done(err);
 
                         if (user) {
-                            return done(null, false, req.flash('signupMessage', 'This username is aleady in use!'));
+                            return done(null, false, req.flash('signupMessage', 'This username is already in use!'));
                         } else {
                             user = new User();
 
