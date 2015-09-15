@@ -34,12 +34,12 @@ var welcome = function(user, next) {
     outgoing(user.email, subject, template(data), next);
 };
 
-var contact = function(email, body, next) {
+var contact = function(email, text, next) {
     var subject = 'CONTACT EMAIL FROM: ' + email;
-    var body = 'From: <%= email %>\nBody: <%= body %>';
+    var body = 'From: <%= email %>\nBody: <%= text %>';
     var data = {
         email: email,
-        body: body
+        text: text
     };
     var template = _.template(body);
     outgoing('hello@cruel.co', subject, template(data), next);
