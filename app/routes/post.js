@@ -2,6 +2,8 @@
 var _       = require('lodash');
 var shortID = require('mongodb-short-id');
 var url     = require('url');
+var async   = require('async');
+var request = require('request');
 var Post    = require('../models/post');
 var User    = require('../models/user');
 var remap   = require('../utils/remap');
@@ -11,6 +13,7 @@ var parser  = require('../utils/parser');
 var app     = require('../../server');
 var config  = app.get('config');
 var s3      = app.get('s3');
+var stream  = require('s3-upload-stream')(s3);
 
 module.exports = function(app, passport) {
     /* Post composition page */
@@ -56,37 +59,69 @@ module.exports = function(app, passport) {
     /* Post handler */
     app.post('/post', function(req, res) {
         if (typeof req.user._id !== 'undefined' && req.user._id !== null) {
-            if (typeof req.body.upload_url !== 'undefined' &&
-                req.body.upload_url !== null &&
-                req.body.upload_url !== '') {
 
-                req.body.url = req.body.upload_url;
-                delete req.body.upload_url;
-            }
-            var data = _.extend(req.body, {
-                date          : new Date(),
-                _user         : req.user._id,
-                _username     : req.user.username,
-                _location     : req.user._location,
-                _locationName : req.user._locationName
-            });
-            parser.format(data.description, function(formatted) {
-                data.description = data.description.replace(/\r?\n/g, '<br/>');
-                data.formatted = formatted;
-                if (data.url === '') {
-                    data.type = 'text';
+            async.waterfall([
+                function(next) {
+                    if (typeof req.body.upload_url !== 'undefined' &&
+                        req.body.upload_url !== null &&
+                        req.body.upload_url !== '') {
+
+                        req.body.url = req.body.upload_url;
+                        delete req.body.upload_url;
+                    }
+                    next(null, req.body.url)
+                },
+                function(url, next) {
+                    if (url === '') {
+                        return next(null);
+                    }
+                    request.head(url, function(err, response, body) {
+                        if (err) return console.error(err);
+                        var filename = url.split('/').pop();
+                        var filetype = response.headers['content-type'];
+                        var upload = stream.upload({
+                            Bucket      : 'cruelco',
+                            Key         : filename,
+                            ContentType : filetype,
+                            ACL         : 'public-read'
+                        });
+                        upload.on('uploaded', function(details) {
+                            req.body.url = details.Location;
+                            next(null);
+                        });
+                        request(url).pipe(upload);
+                    });
+                },
+                function(next) {
+                    var data = _.extend(req.body, {
+                        date          : new Date(),
+                        _user         : req.user._id,
+                        _username     : req.user.username,
+                        _location     : req.user._location,
+                        _locationName : req.user._locationName
+                    });
+                    parser.format(data.description, function(formatted) {
+                        data.description = data.description.replace(/\r?\n/g, '<br/>');
+                        data.formatted = formatted;
+                        if (data.url === '') {
+                            data.type = 'text';
+                        }
+                        data.likers = [data._user];
+                        data = _.omit(data, function(value) {
+                            return value === '';
+                        });
+
+                        var post = new Post(data);
+                        post.save(function(err, post) {
+                            if (err) return console.error(err);
+                            var mapped = remap.postRemap(post);
+                            next(null, mapped.postURL + '?newPost=true');
+                        });
+                    });
                 }
-                data.likers = [data._user];
-                data = _.omit(data, function(value) {
-                    return value === '';
-                });
-
-                var post = new Post(data);
-                post.save(function(err, post) {
-                    if (err) return console.error(err);
-                    var mapped = remap.postRemap(post);
-                    res.redirect(mapped.postURL + '?newPost=true');
-                });
+            ], function(err, url) {
+                if (err) return console.error(err);
+                res.redirect(url);
             });
         } else {
             res.send({outcome: false});
