@@ -808,14 +808,15 @@ textarea {
   outline:none;
 }
 
-
 .dropdown {
   display:none;
   position:absolute;
   right:0;
   top:42px;
   background-color: #f2f2f2;
-  width:175px
+  width:175px;
+  z-index:-1;
+  padding-top:0;
 }
 
 .dropdown a {
@@ -836,16 +837,17 @@ textarea {
 }
 
 .dropdown ul li {
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size:13px;
-  letter-spacing:0;
   width:100%;
   display:inline-block;
   *display:inline; /*IE7*/
   *zoom:1; /*IE7*/
   padding-bottom:6px;
-  padding-top:7px;
+  padding-top:9px;
   border-top: 1px solid #e8e8e8;
+}
+
+.first-link {
+  border-top:none!important;
 }
 
 .dropdown ul li a {
@@ -854,10 +856,6 @@ textarea {
 
 .dropdown ul li a:hover {
   color:#2d2d2d;
-}
-
-.dropdown li:first-child {
-  border-top:none;
 }
 
 /**Notification Dropdown**/
@@ -1586,7 +1584,7 @@ h3 {
   position:absolute;
   top:50%;
   margin-top:-16px;
-  left:-25px;
+  left:-40px;
   background-image: url(/images/boltbutton.png);
   background-size: 35px 35px;
   width:32px;
@@ -1601,7 +1599,7 @@ h3 {
   position:absolute;
   top:50%;
   margin-top:-16px;
-  left:-25px;
+  left:-40px;
   background-image: url(/images/boltbuttonhover.png);
   background-size: 35px 35px;
   width:32px;
@@ -1807,13 +1805,13 @@ h3 {
   }
   
   .bolt {
-    left:-22px;
+    left:-10px;
     background-color:#fff;
     margin-top:-19px;
   }
 
   .bolt-liked {
-    left:-22px;
+    left:-10px;
     background-color:#fff;
     margin-top:-19px;
   }
