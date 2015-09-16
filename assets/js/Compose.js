@@ -20,7 +20,7 @@ var Compose = Backbone.View.extend({
             console.log(file);
             if (file === null) {
                 console.log('No file selected');
-            } else if (file.fileSize > 19000000) {
+            } else if (file.size > 19000000) {
                 // display error
                 this.$composeErrors.empty();
                 this.$composeErrors.append('<div class="form-message-error">Files must be less than 19 Megabytes</div>');
