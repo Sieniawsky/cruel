@@ -147,10 +147,10 @@ var MainFeed = FeedView.extend({
             var start = moment(initData.user.rawDate);
             var hours = moment.duration(end.diff(start)).asHours();
             if (hours < 48) {
-                this.$welcome.html(this.$feedPostWelcomeTemplate());
+                this.$welcome.append(this.$feedPostWelcomeTemplate());
             }
         } else {
-            this.$welcome.html(this.$feedPostWelcomeTemplate());
+            this.$welcome.append(this.$feedPostWelcomeTemplate());
         }
 
         this.$locationName.html($('.js-location option:selected').text());

@@ -25,7 +25,7 @@ module.exports = function(app, passport) {
                     feedPostTemplate : 'partials/feed-post-template',
                     feedScripts      : 'partials/feed-scripts',
                     feedPostWelcome  : 'partials/feed-post-welcome-template',
-                    feedPostAdmin    : 'partials/feed-post-admin-template'  
+                    feedPostAdmin    : 'partials/feed-post-admin-template'
                 }
             });
         });
@@ -51,7 +51,9 @@ module.exports = function(app, passport) {
                 background : bg(),
                 partials   : {
                     feedPostTemplate : 'partials/feed-post-template',
-                    feedScripts      : 'partials/feed-scripts'
+                    feedScripts      : 'partials/feed-scripts',
+                    feedPostWelcome  : 'partials/feed-post-welcome-template',
+                    feedPostAdmin    : 'partials/feed-post-admin-template'
                 }
             });
         });
