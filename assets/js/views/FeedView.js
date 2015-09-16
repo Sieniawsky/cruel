@@ -60,7 +60,7 @@ module.exports = Backbone.View.extend({
                 });
                 that.addAll();
 
-                if (data.length < 8) {
+                if (data.length < 12) {
                     that.hasMore = false;
                     that.$feed.append(that.completed_template());
                 }
