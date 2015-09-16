@@ -13,11 +13,18 @@ var Compose = Backbone.View.extend({
 
     initialize: function() {
         var that = this;
+        this.$composeErrors = $('.js-compose-errors');
         document.getElementById("file_input").onchange = function() {
             var files = document.getElementById("file_input").files;
             var file = files[0];
             if (file === null) {
                 console.log('No file selected');
+            } else if (file.size > 19000000) {
+                // display error
+                that.$composeErrors.empty();
+                that.$composeErrors.append('<div class="form-message-error">Images must be less than 19 Megabytes</div>');
+                $('#upload_url').val('');
+                $('.preview-container').hide();
             } else {
                 $('.js-image').val('');
                 $('#preview').attr('src', '/images/loading.gif');

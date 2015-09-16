@@ -7,6 +7,7 @@
 
         <div class="forms">
             <div class="form-wrapper">
+                <div class="js-compose-errors"></div>
                 <form class="js-compose" id="form" data-toggle="validator"
                     role="form" action="/post" method="post">
                     <input type="hidden" id="upload_url" name="upload_url" value="">
@@ -19,7 +20,7 @@
                     <div class="form-group">
                         <h4>IMAGE (Optional)</h4>
                         <div class="upload-hidden-input button upload-button">
-                            <input class="js-image-upload" type="file" id="file_input">
+                            <input class="js-image-upload" type="file" accept="image/*" id="file_input">
                             <p id="status">Please select a file</p>
                         </div>
                         <input type="url" pattern=".*\.(jpeg|jpg|gif|png|JPEG|JPG|GIF|PNG)$"
