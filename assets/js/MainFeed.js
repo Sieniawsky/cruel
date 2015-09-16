@@ -26,6 +26,7 @@ var MainFeed = FeedView.extend({
         this.$locationName = $('.js-location-name');
         this.$welcome      = $('.js-welcome');
         this.$admin        = $('.js-admin');
+        this.$loading      = $('.js-loading');
 
         this.$feedPostWelcomeTemplate = _.template($('#post-welcome-template').html());
         this.$feedPostAdminTemplate   = _.template($('#post-admin-template').html());
@@ -66,12 +67,20 @@ var MainFeed = FeedView.extend({
         }
     },
 
+    addAll: function() {
+        this.$feed.empty();
+        this.posts.each(this.addOne, this);
+        this.$loading.hide();
+    },
+
     load: function() {
         var that = this;
         this.sort = this.$sort.val();
         this.location = this.$location.val();
         this.page = 1;
         this.hasMore = true;
+        this.$feed.empty();
+        this.$loading.show();
         this.posts.fetch({
             reset : true,
             url   : this.genURL(1),
@@ -90,13 +99,13 @@ var MainFeed = FeedView.extend({
     },
 
     loadPosts: function() {
+        var that = this;
         this.isLoading = true;
         History.replaceState(
             {state:1},
             'Cruel',
             '/' + $('.js-location option:selected').text() + '/' + this.sort + '/' + this.page
         );
-        var that = this;
         $.ajax({
             url  : this.genURL(this.page),
             type : 'GET',
@@ -133,11 +142,14 @@ var MainFeed = FeedView.extend({
 
     render: function() {
         var that = this;
-
-        var end = moment(new Date().getTime());
-        var start = moment(initData.user.rawDate);
-        var hours = moment.duration(end.diff(start)).asHours();
-        if (hours < 48) {
+        if (initData.user) {
+            var end = moment(new Date().getTime());
+            var start = moment(initData.user.rawDate);
+            var hours = moment.duration(end.diff(start)).asHours();
+            if (hours < 48) {
+                this.$welcome.html(this.$feedPostWelcomeTemplate());
+            }
+        } else {
             this.$welcome.html(this.$feedPostWelcomeTemplate());
         }
 
