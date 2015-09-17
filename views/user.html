@@ -2,6 +2,9 @@
     <div class="row">
         <div class="large-12 columns container">
             <div class="js-user-profile"></div>
+             <div class="feed-loading">
+                <img class="loading-animation" src="/images/loading.gif">
+            </div>
                 <div class="user-feed-header">
                     <h2>All Posts</h2>
                     <div class="sorting user-sort">
@@ -22,7 +25,7 @@
 {{> feedScripts}}
 
 <script id="user-profile-template" type="text/template">
-    <div class="user-header">
+    <div class="user-header container-header">
         <h2><%= username %></h2>
     </div>
     <div class="large-5 columns user-image">
