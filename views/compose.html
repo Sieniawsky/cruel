@@ -45,10 +45,16 @@
     </div>
 </div>
 
+<!-- Data Load Point -->
+<script id="init-data" type="application/json">
+    {{{initData}}}
+</script>
+
 <!-- Load page specific scripts -->
 {{#yield-scripts}}
     <script src="/bower_components/H5F/h5f.min.js"></script>
     <script src="/bower_components/bootstrap-validator/dist/validator.min.js"></script>
     <script src="/js/polyfill.js"></script>
+    <script src="/js/dataLoader.js"></script>
     <script src="/js/bundles/Compose.js"></script>
 {{/yield-scripts}}
