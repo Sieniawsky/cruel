@@ -28,7 +28,7 @@ var outgoing = function(target, subject, html, next) {
 
 var welcome = function(user, next) {
     var subject = 'Welcome to Cruel! Claim your free sticker pack.';
-    var html = '<p>Thanks for joining Cruel! Cruel.co is a web app where you can share and vote on content with other students on your campus. Make sure you check out <a href="https://cruel.co/welcome" target="_blank">this post</a> to see how it works!</p><p>Every week we give away prizes to active users on Cruel.co. As one of our very first users, you\'ve already won a free Cruel sticker pack! Simply respond to this e-mail with your name and address to get your stickers in the mail!</p>';
+    var html = '<p>Thanks for joining Cruel! Cruel.co is a web app where you can share and vote on content with other students on your campus. Make sure you check out <a href="https://cruel.co/welcome" target="_blank">this post</a> to see how it works!</p><p>Every week we give away prizes to active users on Cruel.co. As one of our very first users, you\'ve already won a free Cruel sticker pack! Simply respond to this e-mail with your name and address and we\'ll send you your stickers in the mail!</p>';
     var template = _.template(html);
     outgoing(user.email, subject, template(), next);
 };
