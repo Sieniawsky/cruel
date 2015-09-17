@@ -32,6 +32,7 @@ var MainFeed = FeedView.extend({
         this.$feedPostAdminTemplate   = _.template($('#post-admin-template').html());
 
         this.nav = nav || {};
+        this.firstRender = true;
 
         /* Check for feed load options */
         if (typeof initData.options == 'undefined') {
@@ -142,25 +143,27 @@ var MainFeed = FeedView.extend({
 
     render: function() {
         var that = this;
-        if (initData.user) {
-            var end = moment(new Date().getTime());
-            var start = moment(initData.user.rawDate);
-            var hours = moment.duration(end.diff(start)).asHours();
-            if (hours < 48) {
+        if (this.firstRender) {
+            this.firstRender = false;
+            if (initData.user) {
+                var end = moment(new Date().getTime());
+                var start = moment(initData.user.rawDate);
+                var hours = moment.duration(end.diff(start)).asHours();
+                if (hours < 48) {
+                    this.$welcome.append(this.$feedPostWelcomeTemplate());
+                }
+            } else {
                 this.$welcome.append(this.$feedPostWelcomeTemplate());
             }
-        } else {
-            this.$welcome.append(this.$feedPostWelcomeTemplate());
+            this.$admin.empty();
+            var adminPosts = _.filter(initData.adminPosts, function(post) {
+                return post._location === that.$location.val();
+            });
+            _.forEach(adminPosts, function(post) {
+                that.$admin.append(that.$feedPostAdminTemplate(post));
+            });
         }
-
         this.$locationName.html($('.js-location option:selected').text());
-        this.$admin.empty();
-        var adminPosts = _.filter(initData.adminPosts, function(post) {
-            return post._location === that.$location.val();
-        });
-        _.forEach(adminPosts, function(post) {
-            that.$admin.append(that.$feedPostAdminTemplate(post));
-        });
     }
 });
 
