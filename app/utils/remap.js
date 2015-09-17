@@ -21,7 +21,7 @@ module.exports = {
             .map(function(post) {
                 var hours = Math.abs(new Date(post.date) - new Date()) / 36e5;
                 var hotPost = singlePostRemap(post, user);
-                hotPost.hotScore = Math.round(((post.score + 9)/Math.pow(hours + 2, 1.2)) * 100)/100;
+                hotPost.hotScore = Math.round(((post.score + 9)/Math.pow(hours + 2, 1.1)) * 100000)/100000;
                 return hotPost;
             })
             .sortBy(function(post) {

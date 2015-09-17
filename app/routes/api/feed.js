@@ -112,7 +112,7 @@ module.exports = function(app, passport) {
     /* Get hot posts */
     app.get('/api/feed/:location/hot/:page', function(req, res) {
         var range = new Date();
-        range.setDate(range.getDate() - 2);
+        range.setDate(range.getDate() - 4);
         var query = Post.find(
             computeLocationQuery(req.params.location, {
                 deleted: false,
