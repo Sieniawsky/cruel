@@ -82,7 +82,7 @@ module.exports = {
                         _post    : n[0]._post,
                         title    : n[0].title,
                         url      : n[0].url,
-                        snippet  : n[0].title.substring(0, 40).concat(' ...'),
+                        snippet  : n[0].title.substring(0, 30).concat(' ...'),
                         newScore : n.length
                     };
                 }).value();
@@ -98,7 +98,7 @@ module.exports = {
                         _comment : n[0]._comment,
                         comment  : n[0].comment,
                         url      : n[0].url,
-                        snippet  : n[0].comment.substring(0, 40).concat(' ...'),
+                        snippet  : n[0].comment.substring(0, 30).concat(' ...'),
                         newScore : n.length
                     };
                 }).value();
@@ -114,7 +114,7 @@ module.exports = {
                         _comment    : n[0]._comment,
                         title       : n[0].title,
                         url         : n[0].url,
-                        snippet     : n[0].title.substring(0, 40).concat(' ...'),
+                        snippet     : n[0].title.substring(0, 30).concat(' ...'),
                         newComments : n.length
                     };
                 }).value();
