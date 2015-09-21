@@ -1,4 +1,5 @@
 /* This is where it all begins */
+require('newrelic');
 var express  = require('express');
 var app      = module.exports = express();
 var mongoose = require('mongoose');
