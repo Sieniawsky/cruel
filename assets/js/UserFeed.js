@@ -25,8 +25,8 @@ var UserFeed = FeedView.extend({
 
         this.profileTemplate = _.template($('#user-profile-template').html());
 
-        this.sort = 'new';
-        this.$sort.val('new');
+        this.sort = 'top';
+        this.$sort.val('top');
         this.$userProfile = $('.js-user-profile');
         this.user  = initData.selectedUser._id;
         this.url   = this.genURL(this.page);
