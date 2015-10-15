@@ -12,3 +12,6 @@ public/js/bundles/*.js
 # app
 public/js/bundles/**/*.js
 public/css/**/*.css
+
+# newrelic
+newrelic_agent.log
