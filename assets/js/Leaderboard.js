@@ -30,7 +30,8 @@ var Leaderboard = Backbone.View.extend({
             this.$location.val('all');
         }
 
-        this.sort = this.$sort.val();
+        this.sort = 'top';
+        this.$sort.val('top');
 
         this.load();
     },
