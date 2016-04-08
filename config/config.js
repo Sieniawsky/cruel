@@ -33,7 +33,7 @@ module.exports = function(isProd) {
             'www.cruel.co'
         ],
         image_proxy: 'https://cruel.co/proxy?url=',
-        socket : 'mongodb://swaglord69:myballs@ds045403-a0.mongolab.com:45403/heroku_bmpxrfvm'
+        socket : 'mongodb://xxx'
     };
 
     if (isProd) {
