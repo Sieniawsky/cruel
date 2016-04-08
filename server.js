@@ -45,8 +45,8 @@ require('./config/passport')(passport);
 
 /* Create and set s3 client */
 aws.config.update({
-    accessKeyId     : 'AKIAJPZQVXB5ICEY25AQ',
-    secretAccessKey : '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'
+    accessKeyId     : 'xxx',
+    secretAccessKey : 'xxx'
 });
 app.set('s3', new aws.S3());
 
@@ -68,7 +68,7 @@ app.use(session({
     saveUninitialized : false,
     rolling : true,
     resave  : true,
-    secret  : 'Swaglord69',
+    secret  : 'xxx',
     cookie  : {
         expires : false,
         maxAge  : new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
